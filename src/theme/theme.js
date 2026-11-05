@@ -1,0 +1,22 @@
+import { colors } from './colors';
+import { typography } from './typography';
+import { spacing } from './spacing';
+import { radius } from './radius';
+export const theme = { colors, typography, spacing, radius };
+export const themeVariables = {
+ '--background': colors.background, '--foreground': colors.textPrimary,
+ '--card': colors.surface, '--card-foreground': colors.textPrimary,
+ '--popover': colors.surface, '--popover-foreground': colors.textPrimary,
+ '--primary': colors.primary, '--primary-dark': colors.darkPrimary, '--primary-light': colors.lightPrimary,
+ '--primary-foreground': colors.surface, '--border': colors.border, '--input': colors.border,
+ '--ring': colors.primary, '--accent': colors.lightPrimary, '--accent-foreground': colors.darkPrimary,
+ '--muted-foreground': colors.textSecondary, '--destructive': colors.danger,
+ '--sidebar': colors.surface, '--sidebar-foreground': colors.textPrimary,
+ '--sidebar-primary': colors.primary, '--sidebar-primary-foreground': colors.surface,
+ '--sidebar-accent': colors.lightPrimary, '--sidebar-accent-foreground': colors.darkPrimary,
+ '--sidebar-border': colors.border, '--sidebar-ring': colors.primary,
+ '--radius': radius.lg,
+ ...Object.fromEntries(Object.entries(spacing).map(([k,v])=>['--space-'+k,v])),
+ ...Object.fromEntries(Object.entries(typography.sizes).map(([k,v])=>['--type-'+k,v])),
+ ...Object.fromEntries(Object.entries(radius).map(([k,v])=>['--corner-'+k,v])),
+};

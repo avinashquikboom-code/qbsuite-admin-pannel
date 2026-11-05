@@ -1,0 +1,201 @@
+'use client';
+import * as React from 'react';
+import { Sheet, SheetContent, } from '@/components/common/Drawer';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
+import { StatusBadge } from '@/components/common/StatusBadge';
+import { Button } from '@/components/common/Button';
+import { toast } from '@/hooks/use-toast';
+import { RiMailLine, RiPhoneLine, RiMapPinLine, RiCalendarLine, RiBankCardLine, RiUserHeartLine, RiBriefcaseLine, RiMoneyDollarCircleLine, } from '@remixicon/react';
+export function EmployeeDetail({ employee, open, onOpenChange, }) {
+    if (!employee)
+        return null;
+    return (<Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent className="sm:max-w-md overflow-y-auto p-0 bg-white">
+        {/* Cover / Header */}
+        <div className="bg-gradient-to-r from-teal-700 to-teal-600 p-6 text-white">
+          <div className="flex items-center gap-4">
+            <Avatar className="size-16 border-2 border-white/80 shadow-md">
+              <AvatarImage src={employee.avatar} alt={employee.name}/>
+              <AvatarFallback className="bg-teal-900 text-white font-bold text-lg">
+                {employee.firstName[0]}
+                {employee.lastName[0]}
+              </AvatarFallback>
+            </Avatar>
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-2">
+                <h2 className="text-lg font-bold text-white leading-tight">
+                  {employee.name}
+                </h2>
+                <StatusBadge status={employee.status} showIcon={false}/>
+              </div>
+              <p className="text-xs text-teal-100 font-medium">
+                {employee.designation}
+              </p>
+              <p className="text-[11px] text-teal-200 font-mono">
+                {employee.id} • {employee.department}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Details */}
+        <div className="p-6 space-y-6">
+          {/* Quick Contact & Location */}
+          <div className="space-y-2.5">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              Contact & Work Location
+            </h4>
+            <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2 text-slate-500">
+                  <RiMailLine className="size-4 text-teal-600 shrink-0"/>
+                  Email
+                </span>
+                <span className="font-semibold text-slate-900 truncate max-w-[200px]">
+                  {employee.email}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2 text-slate-500">
+                  <RiPhoneLine className="size-4 text-teal-600 shrink-0"/>
+                  Phone
+                </span>
+                <span className="font-semibold text-slate-900">
+                  {employee.phone}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2 text-slate-500">
+                  <RiMapPinLine className="size-4 text-teal-600 shrink-0"/>
+                  Location
+                </span>
+                <span className="font-semibold text-slate-900">
+                  {employee.location}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Job & Employment Profile */}
+          <div className="space-y-2.5">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              Employment Details
+            </h4>
+            <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2 text-slate-500">
+                  <RiBriefcaseLine className="size-4 text-teal-600 shrink-0"/>
+                  Employment Type
+                </span>
+                <span className="font-semibold text-slate-900">
+                  {employee.employmentType}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2 text-slate-500">
+                  <RiCalendarLine className="size-4 text-teal-600 shrink-0"/>
+                  Join Date
+                </span>
+                <span className="font-semibold text-slate-900">
+                  {employee.joinDate}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Compensation */}
+          <div className="space-y-2.5">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              Compensation & Salary Structure
+            </h4>
+            <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2 text-slate-500">
+                  <RiMoneyDollarCircleLine className="size-4 text-emerald-600 shrink-0"/>
+                  Basic Monthly
+                </span>
+                <span className="font-bold text-slate-900">
+                  ${employee.salary.basic.toLocaleString()}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500">Monthly Allowances</span>
+                <span className="font-semibold text-slate-800">
+                  ${employee.salary.allowances.toLocaleString()}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500">Overtime Hourly Rate</span>
+                <span className="font-semibold text-teal-700">
+                  ${employee.salary.hourlyRate}/hr
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Bank Disbursement */}
+          <div className="space-y-2.5">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              Disbursement & Banking
+            </h4>
+            <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2 text-slate-500">
+                  <RiBankCardLine className="size-4 text-teal-600 shrink-0"/>
+                  Bank Name
+                </span>
+                <span className="font-semibold text-slate-900">
+                  {employee.bankDetails.bankName}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500">Account Number</span>
+                <span className="font-mono text-slate-700">
+                  {employee.bankDetails.accountNumber}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Emergency Contact */}
+          <div className="space-y-2.5">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              Emergency Contact
+            </h4>
+            <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2 text-slate-500">
+                  <RiUserHeartLine className="size-4 text-rose-500 shrink-0"/>
+                  Contact Person
+                </span>
+                <span className="font-semibold text-slate-900">
+                  {employee.emergencyContact.name} ({employee.emergencyContact.relationship})
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-500">Emergency Phone</span>
+                <span className="font-semibold text-slate-900">
+                  {employee.emergencyContact.phone}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="pt-2 flex items-center gap-2">
+            <Button className="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs h-9" onClick={() => {
+            toast.success(`Generated Profile Summary for ${employee.name}`);
+            onOpenChange(false);
+        }}>
+              Export Profile (PDF)
+            </Button>
+            <Button variant="outline" className="border-slate-200 text-slate-700 text-xs h-9" onClick={() => {
+            toast.info(`Sent direct notification to ${employee.email}`);
+        }}>
+              Message
+            </Button>
+          </div>
+        </div>
+      </SheetContent>
+    </Sheet>);
+}
