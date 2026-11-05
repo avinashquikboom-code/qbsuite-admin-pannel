@@ -7,34 +7,14 @@ import { Label } from '@/components/common/Label';
 import { Textarea } from '@/components/common/Textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
 import { RiUploadCloudLine } from '@remixicon/react';
-export function AnnouncementForm({ open, onOpenChange, announcement, onSave, }) {
-    const [title, setTitle] = React.useState('');
-    const [content, setContent] = React.useState('');
-    const [category, setCategory] = React.useState('General');
-    const [priority, setPriority] = React.useState('normal');
-    const [targetAudience, setTargetAudience] = React.useState('All Employees');
-    const [isImportant, setIsImportant] = React.useState(false);
-    const [isPublished, setIsPublished] = React.useState(true);
-    React.useEffect(() => {
-        if (announcement) {
-            setTitle(announcement.title);
-            setContent(announcement.content);
-            setCategory(announcement.category);
-            setPriority(announcement.priority);
-            setTargetAudience(announcement.targetAudience);
-            setIsImportant(announcement.isImportant);
-            setIsPublished(announcement.isPublished);
-        }
-        else {
-            setTitle('');
-            setContent('');
-            setCategory('General');
-            setPriority('normal');
-            setTargetAudience('All Employees');
-            setIsImportant(false);
-            setIsPublished(true);
-        }
-    }, [announcement, open]);
+function AnnouncementFormFields({ open, onOpenChange, announcement, onSave, }) {
+    const [title, setTitle] = React.useState(announcement?.title ?? '');
+    const [content, setContent] = React.useState(announcement?.content ?? '');
+    const [category, setCategory] = React.useState(announcement?.category ?? 'General');
+    const [priority, setPriority] = React.useState(announcement?.priority ?? 'normal');
+    const [targetAudience, setTargetAudience] = React.useState(announcement?.targetAudience ?? 'All Employees');
+    const [isImportant, setIsImportant] = React.useState(announcement?.isImportant ?? false);
+    const [isPublished, setIsPublished] = React.useState(announcement?.isPublished ?? true);
     const handleSubmit = (e) => {
         e.preventDefault();
         onSave({
@@ -165,3 +145,5 @@ export function AnnouncementForm({ open, onOpenChange, announcement, onSave, }) 
       </DialogContent>
     </Dialog>);
 }
+
+export function AnnouncementForm(props) { return <AnnouncementFormFields key={(props.announcement?.id || "new") + String(props.open)} {...props} />; }

@@ -1,4 +1,5 @@
-'use client';
+'use client';import { Badge } from '@/components/common/Badge';
+import { DataTable } from '@/components/common/DataTable';
 import * as React from 'react';
 import { RiUserSearchLine, RiAddLine, RiSearchLine, RiDownloadLine, RiMailLine, RiPhoneLine, RiBuildingLine, } from '@remixicon/react';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -160,50 +161,28 @@ export default function LeadsPage() {
       {/* Leads Table */}
       <Card className="border-slate-200/80 shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs border-collapse">
-            <thead className="bg-slate-50/75 border-b border-slate-200/80 text-slate-600 font-semibold uppercase tracking-wider text-[11px]">
-              <tr>
-                <th className="py-3 px-4">Lead</th>
-                <th className="py-3 px-4">Company</th>
-                <th className="py-3 px-4">Source</th>
-                <th className="py-3 px-4">Estimated Value</th>
-                <th className="py-3 px-4">Assigned To</th>
-                <th className="py-3 px-4">Status</th>
-                <th className="py-3 px-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-slate-700">
-              {filteredLeads.length === 0 ? (<tr>
-                  <td colSpan={7} className="py-12 text-center text-slate-400">
-                    <RiUserSearchLine className="size-8 mx-auto mb-2 opacity-50"/>
-                    No leads found matching your filters.
-                  </td>
-                </tr>) : (filteredLeads.map((lead) => (<tr key={lead.id} className="hover:bg-slate-50/70 transition-colors">
-                    <td className="py-3 px-4 font-medium text-slate-900">
+          <DataTable data={filteredLeads} columns={[
+{ header: 'Lead', cell: (lead) => <>
                       <div>{lead.name}</div>
                       <div className="text-[11px] text-slate-400">{lead.email}</div>
-                    </td>
-                    <td className="py-3 px-4 text-slate-700 font-medium">{lead.company}</td>
-                    <td className="py-3 px-4">
-                      <span className="inline-block px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-medium">
-                        {lead.source}
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 font-bold text-slate-900">
+                    </> },
+{ header: 'Company', cell: (lead) => <>{lead.company}</> },
+{ header: 'Source', cell: (lead) => <>
+                      <Badge variant="secondary">{lead.source}</Badge>
+                    </> },
+{ header: 'Estimated Value', cell: (lead) => <>
                       {currency.format(lead.value)}
-                    </td>
-                    <td className="py-3 px-4 text-slate-600">{lead.assignedTo}</td>
-                    <td className="py-3 px-4">
+                    </> },
+{ header: 'Assigned To', cell: (lead) => <>{lead.assignedTo}</> },
+{ header: 'Status', cell: (lead) => <>
                       <StatusBadge status={lead.status}/>
-                    </td>
-                    <td className="py-3 px-4 text-right">
+                    </> },
+{ header: 'Actions', cell: (lead) => <>
                       <Button variant="ghost" size="sm" onClick={() => setSelectedLead(lead)} className="h-8 text-teal-600 hover:text-teal-700 hover:bg-teal-50 text-xs font-semibold">
                         Details
                       </Button>
-                    </td>
-                  </tr>)))}
-            </tbody>
-          </table>
+                    </>, className: 'text-right' }
+]} />
         </div>
       </Card>
 

@@ -4,11 +4,9 @@ import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Cart
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/common/Card';
 import { mockAttendanceTrend } from '@/lib/mock-data';
 import { RiCalendarCheckLine } from '@remixicon/react';
+const subscribe = () => () => {};
 export function AttendanceChart() {
-    const [mounted, setMounted] = React.useState(false);
-    React.useEffect(() => {
-        setMounted(true);
-    }, []);
+    const mounted = React.useSyncExternalStore(subscribe, () => true, () => false);
     if (!mounted) {
         return (<Card className="border border-slate-200 bg-white">
         <CardHeader className="p-5 pb-0">

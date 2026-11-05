@@ -1,4 +1,4 @@
-'use client';
+'use client';import { DataTable } from '@/components/common/DataTable';
 import * as React from 'react';
 import { RiAddLine, RiSearchLine, RiMailLine, RiPhoneLine, RiBuildingLine, } from '@remixicon/react';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -104,42 +104,27 @@ export default function CustomersPage() {
       {/* Table */}
       <Card className="border-slate-200/80 shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs border-collapse">
-            <thead className="bg-slate-50/75 border-b border-slate-200/80 text-slate-600 font-semibold uppercase tracking-wider text-[11px]">
-              <tr>
-                <th className="py-3 px-4">Contact</th>
-                <th className="py-3 px-4">Organization</th>
-                <th className="py-3 px-4">Location</th>
-                <th className="py-3 px-4">Closed Deals</th>
-                <th className="py-3 px-4">Revenue</th>
-                <th className="py-3 px-4">Status</th>
-                <th className="py-3 px-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-slate-700">
-              {filtered.map((c) => (<tr key={c.id} className="hover:bg-slate-50/70 transition-colors">
-                  <td className="py-3 px-4 font-medium text-slate-900">
+          <DataTable data={filtered} columns={[
+{ header: 'Contact', cell: (c) => <>
                     <div>{c.name}</div>
                     <div className="text-[11px] text-slate-400">{c.email}</div>
-                  </td>
-                  <td className="py-3 px-4">
+                  </> },
+{ header: 'Organization', cell: (c) => <>
                     <div className="font-semibold text-slate-800">{c.company}</div>
                     <div className="text-[11px] text-slate-500">{c.role}</div>
-                  </td>
-                  <td className="py-3 px-4 text-slate-600">{c.location}</td>
-                  <td className="py-3 px-4 font-bold text-slate-900">{c.dealsCount}</td>
-                  <td className="py-3 px-4 font-bold text-teal-700">{currency.format(c.totalRevenue)}</td>
-                  <td className="py-3 px-4">
+                  </> },
+{ header: 'Location', cell: (c) => <>{c.location}</> },
+{ header: 'Closed Deals', cell: (c) => <>{c.dealsCount}</> },
+{ header: 'Revenue', cell: (c) => <>{currency.format(c.totalRevenue)}</> },
+{ header: 'Status', cell: (c) => <>
                     <StatusBadge status={c.status}/>
-                  </td>
-                  <td className="py-3 px-4 text-right">
+                  </> },
+{ header: 'Actions', cell: (c) => <>
                     <Button variant="ghost" size="sm" onClick={() => setSelectedContact(c)} className="h-8 text-teal-600 hover:text-teal-700 hover:bg-teal-50 text-xs font-semibold">
                       Dossier
                     </Button>
-                  </td>
-                </tr>))}
-            </tbody>
-          </table>
+                  </>, className: 'text-right' }
+]} />
         </div>
       </Card>
 
