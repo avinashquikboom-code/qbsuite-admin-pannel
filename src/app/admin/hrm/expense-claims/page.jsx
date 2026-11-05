@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { ExpenseTable } from '@/components/expenses/ExpenseTable';
@@ -8,7 +9,7 @@ import { Input } from '@/components/common/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
 import { mockExpenseClaims } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { RiMoneyDollarCircleLine, RiTimeLine, RiCheckboxCircleLine, RiSearchLine, } from '@remixicon/react';
+import { faCheckCircle, faClock, faDollarSign, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 export default function ExpenseClaimsPage() {
     const [claims, setClaims] = React.useState(mockExpenseClaims);
     const [search, setSearch] = React.useState('');
@@ -91,7 +92,7 @@ export default function ExpenseClaimsPage() {
             <span className="text-[11px] font-semibold text-amber-700 uppercase">
               Pending Reimbursements
             </span>
-            <RiTimeLine className="size-4 text-amber-600"/>
+            <FontAwesomeIcon icon={faClock} className="size-4 text-amber-600"/>
           </div>
           <p className="text-xl font-bold text-amber-800 mt-1">
             ${pendingAmount.toFixed(2)}
@@ -106,7 +107,7 @@ export default function ExpenseClaimsPage() {
             <span className="text-[11px] font-semibold text-brand-dark uppercase">
               Approved This Month
             </span>
-            <RiCheckboxCircleLine className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faCheckCircle} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">
             ${approvedAmount.toFixed(2)}
@@ -121,7 +122,7 @@ export default function ExpenseClaimsPage() {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Total Claims Logged
             </span>
-            <RiMoneyDollarCircleLine className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faDollarSign} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-slate-900 mt-1">
             {claims.length} Total Submissions
@@ -133,7 +134,7 @@ export default function ExpenseClaimsPage() {
       {/* Filter Toolbar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-2xs">
         <div className="relative flex-1 sm:max-w-xs">
-          <RiSearchLine className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
           <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search claim, employee, receipt..." className="h-9 pl-8 pr-3 text-xs border-slate-200 bg-slate-50/50 focus-visible:bg-white"/>
         </div>
 

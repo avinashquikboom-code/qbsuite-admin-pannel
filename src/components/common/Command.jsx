@@ -1,10 +1,11 @@
 "use client";
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { cn } from "cn";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, } from "@/components/common/Modal";
 import { InputGroup, InputGroupAddon, } from "@/components/common/InputGroup";
-import { RiSearchLine, RiCheckLine } from "@remixicon/react";
+import { faCheck, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 function Command({ className, ...props }) {
     return (<CommandPrimitive data-slot="command" className={cn("flex size-full flex-col overflow-hidden rounded-xl! bg-popover p-1 text-popover-foreground", className)} {...props}/>);
 }
@@ -24,7 +25,7 @@ function CommandInput({ className, ...props }) {
       <InputGroup className="h-8! rounded-lg! border-input/30 bg-input/30 shadow-none! *:data-[slot=input-group-addon]:pl-2!">
         <CommandPrimitive.Input data-slot="command-input" className={cn("w-full text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50", className)} {...props}/>
         <InputGroupAddon>
-          <RiSearchLine className="size-4 shrink-0 opacity-50"/>
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="size-4 shrink-0 opacity-50"/>
         </InputGroupAddon>
       </InputGroup>
     </div>);
@@ -44,7 +45,7 @@ function CommandSeparator({ className, ...props }) {
 function CommandItem({ className, children, ...props }) {
     return (<CommandPrimitive.Item data-slot="command-item" className={cn("group/command-item relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none in-data-[slot=dialog-content]:rounded-lg! data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground", className)} {...props}>
       {children}
-      <RiCheckLine className="ml-auto opacity-0 group-has-data-[slot=command-shortcut]/command-item:hidden group-data-[checked=true]/command-item:opacity-100"/>
+      <FontAwesomeIcon icon={faCheck} className="ml-auto opacity-0 group-has-data-[slot=command-shortcut]/command-item:hidden group-data-[checked=true]/command-item:opacity-100"/>
     </CommandPrimitive.Item>);
 }
 function CommandShortcut({ className, ...props }) {

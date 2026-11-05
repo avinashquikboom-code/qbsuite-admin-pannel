@@ -1,6 +1,8 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
-import { RiMetaLine, RiRefreshLine, RiShieldCheckLine, } from '@remixicon/react';
+import { faArrowsRotate, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
+import { faMeta } from '@fortawesome/free-brands-svg-icons';
 import { PageHeader } from '@/components/common/PageHeader';
 import { Button } from '@/components/common/Button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/common/Card';
@@ -17,7 +19,7 @@ export default function MetaIntegrationPage() {
     };
     return (<div className="space-y-6">
       <PageHeader title="Meta Ads & Business Suite Integration" description="Connect Instagram and Facebook Lead Ads directly into the QB Suite CRM pipeline." badge="Meta Cloud" badgeVariant="green" actions={<Button size="sm" onClick={handleSync} disabled={syncing} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
-            <RiRefreshLine className={`size-4 ${syncing ? 'animate-spin' : ''}`}/>
+            <FontAwesomeIcon icon={faArrowsRotate} className={`size-4 ${syncing ? 'animate-spin' : ''}`}/>
             <span>{syncing ? 'Syncing...' : 'Sync Leads Now'}</span>
           </Button>}/>
 
@@ -25,7 +27,7 @@ export default function MetaIntegrationPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader>
             <div className="flex size-10 items-center justify-center rounded-lg bg-brand-light text-brand mb-2">
-              <RiMetaLine className="size-6"/>
+              <FontAwesomeIcon icon={faMeta} className="size-6"/>
             </div>
             <CardTitle className="text-base font-bold text-slate-900">
               Facebook Lead Ads
@@ -49,7 +51,7 @@ export default function MetaIntegrationPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader>
             <div className="flex size-10 items-center justify-center rounded-lg bg-pink-50 text-pink-600 mb-2">
-              <RiMetaLine className="size-6"/>
+              <FontAwesomeIcon icon={faMeta} className="size-6"/>
             </div>
             <CardTitle className="text-base font-bold text-slate-900">
               Instagram Direct Ads
@@ -73,7 +75,7 @@ export default function MetaIntegrationPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader>
             <div className="flex size-10 items-center justify-center rounded-lg bg-brand-light text-brand mb-2">
-              <RiShieldCheckLine className="size-6"/>
+              <FontAwesomeIcon icon={faShieldHalved} className="size-6"/>
             </div>
             <CardTitle className="text-base font-bold text-slate-900">
               Conversions API (CAPI)

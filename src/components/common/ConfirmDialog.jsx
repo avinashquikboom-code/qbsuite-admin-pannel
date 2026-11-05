@@ -1,24 +1,25 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, } from '@/components/common/Modal';
 import { Button } from '@/components/common/Button';
 import { Textarea } from '@/components/common/Textarea';
 import { Label } from '@/components/common/Label';
-import { RiAlertLine, RiCheckboxCircleLine, RiInformationLine } from '@remixicon/react';
+import { faCheckCircle, faCircleInfo, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 export function ConfirmDialog({ open, onOpenChange, title, description, confirmLabel = 'Confirm', cancelLabel = 'Cancel', variant = 'default', onConfirm, note, }) {
     const getIcon = () => {
         switch (variant) {
             case 'destructive':
                 return (<div className="flex size-10 items-center justify-center rounded-full bg-rose-100 text-rose-600 shrink-0">
-            <RiAlertLine className="size-5"/>
+            <FontAwesomeIcon icon={faTriangleExclamation} className="size-5"/>
           </div>);
             case 'success':
                 return (<div className="flex size-10 items-center justify-center rounded-full bg-brand-light text-brand shrink-0">
-            <RiCheckboxCircleLine className="size-5"/>
+            <FontAwesomeIcon icon={faCheckCircle} className="size-5"/>
           </div>);
             default:
                 return (<div className="flex size-10 items-center justify-center rounded-full bg-brand-light text-brand shrink-0">
-            <RiInformationLine className="size-5"/>
+            <FontAwesomeIcon icon={faCircleInfo} className="size-5"/>
           </div>);
         }
     };

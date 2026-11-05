@@ -1,11 +1,12 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, } from '@/components/common/Drawer';
 import { StatusBadge } from '@/components/common/StatusBadge';
 import { Button } from '@/components/common/Button';
 import { Badge } from '@/components/common/Badge';
 import { toast } from '@/hooks/use-toast';
-import { RiAttachmentLine, RiDownloadLine, RiCheckLine, RiCloseLine, } from '@remixicon/react';
+import { faCheck, faDownload, faPaperclip, faXmark } from '@fortawesome/free-solid-svg-icons';
 export function ExpenseDetail({ claim, open, onOpenChange, onApprove, onReject, }) {
     if (!claim)
         return null;
@@ -52,11 +53,11 @@ export function ExpenseDetail({ claim, open, onOpenChange, onApprove, onReject, 
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs font-semibold text-slate-700">
             <span className="flex items-center gap-1.5">
-              <RiAttachmentLine className="size-4 text-brand"/>
+              <FontAwesomeIcon icon={faPaperclip} className="size-4 text-brand"/>
               Attached Receipt Document
             </span>
             <Button variant="ghost" size="sm" onClick={() => toast.success(`Downloading ${claim.receiptName}`)} className="h-6 text-[11px] text-brand hover:text-brand-dark p-0">
-              <RiDownloadLine className="size-3 mr-1"/>
+              <FontAwesomeIcon icon={faDownload} className="size-3 mr-1"/>
               Download
             </Button>
           </div>
@@ -86,14 +87,14 @@ export function ExpenseDetail({ claim, open, onOpenChange, onApprove, onReject, 
                 onApprove(claim);
                 onOpenChange(false);
             }}>
-              <RiCheckLine className="size-4 mr-1.5"/>
+              <FontAwesomeIcon icon={faCheck} className="size-4 mr-1.5"/>
               Approve Claim
             </Button>
             <Button variant="outline" className="border-slate-200 text-rose-600 hover:bg-rose-50 text-xs font-semibold h-9" onClick={() => {
                 onReject(claim);
                 onOpenChange(false);
             }}>
-              <RiCloseLine className="size-4 mr-1.5"/>
+              <FontAwesomeIcon icon={faXmark} className="size-4 mr-1.5"/>
               Reject
             </Button>
           </div>)}

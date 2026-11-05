@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { DataTable } from '@/components/common/DataTable';
 import { StatusBadge } from '@/components/common/StatusBadge';
@@ -7,7 +8,8 @@ import { Button } from '@/components/common/Button';
 import { Input } from '@/components/common/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
 import { mockDepartments } from '@/lib/mock-data';
-import { RiSearchLine, RiEyeLine, RiMailLine, RiPhoneLine, } from '@remixicon/react';
+import { faMagnifyingGlass, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faEye } from '@fortawesome/free-regular-svg-icons';
 export function EmployeeTable({ employees, onSelectEmployee, }) {
     const [search, setSearch] = React.useState('');
     const [selectedDept, setSelectedDept] = React.useState('All Departments');
@@ -55,11 +57,11 @@ export function EmployeeTable({ employees, onSelectEmployee, }) {
             header: 'Contact Info',
             cell: (emp) => (<div className="flex flex-col text-xs text-slate-500 space-y-0.5">
           <span className="flex items-center gap-1.5 truncate">
-            <RiMailLine className="size-3.5 text-slate-400 shrink-0"/>
+            <FontAwesomeIcon icon={faEnvelope} className="size-3.5 text-slate-400 shrink-0"/>
             {emp.email}
           </span>
           <span className="flex items-center gap-1.5">
-            <RiPhoneLine className="size-3.5 text-slate-400 shrink-0"/>
+            <FontAwesomeIcon icon={faPhone} className="size-3.5 text-slate-400 shrink-0"/>
             {emp.phone}
           </span>
         </div>),
@@ -82,7 +84,7 @@ export function EmployeeTable({ employees, onSelectEmployee, }) {
             className: 'text-right',
             cell: (emp) => (<div className="flex items-center justify-end gap-1.5">
           <Button size="sm" variant="outline" onClick={() => onSelectEmployee(emp)} className="h-8 px-2.5 text-xs text-slate-700 hover:text-brand-dark hover:bg-brand-light border-slate-200">
-            <RiEyeLine className="size-3.5 mr-1 text-slate-400"/>
+            <FontAwesomeIcon icon={faEye} className="size-3.5 mr-1 text-slate-400"/>
             View Profile
           </Button>
         </div>),
@@ -92,7 +94,7 @@ export function EmployeeTable({ employees, onSelectEmployee, }) {
       {/* Filters Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-2xs">
         <div className="relative flex-1 sm:max-w-xs">
-          <RiSearchLine className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
           <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search employee by name, ID, role..." className="h-9 pl-8 pr-3 text-xs border-slate-200 bg-slate-50/50 focus-visible:bg-white focus-visible:ring-brand"/>
         </div>
 

@@ -1,4 +1,4 @@
-import { RemixIcon } from '@/components/icons/RemixIcon';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import { Card, CardContent } from '@/components/common/Card';
 import { Badge } from '@/components/common/Badge';
 import { cn } from '@/lib/utils';
@@ -20,7 +20,7 @@ export function StatCard({ title, value, change, changeType = 'neutral', icon: I
             </div>
           </div>
           <div className={cn('flex size-11 items-center justify-center rounded-xl shrink-0 transition-transform group-hover:scale-105', iconBg, iconColor)}>
-            {Icon && <RemixIcon icon={Icon} className="size-5.5"/>}
+            {Icon && <FontAwesomeIcon icon={Icon} className="size-5.5"/>}
           </div>
         </div>
 

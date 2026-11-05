@@ -1,11 +1,13 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { DataTable } from '@/components/common/DataTable';
 import { StatusBadge } from '@/components/common/StatusBadge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
 import { Button } from '@/components/common/Button';
 import { Badge } from '@/components/common/Badge';
-import { RiCheckLine, RiCloseLine, RiAttachmentLine, RiEyeLine, } from '@remixicon/react';
+import { faCheck, faPaperclip, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
 export function ExpenseTable({ claims, onApprove, onReject, onViewDetail, }) {
     const columns = [
         {
@@ -49,7 +51,7 @@ export function ExpenseTable({ claims, onApprove, onReject, onViewDetail, }) {
         {
             header: 'Receipt',
             cell: (exp) => (<button onClick={() => onViewDetail(exp)} className="flex items-center gap-1 text-xs text-brand hover:text-brand-dark font-medium group">
-          <RiAttachmentLine className="size-3.5 text-slate-400 group-hover:text-brand"/>
+          <FontAwesomeIcon icon={faPaperclip} className="size-3.5 text-slate-400 group-hover:text-brand"/>
           <span className="truncate max-w-[120px]">{exp.receiptName}</span>
         </button>),
         },
@@ -63,14 +65,14 @@ export function ExpenseTable({ claims, onApprove, onReject, onViewDetail, }) {
             cell: (exp) => (<div className="flex items-center justify-end gap-1.5">
           {exp.status === 'pending' ? (<>
               <Button size="sm" onClick={() => onApprove(exp)} className="h-7.5 px-2.5 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
-                <RiCheckLine className="size-3.5 mr-1"/>
+                <FontAwesomeIcon icon={faCheck} className="size-3.5 mr-1"/>
                 Approve
               </Button>
               <Button size="sm" variant="outline" onClick={() => onReject(exp)} className="h-7.5 px-2 border-slate-200 text-slate-600 hover:text-rose-600 hover:bg-rose-50 text-xs">
-                <RiCloseLine className="size-3.5"/>
+                <FontAwesomeIcon icon={faXmark} className="size-3.5"/>
               </Button>
             </>) : (<Button size="sm" variant="ghost" onClick={() => onViewDetail(exp)} className="h-7.5 text-xs text-slate-600 hover:text-slate-900">
-              <RiEyeLine className="size-3.5 mr-1 text-slate-400"/>
+              <FontAwesomeIcon icon={faEye} className="size-3.5 mr-1 text-slate-400"/>
               Review
             </Button>)}
         </div>),

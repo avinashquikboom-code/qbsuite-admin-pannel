@@ -1,11 +1,13 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { StatusBadge } from '@/components/common/StatusBadge';
 import { Card, CardContent } from '@/components/common/Card';
 import { Badge } from '@/components/common/Badge';
 import { Button } from '@/components/common/Button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
-import { RiEditLine, RiDeleteBinLine, RiAttachmentLine, RiCheckboxCircleLine, RiEyeOffLine, } from '@remixicon/react';
+import { faCheckCircle, faPaperclip, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 export function AnnouncementList({ announcements, onEdit, onDelete, onTogglePublish, }) {
     return (<div className="space-y-3.5">
       {announcements.map((ann) => (<Card key={ann.id} className={`border bg-white transition-all duration-200 shadow-2xs hover:shadow-xs ${ann.isImportant ? 'border-rose-200/80 bg-rose-50/20' : 'border-slate-200/90'}`}>
@@ -24,10 +26,10 @@ export function AnnouncementList({ announcements, onEdit, onDelete, onTogglePubl
                     </Badge>)}
 
                   {!ann.isPublished ? (<Badge variant="outline" className="border-dashed border-amber-300 text-amber-700 bg-amber-50 text-[10px] font-semibold">
-                      <RiEyeOffLine className="size-3 mr-1"/>
+                      <FontAwesomeIcon icon={faEyeSlash} className="size-3 mr-1"/>
                       Draft / Unannounced
                     </Badge>) : (<span className="text-[11px] text-brand font-semibold flex items-center gap-1">
-                      <RiCheckboxCircleLine className="size-3.5"/>
+                      <FontAwesomeIcon icon={faCheckCircle} className="size-3.5"/>
                       Published
                     </span>)}
                 </div>
@@ -43,7 +45,7 @@ export function AnnouncementList({ announcements, onEdit, onDelete, onTogglePubl
                 {/* Attachments */}
                 {ann.attachments && ann.attachments.length > 0 && (<div className="pt-2 flex flex-wrap gap-2">
                     {ann.attachments.map((att) => (<span key={att.id} className="inline-flex items-center gap-1.5 text-[11px] font-medium text-brand-dark bg-brand-light border border-brand-light/80 px-2 py-1 rounded-md">
-                        <RiAttachmentLine className="size-3 text-brand"/>
+                        <FontAwesomeIcon icon={faPaperclip} className="size-3 text-brand"/>
                         <span className="font-semibold">{att.name}</span>
                         <span className="text-slate-400">({att.size})</span>
                       </span>))}
@@ -76,10 +78,10 @@ export function AnnouncementList({ announcements, onEdit, onDelete, onTogglePubl
                   {ann.isPublished ? 'Unpublish' : 'Publish'}
                 </Button>
                 <Button size="sm" variant="outline" onClick={() => onEdit(ann)} className="h-7.5 px-2 text-xs border-slate-200 text-slate-600 hover:text-brand-dark">
-                  <RiEditLine className="size-3.5"/>
+                  <FontAwesomeIcon icon={faPen} className="size-3.5"/>
                 </Button>
                 <Button size="sm" variant="outline" onClick={() => onDelete(ann)} className="h-7.5 px-2 text-xs border-slate-200 text-slate-600 hover:text-rose-600 hover:bg-rose-50">
-                  <RiDeleteBinLine className="size-3.5"/>
+                  <FontAwesomeIcon icon={faTrash} className="size-3.5"/>
                 </Button>
               </div>
             </div>

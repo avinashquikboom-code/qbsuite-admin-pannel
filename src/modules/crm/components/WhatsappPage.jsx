@@ -1,6 +1,8 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
-import { RiWhatsappLine, RiSendPlaneLine, RiCheckDoubleLine, } from '@remixicon/react';
+import { faCheckDouble, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { PageHeader } from '@/components/common/PageHeader';
 import { Button } from '@/components/common/Button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/common/Card';
@@ -94,7 +96,7 @@ export default function WhatsAppPage() {
         <Card className="lg:col-span-1 border-slate-200/80 shadow-2xs">
           <CardHeader>
             <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <RiWhatsappLine className="size-5 text-brand"/>
+              <FontAwesomeIcon icon={faWhatsapp} className="size-5 text-brand"/>
               <span>Outreach Simulator</span>
             </CardTitle>
             <CardDescription className="text-xs text-slate-500">
@@ -114,7 +116,7 @@ export default function WhatsAppPage() {
               </div>
 
               <Button type="submit" size="sm" className="w-full bg-brand hover:bg-brand-dark text-primary-foreground gap-2">
-                <RiSendPlaneLine className="size-4"/>
+                <FontAwesomeIcon icon={faPaperPlane} className="size-4"/>
                 <span>Send via WhatsApp API</span>
               </Button>
             </form>
@@ -136,7 +138,7 @@ export default function WhatsAppPage() {
               {logs.map((log) => (<div key={log.id} className="p-4 flex items-center justify-between hover:bg-slate-50/50">
                   <div className="flex items-center gap-3">
                     <div className="flex size-8 items-center justify-center rounded-full bg-brand-light text-brand">
-                      <RiWhatsappLine className="size-4"/>
+                      <FontAwesomeIcon icon={faWhatsapp} className="size-4"/>
                     </div>
                     <div>
                       <div className="font-semibold text-slate-900 text-xs">{log.name}</div>
@@ -145,7 +147,7 @@ export default function WhatsAppPage() {
                   </div>
                   <div className="flex items-center gap-3">
                     <Badge variant="outline" className="text-[10px] bg-brand-light text-brand-dark border-brand-light gap-1">
-                      <RiCheckDoubleLine className="size-3"/>
+                      <FontAwesomeIcon icon={faCheckDouble} className="size-3"/>
                       <span>{log.status}</span>
                     </Badge>
                     <span className="text-[11px] text-slate-400">{log.time}</span>

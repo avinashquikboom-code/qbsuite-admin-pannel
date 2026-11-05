@@ -1,6 +1,8 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
-import { RiBuilding4Line, RiTimeLine, RiShieldKeyholeLine, RiSaveLine, } from '@remixicon/react';
+import { faBuilding, faClock, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
+import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
 import { PageHeader } from '@/components/common/PageHeader';
 import { Button } from '@/components/common/Button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/common/Card';
@@ -24,7 +26,7 @@ export default function SettingsPage() {
     };
     return (<div className="space-y-6">
       <PageHeader title="Suite Administration & Policies" description="Global system parameters, attendance deduction rules, overtime rates, and company profile." badge="System" badgeVariant="green" actions={<Button size="sm" onClick={handleSave} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
-            <RiSaveLine className="size-4"/>
+            <FontAwesomeIcon icon={faFloppyDisk} className="size-4"/>
             <span>Save Changes</span>
           </Button>}/>
 
@@ -46,7 +48,7 @@ export default function SettingsPage() {
           <Card className="border-slate-200/80 shadow-2xs">
             <CardHeader>
               <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <RiTimeLine className="size-5 text-brand"/>
+                <FontAwesomeIcon icon={faClock} className="size-5 text-brand"/>
                 <span>Attendance & Late Deduction Multipliers</span>
               </CardTitle>
               <CardDescription className="text-xs text-slate-500">
@@ -117,7 +119,7 @@ export default function SettingsPage() {
           <Card className="border-slate-200/80 shadow-2xs">
             <CardHeader>
               <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <RiBuilding4Line className="size-5 text-brand"/>
+                <FontAwesomeIcon icon={faBuilding} className="size-5 text-brand"/>
                 <span>Organization Identity</span>
               </CardTitle>
             </CardHeader>
@@ -141,7 +143,7 @@ export default function SettingsPage() {
           <Card className="border-slate-200/80 shadow-2xs">
             <CardHeader>
               <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <RiShieldKeyholeLine className="size-5 text-brand"/>
+                <FontAwesomeIcon icon={faShieldHalved} className="size-5 text-brand"/>
                 <span>Security & Webhook Access</span>
               </CardTitle>
             </CardHeader>

@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, } from '@/components/common/Modal';
 import { Button } from '@/components/common/Button';
@@ -6,7 +7,7 @@ import { Input } from '@/components/common/Input';
 import { Label } from '@/components/common/Label';
 import { Textarea } from '@/components/common/Textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
-import { RiUploadCloudLine } from '@remixicon/react';
+import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 function AnnouncementFormFields({ open, onOpenChange, announcement, onSave, }) {
     const [title, setTitle] = React.useState(announcement?.title ?? '');
     const [content, setContent] = React.useState(announcement?.content ?? '');
@@ -106,7 +107,7 @@ function AnnouncementFormFields({ open, onOpenChange, announcement, onSave, }) {
             <div className="space-y-1">
               <Label className="text-xs font-medium">Attachments (Optional)</Label>
               <div className="rounded-lg border border-dashed border-slate-200 p-3 bg-slate-50/60 text-center hover:bg-slate-50 cursor-pointer">
-                <RiUploadCloudLine className="size-6 text-slate-400 mx-auto"/>
+                <FontAwesomeIcon icon={faCloudArrowUp} className="size-6 text-slate-400 mx-auto"/>
                 <p className="text-[11px] text-slate-600 mt-1">
                   Drag & drop PDF, guidelines, or matrix here, or{' '}
                   <span className="text-brand font-semibold">browse files</span>

@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { AnnouncementList } from '@/components/announcements/AnnouncementList';
@@ -9,7 +10,7 @@ import { Input } from '@/components/common/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
 import { mockAnnouncements } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { RiAddLine, RiSearchLine, } from '@remixicon/react';
+import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
 export default function AnnouncementsPage() {
     const [announcements, setAnnouncements] = React.useState(mockAnnouncements);
     const [search, setSearch] = React.useState('');
@@ -73,14 +74,14 @@ export default function AnnouncementsPage() {
                 setEditingItem(null);
                 setFormOpen(true);
             }} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
-            <RiAddLine className="size-4 mr-1.5"/>
+            <FontAwesomeIcon icon={faPlus} className="size-4 mr-1.5"/>
             New Announcement
           </Button>}/>
 
       {/* Filter Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-2xs">
         <div className="relative flex-1 sm:max-w-xs">
-          <RiSearchLine className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
           <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search announcement keywords..." className="h-9 pl-8 pr-3 text-xs border-slate-200 bg-slate-50/50 focus-visible:bg-white"/>
         </div>
 

@@ -1,7 +1,8 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { Card, CardContent } from '@/components/common/Card';
-import { RiBankCardLine, RiMoneyDollarCircleLine, RiPercentLine, RiTimeLine, RiGiftLine, } from '@remixicon/react';
+import { faClock, faDollarSign, faGift, faPercent, faWallet } from '@fortawesome/free-solid-svg-icons';
 export function PayrollSummary({ records }) {
     const totals = React.useMemo(() => {
         return records.reduce((acc, r) => {
@@ -30,7 +31,7 @@ export function PayrollSummary({ records }) {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Gross Earnings
             </span>
-            <RiMoneyDollarCircleLine className="size-4 text-slate-400"/>
+            <FontAwesomeIcon icon={faDollarSign} className="size-4 text-slate-400"/>
           </div>
           <p className="text-xl font-bold text-slate-900 mt-1">
             ${totals.gross.toLocaleString()}
@@ -47,7 +48,7 @@ export function PayrollSummary({ records }) {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Total Deductions
             </span>
-            <RiPercentLine className="size-4 text-rose-500"/>
+            <FontAwesomeIcon icon={faPercent} className="size-4 text-rose-500"/>
           </div>
           <p className="text-xl font-bold text-rose-600 mt-1">
             -${totals.deductions.toLocaleString()}
@@ -62,7 +63,7 @@ export function PayrollSummary({ records }) {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Overtime Added
             </span>
-            <RiTimeLine className="size-4 text-amber-500"/>
+            <FontAwesomeIcon icon={faClock} className="size-4 text-amber-500"/>
           </div>
           <p className="text-xl font-bold text-amber-700 mt-1">
             +${totals.overtime.toLocaleString()}
@@ -77,7 +78,7 @@ export function PayrollSummary({ records }) {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Reimbursements
             </span>
-            <RiGiftLine className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faGift} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">
             +${totals.reimbursements.toLocaleString()}
@@ -92,7 +93,7 @@ export function PayrollSummary({ records }) {
             <span className="text-[11px] font-bold text-brand-dark uppercase">
               Net Payable Disbursed
             </span>
-            <RiBankCardLine className="size-4 text-brand-dark"/>
+            <FontAwesomeIcon icon={faWallet} className="size-4 text-brand-dark"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">
             ${totals.net.toLocaleString()}

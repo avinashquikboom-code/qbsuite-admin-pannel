@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { DataTable } from '@/components/common/DataTable';
@@ -12,7 +13,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Label } from '@/components/common/Label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
 import { toast } from '@/hooks/use-toast';
-import { RiCalendarCloseLine, RiCheckLine, RiCloseLine, RiSearchLine, RiCalendarCheckLine, RiAddLine, RiHeartPulseLine, } from '@remixicon/react';
+import { faCheck, faHeartPulse, faMagnifyingGlass, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarCheck, faCalendarXmark } from '@fortawesome/free-regular-svg-icons';
 const mockLeaves = [
     {
         id: 'LEV-501',
@@ -205,11 +207,11 @@ export default function LeaveManagementPage() {
             cell: (l) => (<div className="flex items-center justify-end gap-1.5">
           {l.status === 'pending' ? (<>
               <Button size="sm" onClick={() => handleApprove(l)} className="h-7.5 px-2.5 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
-                <RiCheckLine className="size-3.5 mr-1"/>
+                <FontAwesomeIcon icon={faCheck} className="size-3.5 mr-1"/>
                 Approve
               </Button>
               <Button size="sm" variant="outline" onClick={() => handleReject(l)} className="h-7.5 px-2 border-slate-200 text-slate-600 hover:text-rose-600 hover:bg-rose-50 text-xs">
-                <RiCloseLine className="size-3.5"/>
+                <FontAwesomeIcon icon={faXmark} className="size-3.5"/>
               </Button>
             </>) : (<span className="text-xs text-slate-400 italic">Processed</span>)}
         </div>),
@@ -217,7 +219,7 @@ export default function LeaveManagementPage() {
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
       <PageHeader title="Leave Management & Absence Tracking" description="Review vacation requests, sick leaves, parental allowances, and team holiday calendars." actions={<Button size="sm" onClick={() => setApplyDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
-            <RiAddLine className="size-4 mr-1.5"/>
+            <FontAwesomeIcon icon={faPlus} className="size-4 mr-1.5"/>
             Apply Leave On Behalf
           </Button>}/>
 
@@ -228,7 +230,7 @@ export default function LeaveManagementPage() {
             <span className="text-[11px] font-semibold text-amber-700 uppercase">
               Pending Requests
             </span>
-            <RiCalendarCloseLine className="size-4 text-amber-600"/>
+            <FontAwesomeIcon icon={faCalendarXmark} className="size-4 text-amber-600"/>
           </div>
           <p className="text-xl font-bold text-amber-800 mt-1">
             {leaves.filter((l) => l.status === 'pending').length} Requests
@@ -243,7 +245,7 @@ export default function LeaveManagementPage() {
             <span className="text-[11px] font-semibold text-brand-dark uppercase">
               Currently On Leave
             </span>
-            <RiCalendarCheckLine className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faCalendarCheck} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">
             1 Team Member
@@ -258,7 +260,7 @@ export default function LeaveManagementPage() {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Average Annual Balance
             </span>
-            <RiHeartPulseLine className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faHeartPulse} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-slate-900 mt-1">
             18.5 Days / Emp
@@ -272,7 +274,7 @@ export default function LeaveManagementPage() {
       {/* Filter Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-2xs">
         <div className="relative flex-1 sm:max-w-xs">
-          <RiSearchLine className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
           <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search employee, reason..." className="h-9 pl-8 pr-3 text-xs border-slate-200 bg-slate-50/50 focus-visible:bg-white"/>
         </div>
 

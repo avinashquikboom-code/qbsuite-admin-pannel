@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import Link from 'next/link';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -9,7 +10,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/common/Button';
 import { Badge } from '@/components/common/Badge';
 import { mockKpiData, mockCrmKpiData, mockPipelineStages, mockEmployees, } from '@/lib/mock-data';
-import { RiBuilding4Line, RiBriefcaseLine, RiTeamLine, RiCalendarCheckLine, RiMoneyDollarCircleLine, RiExchangeDollarLine, RiArrowRightLine, RiUserFollowLine, RiCheckDoubleLine, } from '@remixicon/react';
+import { faArrowRight, faBuilding, faCheckDouble, faDollarSign, faMoneyBillTransfer, faUserCheck, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 export default function AdminDashboardPage() {
     return (<div className="space-y-6 max-w-7xl mx-auto">
       <PageHeader title="QB Suite Executive Portal" description="Unified Enterprise Operations across Human Resources, Workforce Management, and Sales CRM." badge={<Badge className="bg-brand-light text-brand-dark border-brand-light text-xs font-semibold px-2 py-0.5">
@@ -17,13 +19,13 @@ export default function AdminDashboardPage() {
           </Badge>} actions={<div className="flex items-center gap-2">
             <Link href="/admin/hrm/dashboard">
               <Button variant="outline" size="sm" className="border-slate-200 text-slate-700 hover:text-brand-dark text-xs h-9">
-                <RiBuilding4Line className="size-4 mr-1.5 text-brand"/>
+                <FontAwesomeIcon icon={faBuilding} className="size-4 mr-1.5 text-brand"/>
                 HRM Module
               </Button>
             </Link>
             <Link href="/admin/crm/dashboard">
               <Button size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs h-9 font-medium">
-                <RiBriefcaseLine className="size-4 mr-1.5"/>
+                <FontAwesomeIcon icon={faUsers} className="size-4 mr-1.5"/>
                 CRM Module
               </Button>
             </Link>
@@ -31,10 +33,10 @@ export default function AdminDashboardPage() {
 
       {/* Executive Combined KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard title="Total Workforce" value={mockKpiData.totalEmployees} change={mockKpiData.totalEmployeesChange} changeType="positive" icon={RiTeamLine} iconColor="text-brand" iconBg="bg-brand-light" description="Active team headcount"/>
-        <StatCard title="Attendance Today" value={`${mockKpiData.presentPercentage}%`} change={`${mockKpiData.presentToday} Present / ${mockKpiData.absentToday} Absent`} changeType="positive" icon={RiCalendarCheckLine} iconColor="text-brand" iconBg="bg-brand-light"/>
-        <StatCard title="CRM Pipeline Value" value={`$${(mockCrmKpiData.pipelineValue / 1000).toFixed(0)}k`} change={`${mockCrmKpiData.activeDealsCount} Active Deals in Flight`} changeType="positive" icon={RiExchangeDollarLine} iconColor="text-brand-dark" iconBg="bg-brand-light" badge="High Velocity"/>
-        <StatCard title="Total Q1 Revenue" value={`$${mockCrmKpiData.totalRevenue.toLocaleString()}`} change={mockCrmKpiData.revenueGrowth} changeType="positive" icon={RiMoneyDollarCircleLine} iconColor="text-brand" iconBg="bg-brand-light"/>
+        <StatCard title="Total Workforce" value={mockKpiData.totalEmployees} change={mockKpiData.totalEmployeesChange} changeType="positive" icon={faUsers} iconColor="text-brand" iconBg="bg-brand-light" description="Active team headcount"/>
+        <StatCard title="Attendance Today" value={`${mockKpiData.presentPercentage}%`} change={`${mockKpiData.presentToday} Present / ${mockKpiData.absentToday} Absent`} changeType="positive" icon={faCalendarCheck} iconColor="text-brand" iconBg="bg-brand-light"/>
+        <StatCard title="CRM Pipeline Value" value={`$${(mockCrmKpiData.pipelineValue / 1000).toFixed(0)}k`} change={`${mockCrmKpiData.activeDealsCount} Active Deals in Flight`} changeType="positive" icon={faMoneyBillTransfer} iconColor="text-brand-dark" iconBg="bg-brand-light" badge="High Velocity"/>
+        <StatCard title="Total Q1 Revenue" value={`$${mockCrmKpiData.totalRevenue.toLocaleString()}`} change={mockCrmKpiData.revenueGrowth} changeType="positive" icon={faDollarSign} iconColor="text-brand" iconBg="bg-brand-light"/>
       </div>
 
       {/* Module Quick Launch Showcases */}
@@ -45,7 +47,7 @@ export default function AdminDashboardPage() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="flex size-10 items-center justify-center rounded-xl bg-brand-light text-brand">
-                  <RiBuilding4Line className="size-5"/>
+                  <FontAwesomeIcon icon={faBuilding} className="size-5"/>
                 </div>
                 <div>
                   <CardTitle className="text-base font-bold text-slate-900">
@@ -85,13 +87,13 @@ export default function AdminDashboardPage() {
 
             <div className="flex items-center justify-between pt-1">
               <div className="flex items-center gap-2 text-xs text-slate-500">
-                <RiCheckDoubleLine className="size-4 text-brand"/>
+                <FontAwesomeIcon icon={faCheckDouble} className="size-4 text-brand"/>
                 <span>Next payroll run: Mar 31, 2026</span>
               </div>
               <Link href="/admin/hrm/dashboard">
                 <Button size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold h-8">
                   Enter HRM
-                  <RiArrowRightLine className="size-3.5 ml-1"/>
+                  <FontAwesomeIcon icon={faArrowRight} className="size-3.5 ml-1"/>
                 </Button>
               </Link>
             </div>
@@ -104,7 +106,7 @@ export default function AdminDashboardPage() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="flex size-10 items-center justify-center rounded-xl bg-brand-light text-brand">
-                  <RiBriefcaseLine className="size-5"/>
+                  <FontAwesomeIcon icon={faUsers} className="size-5"/>
                 </div>
                 <div>
                   <CardTitle className="text-base font-bold text-slate-900">
@@ -144,13 +146,13 @@ export default function AdminDashboardPage() {
 
             <div className="flex items-center justify-between pt-1">
               <div className="flex items-center gap-2 text-xs text-slate-500">
-                <RiUserFollowLine className="size-4 text-brand"/>
+                <FontAwesomeIcon icon={faUserCheck} className="size-4 text-brand"/>
                 <span>3 Deals awaiting contract closing</span>
               </div>
               <Link href="/admin/crm/dashboard">
                 <Button size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold h-8">
                   Enter CRM
-                  <RiArrowRightLine className="size-3.5 ml-1"/>
+                  <FontAwesomeIcon icon={faArrowRight} className="size-3.5 ml-1"/>
                 </Button>
               </Link>
             </div>

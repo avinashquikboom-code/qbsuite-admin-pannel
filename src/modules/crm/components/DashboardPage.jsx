@@ -1,7 +1,9 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import Link from 'next/link';
-import { RiUserSearchLine, RiMoneyDollarCircleLine, RiPercentLine, RiContactsBookLine, RiArrowRightLine, RiAddLine, RiWhatsappLine, RiMegaphoneLine, } from '@remixicon/react';
+import { faArrowRight, faBullhorn, faDollarSign, faPercent, faPlus, faUserGroup, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { PageHeader } from '@/components/common/PageHeader';
 import { StatCard } from '@/components/common/StatCard';
 import { Button } from '@/components/common/Button';
@@ -18,7 +20,7 @@ export default function CrmDashboardPage() {
       <PageHeader title="CRM Executive Dashboard" description="Pipeline health, active leads conversion, high-value opportunities and customer acquisition." badge="CRM Suite" badgeVariant="green" actions={<div className="flex items-center gap-2">
             <Link href="/admin/crm/leads">
               <Button size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm">
-                <RiAddLine className="size-4"/>
+                <FontAwesomeIcon icon={faPlus} className="size-4"/>
                 <span>New Lead</span>
               </Button>
             </Link>
@@ -26,10 +28,10 @@ export default function CrmDashboardPage() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard title="Total Pipeline Value" value={currency.format(mockCrmKpiData.pipelineValue)} change="+18.4% vs last month" trend="up" icon={RiMoneyDollarCircleLine} accent="green"/>
-        <StatCard title="Active Leads" value={mockCrmKpiData.leadsCount.toString()} change="+12 qualified this week" trend="up" icon={RiUserSearchLine} accent="green"/>
-        <StatCard title="Deals in Progress" value={mockCrmKpiData.activeDealsCount.toString()} change="8 closing this sprint" trend="neutral" icon={RiPercentLine} accent="green"/>
-        <StatCard title="Key Accounts" value={mockContacts.length.toString()} change="+3 enterprises added" trend="up" icon={RiContactsBookLine} accent="green"/>
+        <StatCard title="Total Pipeline Value" value={currency.format(mockCrmKpiData.pipelineValue)} change="+18.4% vs last month" trend="up" icon={faDollarSign} accent="green"/>
+        <StatCard title="Active Leads" value={mockCrmKpiData.leadsCount.toString()} change="+12 qualified this week" trend="up" icon={faUsers} accent="green"/>
+        <StatCard title="Deals in Progress" value={mockCrmKpiData.activeDealsCount.toString()} change="8 closing this sprint" trend="neutral" icon={faPercent} accent="green"/>
+        <StatCard title="Key Accounts" value={mockContacts.length.toString()} change="+3 enterprises added" trend="up" icon={faUserGroup} accent="green"/>
       </div>
 
       {/* Quick Launchpad & Highlights */}
@@ -48,7 +50,7 @@ export default function CrmDashboardPage() {
             <Link href="/admin/crm/leads">
               <Button variant="ghost" size="sm" className="text-brand hover:text-brand-dark hover:bg-brand-light gap-1 text-xs">
                 <span>View All Leads</span>
-                <RiArrowRightLine className="size-3.5"/>
+                <FontAwesomeIcon icon={faArrowRight} className="size-3.5"/>
               </Button>
             </Link>
           </CardHeader>
@@ -92,27 +94,27 @@ export default function CrmDashboardPage() {
               <Link href="/admin/crm/whatsapp" className="flex items-center justify-between p-3 rounded-lg border border-slate-200/80 hover:border-brand-light hover:bg-brand-light/40 transition-all">
                 <div className="flex items-center gap-3">
                   <div className="flex size-9 items-center justify-center rounded-lg bg-brand-light text-brand">
-                    <RiWhatsappLine className="size-5"/>
+                    <FontAwesomeIcon icon={faWhatsapp} className="size-5"/>
                   </div>
                   <div>
                     <div className="text-sm font-semibold text-slate-900">WhatsApp Business API</div>
                     <div className="text-xs text-brand font-medium">Synced • 98.4% Delivery</div>
                   </div>
                 </div>
-                <RiArrowRightLine className="size-4 text-slate-400"/>
+                <FontAwesomeIcon icon={faArrowRight} className="size-4 text-slate-400"/>
               </Link>
 
               <Link href="/admin/crm/campaigns" className="flex items-center justify-between p-3 rounded-lg border border-slate-200/80 hover:border-brand-light hover:bg-brand-light/40 transition-all">
                 <div className="flex items-center gap-3">
                   <div className="flex size-9 items-center justify-center rounded-lg bg-brand-light text-brand">
-                    <RiMegaphoneLine className="size-5"/>
+                    <FontAwesomeIcon icon={faBullhorn} className="size-5"/>
                   </div>
                   <div>
                     <div className="text-sm font-semibold text-slate-900">Email & Ad Campaigns</div>
                     <div className="text-xs text-slate-500">3 active campaigns running</div>
                   </div>
                 </div>
-                <RiArrowRightLine className="size-4 text-slate-400"/>
+                <FontAwesomeIcon icon={faArrowRight} className="size-4 text-slate-400"/>
               </Link>
             </CardContent>
           </Card>

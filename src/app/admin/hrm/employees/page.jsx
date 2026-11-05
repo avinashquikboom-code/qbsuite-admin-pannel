@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { EmployeeTable } from '@/components/employees/EmployeeTable';
@@ -10,7 +11,7 @@ import { Label } from '@/components/common/Label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
 import { mockEmployees } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { RiUserAddLine } from '@remixicon/react';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 export default function EmployeesPage() {
     const [employees, setEmployees] = React.useState(mockEmployees);
     const [selectedEmployee, setSelectedEmployee] = React.useState(null);
@@ -92,7 +93,7 @@ export default function EmployeesPage() {
     const inactiveCount = employees.filter((e) => e.status === 'inactive').length;
     return (<div className="space-y-6 max-w-7xl mx-auto">
       <PageHeader title="Employee Directory" description="Manage company personnel, designations, salary packages, and employment status." actions={<Button onClick={() => setAddDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
-            <RiUserAddLine className="size-4 mr-1.5"/>
+            <FontAwesomeIcon icon={faUserPlus} className="size-4 mr-1.5"/>
             Add New Employee
           </Button>}/>
 

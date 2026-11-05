@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { OvertimeTable } from '@/components/overtime/OvertimeTable';
@@ -7,7 +8,7 @@ import { ConfirmDialog } from '@/components/common/ConfirmDialog';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, } from '@/components/common/Modal';
 import { mockOvertimeRequests } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { RiTimeLine, RiMoneyDollarCircleLine, RiCheckboxCircleLine } from '@remixicon/react';
+import { faCheckCircle, faClock, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 export default function OvertimePage() {
     const [requests, setRequests] = React.useState(mockOvertimeRequests);
     const [activeTab, setActiveTab] = React.useState('all');
@@ -95,7 +96,7 @@ export default function OvertimePage() {
             <span className="text-[11px] font-semibold text-amber-700 uppercase">
               Pending Approvals
             </span>
-            <RiTimeLine className="size-4 text-amber-600"/>
+            <FontAwesomeIcon icon={faClock} className="size-4 text-amber-600"/>
           </div>
           <p className="text-xl font-bold text-amber-800 mt-1">
             {counts.pending} Requests (${pendingAmount.toFixed(2)})
@@ -107,7 +108,7 @@ export default function OvertimePage() {
             <span className="text-[11px] font-semibold text-brand-dark uppercase">
               Approved Overtime
             </span>
-            <RiCheckboxCircleLine className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faCheckCircle} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">
             {counts.approved} Claims (${approvedAmount.toFixed(2)})
@@ -119,7 +120,7 @@ export default function OvertimePage() {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Total Approved Extra Hours
             </span>
-            <RiMoneyDollarCircleLine className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faDollarSign} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-slate-900 mt-1">
             {totalHours} Total Hours

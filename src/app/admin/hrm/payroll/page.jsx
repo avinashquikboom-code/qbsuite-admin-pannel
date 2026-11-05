@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { PayrollSummary } from '@/components/payroll/PayrollSummary';
@@ -9,7 +10,8 @@ import { Button } from '@/components/common/Button';
 import { Badge } from '@/components/common/Badge';
 import { mockPayrollRecords } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { RiBankCardLine, RiDownloadLine, RiPrinterLine, RiMailLine, } from '@remixicon/react';
+import { faDownload, faPrint, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 export default function PayrollPage() {
     const [records, setRecords] = React.useState(mockPayrollRecords);
     const [selectedMonth, setSelectedMonth] = React.useState('March 2026');
@@ -44,11 +46,11 @@ export default function PayrollPage() {
     return (<div className="space-y-6 max-w-7xl mx-auto">
       <PageHeader title="Payroll & Compensation Management" description="Calculate monthly salaries, tax withholding, overtime credits, reimbursements, and payslip generation." actions={<div className="flex items-center gap-2">
             <Button variant="outline" size="sm" onClick={() => toast.success('Exported Monthly Payroll to Excel/CSV')} className="border-slate-200 text-slate-700 hover:text-brand-dark text-xs h-9">
-              <RiDownloadLine className="size-3.5 mr-1 text-slate-400"/>
+              <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1 text-slate-400"/>
               Export Bank File
             </Button>
             <Button size="sm" onClick={() => setRunBatchOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
-              <RiBankCardLine className="size-4 mr-1.5"/>
+              <FontAwesomeIcon icon={faWallet} className="size-4 mr-1.5"/>
               Run Payroll Batch
             </Button>
           </div>}/>
@@ -221,19 +223,19 @@ export default function PayrollPage() {
               {/* Modal Footer Actions */}
               <div className="flex items-center justify-between pt-2">
                 <Button variant="outline" size="sm" onClick={() => toast.success(`Payslip sent to ${selectedRecord.employeeName}'s email`)} className="h-8 text-xs border-slate-200">
-                  <RiMailLine className="size-3.5 mr-1"/>
+                  <FontAwesomeIcon icon={faEnvelope} className="size-3.5 mr-1"/>
                   Email Payslip
                 </Button>
                 <div className="flex items-center gap-2">
                   <Button variant="outline" size="sm" onClick={() => toast.success('Sending to connected office printer...')} className="h-8 text-xs border-slate-200">
-                    <RiPrinterLine className="size-3.5 mr-1"/>
+                    <FontAwesomeIcon icon={faPrint} className="size-3.5 mr-1"/>
                     Print
                   </Button>
                   <Button size="sm" onClick={() => {
                 toast.success(`Downloaded ${selectedRecord.id}.pdf`);
                 setPayslipOpen(false);
             }} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs">
-                    <RiDownloadLine className="size-3.5 mr-1"/>
+                    <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1"/>
                     Download PDF
                   </Button>
                 </div>

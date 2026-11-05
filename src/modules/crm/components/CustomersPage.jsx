@@ -1,7 +1,9 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import { DataTable } from '@/components/common/DataTable';
 import * as React from 'react';
-import { RiAddLine, RiSearchLine, RiMailLine, RiPhoneLine, RiBuildingLine, } from '@remixicon/react';
+import { faBuilding, faMagnifyingGlass, faPhone, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { PageHeader } from '@/components/common/PageHeader';
 import { Button } from '@/components/common/Button';
 import { Input } from '@/components/common/Input';
@@ -64,7 +66,7 @@ export default function CustomersPage() {
     };
     return (<div className="space-y-6">
       <PageHeader title="Enterprise Customers & Accounts" description="Maintain client relationships, contract histories, and account portfolio values." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
-            <RiAddLine className="size-4"/>
+            <FontAwesomeIcon icon={faPlus} className="size-4"/>
             <span>Add Customer</span>
           </Button>}/>
 
@@ -96,7 +98,7 @@ export default function CustomersPage() {
       <Card className="border-slate-200/80 shadow-2xs">
         <CardContent className="p-4">
           <div className="relative w-full sm:w-80">
-            <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
             <Input placeholder="Filter by customer name, company, email..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9 h-9 text-xs border-slate-200 bg-slate-50/50"/>
           </div>
         </CardContent>
@@ -146,15 +148,15 @@ export default function CustomersPage() {
                   <StatusBadge status={selectedContact.status}/>
                 </div>
                 <div className="flex items-center gap-2 text-slate-600">
-                  <RiBuildingLine className="size-3.5 text-slate-400"/>
+                  <FontAwesomeIcon icon={faBuilding} className="size-3.5 text-slate-400"/>
                   <span>{selectedContact.company} ({selectedContact.role})</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-600">
-                  <RiMailLine className="size-3.5 text-slate-400"/>
+                  <FontAwesomeIcon icon={faEnvelope} className="size-3.5 text-slate-400"/>
                   <span>{selectedContact.email}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-600">
-                  <RiPhoneLine className="size-3.5 text-slate-400"/>
+                  <FontAwesomeIcon icon={faPhone} className="size-3.5 text-slate-400"/>
                   <span>{selectedContact.phone}</span>
                 </div>
               </div>

@@ -1,9 +1,10 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/common/Card';
 import { mockAttendanceTrend } from '@/lib/mock-data';
-import { RiCalendarCheckLine } from '@remixicon/react';
+import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 const subscribe = () => () => {};
 export function AttendanceChart() {
     const mounted = React.useSyncExternalStore(subscribe, () => true, () => false);
@@ -22,7 +23,7 @@ export function AttendanceChart() {
       <CardHeader className="p-5 pb-3 flex flex-row items-center justify-between space-y-0">
         <div>
           <div className="flex items-center gap-2">
-            <RiCalendarCheckLine className="size-5 text-brand"/>
+            <FontAwesomeIcon icon={faCalendarCheck} className="size-5 text-brand"/>
             <CardTitle className="text-base font-bold text-slate-900">
               Weekly Attendance Analysis
             </CardTitle>

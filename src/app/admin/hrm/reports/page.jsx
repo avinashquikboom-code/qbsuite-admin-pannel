@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/common/Card';
@@ -6,7 +7,7 @@ import { Button } from '@/components/common/Button';
 import { AttendanceChart } from '@/components/dashboard/AttendanceChart';
 import { mockEmployees, mockKpiData } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { RiDownloadLine, RiPieChartLine, } from '@remixicon/react';
+import { faChartLine, faDownload } from '@fortawesome/free-solid-svg-icons';
 export default function HrmReportsPage() {
     const departmentCounts = React.useMemo(() => {
         const counts = {};
@@ -27,11 +28,11 @@ export default function HrmReportsPage() {
     return (<div className="space-y-6 max-w-7xl mx-auto">
       <PageHeader title="HRM Reports & People Analytics" description="Comprehensive workplace metrics, department headcounts, overtime cost exposure, and attendance ratios." actions={<div className="flex items-center gap-2">
             <Button variant="outline" size="sm" onClick={() => handleExport('Payroll & Tax Audit')} className="border-slate-200 text-slate-700 text-xs h-9">
-              <RiDownloadLine className="size-3.5 mr-1"/>
+              <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1"/>
               Tax Audit File
             </Button>
             <Button size="sm" onClick={() => handleExport('Complete HRM Quarterly Report')} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
-              <RiDownloadLine className="size-3.5 mr-1"/>
+              <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1"/>
               Export Full Report (PDF)
             </Button>
           </div>}/>
@@ -91,7 +92,7 @@ export default function HrmReportsPage() {
         <Card className="border border-slate-200/90 bg-white shadow-xs">
           <CardHeader className="p-5 pb-3">
             <div className="flex items-center gap-2">
-              <RiPieChartLine className="size-5 text-brand"/>
+              <FontAwesomeIcon icon={faChartLine} className="size-5 text-brand"/>
               <CardTitle className="text-base font-bold text-slate-900">
                 Departmental Workforce Distribution
               </CardTitle>
@@ -143,7 +144,7 @@ export default function HrmReportsPage() {
                 <p className="text-slate-400">Detailed tax withholding matrix per employee</p>
               </div>
               <Button variant="outline" size="sm" onClick={() => handleExport('W-2 Reconciliation')} className="h-7.5 border-slate-200 text-xs text-slate-700">
-                <RiDownloadLine className="size-3 mr-1"/>
+                <FontAwesomeIcon icon={faDownload} className="size-3 mr-1"/>
                 CSV
               </Button>
             </div>
@@ -156,7 +157,7 @@ export default function HrmReportsPage() {
                 <p className="text-slate-400">Recorded hours, multipliers and justification notes</p>
               </div>
               <Button variant="outline" size="sm" onClick={() => handleExport('FLSA Audit')} className="h-7.5 border-slate-200 text-xs text-slate-700">
-                <RiDownloadLine className="size-3 mr-1"/>
+                <FontAwesomeIcon icon={faDownload} className="size-3 mr-1"/>
                 CSV
               </Button>
             </div>
@@ -169,7 +170,7 @@ export default function HrmReportsPage() {
                 <p className="text-slate-400">Complete raw punch timestamps and break intervals</p>
               </div>
               <Button variant="outline" size="sm" onClick={() => handleExport('Timesheet Audit')} className="h-7.5 border-slate-200 text-xs text-slate-700">
-                <RiDownloadLine className="size-3 mr-1"/>
+                <FontAwesomeIcon icon={faDownload} className="size-3 mr-1"/>
                 CSV
               </Button>
             </div>

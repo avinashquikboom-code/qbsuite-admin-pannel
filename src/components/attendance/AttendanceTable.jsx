@@ -1,10 +1,11 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { DataTable } from '@/components/common/DataTable';
 import { StatusBadge } from '@/components/common/StatusBadge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
 import { Button } from '@/components/common/Button';
-import { RiTimeLine, RiAlertLine } from '@remixicon/react';
+import { faClock, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 export function AttendanceTable({ records, onAdjustPunch, }) {
     const columns = [
         {
@@ -53,7 +54,7 @@ export function AttendanceTable({ records, onAdjustPunch, }) {
         {
             header: 'Late / Delay',
             cell: (rec) => rec.lateDuration ? (<span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-            <RiAlertLine className="size-3"/>
+            <FontAwesomeIcon icon={faTriangleExclamation} className="size-3"/>
             {rec.lateDuration}
           </span>) : (<span className="text-xs text-slate-400 font-mono">—</span>),
         },
@@ -65,7 +66,7 @@ export function AttendanceTable({ records, onAdjustPunch, }) {
             header: 'Actions',
             className: 'text-right',
             cell: (rec) => (<Button size="sm" variant="ghost" onClick={() => onAdjustPunch?.(rec)} className="h-8 text-xs text-slate-600 hover:text-brand-dark hover:bg-brand-light">
-          <RiTimeLine className="size-3.5 mr-1 text-slate-400"/>
+          <FontAwesomeIcon icon={faClock} className="size-3.5 mr-1 text-slate-400"/>
           Edit Log
         </Button>),
         },

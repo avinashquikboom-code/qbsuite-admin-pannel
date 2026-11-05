@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { AttendanceFilters } from '@/components/attendance/AttendanceFilters';
@@ -10,7 +11,8 @@ import { Label } from '@/components/common/Label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
 import { mockAttendanceRecords } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { RiCalendarCheckLine, RiAlertLine, RiCalendarCloseLine, RiCloseCircleLine, } from '@remixicon/react';
+import { faCircleXmark, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarCheck, faCalendarXmark } from '@fortawesome/free-regular-svg-icons';
 export default function AttendancePage() {
     const [records, setRecords] = React.useState(mockAttendanceRecords);
     const [search, setSearch] = React.useState('');
@@ -66,7 +68,7 @@ export default function AttendancePage() {
     const absentCount = records.filter((r) => r.status === 'absent').length;
     return (<div className="space-y-6 max-w-7xl mx-auto">
       <PageHeader title="Attendance & Time Clock" description="Daily punch in/out timestamps, break tracking, working duration, and automated late arrival detection." actions={<Button size="sm" onClick={handleExport} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
-            <RiCalendarCheckLine className="size-4 mr-1.5"/>
+            <FontAwesomeIcon icon={faCalendarCheck} className="size-4 mr-1.5"/>
             Generate Timesheet
           </Button>}/>
 
@@ -77,7 +79,7 @@ export default function AttendancePage() {
             <span className="text-[11px] font-semibold text-brand-dark uppercase">
               Present Today
             </span>
-            <RiCalendarCheckLine className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faCalendarCheck} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">
             {presentCount} Employees
@@ -89,7 +91,7 @@ export default function AttendancePage() {
             <span className="text-[11px] font-semibold text-amber-700 uppercase">
               Late Arrivals
             </span>
-            <RiAlertLine className="size-4 text-amber-600"/>
+            <FontAwesomeIcon icon={faTriangleExclamation} className="size-4 text-amber-600"/>
           </div>
           <p className="text-xl font-bold text-amber-800 mt-1">
             {lateCount} Employees
@@ -101,7 +103,7 @@ export default function AttendancePage() {
             <span className="text-[11px] font-semibold text-brand-dark uppercase">
               Approved Leave
             </span>
-            <RiCalendarCloseLine className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faCalendarXmark} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">
             {onLeaveCount} Employees
@@ -113,7 +115,7 @@ export default function AttendancePage() {
             <span className="text-[11px] font-semibold text-rose-700 uppercase">
               Unexcused Absent
             </span>
-            <RiCloseCircleLine className="size-4 text-rose-600"/>
+            <FontAwesomeIcon icon={faCircleXmark} className="size-4 text-rose-600"/>
           </div>
           <p className="text-xl font-bold text-rose-800 mt-1">
             {absentCount} Employees

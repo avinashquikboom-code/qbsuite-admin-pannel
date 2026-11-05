@@ -1,8 +1,9 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { RiArrowRightSLine, RiHome4Line } from '@remixicon/react';
+import { faChevronRight, faHouse } from '@fortawesome/free-solid-svg-icons';
 export function Breadcrumb() {
     const pathname = usePathname();
     const pathSegments = pathname.split('/').filter(Boolean);
@@ -58,11 +59,11 @@ export function Breadcrumb() {
     };
     return (<nav className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
       <Link href="/" className="flex items-center gap-1 text-slate-500 hover:text-brand-dark transition-colors">
-        <RiHome4Line className="size-3.5 text-slate-400"/>
+        <FontAwesomeIcon icon={faHouse} className="size-3.5 text-slate-400"/>
         <span className="hidden sm:inline">QB Suite</span>
       </Link>
 
-      {pathSegments.length > 0 && (<RiArrowRightSLine className="size-3.5 text-slate-400 shrink-0"/>)}
+      {pathSegments.length > 0 && (<FontAwesomeIcon icon={faChevronRight} className="size-3.5 text-slate-400 shrink-0"/>)}
 
       {pathSegments.map((segment, index) => {
             const url = `/${pathSegments.slice(0, index + 1).join('/')}`;
@@ -73,7 +74,7 @@ export function Breadcrumb() {
               </span>) : (<Link href={url} className="text-slate-500 hover:text-brand-dark transition-colors">
                 {getSegmentName(segment)}
               </Link>)}
-            {!isLast && (<RiArrowRightSLine className="size-3.5 text-slate-400 shrink-0"/>)}
+            {!isLast && (<FontAwesomeIcon icon={faChevronRight} className="size-3.5 text-slate-400 shrink-0"/>)}
           </React.Fragment>);
         })}
     </nav>);

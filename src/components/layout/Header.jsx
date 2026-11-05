@@ -1,8 +1,9 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { RiMenuLine, RiSearchLine, RiNotification3Line, RiBuilding4Line, RiBriefcaseLine, RiApps2Line, RiUser3Line, RiSettings4Line, RiLogoutBoxRLine, RiCheckDoubleLine, } from '@remixicon/react';
+import { faBars, faBell, faBuilding, faCheckDouble, faGear, faMagnifyingGlass, faRightFromBracket, faTableCellsLarge, faUserTie, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Input } from '@/components/common/Input';
@@ -91,7 +92,7 @@ export function Header() {
         {/* Mobile Sidebar Trigger */}
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
           <SheetTrigger className="inline-flex size-9 items-center justify-center rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 lg:hidden" aria-label="Open Navigation">
-            <RiMenuLine className="size-5"/>
+            <FontAwesomeIcon icon={faBars} className="size-5"/>
           </SheetTrigger>
           <SheetContent aria-label="Navigation" side="left" className="p-0 w-72 max-w-[80vw]">
             <Sidebar onNavigate={() => setMobileOpen(false)} className="w-full border-none"/>
@@ -108,14 +109,14 @@ export function Header() {
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Quick Search */}
         <form onSubmit={handleSearchSubmit} className="relative hidden sm:block w-48 md:w-60">
-          <RiSearchLine className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
           <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search employee, lead, deal..." className="h-9 pl-8 pr-3 text-xs bg-slate-50 border-slate-200 focus-visible:bg-white focus-visible:ring-brand"/>
         </form>
 
         {/* Notifications Popover */}
         <Popover>
           <PopoverTrigger className="relative flex size-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors">
-            <RiNotification3Line className="size-4.5"/>
+            <FontAwesomeIcon icon={faBell} className="size-4.5"/>
             <span className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-primary-foreground shadow-xs">
               2
             </span>
@@ -131,7 +132,7 @@ export function Header() {
                 </Badge>
               </div>
               <button onClick={() => toast.success('All marked as read')} className="text-xs text-brand hover:text-brand-dark flex items-center gap-1 font-medium">
-                <RiCheckDoubleLine className="size-3.5"/>
+                <FontAwesomeIcon icon={faCheckDouble} className="size-3.5"/>
                 Mark read
               </button>
             </div>
@@ -187,16 +188,16 @@ export function Header() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator className="bg-slate-100 my-1"/>
             <DropdownMenuItem onClick={() => router.push('/admin/hrm/employees')} className="text-xs p-2 rounded-lg cursor-pointer text-slate-700 hover:bg-slate-50 flex items-center gap-2">
-              <RiUser3Line className="size-4 text-slate-500"/>
+              <FontAwesomeIcon icon={faUserTie} className="size-4 text-slate-500"/>
               <span>Admin Profile</span>
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => router.push('/admin/settings')} className="text-xs p-2 rounded-lg cursor-pointer text-slate-700 hover:bg-slate-50 flex items-center gap-2">
-              <RiSettings4Line className="size-4 text-slate-500"/>
+              <FontAwesomeIcon icon={faGear} className="size-4 text-slate-500"/>
               <span>System Settings</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator className="bg-slate-100 my-1"/>
             <DropdownMenuItem onClick={() => toast.success('Signed out successfully')} className="text-xs p-2 rounded-lg cursor-pointer text-rose-600 hover:bg-rose-50 flex items-center gap-2">
-              <RiLogoutBoxRLine className="size-4 text-rose-500"/>
+              <FontAwesomeIcon icon={faRightFromBracket} className="size-4 text-rose-500"/>
               <span>Sign out</span>
             </DropdownMenuItem>
           </DropdownMenuContent>

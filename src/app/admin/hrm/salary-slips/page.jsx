@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { DataTable } from '@/components/common/DataTable';
@@ -9,7 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '
 import { Dialog, DialogContent, } from '@/components/common/Modal';
 import { mockPayrollRecords } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { RiFileTextLine, RiDownloadLine, RiPrinterLine, RiMailLine, RiSearchLine, } from '@remixicon/react';
+import { faDownload, faMagnifyingGlass, faPrint } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faFileLines } from '@fortawesome/free-regular-svg-icons';
 export default function SalarySlipsPage() {
     const [records] = React.useState(mockPayrollRecords);
     const [search, setSearch] = React.useState('');
@@ -76,25 +78,25 @@ export default function SalarySlipsPage() {
             className: 'text-right',
             cell: (r) => (<div className="flex items-center justify-end gap-1.5">
           <Button size="sm" variant="outline" onClick={() => setActiveSlip(r)} className="h-7.5 px-2.5 border-slate-200 text-slate-700 hover:text-brand-dark hover:bg-brand-light text-xs">
-            <RiFileTextLine className="size-3.5 mr-1 text-slate-400"/>
+            <FontAwesomeIcon icon={faFileLines} className="size-3.5 mr-1 text-slate-400"/>
             View Slip
           </Button>
           <Button size="sm" variant="ghost" onClick={() => toast.success(`Downloaded payslip for ${r.employeeName}`)} className="h-7.5 px-2 text-slate-600 hover:text-slate-900">
-            <RiDownloadLine className="size-3.5"/>
+            <FontAwesomeIcon icon={faDownload} className="size-3.5"/>
           </Button>
         </div>),
         },
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
       <PageHeader title="Salary Slips Repository" description="Search, view, download and distribute official monthly compensation slips to personnel." actions={<Button size="sm" onClick={() => toast.success('Sent payslips to all employees via email')} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
-            <RiMailLine className="size-4 mr-1.5"/>
+            <FontAwesomeIcon icon={faEnvelope} className="size-4 mr-1.5"/>
             Email All Slips
           </Button>}/>
 
       {/* Filter Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-2xs">
         <div className="relative flex-1 sm:max-w-xs">
-          <RiSearchLine className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
           <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search by slip ID, employee name..." className="h-9 pl-8 pr-3 text-xs border-slate-200 bg-slate-50/50 focus-visible:bg-white"/>
         </div>
 
@@ -210,14 +212,14 @@ export default function SalarySlipsPage() {
 
               <div className="flex justify-end gap-2 pt-2">
                 <Button variant="outline" size="sm" onClick={() => toast.success('Printed slip')} className="h-8 text-xs border-slate-200">
-                  <RiPrinterLine className="size-3.5 mr-1"/>
+                  <FontAwesomeIcon icon={faPrint} className="size-3.5 mr-1"/>
                   Print
                 </Button>
                 <Button size="sm" onClick={() => {
                 toast.success('Downloaded PDF slip');
                 setActiveSlip(null);
             }} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
-                  <RiDownloadLine className="size-3.5 mr-1"/>
+                  <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1"/>
                   Download
                 </Button>
               </div>

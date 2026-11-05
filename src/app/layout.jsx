@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import './globals.css';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { themeVariables } from '@/theme/theme';

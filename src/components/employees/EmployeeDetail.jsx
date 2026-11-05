@@ -1,11 +1,13 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { Sheet, SheetContent, } from '@/components/common/Drawer';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
 import { StatusBadge } from '@/components/common/StatusBadge';
 import { Button } from '@/components/common/Button';
 import { toast } from '@/hooks/use-toast';
-import { RiMailLine, RiPhoneLine, RiMapPinLine, RiCalendarLine, RiBankCardLine, RiUserHeartLine, RiBriefcaseLine, RiMoneyDollarCircleLine, } from '@remixicon/react';
+import { faDollarSign, faLocationDot, faPhone, faUser, faUsers, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 export function EmployeeDetail({ employee, open, onOpenChange, }) {
     if (!employee)
         return null;
@@ -48,7 +50,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiMailLine className="size-4 text-brand shrink-0"/>
+                  <FontAwesomeIcon icon={faEnvelope} className="size-4 text-brand shrink-0"/>
                   Email
                 </span>
                 <span className="font-semibold text-slate-900 truncate max-w-[200px]">
@@ -57,7 +59,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiPhoneLine className="size-4 text-brand shrink-0"/>
+                  <FontAwesomeIcon icon={faPhone} className="size-4 text-brand shrink-0"/>
                   Phone
                 </span>
                 <span className="font-semibold text-slate-900">
@@ -66,7 +68,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiMapPinLine className="size-4 text-brand shrink-0"/>
+                  <FontAwesomeIcon icon={faLocationDot} className="size-4 text-brand shrink-0"/>
                   Location
                 </span>
                 <span className="font-semibold text-slate-900">
@@ -84,7 +86,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiBriefcaseLine className="size-4 text-brand shrink-0"/>
+                  <FontAwesomeIcon icon={faUsers} className="size-4 text-brand shrink-0"/>
                   Employment Type
                 </span>
                 <span className="font-semibold text-slate-900">
@@ -93,7 +95,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiCalendarLine className="size-4 text-brand shrink-0"/>
+                  <FontAwesomeIcon icon={faCalendar} className="size-4 text-brand shrink-0"/>
                   Join Date
                 </span>
                 <span className="font-semibold text-slate-900">
@@ -111,7 +113,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiMoneyDollarCircleLine className="size-4 text-brand shrink-0"/>
+                  <FontAwesomeIcon icon={faDollarSign} className="size-4 text-brand shrink-0"/>
                   Basic Monthly
                 </span>
                 <span className="font-bold text-slate-900">
@@ -141,7 +143,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiBankCardLine className="size-4 text-brand shrink-0"/>
+                  <FontAwesomeIcon icon={faWallet} className="size-4 text-brand shrink-0"/>
                   Bank Name
                 </span>
                 <span className="font-semibold text-slate-900">
@@ -165,7 +167,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiUserHeartLine className="size-4 text-rose-500 shrink-0"/>
+                  <FontAwesomeIcon icon={faUser} className="size-4 text-rose-500 shrink-0"/>
                   Contact Person
                 </span>
                 <span className="font-semibold text-slate-900">

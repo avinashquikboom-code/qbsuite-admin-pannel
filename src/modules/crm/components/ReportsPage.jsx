@@ -1,6 +1,7 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
-import { RiDownloadLine, RiArrowUpLine, RiTrophyLine, } from '@remixicon/react';
+import { faArrowUp, faDownload, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { PageHeader } from '@/components/common/PageHeader';
 import { Button } from '@/components/common/Button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/common/Card';
@@ -14,7 +15,7 @@ export default function CrmReportsPage() {
     });
     return (<div className="space-y-6">
       <PageHeader title="CRM Revenue & Pipeline Intelligence" description="Comprehensive analysis of customer lifetime value, conversion velocity and sales reps performance." badge="Analytics" badgeVariant="green" actions={<Button size="sm" onClick={() => toast.success('Analytics report PDF generated!')} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
-            <RiDownloadLine className="size-4"/>
+            <FontAwesomeIcon icon={faDownload} className="size-4"/>
             <span>Export Analytics</span>
           </Button>}/>
 
@@ -25,7 +26,7 @@ export default function CrmReportsPage() {
             <CardTitle className="text-xs font-medium text-slate-500">Won Revenue YTD</CardTitle>
             <div className="text-2xl font-bold text-brand-dark mt-1">$482,000</div>
             <div className="text-[11px] text-brand font-medium flex items-center gap-1 mt-1">
-              <RiArrowUpLine className="size-3"/>
+              <FontAwesomeIcon icon={faArrowUp} className="size-3"/>
               <span>+24.5% vs prior year</span>
             </div>
           </CardHeader>
@@ -81,7 +82,7 @@ export default function CrmReportsPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader>
             <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <RiTrophyLine className="size-5 text-amber-500"/>
+              <FontAwesomeIcon icon={faTrophy} className="size-5 text-amber-500"/>
               <span>Sales Representative Leaderboard</span>
             </CardTitle>
             <CardDescription className="text-xs text-slate-500">

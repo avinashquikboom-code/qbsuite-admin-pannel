@@ -1,8 +1,10 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import { Badge } from '@/components/common/Badge';
 import { DataTable } from '@/components/common/DataTable';
 import * as React from 'react';
-import { RiUserSearchLine, RiAddLine, RiSearchLine, RiDownloadLine, RiMailLine, RiPhoneLine, RiBuildingLine, } from '@remixicon/react';
+import { faBuilding, faDownload, faMagnifyingGlass, faPhone, faPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { PageHeader } from '@/components/common/PageHeader';
 import { Button } from '@/components/common/Button';
 import { Input } from '@/components/common/Input';
@@ -86,11 +88,11 @@ export default function LeadsPage() {
     return (<div className="space-y-6">
       <PageHeader title="Sales Leads Management" description="Capture, qualify and convert opportunities into long-term enterprise clients." badge="CRM" badgeVariant="green" actions={<div className="flex items-center gap-2">
             <Button variant="outline" size="sm" onClick={() => toast.success('Leads exported to CSV')} className="gap-1.5 text-xs text-slate-700">
-              <RiDownloadLine className="size-4"/>
+              <FontAwesomeIcon icon={faDownload} className="size-4"/>
               <span>Export</span>
             </Button>
             <Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
-              <RiAddLine className="size-4"/>
+              <FontAwesomeIcon icon={faPlus} className="size-4"/>
               <span>New Lead</span>
             </Button>
           </div>}/>
@@ -122,7 +124,7 @@ export default function LeadsPage() {
         <CardContent className="p-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="relative w-full sm:w-80">
-              <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
+              <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
               <Input placeholder="Search by name, company, email..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9 h-9 text-xs border-slate-200 bg-slate-50/50"/>
             </div>
 
@@ -204,15 +206,15 @@ export default function LeadsPage() {
                   <StatusBadge status={selectedLead.status}/>
                 </div>
                 <div className="flex items-center gap-2 text-slate-600">
-                  <RiBuildingLine className="size-3.5 text-slate-400"/>
+                  <FontAwesomeIcon icon={faBuilding} className="size-3.5 text-slate-400"/>
                   <span>{selectedLead.company} • {selectedLead.title}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-600">
-                  <RiMailLine className="size-3.5 text-slate-400"/>
+                  <FontAwesomeIcon icon={faEnvelope} className="size-3.5 text-slate-400"/>
                   <span>{selectedLead.email}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-600">
-                  <RiPhoneLine className="size-3.5 text-slate-400"/>
+                  <FontAwesomeIcon icon={faPhone} className="size-3.5 text-slate-400"/>
                   <span>{selectedLead.phone}</span>
                 </div>
               </div>

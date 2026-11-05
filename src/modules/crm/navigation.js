@@ -1,43 +1,44 @@
-import { RiBarChartBoxLine, RiContactsBookLine, RiDashboard2Line, RiMegaphoneLine, RiMetaLine, RiUserSearchLine, RiWhatsappLine } from '@remixicon/react';
+import { faBullhorn, faChartLine, faGauge, faUserGroup, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faMeta, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { mockCrmKpiData } from '@/modules/crm/services/mock-data';
 export const navigation = [
         {
             name: 'CRM Dashboard',
             href: '/admin/crm/dashboard',
-            icon: RiDashboard2Line,
+            icon: faGauge,
             matchExact: true,
         },
         {
             name: 'Leads',
             href: '/admin/crm/leads',
-            icon: RiUserSearchLine,
+            icon: faUsers,
             badge: mockCrmKpiData.leadsCount.toString(),
         },
         {
             name: 'Customers',
             href: '/admin/crm/customers',
-            icon: RiContactsBookLine,
+            icon: faUserGroup,
         },
         {
             name: 'Campaigns',
             href: '/admin/crm/campaigns',
-            icon: RiMegaphoneLine,
+            icon: faBullhorn,
         },
         {
             name: 'WhatsApp',
             href: '/admin/crm/whatsapp',
-            icon: RiWhatsappLine,
+            icon: faWhatsapp,
             badge: 'Live',
             badgeVariant: 'green',
         },
         {
             name: 'Meta Integration',
             href: '/admin/crm/meta-integration',
-            icon: RiMetaLine,
+            icon: faMeta,
         },
         {
             name: 'CRM Reports',
             href: '/admin/crm/reports',
-            icon: RiBarChartBoxLine,
+            icon: faChartLine,
         },
     ];

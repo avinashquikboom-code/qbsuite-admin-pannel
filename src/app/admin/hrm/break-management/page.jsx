@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { DataTable } from '@/components/common/DataTable';
@@ -10,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, } from '@/components/common/Modal';
 import { Label } from '@/components/common/Label';
 import { toast } from '@/hooks/use-toast';
-import { RiCupLine, RiTimeLine, RiAlertLine, RiCheckboxCircleLine, RiSearchLine, RiAddLine, } from '@remixicon/react';
+import { faCheckCircle, faClock, faMagnifyingGlass, faMugHot, faPlus, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 const mockBreakRecords = [
     {
         id: 'BRK-101',
@@ -165,18 +166,18 @@ export default function BreakManagementPage() {
             cell: (rec) => {
                 if (rec.status === 'exceeded') {
                     return (<span className="inline-flex items-center gap-1 text-[11px] font-semibold text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded">
-              <RiAlertLine className="size-3"/>
+              <FontAwesomeIcon icon={faTriangleExclamation} className="size-3"/>
               Overstay (+{rec.overstayMinutes}m)
             </span>);
                 }
                 if (rec.status === 'active') {
                     return (<span className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-dark bg-brand-light border border-brand-light px-2 py-0.5 rounded">
-              <RiTimeLine className="size-3"/>
+              <FontAwesomeIcon icon={faClock} className="size-3"/>
               Active Now
             </span>);
                 }
                 return (<span className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-dark bg-brand-light border border-brand-light px-2 py-0.5 rounded">
-            <RiCheckboxCircleLine className="size-3"/>
+            <FontAwesomeIcon icon={faCheckCircle} className="size-3"/>
             Within Policy
           </span>);
             },
@@ -184,7 +185,7 @@ export default function BreakManagementPage() {
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
       <PageHeader title="Break & Interval Management" description="Monitor lunch and short break durations in compliance with workplace time policies." actions={<Button size="sm" onClick={() => setLogDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
-            <RiAddLine className="size-4 mr-1.5"/>
+            <FontAwesomeIcon icon={faPlus} className="size-4 mr-1.5"/>
             Log Manual Break
           </Button>}/>
 
@@ -195,7 +196,7 @@ export default function BreakManagementPage() {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Standard Lunch Policy
             </span>
-            <RiCupLine className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faMugHot} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-slate-900 mt-1">60 Minutes</p>
           <p className="text-[11px] text-slate-500 mt-0.5">
@@ -208,7 +209,7 @@ export default function BreakManagementPage() {
             <span className="text-[11px] font-semibold text-brand-dark uppercase">
               Active On Break Now
             </span>
-            <RiTimeLine className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faClock} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">1 Employee</p>
           <p className="text-[11px] text-brand mt-0.5">
@@ -221,7 +222,7 @@ export default function BreakManagementPage() {
             <span className="text-[11px] font-semibold text-rose-700 uppercase">
               Policy Overstay Flags
             </span>
-            <RiAlertLine className="size-4 text-rose-600"/>
+            <FontAwesomeIcon icon={faTriangleExclamation} className="size-4 text-rose-600"/>
           </div>
           <p className="text-xl font-bold text-rose-800 mt-1">2 Flags Today</p>
           <p className="text-[11px] text-rose-600 mt-0.5">
@@ -233,7 +234,7 @@ export default function BreakManagementPage() {
       {/* Filter Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-2xs">
         <div className="relative flex-1 sm:max-w-xs">
-          <RiSearchLine className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
           <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search by employee name..." className="h-9 pl-8 pr-3 text-xs border-slate-200 bg-slate-50/50 focus-visible:bg-white"/>
         </div>
 

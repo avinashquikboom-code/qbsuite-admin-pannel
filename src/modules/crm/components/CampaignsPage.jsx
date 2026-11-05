@@ -1,6 +1,7 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
-import { RiAddLine, } from '@remixicon/react';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PageHeader } from '@/components/common/PageHeader';
 import { Button } from '@/components/common/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/common/Card';
@@ -92,7 +93,7 @@ export default function CampaignsPage() {
     };
     return (<div className="space-y-6">
       <PageHeader title="Marketing & Ad Campaigns" description="Multi-channel acquisition pipelines across LinkedIn, Email and Meta networks." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
-            <RiAddLine className="size-4"/>
+            <FontAwesomeIcon icon={faPlus} className="size-4"/>
             <span>Launch Campaign</span>
           </Button>}/>
 

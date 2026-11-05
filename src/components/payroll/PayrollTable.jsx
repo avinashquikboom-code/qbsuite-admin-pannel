@@ -1,10 +1,12 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { DataTable } from '@/components/common/DataTable';
 import { StatusBadge } from '@/components/common/StatusBadge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
 import { Button } from '@/components/common/Button';
-import { RiFileTextLine, RiCheckDoubleLine } from '@remixicon/react';
+import { faCheckDouble } from '@fortawesome/free-solid-svg-icons';
+import { faFileLines } from '@fortawesome/free-regular-svg-icons';
 export function PayrollTable({ records, onViewPayslip, onMarkPaid, }) {
     const columns = [
         {
@@ -81,11 +83,11 @@ export function PayrollTable({ records, onViewPayslip, onMarkPaid, }) {
             className: 'text-right',
             cell: (rec) => (<div className="flex items-center justify-end gap-1.5">
           <Button size="sm" variant="outline" onClick={() => onViewPayslip(rec)} className="h-7.5 px-2.5 border-slate-200 text-slate-700 hover:text-brand-dark hover:bg-brand-light text-xs">
-            <RiFileTextLine className="size-3.5 mr-1 text-slate-400"/>
+            <FontAwesomeIcon icon={faFileLines} className="size-3.5 mr-1 text-slate-400"/>
             Payslip
           </Button>
           {rec.status === 'pending' && onMarkPaid && (<Button size="sm" onClick={() => onMarkPaid(rec)} className="h-7.5 px-2 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
-              <RiCheckDoubleLine className="size-3.5 mr-1"/>
+              <FontAwesomeIcon icon={faCheckDouble} className="size-3.5 mr-1"/>
               Pay
             </Button>)}
         </div>),

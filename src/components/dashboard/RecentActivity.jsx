@@ -1,4 +1,5 @@
 'use client';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/common/Card';
@@ -9,7 +10,7 @@ import { StatusBadge } from '@/components/common/StatusBadge';
 import { ConfirmDialog } from '@/components/common/ConfirmDialog';
 import { mockOvertimeRequests, mockExpenseClaims, mockAnnouncements, } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { RiTimeLine, RiMoneyDollarCircleLine, RiMegaphoneLine, RiCheckLine, RiCloseLine, RiArrowRightLine, } from '@remixicon/react';
+import { faArrowRight, faBullhorn, faCheck, faClock, faDollarSign, faXmark } from '@fortawesome/free-solid-svg-icons';
 export function RecentActivity() {
     const [overtimes, setOvertimes] = React.useState(mockOvertimeRequests);
     const [expenses, setExpenses] = React.useState(mockExpenseClaims);
@@ -56,15 +57,15 @@ export function RecentActivity() {
         <Tabs defaultValue="overtime" className="w-full">
           <TabsList className="bg-slate-100 p-1 mb-4 h-9">
             <TabsTrigger value="overtime" className="text-xs data-[state=active]:bg-white data-[state=active]:text-brand-dark data-[state=active]:shadow-xs font-semibold">
-              <RiTimeLine className="size-3.5 mr-1.5"/>
+              <FontAwesomeIcon icon={faClock} className="size-3.5 mr-1.5"/>
               Overtime Requests
             </TabsTrigger>
             <TabsTrigger value="expenses" className="text-xs data-[state=active]:bg-white data-[state=active]:text-brand-dark data-[state=active]:shadow-xs font-semibold">
-              <RiMoneyDollarCircleLine className="size-3.5 mr-1.5"/>
+              <FontAwesomeIcon icon={faDollarSign} className="size-3.5 mr-1.5"/>
               Expense Claims
             </TabsTrigger>
             <TabsTrigger value="announcements" className="text-xs data-[state=active]:bg-white data-[state=active]:text-brand-dark data-[state=active]:shadow-xs font-semibold">
-              <RiMegaphoneLine className="size-3.5 mr-1.5"/>
+              <FontAwesomeIcon icon={faBullhorn} className="size-3.5 mr-1.5"/>
               Announcements
             </TabsTrigger>
           </TabsList>
@@ -108,7 +109,7 @@ export function RecentActivity() {
                     type: 'approve-ot',
                     item: ot,
                 })} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs px-2.5 font-medium">
-                        <RiCheckLine className="size-3.5 mr-1"/>
+                        <FontAwesomeIcon icon={faCheck} className="size-3.5 mr-1"/>
                         Approve
                       </Button>
                       <Button size="sm" variant="outline" onClick={() => setDialogState({
@@ -116,7 +117,7 @@ export function RecentActivity() {
                     type: 'reject-ot',
                     item: ot,
                 })} className="h-8 border-slate-200 text-slate-600 hover:text-rose-600 text-xs px-2.5">
-                        <RiCloseLine className="size-3.5 mr-1"/>
+                        <FontAwesomeIcon icon={faXmark} className="size-3.5 mr-1"/>
                         Reject
                       </Button>
                     </>) : (<span className="text-xs text-slate-400 italic">
@@ -127,7 +128,7 @@ export function RecentActivity() {
             <div className="pt-2 text-right">
               <Link href="/hrm/overtime" className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:text-brand-dark">
                 View all overtime requests
-                <RiArrowRightLine className="size-3.5"/>
+                <FontAwesomeIcon icon={faArrowRight} className="size-3.5"/>
               </Link>
             </div>
           </TabsContent>
@@ -173,7 +174,7 @@ export function RecentActivity() {
                     type: 'approve-exp',
                     item: exp,
                 })} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs px-2.5 font-medium">
-                        <RiCheckLine className="size-3.5 mr-1"/>
+                        <FontAwesomeIcon icon={faCheck} className="size-3.5 mr-1"/>
                         Approve
                       </Button>
                       <Button size="sm" variant="outline" onClick={() => setDialogState({
@@ -181,7 +182,7 @@ export function RecentActivity() {
                     type: 'reject-exp',
                     item: exp,
                 })} className="h-8 border-slate-200 text-slate-600 hover:text-rose-600 text-xs px-2.5">
-                        <RiCloseLine className="size-3.5 mr-1"/>
+                        <FontAwesomeIcon icon={faXmark} className="size-3.5 mr-1"/>
                         Reject
                       </Button>
                     </>) : (<span className="text-xs text-slate-400 italic">
@@ -192,7 +193,7 @@ export function RecentActivity() {
             <div className="pt-2 text-right">
               <Link href="/hrm/expenses" className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:text-brand-dark">
                 View all expense claims
-                <RiArrowRightLine className="size-3.5"/>
+                <FontAwesomeIcon icon={faArrowRight} className="size-3.5"/>
               </Link>
             </div>
           </TabsContent>
@@ -226,7 +227,7 @@ export function RecentActivity() {
             <div className="pt-2 text-right">
               <Link href="/hrm/announcements" className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:text-brand-dark">
                 Manage announcements
-                <RiArrowRightLine className="size-3.5"/>
+                <FontAwesomeIcon icon={faArrowRight} className="size-3.5"/>
               </Link>
             </div>
           </TabsContent>

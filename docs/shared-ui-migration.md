@@ -1,6 +1,6 @@
 # Shared UI migration
 
-Audit: existing CRM and HRM screens use Base UI primitives in components/ui, composed UI in components/shared, and a reusable dashboard KpiCard. CRM pages repeat table/search markup; there are no Production or Customer admin screens or API clients. Existing data is local mock data. Geist and scattered green/slate utility colors are used. Remix icons are already used; lucide-react is an unused dependency.
+Audit: existing CRM and HRM screens use Base UI primitives in components/ui, composed UI in components/shared, and a reusable dashboard KpiCard. CRM pages repeat table/search markup; there are no Production or Customer admin screens or API clients. Existing data is local mock data. Geist and scattered green/slate utility colors are used. The original icon dependency was replaced by Font Awesome across the admin; unused alternative icon dependencies were removed.
 
 Plan: consolidate implementations first, update all imports, convert frontend TS/TSX to JS/JSX without changing handlers, centralize tokens and shell, move CRM business screens under modules/crm/components, add honest empty-state module entry points for Production and Customer, then lint/build and check imports. Existing HRM routes are preserved without creating an HRM app folder. Backend and sibling mobile apps are out of scope.
 
@@ -38,3 +38,9 @@ Mapping:
 CRM route files → modules/crm/components/*Page.jsx (route wrappers preserve URLs). Module hooks/services/utils folders are reserved for future business logic; do not add local copies of shared UI. Production/Customer use the same common DataTable, Button, Input, Modal, Badge and global shell. No backend endpoints are invented.
 
 Validation: ESLint passed. Next.js production build passed with all 30 pages generated. The default build now uses Webpack and standard Tailwind PostCSS because this environment blocks the Turbopack CSS worker's local port. Browser smoke checks verified CRM search, lead details and stage updates, the mobile navigation drawer, Production modal, and Customer entry page. Browser-computed Inter and #5EC269 verified at 390px. Production and Customer are intentionally unconnected entry points; no prior workflows existed to migrate.
+
+## Admin icon standard
+
+All admin icon rendering uses `components/icons/FontAwesomeIcon.jsx`. Import only the required icon definitions from the solid, regular or brands Font Awesome packages. The root layout imports Font Awesome support CSS once, and the wrapper disables automatic CSS injection according to the official Next.js integration: https://docs.fontawesome.com/web/use-with/react/use-with/ . Sizing, spacing, colors and animations use Tailwind classes. Icon-only controls keep their accessible labels; standalone meaningful icons accept `label`.
+
+The UI generator configuration omits the obsolete icon library setting because it does not support Font Awesome. Adapt generated icons to the wrapper before use; `npm run check:ui` rejects unsupported icon libraries. No global application state was needed; existing local state remains local. Mobile icon standards and backend files are unchanged.
