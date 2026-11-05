@@ -1,0 +1,579 @@
+'use client'
+
+import * as React from 'react'
+import { PageHeader } from '@/components/shared/PageHeader'
+import { DataTable } from '@/components/shared/DataTable'
+import { StatusBadge } from '@/components/shared/StatusBadge'
+import { ConfirmDialog } from '@/components/shared/ConfirmDialog'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { toast } from '@/hooks/use-toast'
+import {
+  RiCalendarCloseLine,
+  RiCheckLine,
+  RiCloseLine,
+  RiSearchLine,
+  RiCalendarCheckLine,
+  RiAddLine,
+  RiHeartPulseLine,
+} from '@remixicon/react'
+
+interface LeaveApplication {
+  id: string
+  employeeId: string
+  employeeName: string
+  employeeAvatar: string
+  department: string
+  leaveType: 'Annual Leave' | 'Sick Leave' | 'Casual Leave' | 'Maternity / Parental'
+  startDate: string
+  endDate: string
+  totalDays: number
+  reason: string
+  status: 'pending' | 'approved' | 'rejected'
+  appliedOn: string
+}
+
+const mockLeaves: LeaveApplication[] = [
+  {
+    id: 'LEV-501',
+    employeeId: 'EMP-1007',
+    employeeName: 'Chloe Dupont',
+    employeeAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150',
+    department: 'Marketing',
+    leaveType: 'Maternity / Parental',
+    startDate: '2026-03-20',
+    endDate: '2026-06-20',
+    totalDays: 60,
+    reason: 'Parental leave under company family care program',
+    status: 'approved',
+    appliedOn: '2026-02-15',
+  },
+  {
+    id: 'LEV-502',
+    employeeId: 'EMP-1003',
+    employeeName: 'Priya Sharma',
+    employeeAvatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150',
+    department: 'Product & Design',
+    leaveType: 'Annual Leave',
+    startDate: '2026-04-06',
+    endDate: '2026-04-10',
+    totalDays: 5,
+    reason: 'Annual family holiday and recharge',
+    status: 'pending',
+    appliedOn: '2026-03-22',
+  },
+  {
+    id: 'LEV-503',
+    employeeId: 'EMP-1002',
+    employeeName: 'Alexander Vance',
+    employeeAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
+    department: 'Engineering',
+    leaveType: 'Sick Leave',
+    startDate: '2026-03-23',
+    endDate: '2026-03-24',
+    totalDays: 2,
+    reason: 'Flu symptoms with doctor consultation prescription',
+    status: 'approved',
+    appliedOn: '2026-03-23',
+  },
+  {
+    id: 'LEV-504',
+    employeeId: 'EMP-1009',
+    employeeName: 'Amara Okafor',
+    employeeAvatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150',
+    department: 'Engineering',
+    leaveType: 'Casual Leave',
+    startDate: '2026-03-27',
+    endDate: '2026-03-27',
+    totalDays: 1,
+    reason: 'Personal family appointment',
+    status: 'pending',
+    appliedOn: '2026-03-24',
+  },
+]
+
+export default function LeaveManagementPage() {
+  const [leaves, setLeaves] = React.useState<LeaveApplication[]>(mockLeaves)
+  const [search, setSearch] = React.useState('')
+  const [selectedType, setSelectedType] = React.useState('all')
+  const [selectedStatus, setSelectedStatus] = React.useState('all')
+
+  const [confirmDialog, setConfirmDialog] = React.useState<{
+    open: boolean
+    type: 'approve' | 'reject' | null
+    item: LeaveApplication | null
+  }>({
+    open: false,
+    type: null,
+    item: null,
+  })
+
+  const [applyDialogOpen, setApplyDialogOpen] = React.useState(false)
+  const [formData, setFormData] = React.useState({
+    employeeName: 'Marcus Sterling',
+    leaveType: 'Annual Leave' as LeaveApplication['leaveType'],
+    startDate: '2026-04-15',
+    endDate: '2026-04-17',
+    totalDays: 3,
+    reason: 'Scheduled personal leave',
+  })
+
+  const filtered = React.useMemo(() => {
+    return leaves.filter((l) => {
+      const matchSearch =
+        l.employeeName.toLowerCase().includes(search.toLowerCase()) ||
+        l.reason.toLowerCase().includes(search.toLowerCase()) ||
+        l.id.toLowerCase().includes(search.toLowerCase())
+
+      const matchType = selectedType === 'all' || l.leaveType === selectedType
+      const matchStatus = selectedStatus === 'all' || l.status === selectedStatus
+
+      return matchSearch && matchType && matchStatus
+    })
+  }, [leaves, search, selectedType, selectedStatus])
+
+  const handleApprove = (item: LeaveApplication) => {
+    setConfirmDialog({
+      open: true,
+      type: 'approve',
+      item,
+    })
+  }
+
+  const handleReject = (item: LeaveApplication) => {
+    setConfirmDialog({
+      open: true,
+      type: 'reject',
+      item,
+    })
+  }
+
+  const handleConfirmAction = () => {
+    if (!confirmDialog.item || !confirmDialog.type) return
+    const isApprove = confirmDialog.type === 'approve'
+
+    setLeaves((prev) =>
+      prev.map((l) =>
+        l.id === confirmDialog.item!.id
+          ? { ...l, status: isApprove ? 'approved' : 'rejected' }
+          : l
+      )
+    )
+
+    if (isApprove) {
+      toast.success(`Leave Approved for ${confirmDialog.item.employeeName}`, {
+        description: `${confirmDialog.item.totalDays} day(s) deducted from balance.`,
+      })
+    } else {
+      toast.error(`Leave Request Rejected for ${confirmDialog.item.employeeName}`)
+    }
+  }
+
+  const handleApplyLeave = (e: React.FormEvent) => {
+    e.preventDefault()
+    const newLeave: LeaveApplication = {
+      id: `LEV-${500 + leaves.length + 1}`,
+      employeeId: 'EMP-1004',
+      employeeName: formData.employeeName,
+      employeeAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
+      department: 'Human Resources',
+      leaveType: formData.leaveType,
+      startDate: formData.startDate,
+      endDate: formData.endDate,
+      totalDays: Number(formData.totalDays) || 1,
+      reason: formData.reason,
+      status: 'pending',
+      appliedOn: new Date().toISOString().split('T')[0],
+    }
+
+    setLeaves((prev) => [newLeave, ...prev])
+    setApplyDialogOpen(false)
+    toast.success('Leave Application Submitted', {
+      description: `Leave recorded for ${newLeave.employeeName}.`,
+    })
+  }
+
+  const columns = [
+    {
+      header: 'Employee',
+      cell: (l: LeaveApplication) => (
+        <div className="flex items-center gap-3">
+          <Avatar className="size-9 border border-slate-200">
+            <AvatarImage src={l.employeeAvatar} alt={l.employeeName} />
+            <AvatarFallback className="bg-teal-600 text-white text-xs">
+              {l.employeeName.slice(0, 2)}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <span className="font-semibold text-slate-900 leading-tight">
+              {l.employeeName}
+            </span>
+            <span className="text-xs text-slate-400 font-mono">
+              {l.employeeId} • {l.department}
+            </span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      header: 'Leave Type',
+      cell: (l: LeaveApplication) => (
+        <Badge
+          variant="outline"
+          className="bg-slate-50 text-slate-800 border-slate-200 text-xs font-medium py-0.5"
+        >
+          {l.leaveType}
+        </Badge>
+      ),
+    },
+    {
+      header: 'Duration',
+      cell: (l: LeaveApplication) => (
+        <div className="flex flex-col text-xs">
+          <span className="font-bold text-slate-900">
+            {l.totalDays} {l.totalDays === 1 ? 'Day' : 'Days'}
+          </span>
+          <span className="text-slate-500">
+            {l.startDate} to {l.endDate}
+          </span>
+        </div>
+      ),
+    },
+    {
+      header: 'Reason',
+      cell: (l: LeaveApplication) => (
+        <p className="text-xs text-slate-600 max-w-xs truncate" title={l.reason}>
+          {l.reason}
+        </p>
+      ),
+    },
+    {
+      header: 'Status',
+      cell: (l: LeaveApplication) => <StatusBadge status={l.status} />,
+    },
+    {
+      header: 'Actions',
+      className: 'text-right',
+      cell: (l: LeaveApplication) => (
+        <div className="flex items-center justify-end gap-1.5">
+          {l.status === 'pending' ? (
+            <>
+              <Button
+                size="sm"
+                onClick={() => handleApprove(l)}
+                className="h-7.5 px-2.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold"
+              >
+                <RiCheckLine className="size-3.5 mr-1" />
+                Approve
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => handleReject(l)}
+                className="h-7.5 px-2 border-slate-200 text-slate-600 hover:text-rose-600 hover:bg-rose-50 text-xs"
+              >
+                <RiCloseLine className="size-3.5" />
+              </Button>
+            </>
+          ) : (
+            <span className="text-xs text-slate-400 italic">Processed</span>
+          )}
+        </div>
+      ),
+    },
+  ]
+
+  return (
+    <div className="space-y-6 max-w-7xl mx-auto">
+      <PageHeader
+        title="Leave Management & Absence Tracking"
+        description="Review vacation requests, sick leaves, parental allowances, and team holiday calendars."
+        actions={
+          <Button
+            size="sm"
+            onClick={() => setApplyDialogOpen(true)}
+            className="bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs h-9"
+          >
+            <RiAddLine className="size-4 mr-1.5" />
+            Apply Leave On Behalf
+          </Button>
+        }
+      />
+
+      {/* KPI Balance Strip */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="p-3.5 rounded-xl border border-amber-100 bg-amber-50/50">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-semibold text-amber-700 uppercase">
+              Pending Requests
+            </span>
+            <RiCalendarCloseLine className="size-4 text-amber-600" />
+          </div>
+          <p className="text-xl font-bold text-amber-800 mt-1">
+            {leaves.filter((l) => l.status === 'pending').length} Requests
+          </p>
+          <p className="text-[11px] text-amber-700 mt-0.5">
+            6 total days awaiting approval
+          </p>
+        </div>
+
+        <div className="p-3.5 rounded-xl border border-teal-100 bg-teal-50/50">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-semibold text-teal-700 uppercase">
+              Currently On Leave
+            </span>
+            <RiCalendarCheckLine className="size-4 text-teal-600" />
+          </div>
+          <p className="text-xl font-bold text-teal-800 mt-1">
+            1 Team Member
+          </p>
+          <p className="text-[11px] text-teal-700 mt-0.5">
+            Chloe Dupont (Parental leave)
+          </p>
+        </div>
+
+        <div className="p-3.5 rounded-xl border border-slate-200 bg-white">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase">
+              Average Annual Balance
+            </span>
+            <RiHeartPulseLine className="size-4 text-teal-600" />
+          </div>
+          <p className="text-xl font-bold text-slate-900 mt-1">
+            18.5 Days / Emp
+          </p>
+          <p className="text-[11px] text-slate-500 mt-0.5">
+            Standard 24-day statutory policy
+          </p>
+        </div>
+      </div>
+
+      {/* Filter Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-2xs">
+        <div className="relative flex-1 sm:max-w-xs">
+          <RiSearchLine className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+          <Input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search employee, reason..."
+            className="h-9 pl-8 pr-3 text-xs border-slate-200 bg-slate-50/50 focus-visible:bg-white"
+          />
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2">
+          <Select value={selectedType} onValueChange={setSelectedType}>
+            <SelectTrigger className="h-9 text-xs border-slate-200 w-44 bg-slate-50/50">
+              <SelectValue placeholder="Leave Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all" className="text-xs">
+                All Leave Types
+              </SelectItem>
+              <SelectItem value="Annual Leave" className="text-xs">
+                Annual Leave
+              </SelectItem>
+              <SelectItem value="Sick Leave" className="text-xs">
+                Sick Leave
+              </SelectItem>
+              <SelectItem value="Casual Leave" className="text-xs">
+                Casual Leave
+              </SelectItem>
+              <SelectItem value="Maternity / Parental" className="text-xs">
+                Maternity / Parental
+              </SelectItem>
+            </SelectContent>
+          </Select>
+
+          <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+            <SelectTrigger className="h-9 text-xs border-slate-200 w-32 bg-slate-50/50">
+              <SelectValue placeholder="Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all" className="text-xs">
+                All Status
+              </SelectItem>
+              <SelectItem value="pending" className="text-xs">
+                Pending
+              </SelectItem>
+              <SelectItem value="approved" className="text-xs">
+                Approved
+              </SelectItem>
+              <SelectItem value="rejected" className="text-xs">
+                Rejected
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      {/* Table */}
+      <DataTable
+        columns={columns}
+        data={filtered}
+        pageSize={8}
+        emptyState={<div className="py-8 text-center text-slate-500">No leave applications found.</div>}
+      />
+
+      {/* Approve / Reject Dialog */}
+      <ConfirmDialog
+        open={confirmDialog.open}
+        onOpenChange={(open) =>
+          setConfirmDialog((prev) => ({ ...prev, open }))
+        }
+        title={
+          confirmDialog.type === 'approve'
+            ? `Approve Leave Application (${confirmDialog.item?.totalDays} Days)`
+            : `Reject Leave Application`
+        }
+        description={
+          confirmDialog.type === 'approve'
+            ? `Grant ${confirmDialog.item?.totalDays} day(s) ${confirmDialog.item?.leaveType} to ${confirmDialog.item?.employeeName} from ${confirmDialog.item?.startDate} to ${confirmDialog.item?.endDate}.`
+            : `Decline leave application for ${confirmDialog.item?.employeeName}.`
+        }
+        variant={confirmDialog.type === 'approve' ? 'success' : 'destructive'}
+        confirmLabel={confirmDialog.type === 'approve' ? 'Approve Leave' : 'Reject Leave'}
+        onConfirm={handleConfirmAction}
+      />
+
+      {/* Apply Leave Dialog */}
+      <Dialog open={applyDialogOpen} onOpenChange={setApplyDialogOpen}>
+        <DialogContent className="sm:max-w-md bg-white border border-slate-200 shadow-xl rounded-xl">
+          <form onSubmit={handleApplyLeave}>
+            <DialogHeader>
+              <DialogTitle className="text-base font-bold text-slate-900">
+                Submit Leave Application
+              </DialogTitle>
+              <DialogDescription className="text-xs text-slate-500">
+                Record absence on behalf of an employee.
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="space-y-3 py-4 text-xs">
+              <div className="space-y-1">
+                <Label className="text-xs font-medium">Employee Name</Label>
+                <Input
+                  value={formData.employeeName}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, employeeName: e.target.value }))
+                  }
+                  className="h-8 text-xs"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <Label className="text-xs font-medium">Leave Type</Label>
+                <Select
+                  value={formData.leaveType}
+                  onValueChange={(val: LeaveApplication['leaveType']) =>
+                    setFormData((prev) => ({ ...prev, leaveType: val }))
+                  }
+                >
+                  <SelectTrigger className="h-8 text-xs w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Annual Leave" className="text-xs">
+                      Annual Leave
+                    </SelectItem>
+                    <SelectItem value="Sick Leave" className="text-xs">
+                      Sick Leave
+                    </SelectItem>
+                    <SelectItem value="Casual Leave" className="text-xs">
+                      Casual Leave
+                    </SelectItem>
+                    <SelectItem value="Maternity / Parental" className="text-xs">
+                      Maternity / Parental
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <Label className="text-xs font-medium">Start Date</Label>
+                  <Input
+                    type="date"
+                    value={formData.startDate}
+                    onChange={(e) =>
+                      setFormData((prev) => ({ ...prev, startDate: e.target.value }))
+                    }
+                    className="h-8 text-xs"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs font-medium">End Date</Label>
+                  <Input
+                    type="date"
+                    value={formData.endDate}
+                    onChange={(e) =>
+                      setFormData((prev) => ({ ...prev, endDate: e.target.value }))
+                    }
+                    className="h-8 text-xs"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <Label className="text-xs font-medium">Total Days</Label>
+                <Input
+                  type="number"
+                  value={formData.totalDays}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, totalDays: Number(e.target.value) }))
+                  }
+                  className="h-8 text-xs"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <Label className="text-xs font-medium">Reason for Absence</Label>
+                <Input
+                  value={formData.reason}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, reason: e.target.value }))
+                  }
+                  className="h-8 text-xs"
+                />
+              </div>
+            </div>
+
+            <DialogFooter className="border-t border-slate-100 pt-3">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setApplyDialogOpen(false)}
+                className="h-8 text-xs"
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                className="h-8 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold"
+              >
+                Submit Application
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}

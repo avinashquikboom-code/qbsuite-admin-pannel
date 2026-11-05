@@ -1,0 +1,99 @@
+import * as React from 'react'
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
+
+interface KpiCardProps {
+  title: string
+  value: string | number
+  change?: string
+  changeType?: 'positive' | 'negative' | 'neutral'
+  trend?: string
+  accent?: string
+  icon: React.ComponentType<{ className?: string }>
+  iconColor?: string
+  iconBg?: string
+  description?: string
+  badge?: string
+  className?: string
+  onClick?: () => void
+}
+
+export function KpiCard({
+  title,
+  value,
+  change,
+  changeType = 'neutral',
+  icon: Icon,
+  iconColor = 'text-teal-600',
+  iconBg = 'bg-teal-50',
+  description,
+  badge,
+  className,
+  onClick,
+}: KpiCardProps) {
+  return (
+    <Card
+      onClick={onClick}
+      className={cn(
+        'relative overflow-hidden border border-slate-200/90 bg-white transition-all duration-200 hover:shadow-md hover:border-slate-300',
+        onClick ? 'cursor-pointer hover:-translate-y-0.5' : '',
+        className
+      )}
+    >
+      <CardContent className="p-5">
+        <div className="flex items-start justify-between">
+          <div className="space-y-1">
+            <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+              {title}
+            </p>
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold tracking-tight text-slate-900">
+                {value}
+              </span>
+              {badge && (
+                <Badge
+                  variant="outline"
+                  className="bg-teal-50 text-teal-700 border-teal-200 text-[10px] font-semibold py-0"
+                >
+                  {badge}
+                </Badge>
+              )}
+            </div>
+          </div>
+          <div
+            className={cn(
+              'flex size-11 items-center justify-center rounded-xl shrink-0 transition-transform group-hover:scale-105',
+              iconBg,
+              iconColor
+            )}
+          >
+            <Icon className="size-5.5" />
+          </div>
+        </div>
+
+        {(change || description) && (
+          <div className="mt-3 flex items-center gap-1.5 text-xs">
+            {change && (
+              <span
+                className={cn(
+                  'font-semibold',
+                  changeType === 'positive'
+                    ? 'text-emerald-600'
+                    : changeType === 'negative'
+                    ? 'text-rose-600'
+                    : 'text-slate-600'
+                )}
+              >
+                {change}
+              </span>
+            )}
+            {description && (
+              <span className="text-slate-400 truncate">{description}</span>
+            )}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  )
+}

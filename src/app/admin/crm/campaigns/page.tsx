@@ -1,0 +1,284 @@
+'use client'
+
+import * as React from 'react'
+import {
+  RiMegaphoneLine,
+  RiAddLine,
+  RiMailLine,
+  RiBarChartLine,
+  RiCursorLine,
+  RiEyeLine,
+} from '@remixicon/react'
+import { PageHeader } from '@/components/shared/PageHeader'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { toast } from 'sonner'
+
+interface Campaign {
+  id: string
+  name: string
+  channel: 'Email' | 'LinkedIn' | 'Meta' | 'WhatsApp'
+  budget: number
+  spent: number
+  leadsGenerated: number
+  roi: string
+  status: 'active' | 'scheduled' | 'completed'
+  startDate: string
+}
+
+const mockCampaigns: Campaign[] = [
+  {
+    id: 'CMP-101',
+    name: 'Q4 Enterprise Cloud Modernization',
+    channel: 'LinkedIn',
+    budget: 8500,
+    spent: 6200,
+    leadsGenerated: 34,
+    roi: '3.4x',
+    status: 'active',
+    startDate: '2026-10-01',
+  },
+  {
+    id: 'CMP-102',
+    name: 'HRM Suite Product Launch Broadcast',
+    channel: 'Email',
+    budget: 2500,
+    spent: 2100,
+    leadsGenerated: 58,
+    roi: '4.8x',
+    status: 'active',
+    startDate: '2026-10-15',
+  },
+  {
+    id: 'CMP-103',
+    name: 'Automated WhatsApp Re-engagement',
+    channel: 'WhatsApp',
+    budget: 1500,
+    spent: 980,
+    leadsGenerated: 42,
+    roi: '5.2x',
+    status: 'active',
+    startDate: '2026-10-20',
+  },
+  {
+    id: 'CMP-104',
+    name: 'SMB Retargeting Showcase',
+    channel: 'Meta',
+    budget: 4000,
+    spent: 4000,
+    leadsGenerated: 29,
+    roi: '2.8x',
+    status: 'completed',
+    startDate: '2026-09-01',
+  },
+]
+
+export default function CampaignsPage() {
+  const [campaigns, setCampaigns] = React.useState<Campaign[]>(mockCampaigns)
+  const [isAddOpen, setIsAddOpen] = React.useState(false)
+
+  const [name, setName] = React.useState('')
+  const [channel, setChannel] = React.useState<'Email' | 'LinkedIn' | 'Meta' | 'WhatsApp'>('Email')
+  const [budget, setBudget] = React.useState('')
+
+  const currency = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  })
+
+  const handleCreate = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!name || !budget) {
+      toast.error('Please enter campaign title and budget.')
+      return
+    }
+
+    const c: Campaign = {
+      id: `CMP-${100 + campaigns.length + 1}`,
+      name,
+      channel,
+      budget: parseFloat(budget),
+      spent: 0,
+      leadsGenerated: 0,
+      roi: 'Pending',
+      status: 'active',
+      startDate: new Date().toISOString().split('T')[0],
+    }
+
+    setCampaigns([c, ...campaigns])
+    setIsAddOpen(false)
+    setName('')
+    setBudget('')
+    toast.success('Campaign scheduled and broadcast ready!')
+  }
+
+  return (
+    <div className="space-y-6">
+      <PageHeader
+        title="Marketing & Ad Campaigns"
+        description="Multi-channel acquisition pipelines across LinkedIn, Email and Meta networks."
+        badge="CRM"
+        badgeVariant="teal"
+        actions={
+          <Button
+            size="sm"
+            onClick={() => setIsAddOpen(true)}
+            className="bg-teal-600 hover:bg-teal-700 text-white gap-1.5 shadow-sm text-xs"
+          >
+            <RiAddLine className="size-4" />
+            <span>Launch Campaign</span>
+          </Button>
+        }
+      />
+
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <Card className="border-slate-200/80 shadow-2xs">
+          <CardHeader className="py-3 px-4">
+            <CardTitle className="text-xs font-medium text-slate-500">Active Campaigns</CardTitle>
+            <div className="text-2xl font-bold text-slate-900 mt-1">
+              {campaigns.filter((c) => c.status === 'active').length}
+            </div>
+          </CardHeader>
+        </Card>
+        <Card className="border-slate-200/80 shadow-2xs">
+          <CardHeader className="py-3 px-4">
+            <CardTitle className="text-xs font-medium text-slate-500">Total Budget</CardTitle>
+            <div className="text-2xl font-bold text-teal-700 mt-1">
+              {currency.format(campaigns.reduce((a, c) => a + c.budget, 0))}
+            </div>
+          </CardHeader>
+        </Card>
+        <Card className="border-slate-200/80 shadow-2xs">
+          <CardHeader className="py-3 px-4">
+            <CardTitle className="text-xs font-medium text-slate-500">Leads Attributed</CardTitle>
+            <div className="text-2xl font-bold text-emerald-600 mt-1">
+              {campaigns.reduce((a, c) => a + c.leadsGenerated, 0)}
+            </div>
+          </CardHeader>
+        </Card>
+        <Card className="border-slate-200/80 shadow-2xs">
+          <CardHeader className="py-3 px-4">
+            <CardTitle className="text-xs font-medium text-slate-500">Avg Channel ROI</CardTitle>
+            <div className="text-2xl font-bold text-sky-600 mt-1">4.1x</div>
+          </CardHeader>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {campaigns.map((c) => (
+          <Card key={c.id} className="border-slate-200/80 shadow-2xs hover:border-teal-200 transition-all">
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <Badge variant="outline" className="text-[10px] bg-slate-50 text-slate-700 font-semibold">
+                  {c.channel}
+                </Badge>
+                <Badge
+                  className={
+                    c.status === 'active'
+                      ? 'bg-emerald-100 text-emerald-800 border-none'
+                      : 'bg-slate-100 text-slate-700 border-none'
+                  }
+                >
+                  {c.status.toUpperCase()}
+                </Badge>
+              </div>
+              <CardTitle className="text-base font-bold text-slate-900 mt-2">{c.name}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 pt-2">
+              <div className="grid grid-cols-3 gap-2 p-3 bg-slate-50/80 rounded-lg text-xs">
+                <div>
+                  <span className="text-[10px] text-slate-400 font-semibold">BUDGET</span>
+                  <div className="font-bold text-slate-800">{currency.format(c.budget)}</div>
+                </div>
+                <div>
+                  <span className="text-[10px] text-slate-400 font-semibold">LEADS</span>
+                  <div className="font-bold text-teal-700">{c.leadsGenerated}</div>
+                </div>
+                <div>
+                  <span className="text-[10px] text-slate-400 font-semibold">EST. ROI</span>
+                  <div className="font-bold text-emerald-700">{c.roi}</div>
+                </div>
+              </div>
+              <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
+                <span>Started: {c.startDate}</span>
+                <span className="font-medium text-slate-700">Spent: {currency.format(c.spent)}</span>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Modal */}
+      <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
+        <DialogContent className="max-w-md">
+          <form onSubmit={handleCreate}>
+            <DialogHeader>
+              <DialogTitle className="text-base font-bold text-slate-900">Launch Growth Campaign</DialogTitle>
+              <DialogDescription className="text-xs text-slate-500">
+                Setup ad spends and attribution channels for new lead generation.
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="space-y-3 py-3 text-xs">
+              <div className="space-y-1">
+                <Label className="text-xs">Campaign Name *</Label>
+                <Input
+                  required
+                  placeholder="e.g. Q1 Healthcare Inbound"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="h-8 text-xs"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">Attribution Channel</Label>
+                  <Select value={channel} onValueChange={(val: any) => setChannel(val || 'Email')}>
+                    <SelectTrigger className="h-8 text-xs">
+                      <SelectValue placeholder="Channel" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="LinkedIn">LinkedIn Ads</SelectItem>
+                      <SelectItem value="Email">Email Sequence</SelectItem>
+                      <SelectItem value="WhatsApp">WhatsApp Broadcast</SelectItem>
+                      <SelectItem value="Meta">Meta Network</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-1">
+                  <Label className="text-xs">Allocated Budget ($) *</Label>
+                  <Input
+                    type="number"
+                    required
+                    placeholder="5000"
+                    value={budget}
+                    onChange={(e) => setBudget(e.target.value)}
+                    className="h-8 text-xs"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <DialogFooter>
+              <Button type="button" variant="outline" size="sm" onClick={() => setIsAddOpen(false)} className="text-xs">
+                Cancel
+              </Button>
+              <Button type="submit" size="sm" className="bg-teal-600 hover:bg-teal-700 text-white text-xs">
+                Activate Campaign
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}
+
