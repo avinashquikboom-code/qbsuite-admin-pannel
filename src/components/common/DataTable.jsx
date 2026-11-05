@@ -1,18 +1,16 @@
 'use client';
 import * as React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from '@/components/common/Table';
-import { Button } from '@/components/common/Button';
-import { RiArrowLeftSLine, RiArrowRightSLine } from '@remixicon/react';
-export function DataTable({ columns, data, pageSize = 10, emptyState, }) {
+import { Pagination } from './Pagination';
+import { Loading } from './Loading';
+export function DataTable({ columns, data, pageSize = 10, emptyState, isLoading = false, }) {
     const [currentPage, setCurrentPage] = React.useState(1);
+    pageSize = Math.max(1, Math.floor(pageSize) || 10);
     const totalPages = Math.ceil(data.length / pageSize) || 1;
-    const startIndex = (currentPage - 1) * pageSize;
+    const startIndex = (Math.min(currentPage, totalPages) - 1) * pageSize;
     const currentData = data.slice(startIndex, startIndex + pageSize);
-    React.useEffect(() => {
-        if (currentPage > totalPages) {
-            setCurrentPage(1);
-        }
-    }, [totalPages, currentPage]);
+    const page = Math.min(currentPage, totalPages);
+    if (isLoading) return <Loading />;
     return (<div className="rounded-xl border border-slate-200/90 bg-white shadow-xs overflow-hidden">
       <div className="overflow-x-auto">
         <Table className="w-full">
@@ -53,19 +51,7 @@ export function DataTable({ columns, data, pageSize = 10, emptyState, }) {
             </span>{' '}
             of <span className="font-semibold text-slate-700">{data.length}</span> results
           </div>
-          <div className="flex items-center gap-1.5">
-            <Button variant="outline" size="sm" onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1} className="h-8 border-slate-200 text-slate-600 hover:text-slate-900 disabled:opacity-40">
-              <RiArrowLeftSLine className="size-4 mr-1"/>
-              Previous
-            </Button>
-            <div className="text-xs px-2 font-medium text-slate-600">
-              Page {currentPage} of {totalPages}
-            </div>
-            <Button variant="outline" size="sm" onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} className="h-8 border-slate-200 text-slate-600 hover:text-slate-900 disabled:opacity-40">
-              Next
-              <RiArrowRightSLine className="size-4 ml-1"/>
-            </Button>
-          </div>
+          <Pagination page={page} totalPages={totalPages} onPageChange={setCurrentPage} />
         </div>)}
     </div>);
 }

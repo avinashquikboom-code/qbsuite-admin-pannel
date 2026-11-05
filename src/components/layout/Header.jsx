@@ -18,9 +18,9 @@ export function Header() {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
     const currentModule = React.useMemo(() => {
-        if (pathname.startsWith('/crm'))
+        if (pathname.startsWith('/admin/crm'))
             return 'CRM';
-        if (pathname.startsWith('/hrm') ||
+        if (pathname.startsWith('/admin/hrm') ||
             pathname.startsWith('/employees') ||
             pathname.startsWith('/attendance') ||
             pathname.startsWith('/overtime') ||
@@ -29,6 +29,8 @@ export function Header() {
             pathname.startsWith('/announcements')) {
             return 'HRM';
         }
+        if (pathname.startsWith('/admin/production')) return 'Production';
+        if (pathname.startsWith('/admin/customer')) return 'Customer';
         return 'Suite';
     }, [pathname]);
     const notifications = [
@@ -60,22 +62,22 @@ export function Header() {
             return;
         const q = searchQuery.toLowerCase();
         if (q.includes('emp') || q.includes('sarah') || q.includes('alex') || q.includes('priya')) {
-            router.push('/hrm/employees');
+            router.push('/admin/hrm/employees');
         }
         else if (q.includes('att') || q.includes('clock') || q.includes('punch')) {
-            router.push('/hrm/attendance');
+            router.push('/admin/hrm/attendance');
         }
         else if (q.includes('overtime') || q.includes('ot')) {
-            router.push('/hrm/overtime');
+            router.push('/admin/hrm/overtime');
         }
         else if (q.includes('exp') || q.includes('claim')) {
-            router.push('/hrm/expenses');
+            router.push('/admin/hrm/expense-claims');
         }
         else if (q.includes('pay') || q.includes('salary')) {
-            router.push('/hrm/payroll');
+            router.push('/admin/hrm/payroll');
         }
         else if (q.includes('lead') || q.includes('deal') || q.includes('crm')) {
-            router.push('/crm/leads');
+            router.push('/admin/crm/leads');
         }
         else {
             toast.info('Search Query', {
@@ -91,7 +93,7 @@ export function Header() {
           <SheetTrigger className="inline-flex size-9 items-center justify-center rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 lg:hidden" aria-label="Open Navigation">
             <RiMenuLine className="size-5"/>
           </SheetTrigger>
-          <SheetContent side="left" className="p-0 w-72 max-w-[80vw]">
+          <SheetContent aria-label="Navigation" side="left" className="p-0 w-72 max-w-[80vw]">
             <Sidebar onNavigate={() => setMobileOpen(false)} className="w-full border-none"/>
           </SheetContent>
         </Sheet>
@@ -101,28 +103,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Middle: Active Portal Pills */}
-      <div className="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200/80">
-        <Link href="/admin/hrm/dashboard" className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition-all ${currentModule === 'HRM'
-            ? 'bg-white text-teal-700 shadow-xs'
-            : 'text-slate-600 hover:text-slate-900'}`}>
-          <RiBuilding4Line className="size-3.5 text-teal-600"/>
-          <span>HRM Module</span>
-        </Link>
-        <Link href="/admin/crm/dashboard" className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition-all ${currentModule === 'CRM'
-            ? 'bg-white text-teal-700 shadow-xs'
-            : 'text-slate-600 hover:text-slate-900'}`}>
-          <RiBriefcaseLine className="size-3.5 text-teal-600"/>
-          <span>CRM Module</span>
-        </Link>
-        <Link href="/admin/dashboard" className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition-all ${currentModule === 'Suite'
-            ? 'bg-white text-teal-700 shadow-xs'
-            : 'text-slate-600 hover:text-slate-900'}`}>
-          <RiApps2Line className="size-3.5 text-slate-500"/>
-          <span>Unified Dashboard</span>
-        </Link>
-      </div>
-
+      <nav aria-label="Modules" className="hidden md:flex items-center gap-1 rounded-lg bg-muted p-1">{['CRM', 'Production', 'Customer'].map(name => <Link key={name} href={'/admin/'+name.toLowerCase()+'/dashboard'} aria-current={currentModule === name ? 'page' : undefined} className={'rounded-md px-3 py-1 text-xs font-semibold '+(currentModule === name ? 'bg-card text-primary shadow-sm' : 'text-muted-foreground')}>{name}</Link>)}</nav>
       {/* Right: Search, Notifications & User Avatar */}
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Quick Search */}
@@ -205,11 +186,11 @@ export function Header() {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator className="bg-slate-100 my-1"/>
-            <DropdownMenuItem onClick={() => router.push('/hrm/employees')} className="text-xs p-2 rounded-lg cursor-pointer text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+            <DropdownMenuItem onClick={() => router.push('/admin/hrm/employees')} className="text-xs p-2 rounded-lg cursor-pointer text-slate-700 hover:bg-slate-50 flex items-center gap-2">
               <RiUser3Line className="size-4 text-slate-500"/>
               <span>Admin Profile</span>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => router.push('/hrm/announcements')} className="text-xs p-2 rounded-lg cursor-pointer text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+            <DropdownMenuItem onClick={() => router.push('/admin/settings')} className="text-xs p-2 rounded-lg cursor-pointer text-slate-700 hover:bg-slate-50 flex items-center gap-2">
               <RiSettings4Line className="size-4 text-slate-500"/>
               <span>System Settings</span>
             </DropdownMenuItem>
