@@ -1,4 +1,5 @@
-'use client';import { Badge } from '@/components/common/Badge';
+'use client';
+import { Badge } from '@/components/common/Badge';
 import { DataTable } from '@/components/common/DataTable';
 import * as React from 'react';
 import { RiUserSearchLine, RiAddLine, RiSearchLine, RiDownloadLine, RiMailLine, RiPhoneLine, RiBuildingLine, } from '@remixicon/react';
@@ -11,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogD
 import { Label } from '@/components/common/Label';
 import { Textarea } from '@/components/common/Textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/common/Select';
-import { mockLeads } from '@/lib/mock-data';
+import { mockLeads } from '@/modules/crm/services/mock-data';
 import { toast } from 'sonner';
 export default function LeadsPage() {
     const [leads, setLeads] = React.useState(mockLeads);

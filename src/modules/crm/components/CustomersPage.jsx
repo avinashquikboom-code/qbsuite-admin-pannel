@@ -1,4 +1,5 @@
-'use client';import { DataTable } from '@/components/common/DataTable';
+'use client';
+import { DataTable } from '@/components/common/DataTable';
 import * as React from 'react';
 import { RiAddLine, RiSearchLine, RiMailLine, RiPhoneLine, RiBuildingLine, } from '@remixicon/react';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -8,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/common/Ca
 import { StatusBadge } from '@/components/common/StatusBadge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/common/Modal';
 import { Label } from '@/components/common/Label';
-import { mockContacts } from '@/lib/mock-data';
+import { mockContacts } from '@/modules/crm/services/mock-data';
 import { toast } from 'sonner';
 export default function CustomersPage() {
     const [contacts, setContacts] = React.useState(mockContacts);

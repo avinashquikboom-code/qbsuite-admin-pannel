@@ -1,6 +1,5 @@
-import { usePathname } from 'next/navigation';
-import { RiDashboardLine, RiBriefcaseLine, RiBuilding4Line, RiSettings4Line, RiDashboard2Line, RiUserSearchLine, RiContactsBookLine, RiMegaphoneLine, RiWhatsappLine, RiMetaLine, RiBarChartBoxLine, RiTeamLine, RiCalendarCheckLine, RiCupLine, RiTimeLine, RiMoneyDollarCircleLine, RiCalendarCloseLine, RiBankCardLine, RiFileTextLine, RiNotificationBadgeLine, RiPieChartLine, RiArrowDownSLine, RiArrowRightSLine, RiShieldCheckLine, } from '@remixicon/react';
-import { mockKpiData, mockCrmKpiData } from '@/lib/mock-data';
+import { RiBankCardLine, RiCalendarCheckLine, RiCalendarCloseLine, RiCupLine, RiDashboard2Line, RiFileTextLine, RiMoneyDollarCircleLine, RiNotificationBadgeLine, RiPieChartLine, RiTeamLine, RiTimeLine } from '@remixicon/react';
+import { mockKpiData } from '@/lib/mock-data';
 export const navigation = [
         {
             name: 'HRM Dashboard',

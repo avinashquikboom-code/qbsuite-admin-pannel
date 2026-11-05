@@ -7,7 +7,7 @@ import { StatCard } from '@/components/common/StatCard';
 import { Button } from '@/components/common/Button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/common/Card';
 import { StatusBadge } from '@/components/common/StatusBadge';
-import { mockCrmKpiData, mockLeads, mockContacts } from '@/lib/mock-data';
+import { mockCrmKpiData, mockLeads, mockContacts } from '@/modules/crm/services/mock-data';
 export default function CrmDashboardPage() {
     const currency = new Intl.NumberFormat('en-US', {
         style: 'currency',

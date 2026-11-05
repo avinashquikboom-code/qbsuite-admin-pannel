@@ -42,10 +42,10 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-sm: var(--corner-sm);
+  --radius-md: var(--corner-md);
+  --radius-lg: var(--corner-lg);
+  --radius-xl: var(--corner-xl);
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
@@ -84,4 +84,14 @@
  --color-slate-500: var(--muted-foreground);
  --color-slate-800: var(--foreground);
  --spacing: var(--space-1);
+}
+
+@theme inline {
+ --text-xs: var(--type-xs);
+ --text-sm: var(--type-sm);
+ --text-base: var(--type-base);
+ --text-lg: var(--type-lg);
+ --text-xl: var(--type-xl);
+ --text-2xl: var(--type-2xl);
+ --text-3xl: var(--type-3xl);
 }

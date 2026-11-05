@@ -1,6 +1,5 @@
-import { usePathname } from 'next/navigation';
-import { RiDashboardLine, RiBriefcaseLine, RiBuilding4Line, RiSettings4Line, RiDashboard2Line, RiUserSearchLine, RiContactsBookLine, RiMegaphoneLine, RiWhatsappLine, RiMetaLine, RiBarChartBoxLine, RiTeamLine, RiCalendarCheckLine, RiCupLine, RiTimeLine, RiMoneyDollarCircleLine, RiCalendarCloseLine, RiBankCardLine, RiFileTextLine, RiNotificationBadgeLine, RiPieChartLine, RiArrowDownSLine, RiArrowRightSLine, RiShieldCheckLine, } from '@remixicon/react';
-import { mockKpiData, mockCrmKpiData } from '@/lib/mock-data';
+import { RiBarChartBoxLine, RiContactsBookLine, RiDashboard2Line, RiMegaphoneLine, RiMetaLine, RiUserSearchLine, RiWhatsappLine } from '@remixicon/react';
+import { mockCrmKpiData } from '@/modules/crm/services/mock-data';
 export const navigation = [
         {
             name: 'CRM Dashboard',

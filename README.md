@@ -1,37 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# QB Suite Admin
 
-## Getting Started
+Next.js App Router, JavaScript/JSX, Tailwind CSS, Inter and Remix Icons.
 
-First, run the development server:
+Run `npm install`, `npm run dev`, `npm run lint`, and `npm run build`.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- `src/components/common/`: the sole reusable UI implementation library. Import directly, e.g. `import { Button } from '@/components/common/Button'`.
+- `src/components/icons/RemixIcon.jsx`: accepts an `icon` component from `@remixicon/react`, plus size, label and SVG props.
+- `src/theme/`: one token source. Root layout applies the tokens as CSS variables; Tailwind maps to those variables. Inter is loaded globally through Next font with weights 400/500/600/700.
+- `src/components/layout/`: shared MainLayout, Sidebar, Header, Breadcrumb. The shell handles desktop navigation and the mobile drawer.
+- `src/modules/{crm,production,customer}/`: independent business components, hooks, services, utils and navigation configuration. Do not add local common UI libraries or module palettes.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+CRM routes retain their behavior and URL structure. Production and Customer dashboard routes are empty-state entry points pending business workflows and API connections. Existing HRM routes remain available; no new HRM app folder was created. No global application state was needed, so Zustand is not introduced.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+See `docs/shared-ui-migration.md` for the audit and migration mapping.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Common APIs retain the existing compound primitives: Modal exports Dialog, DialogContent, DialogTitle, etc.; Drawer exports Sheet equivalents; Dropdown exports DropdownMenu equivalents; Toast exports Toaster. The Modal, Drawer, Dropdown and Toast names are also aliases of their root primitives. Use their title/description components for accessible overlays. No second implementation backs an alias.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# qbsuite-admin-pannel
+DataTable accepts `columns` (`header`, `accessorKey`, `cell`, `className`), `data` with stable `id`s, `pageSize`, `emptyState`, and `isLoading`. Pagination uses `page`, `totalPages`, `onPageChange`. Checkbox/Radio accept native input props plus `label`. DatePicker uses native date input props. FileUpload accepts native file input props, `label`, `description`, and `onFilesChange(files)`. SearchBar accepts Input props. Loading accepts `label`; Skeleton accepts `className`. Buttons, inputs, cards, selects, tabs and overlays retain their existing configurable props and compound APIs.

@@ -4,7 +4,7 @@ import { RiDownloadLine, RiArrowUpLine, RiTrophyLine, } from '@remixicon/react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { Button } from '@/components/common/Button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/common/Card';
-import { mockPipelineStages } from '@/lib/mock-data';
+import { mockPipelineStages } from '@/modules/crm/services/mock-data';
 import { toast } from 'sonner';
 export default function CrmReportsPage() {
     const currency = new Intl.NumberFormat('en-US', {
