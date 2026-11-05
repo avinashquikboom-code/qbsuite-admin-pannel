@@ -15,9 +15,9 @@ export default function CrmDashboardPage() {
         maximumFractionDigits: 0,
     });
     return (<div className="space-y-6">
-      <PageHeader title="CRM Executive Dashboard" description="Pipeline health, active leads conversion, high-value opportunities and customer acquisition." badge="CRM Suite" badgeVariant="teal" actions={<div className="flex items-center gap-2">
+      <PageHeader title="CRM Executive Dashboard" description="Pipeline health, active leads conversion, high-value opportunities and customer acquisition." badge="CRM Suite" badgeVariant="green" actions={<div className="flex items-center gap-2">
             <Link href="/admin/crm/leads">
-              <Button size="sm" className="bg-teal-600 hover:bg-teal-700 text-white gap-1.5 shadow-sm">
+              <Button size="sm" className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm">
                 <RiAddLine className="size-4"/>
                 <span>New Lead</span>
               </Button>
@@ -26,8 +26,8 @@ export default function CrmDashboardPage() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard title="Total Pipeline Value" value={currency.format(mockCrmKpiData.pipelineValue)} change="+18.4% vs last month" trend="up" icon={RiMoneyDollarCircleLine} accent="teal"/>
-        <StatCard title="Active Leads" value={mockCrmKpiData.leadsCount.toString()} change="+12 qualified this week" trend="up" icon={RiUserSearchLine} accent="teal"/>
+        <StatCard title="Total Pipeline Value" value={currency.format(mockCrmKpiData.pipelineValue)} change="+18.4% vs last month" trend="up" icon={RiMoneyDollarCircleLine} accent="green"/>
+        <StatCard title="Active Leads" value={mockCrmKpiData.leadsCount.toString()} change="+12 qualified this week" trend="up" icon={RiUserSearchLine} accent="green"/>
         <StatCard title="Deals in Progress" value={mockCrmKpiData.activeDealsCount.toString()} change="8 closing this sprint" trend="neutral" icon={RiPercentLine} accent="emerald"/>
         <StatCard title="Key Accounts" value={mockContacts.length.toString()} change="+3 enterprises added" trend="up" icon={RiContactsBookLine} accent="sky"/>
       </div>
@@ -46,7 +46,7 @@ export default function CrmDashboardPage() {
               </CardDescription>
             </div>
             <Link href="/admin/crm/leads">
-              <Button variant="ghost" size="sm" className="text-teal-600 hover:text-teal-700 hover:bg-teal-50 gap-1 text-xs">
+              <Button variant="ghost" size="sm" className="text-brand hover:text-brand-dark hover:bg-brand-light gap-1 text-xs">
                 <span>View All Leads</span>
                 <RiArrowRightLine className="size-3.5"/>
               </Button>
@@ -89,22 +89,22 @@ export default function CrmDashboardPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Link href="/admin/crm/whatsapp" className="flex items-center justify-between p-3 rounded-lg border border-slate-200/80 hover:border-teal-300 hover:bg-teal-50/40 transition-all">
+              <Link href="/admin/crm/whatsapp" className="flex items-center justify-between p-3 rounded-lg border border-slate-200/80 hover:border-brand-light hover:bg-brand-light/40 transition-all">
                 <div className="flex items-center gap-3">
-                  <div className="flex size-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                  <div className="flex size-9 items-center justify-center rounded-lg bg-brand-light text-brand">
                     <RiWhatsappLine className="size-5"/>
                   </div>
                   <div>
                     <div className="text-sm font-semibold text-slate-900">WhatsApp Business API</div>
-                    <div className="text-xs text-emerald-600 font-medium">Synced • 98.4% Delivery</div>
+                    <div className="text-xs text-brand font-medium">Synced • 98.4% Delivery</div>
                   </div>
                 </div>
                 <RiArrowRightLine className="size-4 text-slate-400"/>
               </Link>
 
-              <Link href="/admin/crm/campaigns" className="flex items-center justify-between p-3 rounded-lg border border-slate-200/80 hover:border-teal-300 hover:bg-teal-50/40 transition-all">
+              <Link href="/admin/crm/campaigns" className="flex items-center justify-between p-3 rounded-lg border border-slate-200/80 hover:border-brand-light hover:bg-brand-light/40 transition-all">
                 <div className="flex items-center gap-3">
-                  <div className="flex size-9 items-center justify-center rounded-lg bg-teal-50 text-teal-600">
+                  <div className="flex size-9 items-center justify-center rounded-lg bg-brand-light text-brand">
                     <RiMegaphoneLine className="size-5"/>
                   </div>
                   <div>
@@ -117,9 +117,9 @@ export default function CrmDashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-teal-100 bg-linear-to-br from-teal-50/60 to-white shadow-2xs">
+          <Card className="border-brand-light bg-linear-to-br from-brand-light/60 to-white shadow-2xs">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-bold text-teal-900">
+              <CardTitle className="text-sm font-bold text-brand-dark">
                 Cross-Module Data Bridge
               </CardTitle>
             </CardHeader>
@@ -129,7 +129,7 @@ export default function CrmDashboardPage() {
               </p>
               <div className="pt-2">
                 <Link href="/admin/hrm/payroll">
-                  <Button variant="outline" size="sm" className="w-full border-teal-300 text-teal-800 hover:bg-teal-100 text-xs font-semibold">
+                  <Button variant="outline" size="sm" className="w-full border-brand-light text-brand-dark hover:bg-brand-light text-xs font-semibold">
                     Review Sales Payroll Incentives
                   </Button>
                 </Link>

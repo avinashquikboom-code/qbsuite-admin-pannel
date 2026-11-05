@@ -55,15 +55,15 @@ export function RecentActivity() {
       <CardContent className="p-5 pt-0">
         <Tabs defaultValue="overtime" className="w-full">
           <TabsList className="bg-slate-100 p-1 mb-4 h-9">
-            <TabsTrigger value="overtime" className="text-xs data-[state=active]:bg-white data-[state=active]:text-teal-700 data-[state=active]:shadow-xs font-semibold">
+            <TabsTrigger value="overtime" className="text-xs data-[state=active]:bg-white data-[state=active]:text-brand-dark data-[state=active]:shadow-xs font-semibold">
               <RiTimeLine className="size-3.5 mr-1.5"/>
               Overtime Requests
             </TabsTrigger>
-            <TabsTrigger value="expenses" className="text-xs data-[state=active]:bg-white data-[state=active]:text-teal-700 data-[state=active]:shadow-xs font-semibold">
+            <TabsTrigger value="expenses" className="text-xs data-[state=active]:bg-white data-[state=active]:text-brand-dark data-[state=active]:shadow-xs font-semibold">
               <RiMoneyDollarCircleLine className="size-3.5 mr-1.5"/>
               Expense Claims
             </TabsTrigger>
-            <TabsTrigger value="announcements" className="text-xs data-[state=active]:bg-white data-[state=active]:text-teal-700 data-[state=active]:shadow-xs font-semibold">
+            <TabsTrigger value="announcements" className="text-xs data-[state=active]:bg-white data-[state=active]:text-brand-dark data-[state=active]:shadow-xs font-semibold">
               <RiMegaphoneLine className="size-3.5 mr-1.5"/>
               Announcements
             </TabsTrigger>
@@ -75,7 +75,7 @@ export function RecentActivity() {
                 <div className="flex items-center gap-3">
                   <Avatar className="size-9 border border-slate-200">
                     <AvatarImage src={ot.employeeAvatar} alt={ot.employeeName}/>
-                    <AvatarFallback className="bg-teal-600 text-white text-xs">
+                    <AvatarFallback className="bg-brand text-white text-xs">
                       {ot.employeeName.slice(0, 2).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
@@ -107,7 +107,7 @@ export function RecentActivity() {
                     open: true,
                     type: 'approve-ot',
                     item: ot,
-                })} className="h-8 bg-teal-600 hover:bg-teal-700 text-white text-xs px-2.5 font-medium">
+                })} className="h-8 bg-brand hover:bg-brand-dark text-white text-xs px-2.5 font-medium">
                         <RiCheckLine className="size-3.5 mr-1"/>
                         Approve
                       </Button>
@@ -125,7 +125,7 @@ export function RecentActivity() {
                 </div>
               </div>))}
             <div className="pt-2 text-right">
-              <Link href="/hrm/overtime" className="inline-flex items-center gap-1 text-xs font-semibold text-teal-600 hover:text-teal-700">
+              <Link href="/hrm/overtime" className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:text-brand-dark">
                 View all overtime requests
                 <RiArrowRightLine className="size-3.5"/>
               </Link>
@@ -138,7 +138,7 @@ export function RecentActivity() {
                 <div className="flex items-center gap-3">
                   <Avatar className="size-9 border border-slate-200">
                     <AvatarImage src={exp.employeeAvatar} alt={exp.employeeName}/>
-                    <AvatarFallback className="bg-teal-600 text-white text-xs">
+                    <AvatarFallback className="bg-brand text-white text-xs">
                       {exp.employeeName.slice(0, 2).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
@@ -153,7 +153,7 @@ export function RecentActivity() {
                       {exp.description}
                     </p>
                     <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-1">
-                      <span className="font-semibold text-teal-700">
+                      <span className="font-semibold text-brand-dark">
                         {exp.category}
                       </span>
                       <span>•</span>
@@ -172,7 +172,7 @@ export function RecentActivity() {
                     open: true,
                     type: 'approve-exp',
                     item: exp,
-                })} className="h-8 bg-teal-600 hover:bg-teal-700 text-white text-xs px-2.5 font-medium">
+                })} className="h-8 bg-brand hover:bg-brand-dark text-white text-xs px-2.5 font-medium">
                         <RiCheckLine className="size-3.5 mr-1"/>
                         Approve
                       </Button>
@@ -190,7 +190,7 @@ export function RecentActivity() {
                 </div>
               </div>))}
             <div className="pt-2 text-right">
-              <Link href="/hrm/expenses" className="inline-flex items-center gap-1 text-xs font-semibold text-teal-600 hover:text-teal-700">
+              <Link href="/hrm/expenses" className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:text-brand-dark">
                 View all expense claims
                 <RiArrowRightLine className="size-3.5"/>
               </Link>
@@ -218,13 +218,13 @@ export function RecentActivity() {
                 </p>
                 <div className="flex items-center justify-between text-[11px] text-slate-400 mt-2">
                   <span>Author: {ann.author.name}</span>
-                  <span className="font-medium text-teal-700">
+                  <span className="font-medium text-brand-dark">
                     Audience: {ann.targetAudience}
                   </span>
                 </div>
               </div>))}
             <div className="pt-2 text-right">
-              <Link href="/hrm/announcements" className="inline-flex items-center gap-1 text-xs font-semibold text-teal-600 hover:text-teal-700">
+              <Link href="/hrm/announcements" className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:text-brand-dark">
                 Manage announcements
                 <RiArrowRightLine className="size-3.5"/>
               </Link>

@@ -22,7 +22,7 @@ export function AttendanceChart() {
       <CardHeader className="p-5 pb-3 flex flex-row items-center justify-between space-y-0">
         <div>
           <div className="flex items-center gap-2">
-            <RiCalendarCheckLine className="size-5 text-teal-600"/>
+            <RiCalendarCheckLine className="size-5 text-brand"/>
             <CardTitle className="text-base font-bold text-slate-900">
               Weekly Attendance Analysis
             </CardTitle>
@@ -47,7 +47,7 @@ export function AttendanceChart() {
             fontSize: '12px',
         }}/>
               <Legend wrapperStyle={{ paddingTop: '12px', fontSize: '12px' }} iconType="circle"/>
-              <Bar dataKey="present" name="Present" fill="#009688" radius={[4, 4, 0, 0]} maxBarSize={32}/>
+              <Bar dataKey="present" name="Present" fill="var(--primary)" radius={[4, 4, 0, 0]} maxBarSize={32}/>
               <Bar dataKey="late" name="Late" fill="#f59e0b" radius={[4, 4, 0, 0]} maxBarSize={32}/>
               <Bar dataKey="onLeave" name="On Leave" fill="#38bdf8" radius={[4, 4, 0, 0]} maxBarSize={32}/>
               <Bar dataKey="absent" name="Absent" fill="#f43f5e" radius={[4, 4, 0, 0]} maxBarSize={32}/>

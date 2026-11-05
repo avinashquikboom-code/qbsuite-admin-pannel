@@ -23,20 +23,20 @@ export default function SettingsPage() {
         toast.success('Configuration policies saved and deployed across QB Suite!');
     };
     return (<div className="space-y-6">
-      <PageHeader title="Suite Administration & Policies" description="Global system parameters, attendance deduction rules, overtime rates, and company profile." badge="System" badgeVariant="teal" actions={<Button size="sm" onClick={handleSave} className="bg-teal-600 hover:bg-teal-700 text-white gap-1.5 shadow-sm text-xs">
+      <PageHeader title="Suite Administration & Policies" description="Global system parameters, attendance deduction rules, overtime rates, and company profile." badge="System" badgeVariant="green" actions={<Button size="sm" onClick={handleSave} className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm text-xs">
             <RiSaveLine className="size-4"/>
             <span>Save Changes</span>
           </Button>}/>
 
       <Tabs defaultValue="hrm-policies" className="space-y-4">
         <TabsList className="bg-slate-100 p-1 border border-slate-200">
-          <TabsTrigger value="hrm-policies" className="text-xs data-[state=active]:bg-white data-[state=active]:text-teal-700">
+          <TabsTrigger value="hrm-policies" className="text-xs data-[state=active]:bg-white data-[state=active]:text-brand-dark">
             HRM Payroll & Attendance Rules
           </TabsTrigger>
-          <TabsTrigger value="company" className="text-xs data-[state=active]:bg-white data-[state=active]:text-teal-700">
+          <TabsTrigger value="company" className="text-xs data-[state=active]:bg-white data-[state=active]:text-brand-dark">
             Company Profile
           </TabsTrigger>
-          <TabsTrigger value="security" className="text-xs data-[state=active]:bg-white data-[state=active]:text-teal-700">
+          <TabsTrigger value="security" className="text-xs data-[state=active]:bg-white data-[state=active]:text-brand-dark">
             Security & Integrations
           </TabsTrigger>
         </TabsList>
@@ -46,7 +46,7 @@ export default function SettingsPage() {
           <Card className="border-slate-200/80 shadow-2xs">
             <CardHeader>
               <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <RiTimeLine className="size-5 text-teal-600"/>
+                <RiTimeLine className="size-5 text-brand"/>
                 <span>Attendance & Late Deduction Multipliers</span>
               </CardTitle>
               <CardDescription className="text-xs text-slate-500">
@@ -117,7 +117,7 @@ export default function SettingsPage() {
           <Card className="border-slate-200/80 shadow-2xs">
             <CardHeader>
               <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <RiBuilding4Line className="size-5 text-teal-600"/>
+                <RiBuilding4Line className="size-5 text-brand"/>
                 <span>Organization Identity</span>
               </CardTitle>
             </CardHeader>
@@ -141,7 +141,7 @@ export default function SettingsPage() {
           <Card className="border-slate-200/80 shadow-2xs">
             <CardHeader>
               <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <RiShieldKeyholeLine className="size-5 text-teal-600"/>
+                <RiShieldKeyholeLine className="size-5 text-brand"/>
                 <span>Security & Webhook Access</span>
               </CardTitle>
             </CardHeader>

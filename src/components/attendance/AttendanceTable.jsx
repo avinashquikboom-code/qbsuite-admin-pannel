@@ -12,7 +12,7 @@ export function AttendanceTable({ records, onAdjustPunch, }) {
             cell: (rec) => (<div className="flex items-center gap-3">
           <Avatar className="size-9 border border-slate-200">
             <AvatarImage src={rec.employeeAvatar} alt={rec.employeeName}/>
-            <AvatarFallback className="bg-teal-600 text-white text-xs">
+            <AvatarFallback className="bg-brand text-white text-xs">
               {rec.employeeName.slice(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>
@@ -64,7 +64,7 @@ export function AttendanceTable({ records, onAdjustPunch, }) {
         {
             header: 'Actions',
             className: 'text-right',
-            cell: (rec) => (<Button size="sm" variant="ghost" onClick={() => onAdjustPunch?.(rec)} className="h-8 text-xs text-slate-600 hover:text-teal-700 hover:bg-teal-50">
+            cell: (rec) => (<Button size="sm" variant="ghost" onClick={() => onAdjustPunch?.(rec)} className="h-8 text-xs text-slate-600 hover:text-brand-dark hover:bg-brand-light">
           <RiTimeLine className="size-3.5 mr-1 text-slate-400"/>
           Edit Log
         </Button>),

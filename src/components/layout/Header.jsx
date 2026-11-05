@@ -109,14 +109,14 @@ export function Header() {
         {/* Quick Search */}
         <form onSubmit={handleSearchSubmit} className="relative hidden sm:block w-48 md:w-60">
           <RiSearchLine className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
-          <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search employee, lead, deal..." className="h-9 pl-8 pr-3 text-xs bg-slate-50 border-slate-200 focus-visible:bg-white focus-visible:ring-teal-500"/>
+          <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search employee, lead, deal..." className="h-9 pl-8 pr-3 text-xs bg-slate-50 border-slate-200 focus-visible:bg-white focus-visible:ring-brand"/>
         </form>
 
         {/* Notifications Popover */}
         <Popover>
           <PopoverTrigger className="relative flex size-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors">
             <RiNotification3Line className="size-4.5"/>
-            <span className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-teal-600 text-[10px] font-bold text-white shadow-xs">
+            <span className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-white shadow-xs">
               2
             </span>
           </PopoverTrigger>
@@ -126,20 +126,20 @@ export function Header() {
                 <span className="text-sm font-semibold text-slate-900">
                   Notifications
                 </span>
-                <Badge className="bg-teal-100 text-teal-800 text-[10px] font-bold h-4 px-1.5 shadow-none">
+                <Badge className="bg-brand-light text-brand-dark text-[10px] font-bold h-4 px-1.5 shadow-none">
                   2 New
                 </Badge>
               </div>
-              <button onClick={() => toast.success('All marked as read')} className="text-xs text-teal-600 hover:text-teal-700 flex items-center gap-1 font-medium">
+              <button onClick={() => toast.success('All marked as read')} className="text-xs text-brand hover:text-brand-dark flex items-center gap-1 font-medium">
                 <RiCheckDoubleLine className="size-3.5"/>
                 Mark read
               </button>
             </div>
             <div className="divide-y divide-slate-100 max-h-72 overflow-y-auto">
-              {notifications.map((n) => (<div key={n.id} className={`p-3 text-xs hover:bg-slate-50/80 transition-colors ${n.unread ? 'bg-teal-50/30' : ''}`}>
+              {notifications.map((n) => (<div key={n.id} className={`p-3 text-xs hover:bg-slate-50/80 transition-colors ${n.unread ? 'bg-brand-light/30' : ''}`}>
                   <div className="flex items-center justify-between font-medium text-slate-900">
                     <span className="flex items-center gap-1.5">
-                      {n.unread && (<span className="size-1.5 rounded-full bg-teal-600 shrink-0"/>)}
+                      {n.unread && (<span className="size-1.5 rounded-full bg-brand shrink-0"/>)}
                       {n.title}
                     </span>
                     <span className="text-[10px] text-slate-400">{n.time}</span>
@@ -148,7 +148,7 @@ export function Header() {
                 </div>))}
             </div>
             <div className="p-2 border-t border-slate-100 text-center bg-slate-50/40 rounded-b-xl">
-              <Link href="/hrm/announcements" className="text-xs font-semibold text-teal-600 hover:text-teal-700">
+              <Link href="/hrm/announcements" className="text-xs font-semibold text-brand hover:text-brand-dark">
                 View all company updates →
               </Link>
             </div>
@@ -157,10 +157,10 @@ export function Header() {
 
         {/* Admin Profile Dropdown */}
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center gap-2 rounded-lg p-1 hover:bg-slate-100 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-teal-500">
+          <DropdownMenuTrigger className="flex items-center gap-2 rounded-lg p-1 hover:bg-slate-100 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand">
             <Avatar className="size-8 border border-slate-200">
               <AvatarImage src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Alexander Vance"/>
-              <AvatarFallback className="bg-teal-600 text-white font-semibold text-xs">
+              <AvatarFallback className="bg-brand text-white font-semibold text-xs">
                 AV
               </AvatarFallback>
             </Avatar>

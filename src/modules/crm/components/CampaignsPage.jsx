@@ -91,7 +91,7 @@ export default function CampaignsPage() {
         toast.success('Campaign scheduled and broadcast ready!');
     };
     return (<div className="space-y-6">
-      <PageHeader title="Marketing & Ad Campaigns" description="Multi-channel acquisition pipelines across LinkedIn, Email and Meta networks." badge="CRM" badgeVariant="teal" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-teal-600 hover:bg-teal-700 text-white gap-1.5 shadow-sm text-xs">
+      <PageHeader title="Marketing & Ad Campaigns" description="Multi-channel acquisition pipelines across LinkedIn, Email and Meta networks." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm text-xs">
             <RiAddLine className="size-4"/>
             <span>Launch Campaign</span>
           </Button>}/>
@@ -108,7 +108,7 @@ export default function CampaignsPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Total Budget</CardTitle>
-            <div className="text-2xl font-bold text-teal-700 mt-1">
+            <div className="text-2xl font-bold text-brand-dark mt-1">
               {currency.format(campaigns.reduce((a, c) => a + c.budget, 0))}
             </div>
           </CardHeader>
@@ -116,7 +116,7 @@ export default function CampaignsPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Leads Attributed</CardTitle>
-            <div className="text-2xl font-bold text-emerald-600 mt-1">
+            <div className="text-2xl font-bold text-brand mt-1">
               {campaigns.reduce((a, c) => a + c.leadsGenerated, 0)}
             </div>
           </CardHeader>
@@ -130,14 +130,14 @@ export default function CampaignsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {campaigns.map((c) => (<Card key={c.id} className="border-slate-200/80 shadow-2xs hover:border-teal-200 transition-all">
+        {campaigns.map((c) => (<Card key={c.id} className="border-slate-200/80 shadow-2xs hover:border-brand-light transition-all">
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
                 <Badge variant="outline" className="text-[10px] bg-slate-50 text-slate-700 font-semibold">
                   {c.channel}
                 </Badge>
                 <Badge className={c.status === 'active'
-                ? 'bg-emerald-100 text-emerald-800 border-none'
+                ? 'bg-brand-light text-brand-dark border-none'
                 : 'bg-slate-100 text-slate-700 border-none'}>
                   {c.status.toUpperCase()}
                 </Badge>
@@ -152,11 +152,11 @@ export default function CampaignsPage() {
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-400 font-semibold">LEADS</span>
-                  <div className="font-bold text-teal-700">{c.leadsGenerated}</div>
+                  <div className="font-bold text-brand-dark">{c.leadsGenerated}</div>
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-400 font-semibold">EST. ROI</span>
-                  <div className="font-bold text-emerald-700">{c.roi}</div>
+                  <div className="font-bold text-brand-dark">{c.roi}</div>
                 </div>
               </div>
               <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
@@ -211,7 +211,7 @@ export default function CampaignsPage() {
               <Button type="button" variant="outline" size="sm" onClick={() => setIsAddOpen(false)} className="text-xs">
                 Cancel
               </Button>
-              <Button type="submit" size="sm" className="bg-teal-600 hover:bg-teal-700 text-white text-xs">
+              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-white text-xs">
                 Activate Campaign
               </Button>
             </DialogFooter>

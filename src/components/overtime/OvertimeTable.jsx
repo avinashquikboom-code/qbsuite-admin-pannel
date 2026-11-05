@@ -12,7 +12,7 @@ export function OvertimeTable({ records, onApprove, onReject, onViewDetails, }) 
             cell: (ot) => (<div className="flex items-center gap-3">
           <Avatar className="size-9 border border-slate-200">
             <AvatarImage src={ot.employeeAvatar} alt={ot.employeeName}/>
-            <AvatarFallback className="bg-teal-600 text-white text-xs">
+            <AvatarFallback className="bg-brand text-white text-xs">
               {ot.employeeName.slice(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>
@@ -46,7 +46,7 @@ export function OvertimeTable({ records, onApprove, onReject, onViewDetails, }) 
         },
         {
             header: 'Est. Amount',
-            cell: (ot) => (<span className="font-bold text-sm text-teal-700">
+            cell: (ot) => (<span className="font-bold text-sm text-brand-dark">
           ${ot.estimatedAmount.toFixed(2)}
         </span>),
         },
@@ -65,7 +65,7 @@ export function OvertimeTable({ records, onApprove, onReject, onViewDetails, }) 
             className: 'text-right',
             cell: (ot) => (<div className="flex items-center justify-end gap-1.5">
           {ot.status === 'pending' ? (<>
-              <Button size="sm" onClick={() => onApprove(ot)} className="h-7.5 px-2.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold">
+              <Button size="sm" onClick={() => onApprove(ot)} className="h-7.5 px-2.5 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
                 <RiCheckLine className="size-3.5 mr-1"/>
                 Approve
               </Button>

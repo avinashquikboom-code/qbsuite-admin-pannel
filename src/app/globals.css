@@ -55,8 +55,8 @@
   --secondary: #f1f5f9;
   --secondary-foreground: #0f172a;
   --muted: #f1f5f9;
-  --chart-1: #009688;
-  --chart-2: #14b8a6;
+  --chart-1: var(--primary);
+  --chart-2: var(--primary-dark);
   --chart-3: #3b82f6;
   --chart-4: #f59e0b;
   --chart-5: #ef4444;
@@ -76,9 +76,6 @@
   }
 }
 @theme inline {
- --color-teal-50: var(--primary-light);
- --color-teal-600: var(--primary);
- --color-teal-700: var(--primary-dark);
  --color-slate-50: var(--background);
  --color-slate-200: var(--border);
  --color-slate-500: var(--muted-foreground);

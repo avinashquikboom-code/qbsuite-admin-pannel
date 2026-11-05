@@ -84,12 +84,12 @@ export default function LeadsPage() {
         toast.success(`Lead status updated to ${newStatus}`);
     };
     return (<div className="space-y-6">
-      <PageHeader title="Sales Leads Management" description="Capture, qualify and convert opportunities into long-term enterprise clients." badge="CRM" badgeVariant="teal" actions={<div className="flex items-center gap-2">
+      <PageHeader title="Sales Leads Management" description="Capture, qualify and convert opportunities into long-term enterprise clients." badge="CRM" badgeVariant="green" actions={<div className="flex items-center gap-2">
             <Button variant="outline" size="sm" onClick={() => toast.success('Leads exported to CSV')} className="gap-1.5 text-xs text-slate-700">
               <RiDownloadLine className="size-4"/>
               <span>Export</span>
             </Button>
-            <Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-teal-600 hover:bg-teal-700 text-white gap-1.5 shadow-sm text-xs">
+            <Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm text-xs">
               <RiAddLine className="size-4"/>
               <span>New Lead</span>
             </Button>
@@ -106,13 +106,13 @@ export default function LeadsPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Pipeline Value</CardTitle>
-            <div className="text-2xl font-bold text-teal-700 mt-1">{currency.format(totalValue)}</div>
+            <div className="text-2xl font-bold text-brand-dark mt-1">{currency.format(totalValue)}</div>
           </CardHeader>
         </Card>
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Conversion Rate</CardTitle>
-            <div className="text-2xl font-bold text-emerald-600 mt-1">28.6%</div>
+            <div className="text-2xl font-bold text-brand mt-1">28.6%</div>
           </CardHeader>
         </Card>
       </div>
@@ -179,7 +179,7 @@ export default function LeadsPage() {
                       <StatusBadge status={lead.status}/>
                     </> },
 { header: 'Actions', cell: (lead) => <>
-                      <Button variant="ghost" size="sm" onClick={() => setSelectedLead(lead)} className="h-8 text-teal-600 hover:text-teal-700 hover:bg-teal-50 text-xs font-semibold">
+                      <Button variant="ghost" size="sm" onClick={() => setSelectedLead(lead)} className="h-8 text-brand hover:text-brand-dark hover:bg-brand-light text-xs font-semibold">
                         Details
                       </Button>
                     </>, className: 'text-right' }
@@ -220,7 +220,7 @@ export default function LeadsPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="p-2.5 rounded-lg border border-slate-200">
                   <span className="text-[10px] text-slate-400 uppercase font-semibold">Deal Value</span>
-                  <div className="text-base font-bold text-teal-700">{currency.format(selectedLead.value)}</div>
+                  <div className="text-base font-bold text-brand-dark">{currency.format(selectedLead.value)}</div>
                 </div>
                 <div className="p-2.5 rounded-lg border border-slate-200">
                   <span className="text-[10px] text-slate-400 uppercase font-semibold">Channel</span>
@@ -238,7 +238,7 @@ export default function LeadsPage() {
               <div className="space-y-2 pt-2">
                 <span className="text-[11px] font-semibold text-slate-700">Advance Stage:</span>
                 <div className="flex flex-wrap gap-1.5">
-                  {['new', 'contacted', 'qualified', 'proposal', 'won', 'lost'].map((st) => (<Button key={st} variant={selectedLead.status === st ? 'default' : 'outline'} size="sm" onClick={() => handleUpdateStatus(selectedLead.id, st)} className={selectedLead.status === st ? 'bg-teal-600 text-white text-[11px] h-7' : 'text-[11px] h-7'}>
+                  {['new', 'contacted', 'qualified', 'proposal', 'won', 'lost'].map((st) => (<Button key={st} variant={selectedLead.status === st ? 'default' : 'outline'} size="sm" onClick={() => handleUpdateStatus(selectedLead.id, st)} className={selectedLead.status === st ? 'bg-brand text-white text-[11px] h-7' : 'text-[11px] h-7'}>
                       {st.toUpperCase()}
                     </Button>))}
                 </div>
@@ -318,7 +318,7 @@ export default function LeadsPage() {
               <Button type="button" variant="outline" size="sm" onClick={() => setIsAddOpen(false)} className="text-xs">
                 Cancel
               </Button>
-              <Button type="submit" size="sm" className="bg-teal-600 hover:bg-teal-700 text-white text-xs">
+              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-white text-xs">
                 Save Lead
               </Button>
             </DialogFooter>

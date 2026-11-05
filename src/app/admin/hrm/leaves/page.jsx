@@ -158,7 +158,7 @@ export default function LeaveManagementPage() {
             cell: (l) => (<div className="flex items-center gap-3">
           <Avatar className="size-9 border border-slate-200">
             <AvatarImage src={l.employeeAvatar} alt={l.employeeName}/>
-            <AvatarFallback className="bg-teal-600 text-white text-xs">
+            <AvatarFallback className="bg-brand text-white text-xs">
               {l.employeeName.slice(0, 2)}
             </AvatarFallback>
           </Avatar>
@@ -204,7 +204,7 @@ export default function LeaveManagementPage() {
             className: 'text-right',
             cell: (l) => (<div className="flex items-center justify-end gap-1.5">
           {l.status === 'pending' ? (<>
-              <Button size="sm" onClick={() => handleApprove(l)} className="h-7.5 px-2.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold">
+              <Button size="sm" onClick={() => handleApprove(l)} className="h-7.5 px-2.5 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
                 <RiCheckLine className="size-3.5 mr-1"/>
                 Approve
               </Button>
@@ -216,7 +216,7 @@ export default function LeaveManagementPage() {
         },
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Leave Management & Absence Tracking" description="Review vacation requests, sick leaves, parental allowances, and team holiday calendars." actions={<Button size="sm" onClick={() => setApplyDialogOpen(true)} className="bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs h-9">
+      <PageHeader title="Leave Management & Absence Tracking" description="Review vacation requests, sick leaves, parental allowances, and team holiday calendars." actions={<Button size="sm" onClick={() => setApplyDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
             <RiAddLine className="size-4 mr-1.5"/>
             Apply Leave On Behalf
           </Button>}/>
@@ -238,17 +238,17 @@ export default function LeaveManagementPage() {
           </p>
         </div>
 
-        <div className="p-3.5 rounded-xl border border-teal-100 bg-teal-50/50">
+        <div className="p-3.5 rounded-xl border border-brand-light bg-brand-light/50">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-teal-700 uppercase">
+            <span className="text-[11px] font-semibold text-brand-dark uppercase">
               Currently On Leave
             </span>
-            <RiCalendarCheckLine className="size-4 text-teal-600"/>
+            <RiCalendarCheckLine className="size-4 text-brand"/>
           </div>
-          <p className="text-xl font-bold text-teal-800 mt-1">
+          <p className="text-xl font-bold text-brand-dark mt-1">
             1 Team Member
           </p>
-          <p className="text-[11px] text-teal-700 mt-0.5">
+          <p className="text-[11px] text-brand-dark mt-0.5">
             Chloe Dupont (Parental leave)
           </p>
         </div>
@@ -258,7 +258,7 @@ export default function LeaveManagementPage() {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Average Annual Balance
             </span>
-            <RiHeartPulseLine className="size-4 text-teal-600"/>
+            <RiHeartPulseLine className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-slate-900 mt-1">
             18.5 Days / Emp
@@ -400,7 +400,7 @@ export default function LeaveManagementPage() {
               <Button type="button" variant="outline" onClick={() => setApplyDialogOpen(false)} className="h-8 text-xs">
                 Cancel
               </Button>
-              <Button type="submit" className="h-8 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold">
+              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
                 Submit Application
               </Button>
             </DialogFooter>

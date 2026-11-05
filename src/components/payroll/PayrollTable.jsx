@@ -12,7 +12,7 @@ export function PayrollTable({ records, onViewPayslip, onMarkPaid, }) {
             cell: (rec) => (<div className="flex items-center gap-3">
           <Avatar className="size-9 border border-slate-200">
             <AvatarImage src={rec.employeeAvatar} alt={rec.employeeName}/>
-            <AvatarFallback className="bg-teal-600 text-white text-xs">
+            <AvatarFallback className="bg-brand text-white text-xs">
               {rec.employeeName.slice(0, 2)}
             </AvatarFallback>
           </Avatar>
@@ -44,7 +44,7 @@ export function PayrollTable({ records, onViewPayslip, onMarkPaid, }) {
           <span className="text-amber-700 font-medium">
             +${rec.overtimePay.toFixed(0)} OT
           </span>
-          <span className="text-teal-700 font-medium">
+          <span className="text-brand-dark font-medium">
             +${rec.reimbursements.toFixed(0)} Claim
           </span>
         </div>),
@@ -68,7 +68,7 @@ export function PayrollTable({ records, onViewPayslip, onMarkPaid, }) {
         },
         {
             header: 'Net Payable',
-            cell: (rec) => (<span className="font-extrabold text-sm text-teal-800">
+            cell: (rec) => (<span className="font-bold text-sm text-brand-dark">
           ${rec.netPay.toLocaleString()}
         </span>),
         },
@@ -80,11 +80,11 @@ export function PayrollTable({ records, onViewPayslip, onMarkPaid, }) {
             header: 'Actions',
             className: 'text-right',
             cell: (rec) => (<div className="flex items-center justify-end gap-1.5">
-          <Button size="sm" variant="outline" onClick={() => onViewPayslip(rec)} className="h-7.5 px-2.5 border-slate-200 text-slate-700 hover:text-teal-700 hover:bg-teal-50 text-xs">
+          <Button size="sm" variant="outline" onClick={() => onViewPayslip(rec)} className="h-7.5 px-2.5 border-slate-200 text-slate-700 hover:text-brand-dark hover:bg-brand-light text-xs">
             <RiFileTextLine className="size-3.5 mr-1 text-slate-400"/>
             Payslip
           </Button>
-          {rec.status === 'pending' && onMarkPaid && (<Button size="sm" onClick={() => onMarkPaid(rec)} className="h-7.5 px-2 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold">
+          {rec.status === 'pending' && onMarkPaid && (<Button size="sm" onClick={() => onMarkPaid(rec)} className="h-7.5 px-2 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
               <RiCheckDoubleLine className="size-3.5 mr-1"/>
               Pay
             </Button>)}

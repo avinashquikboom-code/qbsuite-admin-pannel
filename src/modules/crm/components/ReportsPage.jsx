@@ -13,7 +13,7 @@ export default function CrmReportsPage() {
         maximumFractionDigits: 0,
     });
     return (<div className="space-y-6">
-      <PageHeader title="CRM Revenue & Pipeline Intelligence" description="Comprehensive analysis of customer lifetime value, conversion velocity and sales reps performance." badge="Analytics" badgeVariant="teal" actions={<Button size="sm" onClick={() => toast.success('Analytics report PDF generated!')} className="bg-teal-600 hover:bg-teal-700 text-white gap-1.5 shadow-sm text-xs">
+      <PageHeader title="CRM Revenue & Pipeline Intelligence" description="Comprehensive analysis of customer lifetime value, conversion velocity and sales reps performance." badge="Analytics" badgeVariant="green" actions={<Button size="sm" onClick={() => toast.success('Analytics report PDF generated!')} className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm text-xs">
             <RiDownloadLine className="size-4"/>
             <span>Export Analytics</span>
           </Button>}/>
@@ -23,8 +23,8 @@ export default function CrmReportsPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Won Revenue YTD</CardTitle>
-            <div className="text-2xl font-bold text-teal-700 mt-1">$482,000</div>
-            <div className="text-[11px] text-emerald-600 font-medium flex items-center gap-1 mt-1">
+            <div className="text-2xl font-bold text-brand-dark mt-1">$482,000</div>
+            <div className="text-[11px] text-brand font-medium flex items-center gap-1 mt-1">
               <RiArrowUpLine className="size-3"/>
               <span>+24.5% vs prior year</span>
             </div>
@@ -40,15 +40,15 @@ export default function CrmReportsPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Lead-to-Deal Conversion</CardTitle>
-            <div className="text-2xl font-bold text-emerald-600 mt-1">32.8%</div>
-            <div className="text-[11px] text-emerald-600 font-medium mt-1">Top quartile efficiency</div>
+            <div className="text-2xl font-bold text-brand mt-1">32.8%</div>
+            <div className="text-[11px] text-brand font-medium mt-1">Top quartile efficiency</div>
           </CardHeader>
         </Card>
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Customer Churn Rate</CardTitle>
             <div className="text-2xl font-bold text-slate-900 mt-1">1.8%</div>
-            <div className="text-[11px] text-emerald-600 font-medium mt-1">98.2% retention</div>
+            <div className="text-[11px] text-brand font-medium mt-1">98.2% retention</div>
           </CardHeader>
         </Card>
       </div>
@@ -68,10 +68,10 @@ export default function CrmReportsPage() {
             {mockPipelineStages.map((st) => (<div key={st.stage} className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-semibold text-slate-800">{st.stage} ({st.count} deals)</span>
-                  <span className="font-bold text-teal-700">{currency.format(st.value)}</span>
+                  <span className="font-bold text-brand-dark">{currency.format(st.value)}</span>
                 </div>
                 <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div className="bg-teal-600 h-2 rounded-full transition-all" style={{ width: `${Math.min(100, (st.value / 400000) * 100)}%` }}/>
+                  <div className="bg-brand h-2 rounded-full transition-all" style={{ width: `${Math.min(100, (st.value / 400000) * 100)}%` }}/>
                 </div>
               </div>))}
           </CardContent>
@@ -106,8 +106,8 @@ export default function CrmReportsPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-bold text-teal-700">{currency.format(rep.revenue)}</div>
-                    <div className="text-[10px] text-emerald-600 font-semibold">{rep.quota} of quota</div>
+                    <div className="font-bold text-brand-dark">{currency.format(rep.revenue)}</div>
+                    <div className="text-[10px] text-brand font-semibold">{rep.quota} of quota</div>
                   </div>
                 </div>))}
             </div>

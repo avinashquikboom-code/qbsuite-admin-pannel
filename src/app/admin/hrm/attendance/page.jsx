@@ -65,21 +65,21 @@ export default function AttendancePage() {
     const onLeaveCount = records.filter((r) => r.status === 'on_leave').length;
     const absentCount = records.filter((r) => r.status === 'absent').length;
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Attendance & Time Clock" description="Daily punch in/out timestamps, break tracking, working duration, and automated late arrival detection." actions={<Button size="sm" onClick={handleExport} className="bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs h-9">
+      <PageHeader title="Attendance & Time Clock" description="Daily punch in/out timestamps, break tracking, working duration, and automated late arrival detection." actions={<Button size="sm" onClick={handleExport} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
             <RiCalendarCheckLine className="size-4 mr-1.5"/>
             Generate Timesheet
           </Button>}/>
 
       {/* Summary Metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="p-3.5 rounded-xl border border-emerald-100 bg-emerald-50/50">
+        <div className="p-3.5 rounded-xl border border-brand-light bg-brand-light/50">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-emerald-700 uppercase">
+            <span className="text-[11px] font-semibold text-brand-dark uppercase">
               Present Today
             </span>
-            <RiCalendarCheckLine className="size-4 text-emerald-600"/>
+            <RiCalendarCheckLine className="size-4 text-brand"/>
           </div>
-          <p className="text-xl font-bold text-emerald-800 mt-1">
+          <p className="text-xl font-bold text-brand-dark mt-1">
             {presentCount} Employees
           </p>
         </div>
@@ -96,14 +96,14 @@ export default function AttendancePage() {
           </p>
         </div>
 
-        <div className="p-3.5 rounded-xl border border-teal-100 bg-teal-50/50">
+        <div className="p-3.5 rounded-xl border border-brand-light bg-brand-light/50">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-teal-700 uppercase">
+            <span className="text-[11px] font-semibold text-brand-dark uppercase">
               Approved Leave
             </span>
-            <RiCalendarCloseLine className="size-4 text-teal-600"/>
+            <RiCalendarCloseLine className="size-4 text-brand"/>
           </div>
-          <p className="text-xl font-bold text-teal-800 mt-1">
+          <p className="text-xl font-bold text-brand-dark mt-1">
             {onLeaveCount} Employees
           </p>
         </div>
@@ -183,7 +183,7 @@ export default function AttendancePage() {
               <Button type="button" variant="outline" onClick={() => setEditDialogOpen(false)} className="h-8 text-xs">
                 Cancel
               </Button>
-              <Button type="submit" className="h-8 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold">
+              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
                 Save Changes
               </Button>
             </DialogFooter>

@@ -102,14 +102,14 @@ export default function OvertimePage() {
           </p>
         </div>
 
-        <div className="p-3.5 rounded-xl border border-emerald-100 bg-emerald-50/50">
+        <div className="p-3.5 rounded-xl border border-brand-light bg-brand-light/50">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-emerald-700 uppercase">
+            <span className="text-[11px] font-semibold text-brand-dark uppercase">
               Approved Overtime
             </span>
-            <RiCheckboxCircleLine className="size-4 text-emerald-600"/>
+            <RiCheckboxCircleLine className="size-4 text-brand"/>
           </div>
-          <p className="text-xl font-bold text-emerald-800 mt-1">
+          <p className="text-xl font-bold text-brand-dark mt-1">
             {counts.approved} Claims (${approvedAmount.toFixed(2)})
           </p>
         </div>
@@ -119,7 +119,7 @@ export default function OvertimePage() {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Total Approved Extra Hours
             </span>
-            <RiMoneyDollarCircleLine className="size-4 text-teal-600"/>
+            <RiMoneyDollarCircleLine className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-slate-900 mt-1">
             {totalHours} Total Hours

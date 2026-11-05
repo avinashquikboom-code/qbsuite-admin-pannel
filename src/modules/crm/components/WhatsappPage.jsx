@@ -56,8 +56,8 @@ export default function WhatsAppPage() {
         toast.success(`WhatsApp message dispatched to ${recipient}`);
     };
     return (<div className="space-y-6">
-      <PageHeader title="WhatsApp Business API Gateway" description="Official Meta Cloud API pipeline for conversational sales and customer support automation." badge="WhatsApp" badgeVariant="teal" actions={<Badge className="bg-emerald-100 text-emerald-800 border-none gap-1.5 py-1 px-3">
-            <span className="size-2 rounded-full bg-emerald-500 animate-pulse"/>
+      <PageHeader title="WhatsApp Business API Gateway" description="Official Meta Cloud API pipeline for conversational sales and customer support automation." badge="WhatsApp" badgeVariant="green" actions={<Badge className="bg-brand-light text-brand-dark border-none gap-1.5 py-1 px-3">
+            <span className="size-2 rounded-full bg-brand animate-pulse"/>
             <span>Webhook: Connected</span>
           </Badge>}/>
 
@@ -72,13 +72,13 @@ export default function WhatsAppPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Delivery Rate</CardTitle>
-            <div className="text-2xl font-bold text-emerald-600 mt-1">99.4%</div>
+            <div className="text-2xl font-bold text-brand mt-1">99.4%</div>
           </CardHeader>
         </Card>
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Read Rate</CardTitle>
-            <div className="text-2xl font-bold text-teal-700 mt-1">87.2%</div>
+            <div className="text-2xl font-bold text-brand-dark mt-1">87.2%</div>
           </CardHeader>
         </Card>
         <Card className="border-slate-200/80 shadow-2xs">
@@ -94,7 +94,7 @@ export default function WhatsAppPage() {
         <Card className="lg:col-span-1 border-slate-200/80 shadow-2xs">
           <CardHeader>
             <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <RiWhatsappLine className="size-5 text-emerald-600"/>
+              <RiWhatsappLine className="size-5 text-brand"/>
               <span>Outreach Simulator</span>
             </CardTitle>
             <CardDescription className="text-xs text-slate-500">
@@ -113,7 +113,7 @@ export default function WhatsAppPage() {
                 <Textarea rows={4} value={customMsg} onChange={(e) => setCustomMsg(e.target.value)} className="text-xs resize-none"/>
               </div>
 
-              <Button type="submit" size="sm" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white gap-2">
+              <Button type="submit" size="sm" className="w-full bg-brand hover:bg-brand-dark text-white gap-2">
                 <RiSendPlaneLine className="size-4"/>
                 <span>Send via WhatsApp API</span>
               </Button>
@@ -135,7 +135,7 @@ export default function WhatsAppPage() {
             <div className="divide-y divide-slate-100">
               {logs.map((log) => (<div key={log.id} className="p-4 flex items-center justify-between hover:bg-slate-50/50">
                   <div className="flex items-center gap-3">
-                    <div className="flex size-8 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+                    <div className="flex size-8 items-center justify-center rounded-full bg-brand-light text-brand">
                       <RiWhatsappLine className="size-4"/>
                     </div>
                     <div>
@@ -144,7 +144,7 @@ export default function WhatsAppPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Badge variant="outline" className="text-[10px] bg-emerald-50 text-emerald-700 border-emerald-200 gap-1">
+                    <Badge variant="outline" className="text-[10px] bg-brand-light text-brand-dark border-brand-light gap-1">
                       <RiCheckDoubleLine className="size-3"/>
                       <span>{log.status}</span>
                     </Badge>

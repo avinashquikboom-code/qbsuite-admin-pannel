@@ -26,7 +26,7 @@ export function AnnouncementList({ announcements, onEdit, onDelete, onTogglePubl
                   {!ann.isPublished ? (<Badge variant="outline" className="border-dashed border-amber-300 text-amber-700 bg-amber-50 text-[10px] font-semibold">
                       <RiEyeOffLine className="size-3 mr-1"/>
                       Draft / Unannounced
-                    </Badge>) : (<span className="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+                    </Badge>) : (<span className="text-[11px] text-brand font-semibold flex items-center gap-1">
                       <RiCheckboxCircleLine className="size-3.5"/>
                       Published
                     </span>)}
@@ -42,8 +42,8 @@ export function AnnouncementList({ announcements, onEdit, onDelete, onTogglePubl
 
                 {/* Attachments */}
                 {ann.attachments && ann.attachments.length > 0 && (<div className="pt-2 flex flex-wrap gap-2">
-                    {ann.attachments.map((att) => (<span key={att.id} className="inline-flex items-center gap-1.5 text-[11px] font-medium text-teal-700 bg-teal-50 border border-teal-200/80 px-2 py-1 rounded-md">
-                        <RiAttachmentLine className="size-3 text-teal-600"/>
+                    {ann.attachments.map((att) => (<span key={att.id} className="inline-flex items-center gap-1.5 text-[11px] font-medium text-brand-dark bg-brand-light border border-brand-light/80 px-2 py-1 rounded-md">
+                        <RiAttachmentLine className="size-3 text-brand"/>
                         <span className="font-semibold">{att.name}</span>
                         <span className="text-slate-400">({att.size})</span>
                       </span>))}
@@ -75,7 +75,7 @@ export function AnnouncementList({ announcements, onEdit, onDelete, onTogglePubl
                 <Button size="sm" variant="outline" onClick={() => onTogglePublish(ann)} className="h-7.5 px-2 text-xs border-slate-200 text-slate-600 hover:text-slate-900">
                   {ann.isPublished ? 'Unpublish' : 'Publish'}
                 </Button>
-                <Button size="sm" variant="outline" onClick={() => onEdit(ann)} className="h-7.5 px-2 text-xs border-slate-200 text-slate-600 hover:text-teal-700">
+                <Button size="sm" variant="outline" onClick={() => onEdit(ann)} className="h-7.5 px-2 text-xs border-slate-200 text-slate-600 hover:text-brand-dark">
                   <RiEditLine className="size-3.5"/>
                 </Button>
                 <Button size="sm" variant="outline" onClick={() => onDelete(ann)} className="h-7.5 px-2 text-xs border-slate-200 text-slate-600 hover:text-rose-600 hover:bg-rose-50">

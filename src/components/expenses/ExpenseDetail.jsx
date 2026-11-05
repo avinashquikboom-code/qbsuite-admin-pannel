@@ -28,7 +28,7 @@ export function ExpenseDetail({ claim, open, onOpenChange, onApprove, onReject, 
         <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-4 space-y-2.5 text-xs">
           <div className="flex justify-between items-center">
             <span className="text-slate-500">Category</span>
-            <Badge variant="outline" className="bg-white text-teal-800 border-teal-200">
+            <Badge variant="outline" className="bg-white text-brand-dark border-brand-light">
               {claim.category}
             </Badge>
           </div>
@@ -52,10 +52,10 @@ export function ExpenseDetail({ claim, open, onOpenChange, onApprove, onReject, 
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs font-semibold text-slate-700">
             <span className="flex items-center gap-1.5">
-              <RiAttachmentLine className="size-4 text-teal-600"/>
+              <RiAttachmentLine className="size-4 text-brand"/>
               Attached Receipt Document
             </span>
-            <Button variant="ghost" size="sm" onClick={() => toast.success(`Downloading ${claim.receiptName}`)} className="h-6 text-[11px] text-teal-600 hover:text-teal-700 p-0">
+            <Button variant="ghost" size="sm" onClick={() => toast.success(`Downloading ${claim.receiptName}`)} className="h-6 text-[11px] text-brand hover:text-brand-dark p-0">
               <RiDownloadLine className="size-3 mr-1"/>
               Download
             </Button>
@@ -82,7 +82,7 @@ export function ExpenseDetail({ claim, open, onOpenChange, onApprove, onReject, 
 
         {/* Action Buttons */}
         {claim.status === 'pending' && onApprove && onReject && (<div className="pt-2 flex items-center gap-2">
-            <Button className="flex-1 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold h-9" onClick={() => {
+            <Button className="flex-1 bg-brand hover:bg-brand-dark text-white text-xs font-semibold h-9" onClick={() => {
                 onApprove(claim);
                 onOpenChange(false);
             }}>

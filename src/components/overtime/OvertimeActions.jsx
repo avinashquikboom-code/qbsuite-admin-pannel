@@ -7,16 +7,16 @@ export function OvertimeActions({ activeTab, onTabChange, search, onSearchChange
     return (<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-2xs">
       <Tabs value={activeTab} onValueChange={onTabChange} className="w-auto">
         <TabsList className="bg-slate-100 p-1 h-9">
-          <TabsTrigger value="all" className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-teal-700">
+          <TabsTrigger value="all" className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-brand-dark">
             All ({counts.all})
           </TabsTrigger>
-          <TabsTrigger value="pending" className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-teal-700">
+          <TabsTrigger value="pending" className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-brand-dark">
             Pending ({counts.pending})
           </TabsTrigger>
-          <TabsTrigger value="approved" className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-teal-700">
+          <TabsTrigger value="approved" className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-brand-dark">
             Approved ({counts.approved})
           </TabsTrigger>
-          <TabsTrigger value="rejected" className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-teal-700">
+          <TabsTrigger value="rejected" className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-brand-dark">
             Rejected ({counts.rejected})
           </TabsTrigger>
         </TabsList>

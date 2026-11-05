@@ -43,11 +43,11 @@ export default function PayrollPage() {
     };
     return (<div className="space-y-6 max-w-7xl mx-auto">
       <PageHeader title="Payroll & Compensation Management" description="Calculate monthly salaries, tax withholding, overtime credits, reimbursements, and payslip generation." actions={<div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" onClick={() => toast.success('Exported Monthly Payroll to Excel/CSV')} className="border-slate-200 text-slate-700 hover:text-teal-700 text-xs h-9">
+            <Button variant="outline" size="sm" onClick={() => toast.success('Exported Monthly Payroll to Excel/CSV')} className="border-slate-200 text-slate-700 hover:text-brand-dark text-xs h-9">
               <RiDownloadLine className="size-3.5 mr-1 text-slate-400"/>
               Export Bank File
             </Button>
-            <Button size="sm" onClick={() => setRunBatchOpen(true)} className="bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs h-9">
+            <Button size="sm" onClick={() => setRunBatchOpen(true)} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
               <RiBankCardLine className="size-4 mr-1.5"/>
               Run Payroll Batch
             </Button>
@@ -63,7 +63,7 @@ export default function PayrollPage() {
             <h3 className="text-sm font-bold text-slate-900">
               Salary Register — {selectedMonth}
             </h3>
-            <Badge className="bg-teal-50 text-teal-700 border-teal-200 text-[10px]">
+            <Badge className="bg-brand-light text-brand-dark border-brand-light text-[10px]">
               Ready for processing
             </Badge>
           </div>
@@ -83,7 +83,7 @@ export default function PayrollPage() {
               <div className="flex items-start justify-between border-b pb-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-black text-lg text-teal-700 tracking-tight">
+                    <span className="font-bold text-lg text-brand-dark tracking-tight">
                       QB Suite Inc.
                     </span>
                     <span className="text-[10px] uppercase font-bold text-slate-500 bg-slate-100 px-1 rounded">
@@ -124,7 +124,7 @@ export default function PayrollPage() {
                   <span className="font-mono text-slate-800">
                     {selectedRecord.bankAccount}
                   </span>
-                  <span className="text-emerald-700 font-semibold block uppercase text-[10px]">
+                  <span className="text-brand-dark font-semibold block uppercase text-[10px]">
                     Status: {selectedRecord.status}
                   </span>
                 </div>
@@ -157,7 +157,7 @@ export default function PayrollPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Reimbursements</span>
-                    <span className="font-semibold text-teal-700">
+                    <span className="font-semibold text-brand-dark">
                       +${selectedRecord.reimbursements.toFixed(0)}
                     </span>
                   </div>
@@ -204,16 +204,16 @@ export default function PayrollPage() {
               </div>
 
               {/* Net Pay Callout */}
-              <div className="flex items-center justify-between p-3.5 bg-teal-50 rounded-xl border border-teal-200">
+              <div className="flex items-center justify-between p-3.5 bg-brand-light rounded-xl border border-brand-light">
                 <div>
-                  <span className="text-teal-800 font-semibold text-[11px] uppercase tracking-wider block">
+                  <span className="text-brand-dark font-semibold text-[11px] uppercase tracking-wider block">
                     Net Take-Home Pay
                   </span>
-                  <span className="text-xs text-teal-600">
+                  <span className="text-xs text-brand">
                     Direct Deposit into {selectedRecord.bankAccount}
                   </span>
                 </div>
-                <span className="text-2xl font-black text-teal-900">
+                <span className="text-2xl font-bold text-brand-dark">
                   ${selectedRecord.netPay.toLocaleString()}
                 </span>
               </div>
@@ -232,7 +232,7 @@ export default function PayrollPage() {
                   <Button size="sm" onClick={() => {
                 toast.success(`Downloaded ${selectedRecord.id}.pdf`);
                 setPayslipOpen(false);
-            }} className="h-8 bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs">
+            }} className="h-8 bg-brand hover:bg-brand-dark text-white font-medium text-xs">
                     <RiDownloadLine className="size-3.5 mr-1"/>
                     Download PDF
                   </Button>

@@ -2,7 +2,7 @@
 
 Next.js App Router, JavaScript/JSX, Tailwind CSS, Inter and Remix Icons.
 
-Run `npm install`, `npm run dev`, `npm run lint`, and `npm run build`.
+Run `npm install`, `npm run dev`, `npm run lint`, `npm run check:ui`, and `npm run build`. The production build uses Webpack with Tailwind PostCSS; development uses Next.js defaults.
 
 - `src/components/common/`: the sole reusable UI implementation library. Import directly, e.g. `import { Button } from '@/components/common/Button'`.
 - `src/components/icons/RemixIcon.jsx`: accepts an `icon` component from `@remixicon/react`, plus size, label and SVG props.

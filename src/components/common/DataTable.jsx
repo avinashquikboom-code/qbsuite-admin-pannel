@@ -31,7 +31,7 @@ export function DataTable({ columns, data, pageSize = 10, emptyState, isLoading 
                         : null}
                     </TableCell>))}
                 </TableRow>))) : (<TableRow>
-                <TableCell colSpan={columns.length} className="h-48 text-center text-slate-400 py-8">
+                <TableCell colSpan={columns.length} className="h-48 whitespace-normal break-words px-4 text-center text-muted-foreground py-8">
                   {emptyState || 'No records found.'}
                 </TableCell>
               </TableRow>)}

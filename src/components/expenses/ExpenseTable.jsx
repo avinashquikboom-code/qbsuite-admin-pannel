@@ -13,7 +13,7 @@ export function ExpenseTable({ claims, onApprove, onReject, onViewDetail, }) {
             cell: (exp) => (<div className="flex items-center gap-3">
           <Avatar className="size-9 border border-slate-200">
             <AvatarImage src={exp.employeeAvatar} alt={exp.employeeName}/>
-            <AvatarFallback className="bg-teal-600 text-white text-xs">
+            <AvatarFallback className="bg-brand text-white text-xs">
               {exp.employeeName.slice(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>
@@ -29,7 +29,7 @@ export function ExpenseTable({ claims, onApprove, onReject, onViewDetail, }) {
         },
         {
             header: 'Category',
-            cell: (exp) => (<Badge variant="outline" className="bg-slate-50 text-teal-800 border-teal-200 text-xs font-medium py-0.5">
+            cell: (exp) => (<Badge variant="outline" className="bg-slate-50 text-brand-dark border-brand-light text-xs font-medium py-0.5">
           {exp.category}
         </Badge>),
         },
@@ -48,8 +48,8 @@ export function ExpenseTable({ claims, onApprove, onReject, onViewDetail, }) {
         },
         {
             header: 'Receipt',
-            cell: (exp) => (<button onClick={() => onViewDetail(exp)} className="flex items-center gap-1 text-xs text-teal-600 hover:text-teal-700 font-medium group">
-          <RiAttachmentLine className="size-3.5 text-slate-400 group-hover:text-teal-600"/>
+            cell: (exp) => (<button onClick={() => onViewDetail(exp)} className="flex items-center gap-1 text-xs text-brand hover:text-brand-dark font-medium group">
+          <RiAttachmentLine className="size-3.5 text-slate-400 group-hover:text-brand"/>
           <span className="truncate max-w-[120px]">{exp.receiptName}</span>
         </button>),
         },
@@ -62,7 +62,7 @@ export function ExpenseTable({ claims, onApprove, onReject, onViewDetail, }) {
             className: 'text-right',
             cell: (exp) => (<div className="flex items-center justify-end gap-1.5">
           {exp.status === 'pending' ? (<>
-              <Button size="sm" onClick={() => onApprove(exp)} className="h-7.5 px-2.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold">
+              <Button size="sm" onClick={() => onApprove(exp)} className="h-7.5 px-2.5 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
                 <RiCheckLine className="size-3.5 mr-1"/>
                 Approve
               </Button>

@@ -16,7 +16,7 @@ export default function MetaIntegrationPage() {
         }, 1200);
     };
     return (<div className="space-y-6">
-      <PageHeader title="Meta Ads & Business Suite Integration" description="Connect Instagram and Facebook Lead Ads directly into the QB Suite CRM pipeline." badge="Meta Cloud" badgeVariant="teal" actions={<Button size="sm" onClick={handleSync} disabled={syncing} className="bg-teal-600 hover:bg-teal-700 text-white gap-1.5 shadow-sm text-xs">
+      <PageHeader title="Meta Ads & Business Suite Integration" description="Connect Instagram and Facebook Lead Ads directly into the QB Suite CRM pipeline." badge="Meta Cloud" badgeVariant="green" actions={<Button size="sm" onClick={handleSync} disabled={syncing} className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm text-xs">
             <RiRefreshLine className={`size-4 ${syncing ? 'animate-spin' : ''}`}/>
             <span>{syncing ? 'Syncing...' : 'Sync Leads Now'}</span>
           </Button>}/>
@@ -24,7 +24,7 @@ export default function MetaIntegrationPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader>
-            <div className="flex size-10 items-center justify-center rounded-lg bg-teal-50 text-teal-600 mb-2">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-brand-light text-brand mb-2">
               <RiMetaLine className="size-6"/>
             </div>
             <CardTitle className="text-base font-bold text-slate-900">
@@ -37,7 +37,7 @@ export default function MetaIntegrationPage() {
           <CardContent className="space-y-3 text-xs">
             <div className="flex items-center justify-between p-2 rounded bg-slate-50 border border-slate-200">
               <span className="text-slate-600">Status</span>
-              <Badge className="bg-emerald-100 text-emerald-800 border-none text-[10px]">Connected</Badge>
+              <Badge className="bg-brand-light text-brand-dark border-none text-[10px]">Connected</Badge>
             </div>
             <div className="flex items-center justify-between p-2 rounded bg-slate-50 border border-slate-200">
               <span className="text-slate-600">Synced Today</span>
@@ -61,7 +61,7 @@ export default function MetaIntegrationPage() {
           <CardContent className="space-y-3 text-xs">
             <div className="flex items-center justify-between p-2 rounded bg-slate-50 border border-slate-200">
               <span className="text-slate-600">Status</span>
-              <Badge className="bg-emerald-100 text-emerald-800 border-none text-[10px]">Active</Badge>
+              <Badge className="bg-brand-light text-brand-dark border-none text-[10px]">Active</Badge>
             </div>
             <div className="flex items-center justify-between p-2 rounded bg-slate-50 border border-slate-200">
               <span className="text-slate-600">Inbound Inquiries</span>
@@ -72,7 +72,7 @@ export default function MetaIntegrationPage() {
 
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader>
-            <div className="flex size-10 items-center justify-center rounded-lg bg-teal-50 text-teal-600 mb-2">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-brand-light text-brand mb-2">
               <RiShieldCheckLine className="size-6"/>
             </div>
             <CardTitle className="text-base font-bold text-slate-900">
@@ -85,7 +85,7 @@ export default function MetaIntegrationPage() {
           <CardContent className="space-y-3 text-xs">
             <div className="flex items-center justify-between p-2 rounded bg-slate-50 border border-slate-200">
               <span className="text-slate-600">Event Match Quality</span>
-              <span className="font-bold text-emerald-600">8.9 / 10 (Great)</span>
+              <span className="font-bold text-brand">8.9 / 10 (Great)</span>
             </div>
             <div className="flex items-center justify-between p-2 rounded bg-slate-50 border border-slate-200">
               <span className="text-slate-600">Pixel ID</span>

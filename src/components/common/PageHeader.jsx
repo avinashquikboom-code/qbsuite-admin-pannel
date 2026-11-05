@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Badge } from '@/components/common/Badge';
 export function PageHeader({ title, description, badge, actions, }) {
-    const renderedBadge = typeof badge === 'string' ? (<Badge variant="outline" className="border-teal-200 bg-teal-50 text-teal-800 text-xs font-semibold py-0.5">
+    const renderedBadge = typeof badge === 'string' ? (<Badge variant="outline" className="border-brand-light bg-brand-light text-brand-dark text-xs font-semibold py-0.5">
       {badge}
     </Badge>) : badge;
     return (<div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between pb-6 border-b border-slate-200/80">

@@ -12,8 +12,8 @@ export function StatusBadge({ status, className, showIcon = true }) {
         case 'present':
         case 'won':
         case 'converted':
-            return (<Badge variant="outline" className={cn('inline-flex items-center gap-1.5 border-emerald-200 bg-emerald-50 text-emerald-700 font-medium capitalize py-0.5 px-2.5 shadow-none', className)}>
-          {showIcon && <RiCheckboxCircleLine className="size-3.5 text-emerald-600 shrink-0"/>}
+            return (<Badge variant="outline" className={cn('inline-flex items-center gap-1.5 border-brand-light bg-brand-light text-brand-dark font-medium capitalize py-0.5 px-2.5 shadow-none', className)}>
+          {showIcon && <RiCheckboxCircleLine className="size-3.5 text-brand shrink-0"/>}
           <span>{status.replace('_', ' ')}</span>
         </Badge>);
         // Pending / Processing / Late / Normal / Negotiation / Proposal / Contacted
@@ -44,8 +44,8 @@ export function StatusBadge({ status, className, showIcon = true }) {
         case 'qualified':
         case 'discovery':
         case 'new':
-            return (<Badge variant="outline" className={cn('inline-flex items-center gap-1.5 border-teal-200 bg-teal-50 text-teal-800 font-medium capitalize py-0.5 px-2.5 shadow-none', className)}>
-          {showIcon && <RiCalendarCloseLine className="size-3.5 text-teal-600 shrink-0"/>}
+            return (<Badge variant="outline" className={cn('inline-flex items-center gap-1.5 border-brand-light bg-brand-light text-brand-dark font-medium capitalize py-0.5 px-2.5 shadow-none', className)}>
+          {showIcon && <RiCalendarCloseLine className="size-3.5 text-brand shrink-0"/>}
           <span>{status.replace('_', ' ')}</span>
         </Badge>);
         // Priority badges

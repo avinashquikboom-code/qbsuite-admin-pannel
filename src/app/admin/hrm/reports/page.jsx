@@ -30,7 +30,7 @@ export default function HrmReportsPage() {
               <RiDownloadLine className="size-3.5 mr-1"/>
               Tax Audit File
             </Button>
-            <Button size="sm" onClick={() => handleExport('Complete HRM Quarterly Report')} className="bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs h-9">
+            <Button size="sm" onClick={() => handleExport('Complete HRM Quarterly Report')} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
               <RiDownloadLine className="size-3.5 mr-1"/>
               Export Full Report (PDF)
             </Button>
@@ -43,7 +43,7 @@ export default function HrmReportsPage() {
             Workforce Retention
           </span>
           <p className="text-2xl font-bold text-slate-900 mt-1">96.8%</p>
-          <span className="text-[11px] text-emerald-600 font-medium">
+          <span className="text-[11px] text-brand font-medium">
             +2.4% vs industry median
           </span>
         </div>
@@ -52,10 +52,10 @@ export default function HrmReportsPage() {
           <span className="text-[11px] font-semibold text-slate-400 uppercase">
             Avg. Attendance Rate
           </span>
-          <p className="text-2xl font-bold text-teal-800 mt-1">
+          <p className="text-2xl font-bold text-brand-dark mt-1">
             {mockKpiData.presentPercentage}%
           </p>
-          <span className="text-[11px] text-teal-700 font-medium">
+          <span className="text-[11px] text-brand-dark font-medium">
             Past 30 operational days
           </span>
         </div>
@@ -91,7 +91,7 @@ export default function HrmReportsPage() {
         <Card className="border border-slate-200/90 bg-white shadow-xs">
           <CardHeader className="p-5 pb-3">
             <div className="flex items-center gap-2">
-              <RiPieChartLine className="size-5 text-teal-600"/>
+              <RiPieChartLine className="size-5 text-brand"/>
               <CardTitle className="text-base font-bold text-slate-900">
                 Departmental Workforce Distribution
               </CardTitle>
@@ -111,13 +111,13 @@ export default function HrmReportsPage() {
                   </span>
                 </div>
                 <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                  <div className="h-full bg-teal-600 rounded-full transition-all duration-500" style={{ width: `${item.pct * 2.5}%` }}/>
+                  <div className="h-full bg-brand rounded-full transition-all duration-500" style={{ width: `${item.pct * 2.5}%` }}/>
                 </div>
               </div>))}
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
               <span>Total Active Divisions: 7</span>
-              <span className="font-semibold text-teal-700">All positions staffed</span>
+              <span className="font-semibold text-brand-dark">All positions staffed</span>
             </div>
           </CardContent>
         </Card>

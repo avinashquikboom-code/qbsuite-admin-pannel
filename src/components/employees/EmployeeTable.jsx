@@ -29,7 +29,7 @@ export function EmployeeTable({ employees, onSelectEmployee, }) {
             cell: (emp) => (<div className="flex items-center gap-3">
           <Avatar className="size-9 border border-slate-200">
             <AvatarImage src={emp.avatar} alt={emp.name}/>
-            <AvatarFallback className="bg-teal-600 text-white text-xs">
+            <AvatarFallback className="bg-brand text-white text-xs">
               {emp.firstName[0]}
               {emp.lastName[0]}
             </AvatarFallback>
@@ -46,7 +46,7 @@ export function EmployeeTable({ employees, onSelectEmployee, }) {
             header: 'Department & Role',
             cell: (emp) => (<div className="flex flex-col">
           <span className="font-medium text-slate-800">{emp.designation}</span>
-          <span className="text-xs text-teal-700 font-medium">
+          <span className="text-xs text-brand-dark font-medium">
             {emp.department}
           </span>
         </div>),
@@ -81,7 +81,7 @@ export function EmployeeTable({ employees, onSelectEmployee, }) {
             header: 'Actions',
             className: 'text-right',
             cell: (emp) => (<div className="flex items-center justify-end gap-1.5">
-          <Button size="sm" variant="outline" onClick={() => onSelectEmployee(emp)} className="h-8 px-2.5 text-xs text-slate-700 hover:text-teal-700 hover:bg-teal-50 border-slate-200">
+          <Button size="sm" variant="outline" onClick={() => onSelectEmployee(emp)} className="h-8 px-2.5 text-xs text-slate-700 hover:text-brand-dark hover:bg-brand-light border-slate-200">
             <RiEyeLine className="size-3.5 mr-1 text-slate-400"/>
             View Profile
           </Button>
@@ -93,7 +93,7 @@ export function EmployeeTable({ employees, onSelectEmployee, }) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-2xs">
         <div className="relative flex-1 sm:max-w-xs">
           <RiSearchLine className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-slate-400"/>
-          <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search employee by name, ID, role..." className="h-9 pl-8 pr-3 text-xs border-slate-200 bg-slate-50/50 focus-visible:bg-white focus-visible:ring-teal-500"/>
+          <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search employee by name, ID, role..." className="h-9 pl-8 pr-3 text-xs border-slate-200 bg-slate-50/50 focus-visible:bg-white focus-visible:ring-brand"/>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">

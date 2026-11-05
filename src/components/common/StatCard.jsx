@@ -2,7 +2,7 @@ import { RemixIcon } from '@/components/icons/RemixIcon';
 import { Card, CardContent } from '@/components/common/Card';
 import { Badge } from '@/components/common/Badge';
 import { cn } from '@/lib/utils';
-export function StatCard({ title, value, change, changeType = 'neutral', icon: Icon, iconColor = 'text-teal-600', iconBg = 'bg-teal-50', description, badge, className, onClick, }) {
+export function StatCard({ title, value, change, changeType = 'neutral', icon: Icon, iconColor = 'text-brand', iconBg = 'bg-brand-light', description, badge, className, onClick, }) {
     return (<Card onClick={onClick} className={cn('relative overflow-hidden border border-slate-200/90 bg-white transition-all duration-200 hover:shadow-md hover:border-slate-300', onClick ? 'cursor-pointer hover:-translate-y-0.5' : '', className)}>
       <CardContent className="p-5">
         <div className="flex items-start justify-between">
@@ -14,7 +14,7 @@ export function StatCard({ title, value, change, changeType = 'neutral', icon: I
               <span className="text-2xl font-bold tracking-tight text-slate-900">
                 {value}
               </span>
-              {badge && (<Badge variant="outline" className="bg-teal-50 text-teal-700 border-teal-200 text-[10px] font-semibold py-0">
+              {badge && (<Badge variant="outline" className="bg-brand-light text-brand-dark border-brand-light text-[10px] font-semibold py-0">
                   {badge}
                 </Badge>)}
             </div>
@@ -26,7 +26,7 @@ export function StatCard({ title, value, change, changeType = 'neutral', icon: I
 
         {(change || description) && (<div className="mt-3 flex items-center gap-1.5 text-xs">
             {change && (<span className={cn('font-semibold', changeType === 'positive'
-                    ? 'text-emerald-600'
+                    ? 'text-brand'
                     : changeType === 'negative'
                         ? 'text-rose-600'
                         : 'text-slate-600')}>

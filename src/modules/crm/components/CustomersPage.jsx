@@ -63,7 +63,7 @@ export default function CustomersPage() {
         setNewLocation('');
     };
     return (<div className="space-y-6">
-      <PageHeader title="Enterprise Customers & Accounts" description="Maintain client relationships, contract histories, and account portfolio values." badge="CRM" badgeVariant="teal" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-teal-600 hover:bg-teal-700 text-white gap-1.5 shadow-sm text-xs">
+      <PageHeader title="Enterprise Customers & Accounts" description="Maintain client relationships, contract histories, and account portfolio values." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm text-xs">
             <RiAddLine className="size-4"/>
             <span>Add Customer</span>
           </Button>}/>
@@ -79,13 +79,13 @@ export default function CustomersPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Lifetime Portfolio Revenue</CardTitle>
-            <div className="text-2xl font-bold text-teal-700 mt-1">{currency.format(totalRev)}</div>
+            <div className="text-2xl font-bold text-brand-dark mt-1">{currency.format(totalRev)}</div>
           </CardHeader>
         </Card>
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Avg Deal Size</CardTitle>
-            <div className="text-2xl font-bold text-emerald-600 mt-1">
+            <div className="text-2xl font-bold text-brand mt-1">
               {currency.format(totalRev / (filtered.length || 1))}
             </div>
           </CardHeader>
@@ -121,7 +121,7 @@ export default function CustomersPage() {
                     <StatusBadge status={c.status}/>
                   </> },
 { header: 'Actions', cell: (c) => <>
-                    <Button variant="ghost" size="sm" onClick={() => setSelectedContact(c)} className="h-8 text-teal-600 hover:text-teal-700 hover:bg-teal-50 text-xs font-semibold">
+                    <Button variant="ghost" size="sm" onClick={() => setSelectedContact(c)} className="h-8 text-brand hover:text-brand-dark hover:bg-brand-light text-xs font-semibold">
                       Dossier
                     </Button>
                   </>, className: 'text-right' }
@@ -162,7 +162,7 @@ export default function CustomersPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="p-2.5 rounded-lg border border-slate-200">
                   <span className="text-[10px] text-slate-400 uppercase font-semibold">Total Revenue</span>
-                  <div className="text-base font-bold text-teal-700">{currency.format(selectedContact.totalRevenue)}</div>
+                  <div className="text-base font-bold text-brand-dark">{currency.format(selectedContact.totalRevenue)}</div>
                 </div>
                 <div className="p-2.5 rounded-lg border border-slate-200">
                   <span className="text-[10px] text-slate-400 uppercase font-semibold">Last Contacted</span>
@@ -229,7 +229,7 @@ export default function CustomersPage() {
               <Button type="button" variant="outline" size="sm" onClick={() => setIsAddOpen(false)} className="text-xs">
                 Cancel
               </Button>
-              <Button type="submit" size="sm" className="bg-teal-600 hover:bg-teal-700 text-white text-xs">
+              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-white text-xs">
                 Save Account
               </Button>
             </DialogFooter>

@@ -39,7 +39,7 @@ export default function SalarySlipsPage() {
             cell: (r) => (<div className="flex items-center gap-2.5">
           <Avatar className="size-8 border border-slate-200">
             <AvatarImage src={r.employeeAvatar} alt={r.employeeName}/>
-            <AvatarFallback className="bg-teal-600 text-white text-xs">
+            <AvatarFallback className="bg-brand text-white text-xs">
               {r.employeeName.slice(0, 2)}
             </AvatarFallback>
           </Avatar>
@@ -67,7 +67,7 @@ export default function SalarySlipsPage() {
         },
         {
             header: 'Net Take-Home',
-            cell: (r) => (<span className="font-bold text-sm text-teal-800">
+            cell: (r) => (<span className="font-bold text-sm text-brand-dark">
           ${r.netPay.toLocaleString()}
         </span>),
         },
@@ -75,7 +75,7 @@ export default function SalarySlipsPage() {
             header: 'Actions',
             className: 'text-right',
             cell: (r) => (<div className="flex items-center justify-end gap-1.5">
-          <Button size="sm" variant="outline" onClick={() => setActiveSlip(r)} className="h-7.5 px-2.5 border-slate-200 text-slate-700 hover:text-teal-700 hover:bg-teal-50 text-xs">
+          <Button size="sm" variant="outline" onClick={() => setActiveSlip(r)} className="h-7.5 px-2.5 border-slate-200 text-slate-700 hover:text-brand-dark hover:bg-brand-light text-xs">
             <RiFileTextLine className="size-3.5 mr-1 text-slate-400"/>
             View Slip
           </Button>
@@ -86,7 +86,7 @@ export default function SalarySlipsPage() {
         },
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Salary Slips Repository" description="Search, view, download and distribute official monthly compensation slips to personnel." actions={<Button size="sm" onClick={() => toast.success('Sent payslips to all employees via email')} className="bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs h-9">
+      <PageHeader title="Salary Slips Repository" description="Search, view, download and distribute official monthly compensation slips to personnel." actions={<Button size="sm" onClick={() => toast.success('Sent payslips to all employees via email')} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
             <RiMailLine className="size-4 mr-1.5"/>
             Email All Slips
           </Button>}/>
@@ -128,7 +128,7 @@ export default function SalarySlipsPage() {
           {activeSlip && (<div className="space-y-4 text-xs">
               <div className="flex items-start justify-between border-b pb-4">
                 <div>
-                  <span className="font-bold text-lg text-teal-700 tracking-tight">
+                  <span className="font-bold text-lg text-brand-dark tracking-tight">
                     QB Suite Payslip
                   </span>
                   <p className="text-[11px] text-slate-400">
@@ -139,7 +139,7 @@ export default function SalarySlipsPage() {
                   <span className="font-mono font-bold text-slate-800">
                     {activeSlip.id}
                   </span>
-                  <p className="text-[11px] text-emerald-700 font-semibold uppercase">
+                  <p className="text-[11px] text-brand-dark font-semibold uppercase">
                     Status: {activeSlip.status}
                   </p>
                 </div>
@@ -199,11 +199,11 @@ export default function SalarySlipsPage() {
                 </div>
               </div>
 
-              <div className="flex justify-between items-center p-3 bg-teal-50 rounded-xl border border-teal-200">
-                <span className="font-bold text-teal-800 text-sm">
+              <div className="flex justify-between items-center p-3 bg-brand-light rounded-xl border border-brand-light">
+                <span className="font-bold text-brand-dark text-sm">
                   Net Salary Disbursed
                 </span>
-                <span className="text-xl font-extrabold text-teal-900">
+                <span className="text-xl font-bold text-brand-dark">
                   ${activeSlip.netPay.toLocaleString()}
                 </span>
               </div>
@@ -216,7 +216,7 @@ export default function SalarySlipsPage() {
                 <Button size="sm" onClick={() => {
                 toast.success('Downloaded PDF slip');
                 setActiveSlip(null);
-            }} className="h-8 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold">
+            }} className="h-8 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
                   <RiDownloadLine className="size-3.5 mr-1"/>
                   Download
                 </Button>

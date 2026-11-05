@@ -28,7 +28,7 @@ export const navigation = [
             href: '/admin/crm/whatsapp',
             icon: RiWhatsappLine,
             badge: 'Live',
-            badgeVariant: 'teal',
+            badgeVariant: 'green',
         },
         {
             name: 'Meta Integration',

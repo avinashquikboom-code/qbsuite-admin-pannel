@@ -12,11 +12,11 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
     return (<Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="sm:max-w-md overflow-y-auto p-0 bg-white">
         {/* Cover / Header */}
-        <div className="bg-gradient-to-r from-teal-700 to-teal-600 p-6 text-white">
+        <div className="bg-gradient-to-r from-brand-dark to-brand p-6 text-white">
           <div className="flex items-center gap-4">
             <Avatar className="size-16 border-2 border-white/80 shadow-md">
               <AvatarImage src={employee.avatar} alt={employee.name}/>
-              <AvatarFallback className="bg-teal-900 text-white font-bold text-lg">
+              <AvatarFallback className="bg-brand-dark text-white font-bold text-lg">
                 {employee.firstName[0]}
                 {employee.lastName[0]}
               </AvatarFallback>
@@ -28,10 +28,10 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
                 </h2>
                 <StatusBadge status={employee.status} showIcon={false}/>
               </div>
-              <p className="text-xs text-teal-100 font-medium">
+              <p className="text-xs text-brand-light font-medium">
                 {employee.designation}
               </p>
-              <p className="text-[11px] text-teal-200 font-mono">
+              <p className="text-[11px] text-brand-light font-mono">
                 {employee.id} • {employee.department}
               </p>
             </div>
@@ -48,7 +48,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiMailLine className="size-4 text-teal-600 shrink-0"/>
+                  <RiMailLine className="size-4 text-brand shrink-0"/>
                   Email
                 </span>
                 <span className="font-semibold text-slate-900 truncate max-w-[200px]">
@@ -57,7 +57,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiPhoneLine className="size-4 text-teal-600 shrink-0"/>
+                  <RiPhoneLine className="size-4 text-brand shrink-0"/>
                   Phone
                 </span>
                 <span className="font-semibold text-slate-900">
@@ -66,7 +66,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiMapPinLine className="size-4 text-teal-600 shrink-0"/>
+                  <RiMapPinLine className="size-4 text-brand shrink-0"/>
                   Location
                 </span>
                 <span className="font-semibold text-slate-900">
@@ -84,7 +84,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiBriefcaseLine className="size-4 text-teal-600 shrink-0"/>
+                  <RiBriefcaseLine className="size-4 text-brand shrink-0"/>
                   Employment Type
                 </span>
                 <span className="font-semibold text-slate-900">
@@ -93,7 +93,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiCalendarLine className="size-4 text-teal-600 shrink-0"/>
+                  <RiCalendarLine className="size-4 text-brand shrink-0"/>
                   Join Date
                 </span>
                 <span className="font-semibold text-slate-900">
@@ -111,7 +111,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiMoneyDollarCircleLine className="size-4 text-emerald-600 shrink-0"/>
+                  <RiMoneyDollarCircleLine className="size-4 text-brand shrink-0"/>
                   Basic Monthly
                 </span>
                 <span className="font-bold text-slate-900">
@@ -126,7 +126,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-slate-500">Overtime Hourly Rate</span>
-                <span className="font-semibold text-teal-700">
+                <span className="font-semibold text-brand-dark">
                   ${employee.salary.hourlyRate}/hr
                 </span>
               </div>
@@ -141,7 +141,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <RiBankCardLine className="size-4 text-teal-600 shrink-0"/>
+                  <RiBankCardLine className="size-4 text-brand shrink-0"/>
                   Bank Name
                 </span>
                 <span className="font-semibold text-slate-900">
@@ -183,7 +183,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
 
           {/* Quick Actions */}
           <div className="pt-2 flex items-center gap-2">
-            <Button className="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs h-9" onClick={() => {
+            <Button className="flex-1 bg-brand hover:bg-brand-dark text-white font-semibold text-xs h-9" onClick={() => {
             toast.success(`Generated Profile Summary for ${employee.name}`);
             onOpenChange(false);
         }}>

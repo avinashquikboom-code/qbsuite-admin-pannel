@@ -91,7 +91,7 @@ export default function EmployeesPage() {
     const onLeaveCount = employees.filter((e) => e.status === 'on_leave').length;
     const inactiveCount = employees.filter((e) => e.status === 'inactive').length;
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Employee Directory" description="Manage company personnel, designations, salary packages, and employment status." actions={<Button onClick={() => setAddDialogOpen(true)} className="bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs h-9">
+      <PageHeader title="Employee Directory" description="Manage company personnel, designations, salary packages, and employment status." actions={<Button onClick={() => setAddDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
             <RiUserAddLine className="size-4 mr-1.5"/>
             Add New Employee
           </Button>}/>
@@ -106,19 +106,19 @@ export default function EmployeesPage() {
             {employees.length}
           </p>
         </div>
-        <div className="p-3.5 rounded-xl border border-emerald-100 bg-emerald-50/50">
-          <p className="text-[11px] font-semibold text-emerald-700 uppercase">
+        <div className="p-3.5 rounded-xl border border-brand-light bg-brand-light/50">
+          <p className="text-[11px] font-semibold text-brand-dark uppercase">
             Active Status
           </p>
-          <p className="text-xl font-bold text-emerald-800 mt-0.5">
+          <p className="text-xl font-bold text-brand-dark mt-0.5">
             {activeCount}
           </p>
         </div>
-        <div className="p-3.5 rounded-xl border border-teal-100 bg-teal-50/50">
-          <p className="text-[11px] font-semibold text-teal-700 uppercase">
+        <div className="p-3.5 rounded-xl border border-brand-light bg-brand-light/50">
+          <p className="text-[11px] font-semibold text-brand-dark uppercase">
             On Leave
           </p>
-          <p className="text-xl font-bold text-teal-800 mt-0.5">
+          <p className="text-xl font-bold text-brand-dark mt-0.5">
             {onLeaveCount}
           </p>
         </div>
@@ -224,7 +224,7 @@ export default function EmployeesPage() {
               <Button type="button" variant="outline" onClick={() => setAddDialogOpen(false)} className="h-8 text-xs">
                 Cancel
               </Button>
-              <Button type="submit" className="h-8 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold">
+              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
                 Save & Onboard
               </Button>
             </DialogFooter>

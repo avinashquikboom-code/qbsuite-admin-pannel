@@ -109,7 +109,7 @@ function AnnouncementFormFields({ open, onOpenChange, announcement, onSave, }) {
                 <RiUploadCloudLine className="size-6 text-slate-400 mx-auto"/>
                 <p className="text-[11px] text-slate-600 mt-1">
                   Drag & drop PDF, guidelines, or matrix here, or{' '}
-                  <span className="text-teal-600 font-semibold">browse files</span>
+                  <span className="text-brand font-semibold">browse files</span>
                 </p>
                 <p className="text-[10px] text-slate-400">PDF, PNG, JPG up to 10MB</p>
               </div>
@@ -118,14 +118,14 @@ function AnnouncementFormFields({ open, onOpenChange, announcement, onSave, }) {
             {/* Toggles */}
             <div className="grid grid-cols-2 gap-3 pt-2">
               <label className="flex items-center gap-2 cursor-pointer select-none">
-                <input type="checkbox" checked={isImportant} onChange={(e) => setIsImportant(e.target.checked)} className="rounded border-slate-300 text-teal-600 focus:ring-teal-500"/>
+                <input type="checkbox" checked={isImportant} onChange={(e) => setIsImportant(e.target.checked)} className="rounded border-slate-300 text-brand focus:ring-brand"/>
                 <span className="text-xs font-semibold text-slate-800">
                   Mark as High Priority
                 </span>
               </label>
 
               <label className="flex items-center gap-2 cursor-pointer select-none">
-                <input type="checkbox" checked={isPublished} onChange={(e) => setIsPublished(e.target.checked)} className="rounded border-slate-300 text-teal-600 focus:ring-teal-500"/>
+                <input type="checkbox" checked={isPublished} onChange={(e) => setIsPublished(e.target.checked)} className="rounded border-slate-300 text-brand focus:ring-brand"/>
                 <span className="text-xs font-semibold text-slate-800">
                   Publish Immediately
                 </span>
@@ -137,7 +137,7 @@ function AnnouncementFormFields({ open, onOpenChange, announcement, onSave, }) {
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="h-8 text-xs">
               Cancel
             </Button>
-            <Button type="submit" className="h-8 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold">
+            <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
               {announcement ? 'Save Changes' : 'Publish Announcement'}
             </Button>
           </DialogFooter>

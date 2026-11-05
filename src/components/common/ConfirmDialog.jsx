@@ -13,11 +13,11 @@ export function ConfirmDialog({ open, onOpenChange, title, description, confirmL
             <RiAlertLine className="size-5"/>
           </div>);
             case 'success':
-                return (<div className="flex size-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 shrink-0">
+                return (<div className="flex size-10 items-center justify-center rounded-full bg-brand-light text-brand shrink-0">
             <RiCheckboxCircleLine className="size-5"/>
           </div>);
             default:
-                return (<div className="flex size-10 items-center justify-center rounded-full bg-teal-100 text-teal-600 shrink-0">
+                return (<div className="flex size-10 items-center justify-center rounded-full bg-brand-light text-brand shrink-0">
             <RiInformationLine className="size-5"/>
           </div>);
         }
@@ -27,9 +27,9 @@ export function ConfirmDialog({ open, onOpenChange, title, description, confirmL
             case 'destructive':
                 return 'bg-rose-600 hover:bg-rose-700 text-white';
             case 'success':
-                return 'bg-emerald-600 hover:bg-emerald-700 text-white';
+                return 'bg-brand hover:bg-brand-dark text-white';
             default:
-                return 'bg-teal-600 hover:bg-teal-700 text-white';
+                return 'bg-brand hover:bg-brand-dark text-white';
         }
     };
     return (<Dialog open={open} onOpenChange={onOpenChange}>
@@ -50,7 +50,7 @@ export function ConfirmDialog({ open, onOpenChange, title, description, confirmL
                 <Label className="text-xs font-medium text-slate-700">
                   {note.label} {note.required && <span className="text-rose-500">*</span>}
                 </Label>
-                <Textarea value={note.value} onChange={(e) => note.onChange(e.target.value)} placeholder={note.placeholder} rows={3} className="resize-none text-sm border-slate-200 focus-visible:ring-teal-500"/>
+                <Textarea value={note.value} onChange={(e) => note.onChange(e.target.value)} placeholder={note.placeholder} rows={3} className="resize-none text-sm border-slate-200 focus-visible:ring-brand"/>
               </div>)}
           </div>
         </div>

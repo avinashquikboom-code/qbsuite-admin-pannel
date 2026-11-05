@@ -3,7 +3,7 @@ import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { cn } from "cn";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, } from "@/components/common/Modal";
-import { InputGroup, InputGroupAddon, } from "@/components/common/Input-group";
+import { InputGroup, InputGroupAddon, } from "@/components/common/InputGroup";
 import { RiSearchLine, RiCheckLine } from "@remixicon/react";
 function Command({ className, ...props }) {
     return (<CommandPrimitive data-slot="command" className={cn("flex size-full flex-col overflow-hidden rounded-xl! bg-popover p-1 text-popover-foreground", className)} {...props}/>);

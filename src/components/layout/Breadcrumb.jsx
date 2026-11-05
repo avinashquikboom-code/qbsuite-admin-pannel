@@ -57,7 +57,7 @@ export function Breadcrumb() {
         }
     };
     return (<nav className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-      <Link href="/" className="flex items-center gap-1 text-slate-500 hover:text-teal-700 transition-colors">
+      <Link href="/" className="flex items-center gap-1 text-slate-500 hover:text-brand-dark transition-colors">
         <RiHome4Line className="size-3.5 text-slate-400"/>
         <span className="hidden sm:inline">QB Suite</span>
       </Link>
@@ -70,7 +70,7 @@ export function Breadcrumb() {
             return (<React.Fragment key={url}>
             {isLast ? (<span className="font-semibold text-slate-800">
                 {getSegmentName(segment)}
-              </span>) : (<Link href={url} className="text-slate-500 hover:text-teal-700 transition-colors">
+              </span>) : (<Link href={url} className="text-slate-500 hover:text-brand-dark transition-colors">
                 {getSegmentName(segment)}
               </Link>)}
             {!isLast && (<RiArrowRightSLine className="size-3.5 text-slate-400 shrink-0"/>)}

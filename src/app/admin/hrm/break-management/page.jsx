@@ -122,7 +122,7 @@ export default function BreakManagementPage() {
             cell: (rec) => (<div className="flex items-center gap-3">
           <Avatar className="size-8 border border-slate-200">
             <AvatarImage src={rec.employeeAvatar} alt={rec.employeeName}/>
-            <AvatarFallback className="bg-teal-600 text-white text-xs">
+            <AvatarFallback className="bg-brand text-white text-xs">
               {rec.employeeName.slice(0, 2)}
             </AvatarFallback>
           </Avatar>
@@ -151,7 +151,7 @@ export default function BreakManagementPage() {
         {
             header: 'End Time',
             cell: (rec) => (<span className="font-mono text-xs font-medium text-slate-700">
-          {rec.endTime || (<span className="text-teal-700 font-bold animate-pulse">In Progress</span>)}
+          {rec.endTime || (<span className="text-brand-dark font-bold animate-pulse">In Progress</span>)}
         </span>),
         },
         {
@@ -170,12 +170,12 @@ export default function BreakManagementPage() {
             </span>);
                 }
                 if (rec.status === 'active') {
-                    return (<span className="inline-flex items-center gap-1 text-[11px] font-semibold text-teal-700 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded">
+                    return (<span className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-dark bg-brand-light border border-brand-light px-2 py-0.5 rounded">
               <RiTimeLine className="size-3"/>
               Active Now
             </span>);
                 }
-                return (<span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                return (<span className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-dark bg-brand-light border border-brand-light px-2 py-0.5 rounded">
             <RiCheckboxCircleLine className="size-3"/>
             Within Policy
           </span>);
@@ -183,7 +183,7 @@ export default function BreakManagementPage() {
         },
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Break & Interval Management" description="Monitor lunch and short break durations in compliance with workplace time policies." actions={<Button size="sm" onClick={() => setLogDialogOpen(true)} className="bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs h-9">
+      <PageHeader title="Break & Interval Management" description="Monitor lunch and short break durations in compliance with workplace time policies." actions={<Button size="sm" onClick={() => setLogDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
             <RiAddLine className="size-4 mr-1.5"/>
             Log Manual Break
           </Button>}/>
@@ -195,7 +195,7 @@ export default function BreakManagementPage() {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Standard Lunch Policy
             </span>
-            <RiCupLine className="size-4 text-teal-600"/>
+            <RiCupLine className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-slate-900 mt-1">60 Minutes</p>
           <p className="text-[11px] text-slate-500 mt-0.5">
@@ -203,15 +203,15 @@ export default function BreakManagementPage() {
           </p>
         </div>
 
-        <div className="p-3.5 rounded-xl border border-teal-100 bg-teal-50/50">
+        <div className="p-3.5 rounded-xl border border-brand-light bg-brand-light/50">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-teal-700 uppercase">
+            <span className="text-[11px] font-semibold text-brand-dark uppercase">
               Active On Break Now
             </span>
-            <RiTimeLine className="size-4 text-teal-600"/>
+            <RiTimeLine className="size-4 text-brand"/>
           </div>
-          <p className="text-xl font-bold text-teal-800 mt-1">1 Employee</p>
-          <p className="text-[11px] text-teal-600 mt-0.5">
+          <p className="text-xl font-bold text-brand-dark mt-1">1 Employee</p>
+          <p className="text-[11px] text-brand mt-0.5">
             Priya Sharma (Product Design)
           </p>
         </div>
@@ -316,7 +316,7 @@ export default function BreakManagementPage() {
               <Button type="button" variant="outline" onClick={() => setLogDialogOpen(false)} className="h-8 text-xs">
                 Cancel
               </Button>
-              <Button type="submit" className="h-8 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold">
+              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
                 Save Record
               </Button>
             </DialogFooter>
