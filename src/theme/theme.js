@@ -8,7 +8,7 @@ export const themeVariables = {
  '--card': colors.surface, '--card-foreground': colors.textPrimary,
  '--popover': colors.surface, '--popover-foreground': colors.textPrimary,
  '--primary': colors.primary, '--primary-dark': colors.darkPrimary, '--primary-light': colors.lightPrimary,
- '--primary-foreground': colors.surface, '--border': colors.border, '--input': colors.border,
+ '--primary-foreground': colors.textPrimary, '--border': colors.border, '--input': colors.border,
  '--ring': colors.primary, '--accent': colors.lightPrimary, '--accent-foreground': colors.darkPrimary,
  '--muted-foreground': colors.textSecondary, '--destructive': colors.danger,
  '--sidebar': colors.surface, '--sidebar-foreground': colors.textPrimary,

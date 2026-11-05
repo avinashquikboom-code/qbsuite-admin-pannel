@@ -63,7 +63,7 @@ export default function CustomersPage() {
         setNewLocation('');
     };
     return (<div className="space-y-6">
-      <PageHeader title="Enterprise Customers & Accounts" description="Maintain client relationships, contract histories, and account portfolio values." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm text-xs">
+      <PageHeader title="Enterprise Customers & Accounts" description="Maintain client relationships, contract histories, and account portfolio values." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
             <RiAddLine className="size-4"/>
             <span>Add Customer</span>
           </Button>}/>
@@ -229,7 +229,7 @@ export default function CustomersPage() {
               <Button type="button" variant="outline" size="sm" onClick={() => setIsAddOpen(false)} className="text-xs">
                 Cancel
               </Button>
-              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-white text-xs">
+              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs">
                 Save Account
               </Button>
             </DialogFooter>

@@ -21,7 +21,7 @@ export default function HrmDashboardPage() {
               </Button>
             </Link>
             <Link href="/admin/hrm/employees">
-              <Button size="sm" className="bg-brand hover:bg-brand-dark text-white text-xs h-9 font-medium">
+              <Button size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs h-9 font-medium">
                 <RiUserAddLine className="size-4 mr-1.5"/>
                 Add Employee
               </Button>

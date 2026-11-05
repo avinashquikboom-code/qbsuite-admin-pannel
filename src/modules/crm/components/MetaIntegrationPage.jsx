@@ -16,7 +16,7 @@ export default function MetaIntegrationPage() {
         }, 1200);
     };
     return (<div className="space-y-6">
-      <PageHeader title="Meta Ads & Business Suite Integration" description="Connect Instagram and Facebook Lead Ads directly into the QB Suite CRM pipeline." badge="Meta Cloud" badgeVariant="green" actions={<Button size="sm" onClick={handleSync} disabled={syncing} className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm text-xs">
+      <PageHeader title="Meta Ads & Business Suite Integration" description="Connect Instagram and Facebook Lead Ads directly into the QB Suite CRM pipeline." badge="Meta Cloud" badgeVariant="green" actions={<Button size="sm" onClick={handleSync} disabled={syncing} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
             <RiRefreshLine className={`size-4 ${syncing ? 'animate-spin' : ''}`}/>
             <span>{syncing ? 'Syncing...' : 'Sync Leads Now'}</span>
           </Button>}/>

@@ -22,7 +22,7 @@ export default function AdminDashboardPage() {
               </Button>
             </Link>
             <Link href="/admin/crm/dashboard">
-              <Button size="sm" className="bg-brand hover:bg-brand-dark text-white text-xs h-9 font-medium">
+              <Button size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs h-9 font-medium">
                 <RiBriefcaseLine className="size-4 mr-1.5"/>
                 CRM Module
               </Button>
@@ -89,7 +89,7 @@ export default function AdminDashboardPage() {
                 <span>Next payroll run: Mar 31, 2026</span>
               </div>
               <Link href="/admin/hrm/dashboard">
-                <Button size="sm" className="bg-brand hover:bg-brand-dark text-white text-xs font-semibold h-8">
+                <Button size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold h-8">
                   Enter HRM
                   <RiArrowRightLine className="size-3.5 ml-1"/>
                 </Button>
@@ -148,7 +148,7 @@ export default function AdminDashboardPage() {
                 <span>3 Deals awaiting contract closing</span>
               </div>
               <Link href="/admin/crm/dashboard">
-                <Button size="sm" className="bg-brand hover:bg-brand-dark text-white text-xs font-semibold h-8">
+                <Button size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold h-8">
                   Enter CRM
                   <RiArrowRightLine className="size-3.5 ml-1"/>
                 </Button>

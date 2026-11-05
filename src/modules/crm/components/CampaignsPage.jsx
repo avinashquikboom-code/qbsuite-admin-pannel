@@ -91,7 +91,7 @@ export default function CampaignsPage() {
         toast.success('Campaign scheduled and broadcast ready!');
     };
     return (<div className="space-y-6">
-      <PageHeader title="Marketing & Ad Campaigns" description="Multi-channel acquisition pipelines across LinkedIn, Email and Meta networks." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm text-xs">
+      <PageHeader title="Marketing & Ad Campaigns" description="Multi-channel acquisition pipelines across LinkedIn, Email and Meta networks." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
             <RiAddLine className="size-4"/>
             <span>Launch Campaign</span>
           </Button>}/>
@@ -211,7 +211,7 @@ export default function CampaignsPage() {
               <Button type="button" variant="outline" size="sm" onClick={() => setIsAddOpen(false)} className="text-xs">
                 Cancel
               </Button>
-              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-white text-xs">
+              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs">
                 Activate Campaign
               </Button>
             </DialogFooter>

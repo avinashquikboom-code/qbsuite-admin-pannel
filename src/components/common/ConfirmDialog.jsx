@@ -27,9 +27,9 @@ export function ConfirmDialog({ open, onOpenChange, title, description, confirmL
             case 'destructive':
                 return 'bg-rose-600 hover:bg-rose-700 text-white';
             case 'success':
-                return 'bg-brand hover:bg-brand-dark text-white';
+                return 'bg-brand hover:bg-brand-dark text-primary-foreground';
             default:
-                return 'bg-brand hover:bg-brand-dark text-white';
+                return 'bg-brand hover:bg-brand-dark text-primary-foreground';
         }
     };
     return (<Dialog open={open} onOpenChange={onOpenChange}>

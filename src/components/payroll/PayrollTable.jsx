@@ -12,7 +12,7 @@ export function PayrollTable({ records, onViewPayslip, onMarkPaid, }) {
             cell: (rec) => (<div className="flex items-center gap-3">
           <Avatar className="size-9 border border-slate-200">
             <AvatarImage src={rec.employeeAvatar} alt={rec.employeeName}/>
-            <AvatarFallback className="bg-brand text-white text-xs">
+            <AvatarFallback className="bg-brand text-primary-foreground text-xs">
               {rec.employeeName.slice(0, 2)}
             </AvatarFallback>
           </Avatar>
@@ -84,7 +84,7 @@ export function PayrollTable({ records, onViewPayslip, onMarkPaid, }) {
             <RiFileTextLine className="size-3.5 mr-1 text-slate-400"/>
             Payslip
           </Button>
-          {rec.status === 'pending' && onMarkPaid && (<Button size="sm" onClick={() => onMarkPaid(rec)} className="h-7.5 px-2 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
+          {rec.status === 'pending' && onMarkPaid && (<Button size="sm" onClick={() => onMarkPaid(rec)} className="h-7.5 px-2 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
               <RiCheckDoubleLine className="size-3.5 mr-1"/>
               Pay
             </Button>)}

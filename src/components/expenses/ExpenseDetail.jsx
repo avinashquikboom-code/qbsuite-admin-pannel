@@ -82,7 +82,7 @@ export function ExpenseDetail({ claim, open, onOpenChange, onApprove, onReject, 
 
         {/* Action Buttons */}
         {claim.status === 'pending' && onApprove && onReject && (<div className="pt-2 flex items-center gap-2">
-            <Button className="flex-1 bg-brand hover:bg-brand-dark text-white text-xs font-semibold h-9" onClick={() => {
+            <Button className="flex-1 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold h-9" onClick={() => {
                 onApprove(claim);
                 onOpenChange(false);
             }}>

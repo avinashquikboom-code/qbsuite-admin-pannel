@@ -17,7 +17,7 @@ export default function CrmDashboardPage() {
     return (<div className="space-y-6">
       <PageHeader title="CRM Executive Dashboard" description="Pipeline health, active leads conversion, high-value opportunities and customer acquisition." badge="CRM Suite" badgeVariant="green" actions={<div className="flex items-center gap-2">
             <Link href="/admin/crm/leads">
-              <Button size="sm" className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm">
+              <Button size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm">
                 <RiAddLine className="size-4"/>
                 <span>New Lead</span>
               </Button>
@@ -28,8 +28,8 @@ export default function CrmDashboardPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Total Pipeline Value" value={currency.format(mockCrmKpiData.pipelineValue)} change="+18.4% vs last month" trend="up" icon={RiMoneyDollarCircleLine} accent="green"/>
         <StatCard title="Active Leads" value={mockCrmKpiData.leadsCount.toString()} change="+12 qualified this week" trend="up" icon={RiUserSearchLine} accent="green"/>
-        <StatCard title="Deals in Progress" value={mockCrmKpiData.activeDealsCount.toString()} change="8 closing this sprint" trend="neutral" icon={RiPercentLine} accent="emerald"/>
-        <StatCard title="Key Accounts" value={mockContacts.length.toString()} change="+3 enterprises added" trend="up" icon={RiContactsBookLine} accent="sky"/>
+        <StatCard title="Deals in Progress" value={mockCrmKpiData.activeDealsCount.toString()} change="8 closing this sprint" trend="neutral" icon={RiPercentLine} accent="green"/>
+        <StatCard title="Key Accounts" value={mockContacts.length.toString()} change="+3 enterprises added" trend="up" icon={RiContactsBookLine} accent="green"/>
       </div>
 
       {/* Quick Launchpad & Highlights */}

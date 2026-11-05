@@ -158,7 +158,7 @@ export default function LeaveManagementPage() {
             cell: (l) => (<div className="flex items-center gap-3">
           <Avatar className="size-9 border border-slate-200">
             <AvatarImage src={l.employeeAvatar} alt={l.employeeName}/>
-            <AvatarFallback className="bg-brand text-white text-xs">
+            <AvatarFallback className="bg-brand text-primary-foreground text-xs">
               {l.employeeName.slice(0, 2)}
             </AvatarFallback>
           </Avatar>
@@ -204,7 +204,7 @@ export default function LeaveManagementPage() {
             className: 'text-right',
             cell: (l) => (<div className="flex items-center justify-end gap-1.5">
           {l.status === 'pending' ? (<>
-              <Button size="sm" onClick={() => handleApprove(l)} className="h-7.5 px-2.5 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
+              <Button size="sm" onClick={() => handleApprove(l)} className="h-7.5 px-2.5 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
                 <RiCheckLine className="size-3.5 mr-1"/>
                 Approve
               </Button>
@@ -216,7 +216,7 @@ export default function LeaveManagementPage() {
         },
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Leave Management & Absence Tracking" description="Review vacation requests, sick leaves, parental allowances, and team holiday calendars." actions={<Button size="sm" onClick={() => setApplyDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
+      <PageHeader title="Leave Management & Absence Tracking" description="Review vacation requests, sick leaves, parental allowances, and team holiday calendars." actions={<Button size="sm" onClick={() => setApplyDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
             <RiAddLine className="size-4 mr-1.5"/>
             Apply Leave On Behalf
           </Button>}/>
@@ -400,7 +400,7 @@ export default function LeaveManagementPage() {
               <Button type="button" variant="outline" onClick={() => setApplyDialogOpen(false)} className="h-8 text-xs">
                 Cancel
               </Button>
-              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
+              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
                 Submit Application
               </Button>
             </DialogFooter>

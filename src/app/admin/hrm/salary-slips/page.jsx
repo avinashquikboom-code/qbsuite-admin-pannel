@@ -39,7 +39,7 @@ export default function SalarySlipsPage() {
             cell: (r) => (<div className="flex items-center gap-2.5">
           <Avatar className="size-8 border border-slate-200">
             <AvatarImage src={r.employeeAvatar} alt={r.employeeName}/>
-            <AvatarFallback className="bg-brand text-white text-xs">
+            <AvatarFallback className="bg-brand text-primary-foreground text-xs">
               {r.employeeName.slice(0, 2)}
             </AvatarFallback>
           </Avatar>
@@ -86,7 +86,7 @@ export default function SalarySlipsPage() {
         },
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Salary Slips Repository" description="Search, view, download and distribute official monthly compensation slips to personnel." actions={<Button size="sm" onClick={() => toast.success('Sent payslips to all employees via email')} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
+      <PageHeader title="Salary Slips Repository" description="Search, view, download and distribute official monthly compensation slips to personnel." actions={<Button size="sm" onClick={() => toast.success('Sent payslips to all employees via email')} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
             <RiMailLine className="size-4 mr-1.5"/>
             Email All Slips
           </Button>}/>
@@ -216,7 +216,7 @@ export default function SalarySlipsPage() {
                 <Button size="sm" onClick={() => {
                 toast.success('Downloaded PDF slip');
                 setActiveSlip(null);
-            }} className="h-8 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
+            }} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
                   <RiDownloadLine className="size-3.5 mr-1"/>
                   Download
                 </Button>

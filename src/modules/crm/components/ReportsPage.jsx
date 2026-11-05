@@ -13,7 +13,7 @@ export default function CrmReportsPage() {
         maximumFractionDigits: 0,
     });
     return (<div className="space-y-6">
-      <PageHeader title="CRM Revenue & Pipeline Intelligence" description="Comprehensive analysis of customer lifetime value, conversion velocity and sales reps performance." badge="Analytics" badgeVariant="green" actions={<Button size="sm" onClick={() => toast.success('Analytics report PDF generated!')} className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm text-xs">
+      <PageHeader title="CRM Revenue & Pipeline Intelligence" description="Comprehensive analysis of customer lifetime value, conversion velocity and sales reps performance." badge="Analytics" badgeVariant="green" actions={<Button size="sm" onClick={() => toast.success('Analytics report PDF generated!')} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
             <RiDownloadLine className="size-4"/>
             <span>Export Analytics</span>
           </Button>}/>

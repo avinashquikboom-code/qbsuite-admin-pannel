@@ -47,7 +47,7 @@ export default function PayrollPage() {
               <RiDownloadLine className="size-3.5 mr-1 text-slate-400"/>
               Export Bank File
             </Button>
-            <Button size="sm" onClick={() => setRunBatchOpen(true)} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
+            <Button size="sm" onClick={() => setRunBatchOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
               <RiBankCardLine className="size-4 mr-1.5"/>
               Run Payroll Batch
             </Button>
@@ -232,7 +232,7 @@ export default function PayrollPage() {
                   <Button size="sm" onClick={() => {
                 toast.success(`Downloaded ${selectedRecord.id}.pdf`);
                 setPayslipOpen(false);
-            }} className="h-8 bg-brand hover:bg-brand-dark text-white font-medium text-xs">
+            }} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs">
                     <RiDownloadLine className="size-3.5 mr-1"/>
                     Download PDF
                   </Button>

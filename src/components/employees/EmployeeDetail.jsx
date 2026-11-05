@@ -16,7 +16,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
           <div className="flex items-center gap-4">
             <Avatar className="size-16 border-2 border-white/80 shadow-md">
               <AvatarImage src={employee.avatar} alt={employee.name}/>
-              <AvatarFallback className="bg-brand-dark text-white font-bold text-lg">
+              <AvatarFallback className="bg-brand-dark text-primary-foreground font-bold text-lg">
                 {employee.firstName[0]}
                 {employee.lastName[0]}
               </AvatarFallback>
@@ -183,7 +183,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
 
           {/* Quick Actions */}
           <div className="pt-2 flex items-center gap-2">
-            <Button className="flex-1 bg-brand hover:bg-brand-dark text-white font-semibold text-xs h-9" onClick={() => {
+            <Button className="flex-1 bg-brand hover:bg-brand-dark text-primary-foreground font-semibold text-xs h-9" onClick={() => {
             toast.success(`Generated Profile Summary for ${employee.name}`);
             onOpenChange(false);
         }}>

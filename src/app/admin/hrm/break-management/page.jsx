@@ -122,7 +122,7 @@ export default function BreakManagementPage() {
             cell: (rec) => (<div className="flex items-center gap-3">
           <Avatar className="size-8 border border-slate-200">
             <AvatarImage src={rec.employeeAvatar} alt={rec.employeeName}/>
-            <AvatarFallback className="bg-brand text-white text-xs">
+            <AvatarFallback className="bg-brand text-primary-foreground text-xs">
               {rec.employeeName.slice(0, 2)}
             </AvatarFallback>
           </Avatar>
@@ -183,7 +183,7 @@ export default function BreakManagementPage() {
         },
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Break & Interval Management" description="Monitor lunch and short break durations in compliance with workplace time policies." actions={<Button size="sm" onClick={() => setLogDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
+      <PageHeader title="Break & Interval Management" description="Monitor lunch and short break durations in compliance with workplace time policies." actions={<Button size="sm" onClick={() => setLogDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
             <RiAddLine className="size-4 mr-1.5"/>
             Log Manual Break
           </Button>}/>
@@ -316,7 +316,7 @@ export default function BreakManagementPage() {
               <Button type="button" variant="outline" onClick={() => setLogDialogOpen(false)} className="h-8 text-xs">
                 Cancel
               </Button>
-              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
+              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
                 Save Record
               </Button>
             </DialogFooter>

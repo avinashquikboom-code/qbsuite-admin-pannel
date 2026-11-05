@@ -75,7 +75,7 @@ export function RecentActivity() {
                 <div className="flex items-center gap-3">
                   <Avatar className="size-9 border border-slate-200">
                     <AvatarImage src={ot.employeeAvatar} alt={ot.employeeName}/>
-                    <AvatarFallback className="bg-brand text-white text-xs">
+                    <AvatarFallback className="bg-brand text-primary-foreground text-xs">
                       {ot.employeeName.slice(0, 2).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
@@ -107,7 +107,7 @@ export function RecentActivity() {
                     open: true,
                     type: 'approve-ot',
                     item: ot,
-                })} className="h-8 bg-brand hover:bg-brand-dark text-white text-xs px-2.5 font-medium">
+                })} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs px-2.5 font-medium">
                         <RiCheckLine className="size-3.5 mr-1"/>
                         Approve
                       </Button>
@@ -138,7 +138,7 @@ export function RecentActivity() {
                 <div className="flex items-center gap-3">
                   <Avatar className="size-9 border border-slate-200">
                     <AvatarImage src={exp.employeeAvatar} alt={exp.employeeName}/>
-                    <AvatarFallback className="bg-brand text-white text-xs">
+                    <AvatarFallback className="bg-brand text-primary-foreground text-xs">
                       {exp.employeeName.slice(0, 2).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
@@ -172,7 +172,7 @@ export function RecentActivity() {
                     open: true,
                     type: 'approve-exp',
                     item: exp,
-                })} className="h-8 bg-brand hover:bg-brand-dark text-white text-xs px-2.5 font-medium">
+                })} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs px-2.5 font-medium">
                         <RiCheckLine className="size-3.5 mr-1"/>
                         Approve
                       </Button>

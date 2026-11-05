@@ -12,7 +12,7 @@ export function AttendanceTable({ records, onAdjustPunch, }) {
             cell: (rec) => (<div className="flex items-center gap-3">
           <Avatar className="size-9 border border-slate-200">
             <AvatarImage src={rec.employeeAvatar} alt={rec.employeeName}/>
-            <AvatarFallback className="bg-brand text-white text-xs">
+            <AvatarFallback className="bg-brand text-primary-foreground text-xs">
               {rec.employeeName.slice(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>

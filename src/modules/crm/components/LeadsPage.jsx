@@ -89,7 +89,7 @@ export default function LeadsPage() {
               <RiDownloadLine className="size-4"/>
               <span>Export</span>
             </Button>
-            <Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-white gap-1.5 shadow-sm text-xs">
+            <Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
               <RiAddLine className="size-4"/>
               <span>New Lead</span>
             </Button>
@@ -238,7 +238,7 @@ export default function LeadsPage() {
               <div className="space-y-2 pt-2">
                 <span className="text-[11px] font-semibold text-slate-700">Advance Stage:</span>
                 <div className="flex flex-wrap gap-1.5">
-                  {['new', 'contacted', 'qualified', 'proposal', 'won', 'lost'].map((st) => (<Button key={st} variant={selectedLead.status === st ? 'default' : 'outline'} size="sm" onClick={() => handleUpdateStatus(selectedLead.id, st)} className={selectedLead.status === st ? 'bg-brand text-white text-[11px] h-7' : 'text-[11px] h-7'}>
+                  {['new', 'contacted', 'qualified', 'proposal', 'won', 'lost'].map((st) => (<Button key={st} variant={selectedLead.status === st ? 'default' : 'outline'} size="sm" onClick={() => handleUpdateStatus(selectedLead.id, st)} className={selectedLead.status === st ? 'bg-brand text-primary-foreground text-[11px] h-7' : 'text-[11px] h-7'}>
                       {st.toUpperCase()}
                     </Button>))}
                 </div>
@@ -318,7 +318,7 @@ export default function LeadsPage() {
               <Button type="button" variant="outline" size="sm" onClick={() => setIsAddOpen(false)} className="text-xs">
                 Cancel
               </Button>
-              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-white text-xs">
+              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs">
                 Save Lead
               </Button>
             </DialogFooter>

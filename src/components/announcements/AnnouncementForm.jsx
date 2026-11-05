@@ -137,7 +137,7 @@ function AnnouncementFormFields({ open, onOpenChange, announcement, onSave, }) {
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="h-8 text-xs">
               Cancel
             </Button>
-            <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-white text-xs font-semibold">
+            <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
               {announcement ? 'Save Changes' : 'Publish Announcement'}
             </Button>
           </DialogFooter>

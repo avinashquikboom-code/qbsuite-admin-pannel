@@ -30,7 +30,7 @@ export default function HrmReportsPage() {
               <RiDownloadLine className="size-3.5 mr-1"/>
               Tax Audit File
             </Button>
-            <Button size="sm" onClick={() => handleExport('Complete HRM Quarterly Report')} className="bg-brand hover:bg-brand-dark text-white font-medium text-xs h-9">
+            <Button size="sm" onClick={() => handleExport('Complete HRM Quarterly Report')} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
               <RiDownloadLine className="size-3.5 mr-1"/>
               Export Full Report (PDF)
             </Button>

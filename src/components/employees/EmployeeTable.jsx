@@ -29,7 +29,7 @@ export function EmployeeTable({ employees, onSelectEmployee, }) {
             cell: (emp) => (<div className="flex items-center gap-3">
           <Avatar className="size-9 border border-slate-200">
             <AvatarImage src={emp.avatar} alt={emp.name}/>
-            <AvatarFallback className="bg-brand text-white text-xs">
+            <AvatarFallback className="bg-brand text-primary-foreground text-xs">
               {emp.firstName[0]}
               {emp.lastName[0]}
             </AvatarFallback>

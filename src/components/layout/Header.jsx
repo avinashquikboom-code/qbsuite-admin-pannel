@@ -116,7 +116,7 @@ export function Header() {
         <Popover>
           <PopoverTrigger className="relative flex size-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors">
             <RiNotification3Line className="size-4.5"/>
-            <span className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-white shadow-xs">
+            <span className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-primary-foreground shadow-xs">
               2
             </span>
           </PopoverTrigger>
@@ -160,7 +160,7 @@ export function Header() {
           <DropdownMenuTrigger className="flex items-center gap-2 rounded-lg p-1 hover:bg-slate-100 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand">
             <Avatar className="size-8 border border-slate-200">
               <AvatarImage src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Alexander Vance"/>
-              <AvatarFallback className="bg-brand text-white font-semibold text-xs">
+              <AvatarFallback className="bg-brand text-primary-foreground font-semibold text-xs">
                 AV
               </AvatarFallback>
             </Avatar>
