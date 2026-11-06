@@ -8,7 +8,7 @@ import { PageHeader } from '@/components/common/PageHeader';
 import { Button } from '@/components/common/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/common/Card';
 import { Badge } from '@/components/common/Badge';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/common/Modal';
+import { FormDrawer, DrawerFormField } from '@/components/common/drawers/FormDrawer';
 import { Label } from '@/components/common/Label';
 import { Input } from '@/components/common/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/common/Select';
@@ -166,56 +166,39 @@ export default function CampaignsPage() {
           </Card>))}
       </div>
 
-      {/* Modal */}
-      <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
-        <DialogContent className="max-w-md">
-          <form onSubmit={handleCreate}>
-            <DialogHeader>
-              <DialogTitle className="text-base font-bold text-slate-900">Launch Growth Campaign</DialogTitle>
-              <DialogDescription className="text-xs text-slate-500">
-                Setup ad spends and attribution channels for new lead generation.
-              </DialogDescription>
-            </DialogHeader>
+      {/* Launch Campaign FormDrawer */}
+      <FormDrawer
+        open={isAddOpen}
+        onOpenChange={setIsAddOpen}
+        title="Launch Growth Campaign"
+        description="Setup ad spends and attribution channels for new lead generation."
+        onSubmit={handleCreate}
+        submitLabel="Activate Campaign"
+        size="standard"
+      >
+        <DrawerFormField label="Campaign Name" required>
+          <Input required placeholder="e.g. Q1 Healthcare Inbound" value={name} onChange={(e) => setName(e.target.value)} className="h-9 text-xs"/>
+        </DrawerFormField>
 
-            <div className="space-y-3 py-3 text-xs">
-              <div className="space-y-1">
-                <Label className="text-xs">Campaign Name *</Label>
-                <Input required placeholder="e.g. Q1 Healthcare Inbound" value={name} onChange={(e) => setName(e.target.value)} className="h-8 text-xs"/>
-              </div>
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="Attribution Channel">
+            <Select value={channel} onValueChange={(val) => setChannel(val || 'Email')}>
+              <SelectTrigger className="h-9 text-xs w-full">
+                <SelectValue placeholder="Channel"/>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="LinkedIn">LinkedIn Ads</SelectItem>
+                <SelectItem value="Email">Email Sequence</SelectItem>
+                <SelectItem value="WhatsApp">WhatsApp Broadcast</SelectItem>
+                <SelectItem value="Meta">Meta Network</SelectItem>
+              </SelectContent>
+            </Select>
+          </DrawerFormField>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label className="text-xs">Attribution Channel</Label>
-                  <Select value={channel} onValueChange={(val) => setChannel(val || 'Email')}>
-                    <SelectTrigger className="h-8 text-xs">
-                      <SelectValue placeholder="Channel"/>
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="LinkedIn">LinkedIn Ads</SelectItem>
-                      <SelectItem value="Email">Email Sequence</SelectItem>
-                      <SelectItem value="WhatsApp">WhatsApp Broadcast</SelectItem>
-                      <SelectItem value="Meta">Meta Network</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-1">
-                  <Label className="text-xs">Allocated Budget ({CURRENCY_SYMBOL}) *</Label>
-                  <Input type="number" required placeholder="5000" value={budget} onChange={(e) => setBudget(e.target.value)} className="h-8 text-xs"/>
-                </div>
-              </div>
-            </div>
-
-            <DialogFooter>
-              <Button type="button" variant="outline" size="sm" onClick={() => setIsAddOpen(false)} className="text-xs">
-                Cancel
-              </Button>
-              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs">
-                Activate Campaign
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+          <DrawerFormField label={`Allocated Budget (${CURRENCY_SYMBOL})`} required>
+            <Input type="number" required placeholder="5000" value={budget} onChange={(e) => setBudget(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+        </div>
+      </FormDrawer>
     </div>);
 }

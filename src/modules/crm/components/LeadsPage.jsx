@@ -12,7 +12,8 @@ import { Button } from '@/components/common/Button';
 import { Input } from '@/components/common/Input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/common/Card';
 import { StatusBadge } from '@/components/common/StatusBadge';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/common/Modal';
+import { FormDrawer, DrawerFormField } from '@/components/common/drawers/FormDrawer';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/common/Drawer';
 import { Label } from '@/components/common/Label';
 import { Textarea } from '@/components/common/Textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/common/Select';
@@ -187,17 +188,18 @@ export default function LeadsPage() {
         </div>
       </Card>
 
-      {/* Lead Detail Modal */}
-      {selectedLead && (<Dialog open={!!selectedLead} onOpenChange={() => setSelectedLead(null)}>
-          <DialogContent className="max-w-md">
-            <DialogHeader>
-              <DialogTitle className="text-base font-bold text-slate-900">Lead Dossier</DialogTitle>
-              <DialogDescription className="text-xs text-slate-500">
+      {/* Lead Detail Drawer */}
+      {selectedLead && (
+        <Sheet open={!!selectedLead} onOpenChange={() => setSelectedLead(null)}>
+          <SheetContent side="right" className="sm:max-w-[480px] w-full p-0 flex flex-col gap-0 bg-white border-l border-slate-200/90 shadow-2xl rounded-l-2xl overflow-hidden">
+            <SheetHeader className="border-b border-slate-200/80 px-6 py-4.5 text-left">
+              <SheetTitle className="text-base font-bold text-slate-900">Lead Dossier</SheetTitle>
+              <SheetDescription className="text-xs text-slate-500 mt-0.5">
                 Detailed profile and interaction status for {selectedLead.name}
-              </DialogDescription>
-            </DialogHeader>
+              </SheetDescription>
+            </SheetHeader>
 
-            <div className="space-y-4 py-2 text-xs">
+            <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4 text-xs">
               <div className="p-3 bg-slate-50 rounded-lg space-y-2 border border-slate-200/80">
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-sm text-slate-900">{selectedLead.name}</span>
@@ -245,85 +247,65 @@ export default function LeadsPage() {
               </div>
             </div>
 
-            <DialogFooter>
-              <Button variant="outline" size="sm" onClick={() => setSelectedLead(null)} className="text-xs">
+            <div className="shrink-0 flex items-center justify-end border-t border-slate-200/80 bg-slate-50/80 px-6 py-4">
+              <Button variant="outline" size="sm" onClick={() => setSelectedLead(null)} className="h-9 px-4 text-xs font-medium text-slate-700">
                 Close
               </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>)}
-
-      {/* Create Lead Modal */}
-      <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
-        <DialogContent className="max-w-md">
-          <form onSubmit={handleCreateLead}>
-            <DialogHeader>
-              <DialogTitle className="text-base font-bold text-slate-900">Add New Sales Lead</DialogTitle>
-              <DialogDescription className="text-xs text-slate-500">
-                Register a new prospect into the CRM acquisition funnel.
-              </DialogDescription>
-            </DialogHeader>
-
-            <div className="space-y-3 py-3 text-xs">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label className="text-xs">Contact Name *</Label>
-                  <Input required placeholder="e.g. John Miller" value={newName} onChange={(e) => setNewName(e.target.value)} className="h-8 text-xs"/>
-                </div>
-                <div className="space-y-1">
-                  <Label className="text-xs">Company *</Label>
-                  <Input required placeholder="e.g. Acme Health" value={newCompany} onChange={(e) => setNewCompany(e.target.value)} className="h-8 text-xs"/>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label className="text-xs">Email *</Label>
-                  <Input type="email" required placeholder="john@company.com" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} className="h-8 text-xs"/>
-                </div>
-                <div className="space-y-1">
-                  <Label className="text-xs">Phone</Label>
-                  <Input placeholder="+1 (555) 000-0000" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} className="h-8 text-xs"/>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label className="text-xs">Estimated Value ({CURRENCY_SYMBOL})</Label>
-                  <Input type="number" placeholder="25000" value={newValue} onChange={(e) => setNewValue(e.target.value)} className="h-8 text-xs"/>
-                </div>
-                <div className="space-y-1">
-                  <Label className="text-xs">Lead Source</Label>
-                  <Select value={newSource} onValueChange={(val) => setNewSource(val || 'Website')}>
-                    <SelectTrigger className="h-8 text-xs">
-                      <SelectValue placeholder="Source"/>
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Website">Website</SelectItem>
-                      <SelectItem value="LinkedIn">LinkedIn</SelectItem>
-                      <SelectItem value="Referral">Referral</SelectItem>
-                      <SelectItem value="Outbound">Outbound</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="space-y-1">
-                <Label className="text-xs">Requirement Notes</Label>
-                <Textarea placeholder="Key deliverables, budget constraints or project timeline..." value={newNotes} onChange={(e) => setNewNotes(e.target.value)} className="text-xs resize-none" rows={2}/>
-              </div>
             </div>
+          </SheetContent>
+        </Sheet>
+      )}
 
-            <DialogFooter>
-              <Button type="button" variant="outline" size="sm" onClick={() => setIsAddOpen(false)} className="text-xs">
-                Cancel
-              </Button>
-              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs">
-                Save Lead
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+      {/* Create Lead FormDrawer */}
+      <FormDrawer
+        open={isAddOpen}
+        onOpenChange={setIsAddOpen}
+        title="Add New Sales Lead"
+        description="Register a new prospect into the CRM acquisition funnel."
+        onSubmit={handleCreateLead}
+        submitLabel="Save Lead"
+        size="standard"
+      >
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="Contact Name" required>
+            <Input required placeholder="e.g. John Miller" value={newName} onChange={(e) => setNewName(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+          <DrawerFormField label="Company" required>
+            <Input required placeholder="e.g. Acme Health" value={newCompany} onChange={(e) => setNewCompany(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="Email" required>
+            <Input type="email" required placeholder="john@company.com" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+          <DrawerFormField label="Phone">
+            <Input placeholder="+1 (555) 000-0000" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label={`Estimated Value (${CURRENCY_SYMBOL})`}>
+            <Input type="number" placeholder="25000" value={newValue} onChange={(e) => setNewValue(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+          <DrawerFormField label="Lead Source">
+            <Select value={newSource} onValueChange={(val) => setNewSource(val || 'Website')}>
+              <SelectTrigger className="h-9 text-xs w-full">
+                <SelectValue placeholder="Source"/>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Website">Website</SelectItem>
+                <SelectItem value="LinkedIn">LinkedIn</SelectItem>
+                <SelectItem value="Referral">Referral</SelectItem>
+                <SelectItem value="Outbound">Outbound</SelectItem>
+              </SelectContent>
+            </Select>
+          </DrawerFormField>
+        </div>
+
+        <DrawerFormField label="Requirement Notes">
+          <Textarea placeholder="Key deliverables, budget constraints or project timeline..." value={newNotes} onChange={(e) => setNewNotes(e.target.value)} className="text-xs resize-none" rows={3}/>
+        </DrawerFormField>
+      </FormDrawer>
     </div>);
 }

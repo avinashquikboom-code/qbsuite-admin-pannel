@@ -2,8 +2,8 @@
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
-import { AnnouncementList } from '@/components/announcements/AnnouncementList';
-import { AnnouncementForm } from '@/components/announcements/AnnouncementForm';
+import { AnnouncementList } from '@/modules/hrm/components/announcements/AnnouncementList';
+import { AnnouncementForm } from '@/modules/hrm/components/announcements/AnnouncementForm';
 import { ConfirmDialog } from '@/components/common/ConfirmDialog';
 import { Button } from '@/components/common/Button';
 import { Input } from '@/components/common/Input';

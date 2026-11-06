@@ -1,27 +1,29 @@
-const fs=require('fs'),path=require('path'),assert=require('assert');
-const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.join(d,e.name)]);
-const names='Button Input Select Textarea Checkbox Radio DatePicker SearchBar DataTable Pagination Modal Drawer Dropdown Tabs Badge StatusBadge Card StatCard PageHeader EmptyState Loading ConfirmDialog FileUpload Tooltip Toast Skeleton'.split(' ');
-for(const n of names)assert(fs.existsSync('src/components/common/'+n+'.jsx'),n);
-const files=walk('src');assert(!files.some(f=>/\.tsx?$/.test(f)));
-for(const f of files.filter(f=>/\.jsx?$/.test(f))){const s=fs.readFileSync(f,'utf8');assert(!/components\/(ui|shared)\//.test(s),f);assert(!/from ['"](?:lucide|@mui|react-icons|@remixicon)/.test(s),f);for(const m of s.matchAll(/(?:from\s+|import\s*)['"](@\/[^'"]+)['"]/g)){const base='src/'+m[1].slice(2);assert(['','.js','.jsx','/index.js','/index.jsx'].some(ext=>fs.existsSync(base+ext)),f+' unresolved '+m[1]);}}
-for(const m of ['crm','production','customer']){assert(!fs.existsSync('src/modules/'+m+'/components/common'));for(const n of ['DataTable','Button','Input','Modal','Badge'])assert(walk('src/modules/'+m).some(f=>fs.readFileSync(f,'utf8').includes('@/components/common/'+n)),m+' missing '+n);}
-assert(!fs.existsSync('../hrm-app'));
-console.log('Architecture checks passed: '+names.length+' required components, JS/JSX sources, resolved alias imports, Font Awesome icons, and centralized imports across all three modules.');
-const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-for (const dependency of Object.keys(pkg.dependencies || {})) {
-  assert(!/^(?:@remixicon\/|lucide|@mui\/icons|react-icons|@fortawesome\/fontawesome-free)/.test(dependency), dependency);
-}
-assert(fs.existsSync('src/components/icons/FontAwesomeIcon.jsx'));
-for (const file of files.filter(f => /\.jsx?$/.test(f))) {
+const fs = require('fs'), path = require('path'), assert = require('assert');
+const walk = dir => fs.readdirSync(dir, {withFileTypes:true}).flatMap(entry => entry.isDirectory() ? walk(path.join(dir,entry.name)) : [path.join(dir,entry.name)]);
+const primitives = 'button card input label select textarea checkbox switch radio-group calendar popover dialog alert-dialog drawer sheet dropdown-menu navigation-menu tabs table badge avatar tooltip separator skeleton breadcrumb command progress scroll-area form sonner chart'.split(' ');
+for (const name of primitives) assert(fs.existsSync(`src/components/ui/${name}.jsx`), `Missing primitive: ${name}`);
+const files = walk('src');
+assert(!files.some(file => /\.tsx?$/.test(file)), 'Application sources must be JS/JSX');
+assert.equal(JSON.parse(fs.readFileSync('components.json')).aliases.ui, '@/components/ui');
+for (const file of files.filter(file => /\.jsx?$/.test(file))) {
   const source = fs.readFileSync(file, 'utf8');
-  if (file !== 'src/components/icons/FontAwesomeIcon.jsx') {
-    assert(!source.includes("from '@fortawesome/react-fontawesome'"), file + ': render through the shared icon wrapper');
+  assert(!/from ['"](?:lucide|@mui|react-icons|@remixicon)/.test(source), file);
+  assert(!source.includes('IconPlaceholder'), file);
+  if (!file.includes('components/ui/')) assert(!/from ['"]@base-ui\//.test(source), `${file}: primitives belong in ui`);
+  for (const match of source.matchAll(/(?:from\s+|import\s*)['"](@\/[^'"]+)['"]/g)) {
+    const base = 'src/' + match[1].slice(2);
+    assert(['','.js','.jsx','/index.js','/index.jsx'].some(ext => fs.existsSync(base+ext)), `${file}: unresolved ${match[1]}`);
   }
+  if (file !== 'src/components/icons/FontAwesomeIcon.jsx') assert(!/from ['"]@fortawesome\/react-fontawesome['"]/.test(source), file);
   for (const match of source.matchAll(/import\s*\{([^}]+)\}\s*from\s*['"](@fortawesome\/free-[^'"]+)['"]/g)) {
     const icons = require(match[2]);
-    for (const name of match[1].split(',').map(s => s.trim()).filter(Boolean)) {
-      assert(icons[name]?.icon, file + ': unknown Font Awesome icon ' + name);
-    }
+    for (const name of match[1].split(',').map(value => value.trim()).filter(Boolean)) assert(icons[name]?.icon, `${file}: unknown ${name}`);
   }
 }
-console.log('Font Awesome checks passed: valid icon definitions, one shared renderer, no alternative icon dependencies.');
+for (const module of ['crm','hrm','production','customer']) {
+  assert(fs.existsSync(`src/modules/${module}/components`), module);
+  assert(!fs.existsSync(`src/modules/${module}/components/ui`), `Duplicated library in ${module}`);
+}
+assert(fs.readFileSync('src/components/common/DataTable.jsx','utf8').includes('@tanstack/react-table'));
+for (const dependency of Object.keys(JSON.parse(fs.readFileSync('package.json')).dependencies)) assert(!/^(lucide|react-icons|@remixicon\/|@mui\/)/.test(dependency), dependency);
+console.log(`${primitives.length} shared shadcn primitives, JS/JSX, aliases, four modules, TanStack Table and Font Awesome checks passed.`);

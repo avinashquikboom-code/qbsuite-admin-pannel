@@ -4,7 +4,7 @@ import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { cn } from "cn";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, } from "@/components/ui/dialog";
-import { InputGroup, InputGroupAddon, } from "@/components/ui/inputGroup";
+import { InputGroup, InputGroupAddon, } from "@/components/ui/input-group";
 import { faCheck, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 function Command({ className, ...props }) {
     return (<CommandPrimitive data-slot="command" className={cn("flex size-full flex-col overflow-hidden rounded-xl! bg-popover p-1 text-popover-foreground", className)} {...props}/>);

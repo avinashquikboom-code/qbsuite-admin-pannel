@@ -46,6 +46,7 @@ export function EmployeeTable({ employees, onSelectEmployee, }) {
         },
         {
             header: 'Department & Role',
+            accessorFn: (employee) => `${employee.department} ${employee.designation}`, 
             cell: (emp) => (<div className="flex flex-col">
           <span className="font-medium text-slate-800">{emp.designation}</span>
           <span className="text-xs text-brand-dark font-medium">
@@ -55,6 +56,7 @@ export function EmployeeTable({ employees, onSelectEmployee, }) {
         },
         {
             header: 'Contact Info',
+            accessorKey: 'email',
             cell: (emp) => (<div className="flex flex-col text-xs text-slate-500 space-y-0.5">
           <span className="flex items-center gap-1.5 truncate">
             <FontAwesomeIcon icon={faEnvelope} className="size-3.5 text-slate-400 shrink-0"/>
@@ -68,6 +70,7 @@ export function EmployeeTable({ employees, onSelectEmployee, }) {
         },
         {
             header: 'Employment',
+            accessorKey: 'employmentType',
             cell: (emp) => (<div className="flex flex-col text-xs">
           <span className="font-semibold text-slate-800">
             {emp.employmentType}

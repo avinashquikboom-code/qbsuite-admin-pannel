@@ -1,9 +1,10 @@
 'use client';
-import { useId, useMemo, useState } from 'react';
+import { Suspense, useId, useMemo, useState } from 'react';
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, XAxis, YAxis } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import { Table, TableCaption, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -12,7 +13,7 @@ import { formatCurrency } from '@/lib/currency';
 import { filterChartRows, pieTotals } from '@/lib/chart-data';
 const numbers = new Intl.NumberFormat('en-IN');
 
-export function AnalyticsChart({ title, description, data = [], series, kind = 'bar', monetary = false, loading = false, sample = false, yLabel = 'Count', defaultPeriod = 'all' }) {
+function AnalyticsChartContent({ title, description, data = [], series, kind = 'bar', monetary = false, loading = false, sample = false, yLabel = 'Count', defaultPeriod = 'all' }) {
   const id = useId();
   const [period, setPeriod] = useState(defaultPeriod);
   const [from, setFrom] = useState('');
@@ -43,8 +44,12 @@ export function AnalyticsChart({ title, description, data = [], series, kind = '
             {series.map((item) => kind === 'area' ? <Area key={item.key} type="monotone" dataKey={item.key} stroke={`var(--color-${item.key})`} fill={`var(--color-${item.key})`} fillOpacity={0.15} /> : kind === 'line' ? <Line key={item.key} type="monotone" dataKey={item.key} stroke={`var(--color-${item.key})`} strokeWidth={2} /> : <Bar key={item.key} dataKey={item.key} fill={`var(--color-${item.key})`} radius={[4,4,0,0]} maxBarSize={36} />)}
           </Chart>}
         </ChartContainer>
-        <details className="mt-3 text-xs"><summary className="cursor-pointer text-muted-foreground">View accessible chart data</summary><div className="overflow-x-auto"><table className="mt-2 w-full text-left"><caption className="sr-only">{title} data</caption><thead><tr><th scope="col">Date</th>{series.map((item) => <th scope="col" key={item.key}>{item.label}</th>)}</tr></thead><tbody>{rows.map((row, index) => <tr key={`${row.date}-${index}`}><th scope="row" className="font-normal">{row.date}</th>{series.map((item) => <td key={item.key}>{format(row[item.key] ?? 0)}</td>)}</tr>)}</tbody></table></div></details>
+        <details className="mt-3 text-xs"><summary className="cursor-pointer text-muted-foreground">View accessible chart data</summary><div className="overflow-x-auto"><Table className="mt-2 w-full text-left"><TableCaption className="sr-only">{title} data</TableCaption><TableHeader><TableRow><TableHead scope="col">Date</TableHead>{series.map((item) => <TableHead scope="col" key={item.key}>{item.label}</TableHead>)}</TableRow></TableHeader><TableBody>{rows.map((row, index) => <TableRow key={`${row.date}-${index}`}><TableHead scope="row" className="font-normal">{row.date}</TableHead>{series.map((item) => <TableCell key={item.key}>{format(row[item.key] ?? 0)}</TableCell>)}</TableRow>)}</TableBody></Table></div></details>
       </>}
     </CardContent>
   </Card>;
+}
+
+export function AnalyticsChart(props) {
+  return <Suspense fallback={<Skeleton aria-label={`Loading ${props.title}`} className="h-96 w-full" />}><AnalyticsChartContent {...props} /></Suspense>;
 }

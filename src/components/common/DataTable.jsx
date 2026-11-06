@@ -15,8 +15,8 @@ import { legacyValue, searchableText } from '@/lib/table-utils';
 import { toast } from 'sonner';
 
 const EMPTY = [];
-export function DataTable({ columns, data = EMPTY, pageSize = 10, emptyState, isLoading = false, enableRowSelection = false, rowActions = EMPTY, label = 'Records' }) {
-  const [sorting, setSorting] = React.useState([]);
+function DataTableContent({ columns, data = EMPTY, pageSize = 10, emptyState, isLoading = false, enableRowSelection = false, rowActions = EMPTY, label = 'Records', initialSorting = EMPTY }) {
+  const [sorting, setSorting] = React.useState(() => initialSorting);
   const [globalFilter, setGlobalFilter] = React.useState('');
   const [columnVisibility, setColumnVisibility] = React.useState({});
   const [rowSelection, setRowSelection] = React.useState({});
@@ -28,10 +28,10 @@ export function DataTable({ columns, data = EMPTY, pageSize = 10, emptyState, is
       id: column.id || column.accessorKey || `column-${index}`,
       accessorFn: (row) => legacyValue(row, column),
       header: column.header,
-      enableSorting: column.enableSorting ?? !/action/i.test(String(column.header)),
+      enableSorting: column.enableSorting ?? (typeof column.header === 'string' && !/action/i.test(column.header) && (data.length === 0 || legacyValue(data[0], column) != null)),
       enableHiding: column.enableHiding ?? true,
       cell: ({ row, getValue }) => column.cell ? column.cell(row.original) : getValue(),
-      meta: { className: column.className, headClassName: column.headClassName },
+      meta: { label: column.label || (typeof column.header === 'string' ? column.header : `Column ${index + 1}`), className: column.className, headClassName: column.headClassName },
     }));
     if (enableRowSelection) result.unshift({ id: '__select', enableSorting: false, enableHiding: false,
       header: ({ table }) => <Checkbox aria-label="Select page" checked={table.getIsAllPageRowsSelected()} indeterminate={table.getIsSomePageRowsSelected()} onCheckedChange={(checked) => table.toggleAllPageRowsSelected(checked)} />,
@@ -45,7 +45,9 @@ export function DataTable({ columns, data = EMPTY, pageSize = 10, emptyState, is
         </DropdownMenuContent></DropdownMenu>,
     });
     return result;
-  }, [columns, enableRowSelection, rowActions]);
+  }, [columns, data, enableRowSelection, rowActions]);
+  // TanStack v8 uses live getters; keep this hook outside React Compiler memoization.
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({ data: filtered, columns: definitions,
     state: { sorting, globalFilter, columnVisibility, rowSelection },
     onSortingChange: setSorting, onGlobalFilterChange: setGlobalFilter,
@@ -63,7 +65,7 @@ export function DataTable({ columns, data = EMPTY, pageSize = 10, emptyState, is
       <Input aria-label={`Search ${label}`} placeholder={`Search ${label.toLowerCase()}…`} value={globalFilter} onChange={(event) => table.setGlobalFilter(event.target.value)} className="w-full sm:max-w-xs" />
       {statuses.length > 0 && <Select value={status} onValueChange={setStatus}><SelectTrigger aria-label={`Filter ${label} by status`}><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">All statuses</SelectItem>{statuses.map((value) => <SelectItem key={value} value={value}>{value.replaceAll('_', ' ')}</SelectItem>)}</SelectContent></Select>}
       <DropdownMenu><DropdownMenuTrigger render={<Button variant="outline" size="sm" />}><FontAwesomeIcon icon={faColumns} />Columns</DropdownMenuTrigger><DropdownMenuContent align="end" className="w-48">
-        {table.getAllLeafColumns().filter((column) => column.getCanHide()).map((column) => <DropdownMenuCheckboxItem key={column.id} checked={column.getIsVisible()} disabled={column.getIsVisible() && table.getVisibleLeafColumns().filter((item) => item.getCanHide()).length === 1} onCheckedChange={(value) => column.toggleVisibility(value)}>{String(column.columnDef.header)}</DropdownMenuCheckboxItem>)}
+        {table.getAllLeafColumns().filter((column) => column.getCanHide()).map((column) => <DropdownMenuCheckboxItem key={column.id} checked={column.getIsVisible()} disabled={column.getIsVisible() && table.getVisibleLeafColumns().filter((item) => item.getCanHide()).length === 1} onCheckedChange={(value) => column.toggleVisibility(value)}>{column.columnDef.meta.label}</DropdownMenuCheckboxItem>)}
       </DropdownMenuContent></DropdownMenu>
       {enableRowSelection && <span className="text-xs text-muted-foreground" aria-live="polite">{table.getFilteredSelectedRowModel().rows.length} selected</span>}
     </div>
@@ -78,4 +80,10 @@ export function DataTable({ columns, data = EMPTY, pageSize = 10, emptyState, is
         <Pagination page={pagination.pageIndex + 1} totalPages={Math.max(1, table.getPageCount())} onPageChange={(page) => table.setPageIndex(page - 1)} /></div>
     </div>
   </div>;
+}
+
+// TanStack filtering measures time internally. A boundary lets Next.js stream
+// the interactive table without reading unstable timing values during prerender.
+export function DataTable(props) {
+  return <React.Suspense fallback={<Skeleton aria-label="Loading table" className="h-72 w-full" />}><DataTableContent {...props} /></React.Suspense>;
 }

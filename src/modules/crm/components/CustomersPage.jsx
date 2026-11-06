@@ -11,7 +11,8 @@ import { Button } from '@/components/common/Button';
 import { Input } from '@/components/common/Input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/common/Card';
 import { StatusBadge } from '@/components/common/StatusBadge';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/common/Modal';
+import { FormDrawer, DrawerFormField } from '@/components/common/drawers/FormDrawer';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/common/Drawer';
 import { Label } from '@/components/common/Label';
 import { mockContacts } from '@/modules/crm/services/mock-data';
 import { toast } from 'sonner';
@@ -129,17 +130,18 @@ export default function CustomersPage() {
         </div>
       </Card>
 
-      {/* Customer Modal */}
-      {selectedContact && (<Dialog open={!!selectedContact} onOpenChange={() => setSelectedContact(null)}>
-          <DialogContent className="max-w-md">
-            <DialogHeader>
-              <DialogTitle className="text-base font-bold text-slate-900">Customer Profile</DialogTitle>
-              <DialogDescription className="text-xs text-slate-500">
+      {/* Customer Profile Drawer */}
+      {selectedContact && (
+        <Sheet open={!!selectedContact} onOpenChange={() => setSelectedContact(null)}>
+          <SheetContent side="right" className="sm:max-w-[480px] w-full p-0 flex flex-col gap-0 bg-white border-l border-slate-200/90 shadow-2xl rounded-l-2xl overflow-hidden">
+            <SheetHeader className="border-b border-slate-200/80 px-6 py-4.5 text-left">
+              <SheetTitle className="text-base font-bold text-slate-900">Customer Profile</SheetTitle>
+              <SheetDescription className="text-xs text-slate-500 mt-0.5">
                 Enterprise relationship metrics for {selectedContact.company}
-              </DialogDescription>
-            </DialogHeader>
+              </SheetDescription>
+            </SheetHeader>
 
-            <div className="space-y-3 py-2 text-xs">
+            <div className="flex-1 overflow-y-auto px-6 py-5 space-y-3 text-xs">
               <div className="p-3 bg-slate-50 rounded-lg space-y-2 border border-slate-200/80">
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-sm text-slate-900">{selectedContact.name}</span>
@@ -171,70 +173,51 @@ export default function CustomersPage() {
               </div>
             </div>
 
-            <DialogFooter>
-              <Button variant="outline" size="sm" onClick={() => setSelectedContact(null)} className="text-xs">
+            <div className="shrink-0 flex items-center justify-end border-t border-slate-200/80 bg-slate-50/80 px-6 py-4">
+              <Button variant="outline" size="sm" onClick={() => setSelectedContact(null)} className="h-9 px-4 text-xs font-medium text-slate-700">
                 Close
               </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>)}
-
-      {/* Add Dialog */}
-      <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
-        <DialogContent className="max-w-md">
-          <form onSubmit={handleAddCustomer}>
-            <DialogHeader>
-              <DialogTitle className="text-base font-bold text-slate-900">Add Enterprise Customer</DialogTitle>
-              <DialogDescription className="text-xs text-slate-500">
-                Register a new corporate buyer or long-term account.
-              </DialogDescription>
-            </DialogHeader>
-
-            <div className="space-y-3 py-3 text-xs">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label className="text-xs">Full Name *</Label>
-                  <Input required placeholder="e.g. Maria Santos" value={newName} onChange={(e) => setNewName(e.target.value)} className="h-8 text-xs"/>
-                </div>
-                <div className="space-y-1">
-                  <Label className="text-xs">Company *</Label>
-                  <Input required placeholder="e.g. Globex Corp" value={newCompany} onChange={(e) => setNewCompany(e.target.value)} className="h-8 text-xs"/>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label className="text-xs">Job Title / Role</Label>
-                  <Input placeholder="VP Operations" value={newRole} onChange={(e) => setNewRole(e.target.value)} className="h-8 text-xs"/>
-                </div>
-                <div className="space-y-1">
-                  <Label className="text-xs">Email *</Label>
-                  <Input type="email" required placeholder="maria@globex.com" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} className="h-8 text-xs"/>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label className="text-xs">Phone</Label>
-                  <Input placeholder="+1 (555) 000-0000" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} className="h-8 text-xs"/>
-                </div>
-                <div className="space-y-1">
-                  <Label className="text-xs">HQ Location</Label>
-                  <Input placeholder="Chicago, IL" value={newLocation} onChange={(e) => setNewLocation(e.target.value)} className="h-8 text-xs"/>
-                </div>
-              </div>
             </div>
+          </SheetContent>
+        </Sheet>
+      )}
 
-            <DialogFooter>
-              <Button type="button" variant="outline" size="sm" onClick={() => setIsAddOpen(false)} className="text-xs">
-                Cancel
-              </Button>
-              <Button type="submit" size="sm" className="bg-brand hover:bg-brand-dark text-primary-foreground text-xs">
-                Save Account
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+      {/* Add Customer FormDrawer */}
+      <FormDrawer
+        open={isAddOpen}
+        onOpenChange={setIsAddOpen}
+        title="Add Enterprise Customer"
+        description="Register a new corporate buyer or long-term account."
+        onSubmit={handleAddCustomer}
+        submitLabel="Save Account"
+        size="standard"
+      >
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="Full Name" required>
+            <Input required placeholder="e.g. Maria Santos" value={newName} onChange={(e) => setNewName(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+          <DrawerFormField label="Company" required>
+            <Input required placeholder="e.g. Globex Corp" value={newCompany} onChange={(e) => setNewCompany(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="Job Title / Role">
+            <Input placeholder="VP Operations" value={newRole} onChange={(e) => setNewRole(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+          <DrawerFormField label="Email" required>
+            <Input type="email" required placeholder="maria@globex.com" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="Phone">
+            <Input placeholder="+1 (555) 000-0000" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+          <DrawerFormField label="HQ Location">
+            <Input placeholder="Chicago, IL" value={newLocation} onChange={(e) => setNewLocation(e.target.value)} className="h-9 text-xs"/>
+          </DrawerFormField>
+        </div>
+      </FormDrawer>
     </div>);
 }

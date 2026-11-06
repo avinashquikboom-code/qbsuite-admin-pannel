@@ -4,10 +4,10 @@ import { CURRENCY_CODE, CURRENCY_SYMBOL } from "@/lib/currency";
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
-import { EmployeeTable } from '@/components/employees/EmployeeTable';
-import { EmployeeDetail } from '@/components/employees/EmployeeDetail';
+import { EmployeeTable } from '@/modules/hrm/components/employees/EmployeeTable';
+import { EmployeeDetail } from '@/modules/hrm/components/employees/EmployeeDetail';
 import { Button } from '@/components/common/Button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, } from '@/components/common/Modal';
+import { FormDrawer, DrawerFormField } from '@/components/common/drawers/FormDrawer';
 import { Input } from '@/components/common/Input';
 import { Label } from '@/components/common/Label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
@@ -141,98 +141,82 @@ export default function EmployeesPage() {
       {/* Employee Detail Slide-Out */}
       <EmployeeDetail employee={selectedEmployee} open={detailOpen} onOpenChange={setDetailOpen}/>
 
-      {/* Add Employee Dialog */}
-      <Dialog open={addDialogOpen} onOpenChange={setAddDialogOpen}>
-        <DialogContent className="sm:max-w-lg bg-white border border-slate-200 shadow-xl rounded-xl">
-          <form onSubmit={handleAddEmployee}>
-            <DialogHeader>
-              <DialogTitle className="text-base font-bold text-slate-900">
-                Onboard New Employee
-              </DialogTitle>
-              <DialogDescription className="text-xs text-slate-500">
-                Enter professional and compensation details to add a team member.
-              </DialogDescription>
-            </DialogHeader>
+      {/* Add Employee FormDrawer */}
+      <FormDrawer
+        open={addDialogOpen}
+        onOpenChange={setAddDialogOpen}
+        title="Onboard New Employee"
+        description="Enter professional and compensation details to add a team member."
+        onSubmit={handleAddEmployee}
+        submitLabel="Save & Onboard"
+        size="complex"
+      >
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="First Name" required>
+            <Input required placeholder="e.g. John" value={formData.firstName} onChange={(e) => setFormData((prev) => ({ ...prev, firstName: e.target.value }))} className="h-9 text-xs"/>
+          </DrawerFormField>
 
-            <div className="grid grid-cols-2 gap-3 py-4 text-xs">
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">First Name *</Label>
-                <Input required placeholder="e.g. John" value={formData.firstName} onChange={(e) => setFormData((prev) => ({ ...prev, firstName: e.target.value }))} className="h-8 text-xs"/>
-              </div>
+          <DrawerFormField label="Last Name" required>
+            <Input required placeholder="e.g. Doe" value={formData.lastName} onChange={(e) => setFormData((prev) => ({ ...prev, lastName: e.target.value }))} className="h-9 text-xs"/>
+          </DrawerFormField>
+        </div>
 
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Last Name *</Label>
-                <Input required placeholder="e.g. Doe" value={formData.lastName} onChange={(e) => setFormData((prev) => ({ ...prev, lastName: e.target.value }))} className="h-8 text-xs"/>
-              </div>
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="Work Email" required>
+            <Input required type="email" placeholder="john.doe@qbsuite.com" value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} className="h-9 text-xs"/>
+          </DrawerFormField>
 
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Work Email *</Label>
-                <Input required type="email" placeholder="john.doe@qbsuite.com" value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} className="h-8 text-xs"/>
-              </div>
+          <DrawerFormField label="Phone">
+            <Input placeholder="+1 (555) 000-0000" value={formData.phone} onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))} className="h-9 text-xs"/>
+          </DrawerFormField>
+        </div>
 
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Phone</Label>
-                <Input placeholder="+1 (555) 000-0000" value={formData.phone} onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))} className="h-8 text-xs"/>
-              </div>
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="Department">
+            <Select value={formData.department} onValueChange={(val) => setFormData((prev) => ({ ...prev, department: val }))}>
+              <SelectTrigger className="h-9 text-xs w-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Engineering" className="text-xs">
+                  Engineering
+                </SelectItem>
+                <SelectItem value="Product & Design" className="text-xs">
+                  Product & Design
+                </SelectItem>
+                <SelectItem value="Human Resources" className="text-xs">
+                  Human Resources
+                </SelectItem>
+                <SelectItem value="Finance" className="text-xs">
+                  Finance
+                </SelectItem>
+                <SelectItem value="Sales" className="text-xs">
+                  Sales
+                </SelectItem>
+                <SelectItem value="Marketing" className="text-xs">
+                  Marketing
+                </SelectItem>
+                <SelectItem value="Operations" className="text-xs">
+                  Operations
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </DrawerFormField>
 
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Department</Label>
-                <Select value={formData.department} onValueChange={(val) => setFormData((prev) => ({ ...prev, department: val }))}>
-                  <SelectTrigger className="h-8 text-xs w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Engineering" className="text-xs">
-                      Engineering
-                    </SelectItem>
-                    <SelectItem value="Product & Design" className="text-xs">
-                      Product & Design
-                    </SelectItem>
-                    <SelectItem value="Human Resources" className="text-xs">
-                      Human Resources
-                    </SelectItem>
-                    <SelectItem value="Finance" className="text-xs">
-                      Finance
-                    </SelectItem>
-                    <SelectItem value="Sales" className="text-xs">
-                      Sales
-                    </SelectItem>
-                    <SelectItem value="Marketing" className="text-xs">
-                      Marketing
-                    </SelectItem>
-                    <SelectItem value="Operations" className="text-xs">
-                      Operations
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+          <DrawerFormField label="Designation">
+            <Input placeholder="e.g. Lead Engineer" value={formData.designation} onChange={(e) => setFormData((prev) => ({ ...prev, designation: e.target.value }))} className="h-9 text-xs"/>
+          </DrawerFormField>
+        </div>
 
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Designation</Label>
-                <Input placeholder="e.g. Lead Engineer" value={formData.designation} onChange={(e) => setFormData((prev) => ({ ...prev, designation: e.target.value }))} className="h-8 text-xs"/>
-              </div>
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label={`Monthly Basic (${CURRENCY_SYMBOL})`}>
+            <Input type="number" placeholder="e.g. 9500" value={formData.basicSalary} onChange={(e) => setFormData((prev) => ({ ...prev, basicSalary: e.target.value }))} className="h-9 text-xs"/>
+          </DrawerFormField>
 
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Monthly Basic ({CURRENCY_SYMBOL})</Label>
-                <Input type="number" placeholder="e.g. 9500" value={formData.basicSalary} onChange={(e) => setFormData((prev) => ({ ...prev, basicSalary: e.target.value }))} className="h-8 text-xs"/>
-              </div>
-
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Location</Label>
-                <Input placeholder="San Francisco, CA" value={formData.location} onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))} className="h-8 text-xs"/>
-              </div>
-            </div>
-
-            <DialogFooter className="border-t border-slate-100 pt-3">
-              <Button type="button" variant="outline" onClick={() => setAddDialogOpen(false)} className="h-8 text-xs">
-                Cancel
-              </Button>
-              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
-                Save & Onboard
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+          <DrawerFormField label="Location">
+            <Input placeholder="San Francisco, CA" value={formData.location} onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))} className="h-9 text-xs"/>
+          </DrawerFormField>
+        </div>
+      </FormDrawer>
     </div>);
 }

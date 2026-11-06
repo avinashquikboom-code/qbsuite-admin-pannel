@@ -2,8 +2,8 @@
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
-import { AttendanceFilters } from '@/components/attendance/AttendanceFilters';
-import { AttendanceTable } from '@/components/attendance/AttendanceTable';
+import { AttendanceFilters } from '@/modules/hrm/components/attendance/AttendanceFilters';
+import { AttendanceTable } from '@/modules/hrm/components/attendance/AttendanceTable';
 import { Button } from '@/components/common/Button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, } from '@/components/common/Modal';
 import { Input } from '@/components/common/Input';

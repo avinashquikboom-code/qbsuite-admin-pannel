@@ -1,11 +1,12 @@
 'use client';
 
+import { ScrollArea } from '@/components/ui/scroll-area';
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { faChevronDown, faGauge, faGear, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { navigation as crm } from '@/modules/crm/navigation';
-import { navigation as hrm } from '@/navigation/legacy';
+import { navigation as hrm } from '@/modules/hrm/navigation';
 import { navigation as production } from '@/modules/production/navigation';
 import { navigation as customer } from '@/modules/customer/navigation';
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
@@ -152,7 +153,7 @@ export function Sidebar({ className = '', onNavigate }) {
             </Link>
 
             {/* Navigation */}
-            <nav
+            <ScrollArea className="min-h-0 flex-1"><nav
                 aria-label="Main navigation"
                 className={cn('flex-1 space-y-1 overflow-y-auto p-3', isCollapsed && 'px-2')}
             >
@@ -171,7 +172,7 @@ export function Sidebar({ className = '', onNavigate }) {
                 <div className="pt-2">
                     <NavLink item={settingsItem} pathname={pathname} collapsed={isCollapsed} onNavigate={onNavigate} />
                 </div>
-            </nav>
+            </nav></ScrollArea>
 
             {/* Footer branding */}
             <div className={cn('border-t border-sidebar-border p-4', isCollapsed && 'px-2')}>

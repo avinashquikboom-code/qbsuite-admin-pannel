@@ -1,4 +1,5 @@
 'use client';
+import { Progress } from '@/components/ui/progress';
 import { currencyFormatter, formatCurrency } from "@/lib/currency";
 
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
@@ -70,7 +71,7 @@ export default function CrmReportsPage() {
                   <span className="font-bold text-brand-dark">{currency.format(st.value)}</span>
                 </div>
                 <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div className="bg-brand h-2 rounded-full transition-all" style={{ width: `${Math.min(100, (st.value / 400000) * 100)}%` }}/>
+                  <Progress aria-label={`${st.name || st.stage} pipeline value`} value={Math.min(100, (st.value / 400000) * 100)} />
                 </div>
               </div>))}
           </CardContent>
