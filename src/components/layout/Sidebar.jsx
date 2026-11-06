@@ -8,6 +8,7 @@ import {
     faBriefcase,
     faBullhorn,
     faBullseye,
+    faChartBar,
     faChevronDown,
     faClone,
     faDatabase,
@@ -16,19 +17,21 @@ import {
     faGear,
     faLayerGroup,
     faStar,
+    faTrash,
     faUser,
     faVideo,
 } from '@fortawesome/free-solid-svg-icons';
 import { navigation as crm } from '@/modules/crm/navigation';
 import { navigation as hrm } from '@/modules/hrm/navigation';
-import { navigation as production } from '@/modules/production/navigation';
 import { navigation as customer } from '@/modules/customer/navigation';
 import {
     aiSocialNavigation,
     contentNavigation,
     dataCaptureNavigation,
+    dataManagementNavigation,
     influencerNavigation,
     masterNavigation,
+    reportsNavigation,
     settingsNavigation,
     templatesNavigation,
 } from '@/modules/sidebar/extra-navigation';
@@ -40,16 +43,17 @@ const overviewItem = { name: 'Dashboard', href: '/admin/dashboard', icon: faGaug
 
 const groups = [
     { name: 'Dashboard', icon: faGauge, items: [overviewItem] },
-    { name: 'Data Capture', icon: faBullseye, items: dataCaptureNavigation },
-    { name: 'HRM', icon: faBriefcase, items: hrm },
     { name: 'Master', icon: faDatabase, items: masterNavigation },
-    { name: 'Templates', icon: faClone, items: templatesNavigation },
+    { name: 'HRM', icon: faBriefcase, items: hrm },
+    { name: 'Data Capture', icon: faBullseye, items: dataCaptureNavigation },
     { name: 'CRM', icon: faUser, items: crm },
-    { name: 'AI & Social', icon: faStar, items: aiSocialNavigation },
+    { name: 'Templates', icon: faClone, items: templatesNavigation },
     { name: 'Customers', icon: faFileLines, items: customer },
-    { name: 'Production', icon: faLayerGroup, items: production },
     { name: 'Influencer Management', icon: faBullhorn, items: influencerNavigation },
+    { name: 'AI & Social', icon: faStar, items: aiSocialNavigation },
     { name: 'Content Management', icon: faVideo, items: contentNavigation },
+    { name: 'Data Management', icon: faTrash, items: dataManagementNavigation },
+    { name: 'Reports', icon: faChartBar, items: reportsNavigation },
     { name: 'Settings', icon: faGear, items: settingsNavigation },
 ];
 

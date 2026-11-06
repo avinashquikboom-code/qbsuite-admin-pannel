@@ -19,11 +19,11 @@ import {
     faShareNodes,
     faStar,
     faTags,
+    faTrash,
     faUserSlash,
     faUsers,
     faVideo,
 } from '@fortawesome/free-solid-svg-icons';
-import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 
 export const dataCaptureNavigation = [
     { name: 'Data Capture', href: '/admin/sections/data-capture', icon: faDatabase },
@@ -66,6 +66,14 @@ export const contentNavigation = [
     { name: 'Trending Content', href: '/admin/sections/trending-content', icon: faChartBar },
     { name: 'Home Banners', href: '/admin/sections/home-banners', icon: faImage },
     { name: 'Marketing Videos', href: '/admin/sections/marketing-videos', icon: faVideo },
+];
+
+export const dataManagementNavigation = [
+    { name: 'Data Management', href: '/admin/sections/data-management', icon: faTrash },
+];
+
+export const reportsNavigation = [
+    { name: 'Reports', href: '/admin/sections/reports', icon: faChartBar },
 ];
 
 export const settingsNavigation = [
