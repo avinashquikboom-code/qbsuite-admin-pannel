@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import Link from 'next/link';
@@ -9,7 +11,7 @@ import { RecentActivity } from '@/components/dashboard/RecentActivity';
 import { Button } from '@/components/common/Button';
 import { Badge } from '@/components/common/Badge';
 import { mockKpiData } from '@/lib/mock-data';
-import { faClock, faDollarSign, faTriangleExclamation, faUserPlus, faUsers, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faIndianRupeeSign, faTriangleExclamation, faUserPlus, faUsers, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarCheck, faCalendarXmark } from '@fortawesome/free-regular-svg-icons';
 export default function HrmDashboardPage() {
     return (<div className="space-y-6 max-w-7xl mx-auto">
@@ -37,9 +39,9 @@ export default function HrmDashboardPage() {
         <StatCard title="Late Arrivals" value={mockKpiData.lateToday} change="Flagged for manager review" changeType="neutral" icon={faTriangleExclamation} iconColor="text-amber-600" iconBg="bg-amber-50"/>
         <StatCard title="On Approved Leave" value={mockKpiData.onLeaveToday} change="Scheduled vacation & medical" changeType="neutral" icon={faCalendarXmark} iconColor="text-brand-dark" iconBg="bg-brand-light"/>
         <StatCard title="Pending Overtime" value={mockKpiData.pendingOvertime} change="3 requests awaiting signoff" changeType="neutral" icon={faClock} iconColor="text-amber-600" iconBg="bg-amber-50" badge="Action Required"/>
-        <StatCard title="Expense Claims" value={`$${mockKpiData.pendingExpensesAmount}`} change={`${mockKpiData.pendingExpenses} pending review`} changeType="neutral" icon={faDollarSign} iconColor="text-brand" iconBg="bg-brand-light"/>
+        <StatCard title="Expense Claims" value={`${formatCurrency(mockKpiData.pendingExpensesAmount)}`} change={`${mockKpiData.pendingExpenses} pending review`} changeType="neutral" icon={faIndianRupeeSign} iconColor="text-brand" iconBg="bg-brand-light"/>
         <StatCard title="Unexcused Absentees" value={mockKpiData.absentToday} change="Requires HR outreach" changeType="negative" icon={faTriangleExclamation} iconColor="text-rose-600" iconBg="bg-rose-50"/>
-        <StatCard title="Monthly Payroll" value={`$${(mockKpiData.monthlyPayroll / 1000).toFixed(1)}k`} change={mockKpiData.monthlyPayrollChange} changeType="positive" icon={faWallet} iconColor="text-brand-dark" iconBg="bg-brand-light"/>
+        <StatCard title="Monthly Payroll" value={formatCurrency(mockKpiData.monthlyPayroll)} change={mockKpiData.monthlyPayrollChange} changeType="positive" icon={faWallet} iconColor="text-brand-dark" iconBg="bg-brand-light"/>
       </div>
 
       {/* Main HRM Analytics & Operations Section */}

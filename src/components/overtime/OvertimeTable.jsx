@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { DataTable } from '@/components/common/DataTable';
@@ -42,13 +44,13 @@ export function OvertimeTable({ records, onApprove, onReject, onViewDetails, }) 
           <span className="font-bold text-slate-900">
             {ot.hours} hrs ({ot.rateMultiplier}x)
           </span>
-          <span className="text-slate-400">${ot.hourlyRate}/hr base</span>
+          <span className="text-slate-400">{formatCurrency(ot.hourlyRate)}/hr base</span>
         </div>),
         },
         {
             header: 'Est. Amount',
             cell: (ot) => (<span className="font-bold text-sm text-brand-dark">
-          ${ot.estimatedAmount.toFixed(2)}
+          {formatCurrency(ot.estimatedAmount)}
         </span>),
         },
         {

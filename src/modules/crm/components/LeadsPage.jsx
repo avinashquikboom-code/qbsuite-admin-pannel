@@ -1,4 +1,6 @@
 'use client';
+import { CURRENCY_SYMBOL, currencyFormatter } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import { Badge } from '@/components/common/Badge';
 import { DataTable } from '@/components/common/DataTable';
@@ -31,11 +33,7 @@ export default function LeadsPage() {
     const [newValue, setNewValue] = React.useState('');
     const [newSource, setNewSource] = React.useState('Website');
     const [newNotes, setNewNotes] = React.useState('');
-    const currency = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        maximumFractionDigits: 0,
-    });
+    const currency = currencyFormatter;
     const filteredLeads = React.useMemo(() => {
         return leads.filter((lead) => {
             const matchesSearch = lead.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -291,7 +289,7 @@ export default function LeadsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <Label className="text-xs">Estimated Value ($)</Label>
+                  <Label className="text-xs">Estimated Value ({CURRENCY_SYMBOL})</Label>
                   <Input type="number" placeholder="25000" value={newValue} onChange={(e) => setNewValue(e.target.value)} className="h-8 text-xs"/>
                 </div>
                 <div className="space-y-1">

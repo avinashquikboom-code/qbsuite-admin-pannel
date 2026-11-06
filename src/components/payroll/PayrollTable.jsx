@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { DataTable } from '@/components/common/DataTable';
@@ -31,47 +33,47 @@ export function PayrollTable({ records, onViewPayslip, onMarkPaid, }) {
         {
             header: 'Basic Salary',
             cell: (rec) => (<span className="text-xs font-medium text-slate-800">
-          ${rec.basicSalary.toLocaleString()}
+          {formatCurrency(rec.basicSalary)}
         </span>),
         },
         {
             header: 'Allowances',
             cell: (rec) => (<span className="text-xs font-medium text-slate-600">
-          ${rec.allowances.toLocaleString()}
+          {formatCurrency(rec.allowances)}
         </span>),
         },
         {
             header: 'Overtime & Claims',
             cell: (rec) => (<div className="flex flex-col text-xs">
           <span className="text-amber-700 font-medium">
-            +${rec.overtimePay.toFixed(0)} OT
+            +{formatCurrency(rec.overtimePay)} OT
           </span>
           <span className="text-brand-dark font-medium">
-            +${rec.reimbursements.toFixed(0)} Claim
+            +{formatCurrency(rec.reimbursements)} Claim
           </span>
         </div>),
         },
         {
             header: 'Gross Pay',
             cell: (rec) => (<span className="font-bold text-xs text-slate-900">
-          ${rec.grossPay.toLocaleString()}
+          {formatCurrency(rec.grossPay)}
         </span>),
         },
         {
             header: 'Deductions',
             cell: (rec) => (<div className="flex flex-col text-xs text-rose-600">
           <span className="font-semibold">
-            -${rec.totalDeductions.toLocaleString()}
+            -{formatCurrency(rec.totalDeductions)}
           </span>
           <span className="text-[10px] text-slate-400">
-            Tax: ${rec.deductions.tax}
+            Tax: {formatCurrency(rec.deductions.tax)}
           </span>
         </div>),
         },
         {
             header: 'Net Payable',
             cell: (rec) => (<span className="font-bold text-sm text-brand-dark">
-          ${rec.netPay.toLocaleString()}
+          {formatCurrency(rec.netPay)}
         </span>),
         },
         {

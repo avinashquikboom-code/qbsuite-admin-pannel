@@ -1,8 +1,10 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { Card, CardContent } from '@/components/common/Card';
-import { faClock, faDollarSign, faGift, faPercent, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faIndianRupeeSign, faGift, faPercent, faWallet } from '@fortawesome/free-solid-svg-icons';
 export function PayrollSummary({ records }) {
     const totals = React.useMemo(() => {
         return records.reduce((acc, r) => {
@@ -31,13 +33,13 @@ export function PayrollSummary({ records }) {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Gross Earnings
             </span>
-            <FontAwesomeIcon icon={faDollarSign} className="size-4 text-slate-400"/>
+            <FontAwesomeIcon icon={faIndianRupeeSign} className="size-4 text-slate-400"/>
           </div>
           <p className="text-xl font-bold text-slate-900 mt-1">
-            ${totals.gross.toLocaleString()}
+            {formatCurrency(totals.gross)}
           </p>
           <p className="text-[11px] text-slate-500 mt-0.5">
-            Basic: ${totals.basic.toLocaleString()}
+            Basic: {formatCurrency(totals.basic)}
           </p>
         </CardContent>
       </Card>
@@ -51,7 +53,7 @@ export function PayrollSummary({ records }) {
             <FontAwesomeIcon icon={faPercent} className="size-4 text-rose-500"/>
           </div>
           <p className="text-xl font-bold text-rose-600 mt-1">
-            -${totals.deductions.toLocaleString()}
+            -{formatCurrency(totals.deductions)}
           </p>
           <p className="text-[11px] text-slate-500 mt-0.5">Tax & Social Security</p>
         </CardContent>
@@ -66,7 +68,7 @@ export function PayrollSummary({ records }) {
             <FontAwesomeIcon icon={faClock} className="size-4 text-amber-500"/>
           </div>
           <p className="text-xl font-bold text-amber-700 mt-1">
-            +${totals.overtime.toLocaleString()}
+            +{formatCurrency(totals.overtime)}
           </p>
           <p className="text-[11px] text-slate-500 mt-0.5">Approved extra hours</p>
         </CardContent>
@@ -81,7 +83,7 @@ export function PayrollSummary({ records }) {
             <FontAwesomeIcon icon={faGift} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">
-            +${totals.reimbursements.toLocaleString()}
+            +{formatCurrency(totals.reimbursements)}
           </p>
           <p className="text-[11px] text-slate-500 mt-0.5">Approved expense claims</p>
         </CardContent>
@@ -96,7 +98,7 @@ export function PayrollSummary({ records }) {
             <FontAwesomeIcon icon={faWallet} className="size-4 text-brand-dark"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">
-            ${totals.net.toLocaleString()}
+            {formatCurrency(totals.net)}
           </p>
           <p className="text-[11px] text-brand-dark font-medium mt-0.5">
             {records.length} Employees Scheduled

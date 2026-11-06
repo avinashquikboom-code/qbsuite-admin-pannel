@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 
 import * as React from 'react';
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
@@ -86,7 +88,7 @@ export function TopPerformers() {
                             </div>
                             <div className="text-right">
                                 <p className="text-sm font-bold text-slate-900">
-                                    ${person.revenue.toLocaleString()}
+                                    {formatCurrency(person.revenue)}
                                 </p>
                                 <p className="text-[11px] font-medium text-brand-dark">
                                     {person.conversions} conversions

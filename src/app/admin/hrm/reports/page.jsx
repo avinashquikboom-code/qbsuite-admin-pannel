@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -65,7 +67,7 @@ export default function HrmReportsPage() {
           <span className="text-[11px] font-semibold text-slate-400 uppercase">
             Total OT Expenditure
           </span>
-          <p className="text-2xl font-bold text-amber-700 mt-1">$1,858</p>
+          <p className="text-2xl font-bold text-amber-700 mt-1">{formatCurrency(1858)}</p>
           <span className="text-[11px] text-slate-500 font-medium">
             Across 18.5 approved hours
           </span>
@@ -76,7 +78,7 @@ export default function HrmReportsPage() {
             Monthly Payroll Cost
           </span>
           <p className="text-2xl font-bold text-slate-900 mt-1">
-            ${mockKpiData.monthlyPayroll.toLocaleString()}
+            {formatCurrency(mockKpiData.monthlyPayroll)}
           </p>
           <span className="text-[11px] text-slate-500 font-medium">
             March 2026 disbursement

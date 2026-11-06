@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -37,7 +39,7 @@ export default function PayrollPage() {
                 paymentDate: new Date().toISOString().split('T')[0],
             }
             : r));
-        toast.success(`Disbursed salary of $${rec.netPay.toLocaleString()} to ${rec.employeeName}`);
+        toast.success(`Disbursed salary of ${formatCurrency(rec.netPay)} to ${rec.employeeName}`);
     };
     const handleViewPayslip = (rec) => {
         setSelectedRecord(rec);
@@ -142,30 +144,30 @@ export default function PayrollPage() {
                   <div className="flex justify-between">
                     <span className="text-slate-500">Basic Salary</span>
                     <span className="font-semibold text-slate-800">
-                      ${selectedRecord.basicSalary.toLocaleString()}
+                      {formatCurrency(selectedRecord.basicSalary)}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Allowances</span>
                     <span className="font-semibold text-slate-800">
-                      ${selectedRecord.allowances.toLocaleString()}
+                      {formatCurrency(selectedRecord.allowances)}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Overtime Pay</span>
                     <span className="font-semibold text-amber-700">
-                      +${selectedRecord.overtimePay.toFixed(0)}
+                      +{formatCurrency(selectedRecord.overtimePay)}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Reimbursements</span>
                     <span className="font-semibold text-brand-dark">
-                      +${selectedRecord.reimbursements.toFixed(0)}
+                      +{formatCurrency(selectedRecord.reimbursements)}
                     </span>
                   </div>
                   <div className="flex justify-between pt-2 border-t font-bold">
                     <span>Total Gross</span>
-                    <span>${selectedRecord.grossPay.toLocaleString()}</span>
+                    <span>{formatCurrency(selectedRecord.grossPay)}</span>
                   </div>
                 </div>
 
@@ -177,30 +179,30 @@ export default function PayrollPage() {
                   <div className="flex justify-between">
                     <span className="text-slate-500">Income Tax (FIT)</span>
                     <span className="font-semibold text-rose-600">
-                      -${selectedRecord.deductions.tax}
+                      -{formatCurrency(selectedRecord.deductions.tax)}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Health Insurance</span>
                     <span className="font-semibold text-rose-600">
-                      -${selectedRecord.deductions.insurance}
+                      -{formatCurrency(selectedRecord.deductions.insurance)}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Provident / 401(k)</span>
                     <span className="font-semibold text-rose-600">
-                      -${selectedRecord.deductions.providentFund}
+                      -{formatCurrency(selectedRecord.deductions.providentFund)}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Other Pre-Tax</span>
                     <span className="font-semibold text-rose-600">
-                      -${selectedRecord.deductions.other}
+                      -{formatCurrency(selectedRecord.deductions.other)}
                     </span>
                   </div>
                   <div className="flex justify-between pt-2 border-t font-bold text-rose-700">
                     <span>Total Deductions</span>
-                    <span>-${selectedRecord.totalDeductions.toLocaleString()}</span>
+                    <span>-{formatCurrency(selectedRecord.totalDeductions)}</span>
                   </div>
                 </div>
               </div>
@@ -216,7 +218,7 @@ export default function PayrollPage() {
                   </span>
                 </div>
                 <span className="text-2xl font-bold text-brand-dark">
-                  ${selectedRecord.netPay.toLocaleString()}
+                  {formatCurrency(selectedRecord.netPay)}
                 </span>
               </div>
 
@@ -245,6 +247,6 @@ export default function PayrollPage() {
       </Dialog>
 
       {/* Run Batch Confirmation Dialog */}
-      <ConfirmDialog open={runBatchOpen} onOpenChange={setRunBatchOpen} title="Execute Monthly Payroll Batch" description={`This will trigger automated disbursement for all ${records.length} employees in ${selectedMonth} totaling $${records.reduce((acc, r) => acc + r.netPay, 0).toLocaleString()}.`} variant="success" confirmLabel="Confirm & Disburse Funds" onConfirm={handleRunPayrollBatch}/>
+      <ConfirmDialog open={runBatchOpen} onOpenChange={setRunBatchOpen} title="Execute Monthly Payroll Batch" description={`This will trigger automated disbursement for all ${records.length} employees in ${selectedMonth} totaling ${formatCurrency(records.reduce((acc, r) => acc + r.netPay, 0))}.`} variant="success" confirmLabel="Confirm & Disburse Funds" onConfirm={handleRunPayrollBatch}/>
     </div>);
 }

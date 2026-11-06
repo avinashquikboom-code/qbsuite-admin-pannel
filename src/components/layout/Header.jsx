@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import Link from 'next/link';
@@ -48,14 +50,14 @@ export function Header() {
             id: 2,
             title: 'New Enterprise Deal',
             time: '1h ago',
-            desc: 'Deal DEAL-804 with Aegean Advisory moved to Won ($29,000).',
+            desc: `Deal DEAL-804 with Aegean Advisory moved to Won (${formatCurrency(29000)}).`,
             unread: true,
         },
         {
             id: 3,
             title: 'Expense Claim Pending',
             time: '3h ago',
-            desc: 'Liam Chen submitted an expense claim of $845.50 for travel.',
+            desc: `Liam Chen submitted an expense claim of ${formatCurrency(845.50)} for travel.`,
             unread: false,
         },
     ];

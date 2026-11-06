@@ -4,7 +4,7 @@ import * as React from 'react';
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import {
     faClock,
-    faFileInvoiceDollar,
+    faFileInvoice,
     faPlaneDeparture,
     faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +15,7 @@ const TYPE_STYLES = {
     checkin: { icon: faClock, classes: 'bg-brand-light text-brand' },
     lead: { icon: faUserPlus, classes: 'bg-sky-50 text-sky-600' },
     leave: { icon: faPlaneDeparture, classes: 'bg-amber-50 text-amber-600' },
-    payroll: { icon: faFileInvoiceDollar, classes: 'bg-brand-light text-brand-dark' },
+    payroll: { icon: faFileInvoice, classes: 'bg-brand-light text-brand-dark' },
 };
 
 export function ActivityTimeline() {

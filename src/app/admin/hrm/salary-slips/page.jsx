@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -58,19 +60,19 @@ export default function SalarySlipsPage() {
         {
             header: 'Gross Earnings',
             cell: (r) => (<span className="font-semibold text-xs text-slate-800">
-          ${r.grossPay.toLocaleString()}
+          {formatCurrency(r.grossPay)}
         </span>),
         },
         {
             header: 'Deductions',
             cell: (r) => (<span className="font-semibold text-xs text-rose-600">
-          -${r.totalDeductions.toLocaleString()}
+          -{formatCurrency(r.totalDeductions)}
         </span>),
         },
         {
             header: 'Net Take-Home',
             cell: (r) => (<span className="font-bold text-sm text-brand-dark">
-          ${r.netPay.toLocaleString()}
+          {formatCurrency(r.netPay)}
         </span>),
         },
         {
@@ -170,15 +172,15 @@ export default function SalarySlipsPage() {
                   </span>
                   <div className="flex justify-between">
                     <span>Basic Salary:</span>
-                    <span>${activeSlip.basicSalary}</span>
+                    <span>{formatCurrency(activeSlip.basicSalary)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Allowances:</span>
-                    <span>${activeSlip.allowances}</span>
+                    <span>{formatCurrency(activeSlip.allowances)}</span>
                   </div>
                   <div className="flex justify-between font-bold pt-1 border-t">
                     <span>Gross Pay:</span>
-                    <span>${activeSlip.grossPay}</span>
+                    <span>{formatCurrency(activeSlip.grossPay)}</span>
                   </div>
                 </div>
 
@@ -188,15 +190,15 @@ export default function SalarySlipsPage() {
                   </span>
                   <div className="flex justify-between">
                     <span>Income Tax:</span>
-                    <span className="text-rose-600">-${activeSlip.deductions.tax}</span>
+                    <span className="text-rose-600">-{formatCurrency(activeSlip.deductions.tax)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Social Security:</span>
-                    <span className="text-rose-600">-${activeSlip.deductions.insurance}</span>
+                    <span className="text-rose-600">-{formatCurrency(activeSlip.deductions.insurance)}</span>
                   </div>
                   <div className="flex justify-between font-bold pt-1 border-t text-rose-700">
                     <span>Total Deductions:</span>
-                    <span>-${activeSlip.totalDeductions}</span>
+                    <span>-{formatCurrency(activeSlip.totalDeductions)}</span>
                   </div>
                 </div>
               </div>
@@ -206,7 +208,7 @@ export default function SalarySlipsPage() {
                   Net Salary Disbursed
                 </span>
                 <span className="text-xl font-bold text-brand-dark">
-                  ${activeSlip.netPay.toLocaleString()}
+                  {formatCurrency(activeSlip.netPay)}
                 </span>
               </div>
 

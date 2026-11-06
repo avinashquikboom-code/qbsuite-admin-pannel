@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -9,7 +11,7 @@ import { Input } from '@/components/common/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
 import { mockExpenseClaims } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { faCheckCircle, faClock, faDollarSign, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faClock, faIndianRupeeSign, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 export default function ExpenseClaimsPage() {
     const [claims, setClaims] = React.useState(mockExpenseClaims);
     const [search, setSearch] = React.useState('');
@@ -69,7 +71,7 @@ export default function ExpenseClaimsPage() {
             : c));
         if (isApprove) {
             toast.success(`Expense Approved for ${confirmDialog.item.employeeName}`, {
-                description: `$${confirmDialog.item.amount.toFixed(2)} scheduled for next payroll cycle.`,
+                description: `${formatCurrency(confirmDialog.item.amount)} scheduled for next payroll cycle.`,
             });
         }
         else {
@@ -95,7 +97,7 @@ export default function ExpenseClaimsPage() {
             <FontAwesomeIcon icon={faClock} className="size-4 text-amber-600"/>
           </div>
           <p className="text-xl font-bold text-amber-800 mt-1">
-            ${pendingAmount.toFixed(2)}
+            {formatCurrency(pendingAmount)}
           </p>
           <p className="text-[11px] text-amber-700 mt-0.5">
             {claims.filter((c) => c.status === 'pending').length} claims awaiting review
@@ -110,7 +112,7 @@ export default function ExpenseClaimsPage() {
             <FontAwesomeIcon icon={faCheckCircle} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">
-            ${approvedAmount.toFixed(2)}
+            {formatCurrency(approvedAmount)}
           </p>
           <p className="text-[11px] text-brand-dark mt-0.5">
             {claims.filter((c) => c.status === 'approved').length} processed successfully
@@ -122,7 +124,7 @@ export default function ExpenseClaimsPage() {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Total Claims Logged
             </span>
-            <FontAwesomeIcon icon={faDollarSign} className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faIndianRupeeSign} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-slate-900 mt-1">
             {claims.length} Total Submissions
@@ -201,7 +203,7 @@ export default function ExpenseClaimsPage() {
 
       {/* Confirmation Dialog */}
       <ConfirmDialog open={confirmDialog.open} onOpenChange={(open) => setConfirmDialog((prev) => ({ ...prev, open }))} title={confirmDialog.type === 'approve'
-            ? `Approve Expense Claim ($${confirmDialog.item?.amount.toFixed(2)})`
+            ? `Approve Expense Claim (${formatCurrency(confirmDialog.item?.amount)})`
             : `Reject Expense Claim`} description={confirmDialog.type === 'approve'
             ? `Approve reimbursement for ${confirmDialog.item?.employeeName} under "${confirmDialog.item?.category}".`
             : `Decline expense claim for ${confirmDialog.item?.employeeName}. Please specify the reason.`} variant={confirmDialog.type === 'approve' ? 'success' : 'destructive'} confirmLabel={confirmDialog.type === 'approve' ? 'Approve & Reimburse' : 'Reject Claim'} note={{

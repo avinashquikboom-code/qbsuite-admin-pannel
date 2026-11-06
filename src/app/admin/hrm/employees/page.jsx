@@ -1,4 +1,6 @@
 'use client';
+import { CURRENCY_CODE, CURRENCY_SYMBOL } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -57,7 +59,7 @@ export default function EmployeesPage() {
                 basic: Number(formData.basicSalary) || 8000,
                 allowances: 800,
                 hourlyRate: 50,
-                currency: 'USD',
+                currency: CURRENCY_CODE,
             },
             bankDetails: {
                 accountName: `${formData.firstName} ${formData.lastName}`,
@@ -211,7 +213,7 @@ export default function EmployeesPage() {
               </div>
 
               <div className="space-y-1">
-                <Label className="text-xs font-medium">Monthly Basic ($)</Label>
+                <Label className="text-xs font-medium">Monthly Basic ({CURRENCY_SYMBOL})</Label>
                 <Input type="number" placeholder="e.g. 9500" value={formData.basicSalary} onChange={(e) => setFormData((prev) => ({ ...prev, basicSalary: e.target.value }))} className="h-8 text-xs"/>
               </div>
 

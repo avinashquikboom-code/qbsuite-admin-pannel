@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { DataTable } from '@/components/common/DataTable';
@@ -38,7 +40,7 @@ export function ExpenseTable({ claims, onApprove, onReject, onViewDetail, }) {
         {
             header: 'Amount',
             cell: (exp) => (<span className="font-bold text-sm text-slate-900">
-          ${exp.amount.toFixed(2)}
+          {formatCurrency(exp.amount)}
         </span>),
         },
         {

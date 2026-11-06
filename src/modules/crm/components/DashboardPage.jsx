@@ -1,8 +1,10 @@
 'use client';
+import { currencyFormatter } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import Link from 'next/link';
-import { faArrowRight, faBullhorn, faDollarSign, faPercent, faPlus, faUserGroup, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faBullhorn, faIndianRupeeSign, faPercent, faPlus, faUserGroup, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { PageHeader } from '@/components/common/PageHeader';
 import { StatCard } from '@/components/common/StatCard';
@@ -11,11 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { StatusBadge } from '@/components/common/StatusBadge';
 import { mockCrmKpiData, mockLeads, mockContacts } from '@/modules/crm/services/mock-data';
 export default function CrmDashboardPage() {
-    const currency = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        maximumFractionDigits: 0,
-    });
+    const currency = currencyFormatter;
     return (<div className="space-y-6">
       <PageHeader title="CRM Executive Dashboard" description="Pipeline health, active leads conversion, high-value opportunities and customer acquisition." badge="CRM Suite" badgeVariant="green" actions={<div className="flex items-center gap-2">
             <Link href="/admin/crm/leads">
@@ -28,7 +26,7 @@ export default function CrmDashboardPage() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard title="Total Pipeline Value" value={currency.format(mockCrmKpiData.pipelineValue)} change="+18.4% vs last month" trend="up" icon={faDollarSign} accent="green"/>
+        <StatCard title="Total Pipeline Value" value={currency.format(mockCrmKpiData.pipelineValue)} change="+18.4% vs last month" trend="up" icon={faIndianRupeeSign} accent="green"/>
         <StatCard title="Active Leads" value={mockCrmKpiData.leadsCount.toString()} change="+12 qualified this week" trend="up" icon={faUsers} accent="green"/>
         <StatCard title="Deals in Progress" value={mockCrmKpiData.activeDealsCount.toString()} change="8 closing this sprint" trend="neutral" icon={faPercent} accent="green"/>
         <StatCard title="Key Accounts" value={mockContacts.length.toString()} change="+3 enterprises added" trend="up" icon={faUserGroup} accent="green"/>

@@ -1,4 +1,4 @@
-import { faBell, faChartLine, faClock, faDollarSign, faGauge, faMugHot, faUsers, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faChartLine, faClock, faIndianRupeeSign, faGauge, faMugHot, faUsers, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarCheck, faCalendarXmark, faFileLines } from '@fortawesome/free-regular-svg-icons';
 import { mockKpiData } from '@/lib/mock-data';
 export const navigation = [
@@ -34,7 +34,7 @@ export const navigation = [
         {
             name: 'Expense Claims',
             href: '/admin/hrm/expense-claims',
-            icon: faDollarSign,
+            icon: faIndianRupeeSign,
             badge: mockKpiData.pendingExpenses.toString(),
             badgeVariant: 'warning',
         },

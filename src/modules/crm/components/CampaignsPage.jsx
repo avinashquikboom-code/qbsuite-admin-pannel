@@ -1,4 +1,6 @@
 'use client';
+import { CURRENCY_SYMBOL, currencyFormatter } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -63,11 +65,7 @@ export default function CampaignsPage() {
     const [name, setName] = React.useState('');
     const [channel, setChannel] = React.useState('Email');
     const [budget, setBudget] = React.useState('');
-    const currency = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        maximumFractionDigits: 0,
-    });
+    const currency = currencyFormatter;
     const handleCreate = (e) => {
         e.preventDefault();
         if (!name || !budget) {
@@ -202,7 +200,7 @@ export default function CampaignsPage() {
                 </div>
 
                 <div className="space-y-1">
-                  <Label className="text-xs">Allocated Budget ($) *</Label>
+                  <Label className="text-xs">Allocated Budget ({CURRENCY_SYMBOL}) *</Label>
                   <Input type="number" required placeholder="5000" value={budget} onChange={(e) => setBudget(e.target.value)} className="h-8 text-xs"/>
                 </div>
               </div>

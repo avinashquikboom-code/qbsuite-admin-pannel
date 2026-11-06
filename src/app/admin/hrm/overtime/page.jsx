@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -8,7 +10,7 @@ import { ConfirmDialog } from '@/components/common/ConfirmDialog';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, } from '@/components/common/Modal';
 import { mockOvertimeRequests } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { faCheckCircle, faClock, faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faClock, faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
 export default function OvertimePage() {
     const [requests, setRequests] = React.useState(mockOvertimeRequests);
     const [activeTab, setActiveTab] = React.useState('all');
@@ -70,7 +72,7 @@ export default function OvertimePage() {
             : r));
         if (isApprove) {
             toast.success(`Overtime Approved for ${confirmDialog.item.employeeName}`, {
-                description: `${confirmDialog.item.hours}h credited ($${confirmDialog.item.estimatedAmount}).`,
+                description: `${confirmDialog.item.hours}h credited (${formatCurrency(confirmDialog.item.estimatedAmount)}).`,
             });
         }
         else {
@@ -99,7 +101,7 @@ export default function OvertimePage() {
             <FontAwesomeIcon icon={faClock} className="size-4 text-amber-600"/>
           </div>
           <p className="text-xl font-bold text-amber-800 mt-1">
-            {counts.pending} Requests (${pendingAmount.toFixed(2)})
+            {counts.pending} Requests ({formatCurrency(pendingAmount)})
           </p>
         </div>
 
@@ -111,7 +113,7 @@ export default function OvertimePage() {
             <FontAwesomeIcon icon={faCheckCircle} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-brand-dark mt-1">
-            {counts.approved} Claims (${approvedAmount.toFixed(2)})
+            {counts.approved} Claims ({formatCurrency(approvedAmount)})
           </p>
         </div>
 
@@ -120,7 +122,7 @@ export default function OvertimePage() {
             <span className="text-[11px] font-semibold text-slate-400 uppercase">
               Total Approved Extra Hours
             </span>
-            <FontAwesomeIcon icon={faDollarSign} className="size-4 text-brand"/>
+            <FontAwesomeIcon icon={faIndianRupeeSign} className="size-4 text-brand"/>
           </div>
           <p className="text-xl font-bold text-slate-900 mt-1">
             {totalHours} Total Hours
@@ -138,7 +140,7 @@ export default function OvertimePage() {
       <ConfirmDialog open={confirmDialog.open} onOpenChange={(open) => setConfirmDialog((prev) => ({ ...prev, open }))} title={confirmDialog.type === 'approve'
             ? `Approve Overtime (${confirmDialog.item?.hours}h)`
             : `Reject Overtime Request`} description={confirmDialog.type === 'approve'
-            ? `Authorize payment of $${confirmDialog.item?.estimatedAmount} for ${confirmDialog.item?.employeeName} under project "${confirmDialog.item?.project}".`
+            ? `Authorize payment of ${formatCurrency(confirmDialog.item?.estimatedAmount)} for ${confirmDialog.item?.employeeName} under project "${confirmDialog.item?.project}".`
             : `Decline overtime request for ${confirmDialog.item?.employeeName}. Please provide a rejection reason.`} variant={confirmDialog.type === 'approve' ? 'success' : 'destructive'} confirmLabel={confirmDialog.type === 'approve' ? 'Approve & Credit' : 'Reject Request'} note={{
             label: confirmDialog.type === 'approve' ? 'Optional Manager Note' : 'Reason for Rejection',
             placeholder: confirmDialog.type === 'approve' ? 'e.g. Critical release crunch approved.' : 'e.g. Prior authorization required.',
@@ -171,7 +173,7 @@ export default function OvertimePage() {
               <div className="flex justify-between border-b pb-2">
                 <span className="text-slate-500">Calculation</span>
                 <span className="font-semibold text-slate-900">
-                  {detailsItem.hours} hrs @ ${detailsItem.hourlyRate}/hr x {detailsItem.rateMultiplier} = ${detailsItem.estimatedAmount}
+                  {detailsItem.hours} hrs @ {formatCurrency(detailsItem.hourlyRate)}/hr x {detailsItem.rateMultiplier} = {formatCurrency(detailsItem.estimatedAmount)}
                 </span>
               </div>
               <div className="border-b pb-2 space-y-1">

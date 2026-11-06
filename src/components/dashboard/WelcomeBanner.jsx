@@ -11,7 +11,11 @@ function greeting() {
     return 'Good Evening';
 }
 
+const subscribe = () => () => {};
+
 export function WelcomeBanner() {
+    // Current time is unstable during prerender; resolve it client-side.
+    const salutation = React.useSyncExternalStore(subscribe, greeting, () => 'Welcome');
     return (
         <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-sidebar via-sidebar-secondary to-brand-dark p-6 sm:p-8 text-white shadow-md">
             {/* Decorative illustration (pure CSS, right side) */}
@@ -31,7 +35,7 @@ export function WelcomeBanner() {
                     QB Suite Admin Panel
                 </p>
                 <h1 className="mt-1.5 text-2xl font-bold sm:text-3xl">
-                    {greeting()}, Admin
+                    {salutation}, Admin
                 </h1>
                 <p className="mt-2 text-sm text-white/80">
                     Here&apos;s what&apos;s happening in your organization today.

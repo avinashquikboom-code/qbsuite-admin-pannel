@@ -1,3 +1,5 @@
+
+import { CURRENCY_CODE, formatCurrency } from "@/lib/currency";
 export const mockEmployees = [
     {
         id: 'EMP-1001',
@@ -17,7 +19,7 @@ export const mockEmployees = [
             basic: 11500,
             allowances: 1200,
             hourlyRate: 72,
-            currency: 'USD',
+            currency: CURRENCY_CODE,
         },
         bankDetails: {
             accountName: 'Sarah Jenkins',
@@ -49,7 +51,7 @@ export const mockEmployees = [
             basic: 9200,
             allowances: 900,
             hourlyRate: 58,
-            currency: 'USD',
+            currency: CURRENCY_CODE,
         },
         bankDetails: {
             accountName: 'Alexander Vance',
@@ -81,7 +83,7 @@ export const mockEmployees = [
             basic: 10800,
             allowances: 1100,
             hourlyRate: 68,
-            currency: 'USD',
+            currency: CURRENCY_CODE,
         },
         bankDetails: {
             accountName: 'Priya Sharma',
@@ -113,7 +115,7 @@ export const mockEmployees = [
             basic: 9500,
             allowances: 1000,
             hourlyRate: 60,
-            currency: 'USD',
+            currency: CURRENCY_CODE,
         },
         bankDetails: {
             accountName: 'Marcus Sterling',
@@ -145,7 +147,7 @@ export const mockEmployees = [
             basic: 9800,
             allowances: 950,
             hourlyRate: 62,
-            currency: 'USD',
+            currency: CURRENCY_CODE,
         },
         bankDetails: {
             accountName: 'Elena Rostova',
@@ -177,7 +179,7 @@ export const mockEmployees = [
             basic: 8500,
             allowances: 1500,
             hourlyRate: 54,
-            currency: 'USD',
+            currency: CURRENCY_CODE,
         },
         bankDetails: {
             accountName: 'Liam Chen',
@@ -209,7 +211,7 @@ export const mockEmployees = [
             basic: 8800,
             allowances: 800,
             hourlyRate: 55,
-            currency: 'USD',
+            currency: CURRENCY_CODE,
         },
         bankDetails: {
             accountName: 'Chloe Dupont',
@@ -241,7 +243,7 @@ export const mockEmployees = [
             basic: 10200,
             allowances: 1000,
             hourlyRate: 64,
-            currency: 'USD',
+            currency: CURRENCY_CODE,
         },
         bankDetails: {
             accountName: 'Devon Kowalski',
@@ -273,7 +275,7 @@ export const mockEmployees = [
             basic: 8900,
             allowances: 850,
             hourlyRate: 56,
-            currency: 'USD',
+            currency: CURRENCY_CODE,
         },
         bankDetails: {
             accountName: 'Amara Okafor',
@@ -305,7 +307,7 @@ export const mockEmployees = [
             basic: 7200,
             allowances: 400,
             hourlyRate: 45,
-            currency: 'USD',
+            currency: CURRENCY_CODE,
         },
         bankDetails: {
             accountName: 'Mateo Silva',
@@ -578,7 +580,7 @@ export const mockExpenseClaims = [
         department: 'Product & Design',
         category: 'Software / Subscriptions',
         amount: 320.0,
-        currency: '$',
+        currency: CURRENCY_CODE,
         date: '2026-03-20',
         description: 'Annual team seat upgrade for Figma Enterprise design tokens & plugins',
         receiptUrl: 'https://images.unsplash.com/photo-1554415707-9e44667ff484?w=600',
@@ -594,7 +596,7 @@ export const mockExpenseClaims = [
         department: 'Sales',
         category: 'Travel',
         amount: 845.5,
-        currency: '$',
+        currency: CURRENCY_CODE,
         date: '2026-03-18',
         description: 'Flight tickets to Chicago for client on-site enterprise deal presentation',
         receiptUrl: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600',
@@ -610,7 +612,7 @@ export const mockExpenseClaims = [
         department: 'Engineering',
         category: 'Equipment & Hardware',
         amount: 1499.0,
-        currency: '$',
+        currency: CURRENCY_CODE,
         date: '2026-03-15',
         description: 'Dell UltraSharp 38" Curved USB-C Hub Monitor for work station upgrade',
         receiptUrl: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600',
@@ -629,7 +631,7 @@ export const mockExpenseClaims = [
         department: 'Sales',
         category: 'Meals & Entertainment',
         amount: 284.0,
-        currency: '$',
+        currency: CURRENCY_CODE,
         date: '2026-03-19',
         description: 'Client dinner with Acme Corp leadership following vendor finalization',
         receiptUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600',
@@ -648,7 +650,7 @@ export const mockExpenseClaims = [
         department: 'Finance',
         category: 'Training & Education',
         amount: 650.0,
-        currency: '$',
+        currency: CURRENCY_CODE,
         date: '2026-03-12',
         description: 'Corporate International Tax Compliance Seminar 2026 Certification',
         receiptUrl: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600',
@@ -667,7 +669,7 @@ export const mockExpenseClaims = [
         department: 'Operations',
         category: 'Office Supplies',
         amount: 195.0,
-        currency: '$',
+        currency: CURRENCY_CODE,
         date: '2026-03-05',
         description: 'Noise cancelling personal headset without itemized breakdown receipt',
         receiptUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600',
@@ -883,7 +885,7 @@ export const mockAnnouncements = [
     {
         id: 'ANN-302',
         title: 'Updated Comprehensive Health & Dental Benefits Policy',
-        content: 'Beginning April 1st, 2026, our expanded healthcare coverage takes effect, including lower deductible tiers for dependents, enhanced mental wellness allocations ($1,500/yr), and worldwide emergency telemedicine access. Please review the updated handbook.',
+        content: `Beginning April 1st, 2026, our expanded healthcare coverage takes effect, including lower deductible tiers for dependents, enhanced mental wellness allocations (${formatCurrency(1500)}/yr), and worldwide emergency telemedicine access. Please review the updated handbook.`,
         category: 'Policy',
         priority: 'high',
         isPublished: true,

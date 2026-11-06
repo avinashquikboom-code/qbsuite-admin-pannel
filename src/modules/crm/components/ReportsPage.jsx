@@ -1,4 +1,6 @@
 'use client';
+import { currencyFormatter, formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { faArrowUp, faDownload, faTrophy } from '@fortawesome/free-solid-svg-icons';
@@ -8,11 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { mockPipelineStages } from '@/modules/crm/services/mock-data';
 import { toast } from 'sonner';
 export default function CrmReportsPage() {
-    const currency = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        maximumFractionDigits: 0,
-    });
+    const currency = currencyFormatter;
     return (<div className="space-y-6">
       <PageHeader title="CRM Revenue & Pipeline Intelligence" description="Comprehensive analysis of customer lifetime value, conversion velocity and sales reps performance." badge="Analytics" badgeVariant="green" actions={<Button size="sm" onClick={() => toast.success('Analytics report PDF generated!')} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
             <FontAwesomeIcon icon={faDownload} className="size-4"/>
@@ -24,7 +22,7 @@ export default function CrmReportsPage() {
         <Card className="border-slate-200/80 shadow-2xs">
           <CardHeader className="py-3 px-4">
             <CardTitle className="text-xs font-medium text-slate-500">Won Revenue YTD</CardTitle>
-            <div className="text-2xl font-bold text-brand-dark mt-1">$482,000</div>
+            <div className="text-2xl font-bold text-brand-dark mt-1">{formatCurrency(482000)}</div>
             <div className="text-[11px] text-brand font-medium flex items-center gap-1 mt-1">
               <FontAwesomeIcon icon={faArrowUp} className="size-3"/>
               <span>+24.5% vs prior year</span>
@@ -62,7 +60,7 @@ export default function CrmReportsPage() {
               Pipeline Stage Breakdown
             </CardTitle>
             <CardDescription className="text-xs text-slate-500">
-              Deal volume and dollar value distribution across sales phases
+              Deal volume and rupee value distribution across sales phases
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">

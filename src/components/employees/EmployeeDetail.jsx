@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { Sheet, SheetContent, } from '@/components/common/Drawer';
@@ -6,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import { StatusBadge } from '@/components/common/StatusBadge';
 import { Button } from '@/components/common/Button';
 import { toast } from '@/hooks/use-toast';
-import { faDollarSign, faLocationDot, faPhone, faUser, faUsers, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faIndianRupeeSign, faLocationDot, faPhone, faUser, faUsers, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 export function EmployeeDetail({ employee, open, onOpenChange, }) {
     if (!employee)
@@ -113,23 +115,23 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 space-y-2 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-slate-500">
-                  <FontAwesomeIcon icon={faDollarSign} className="size-4 text-brand shrink-0"/>
+                  <FontAwesomeIcon icon={faIndianRupeeSign} className="size-4 text-brand shrink-0"/>
                   Basic Monthly
                 </span>
                 <span className="font-bold text-slate-900">
-                  ${employee.salary.basic.toLocaleString()}
+                  {formatCurrency(employee.salary.basic)}
                 </span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-slate-500">Monthly Allowances</span>
                 <span className="font-semibold text-slate-800">
-                  ${employee.salary.allowances.toLocaleString()}
+                  {formatCurrency(employee.salary.allowances)}
                 </span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-slate-500">Overtime Hourly Rate</span>
                 <span className="font-semibold text-brand-dark">
-                  ${employee.salary.hourlyRate}/hr
+                  {formatCurrency(employee.salary.hourlyRate)}/hr
                 </span>
               </div>
             </div>

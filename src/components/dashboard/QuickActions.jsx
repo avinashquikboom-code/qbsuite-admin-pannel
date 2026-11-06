@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import {
     faBullhorn,
     faCalendarCheck,
-    faFileInvoiceDollar,
+    faFileInvoice,
     faListCheck,
     faUserPlus,
     faUserTie,
@@ -44,7 +44,7 @@ export function QuickActions() {
         {
             label: 'Generate Payslip',
             description: 'Run payroll documents',
-            icon: faFileInvoiceDollar,
+            icon: faFileInvoice,
             onClick: () => router.push('/admin/hrm/salary-slips'),
         },
         {

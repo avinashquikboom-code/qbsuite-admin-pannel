@@ -1,4 +1,6 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import Link from 'next/link';
@@ -10,7 +12,7 @@ import { StatusBadge } from '@/components/common/StatusBadge';
 import { ConfirmDialog } from '@/components/common/ConfirmDialog';
 import { mockOvertimeRequests, mockExpenseClaims, mockAnnouncements, } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
-import { faArrowRight, faBullhorn, faCheck, faClock, faDollarSign, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faBullhorn, faCheck, faClock, faIndianRupeeSign, faXmark } from '@fortawesome/free-solid-svg-icons';
 export function RecentActivity() {
     const [overtimes, setOvertimes] = React.useState(mockOvertimeRequests);
     const [expenses, setExpenses] = React.useState(mockExpenseClaims);
@@ -23,7 +25,7 @@ export function RecentActivity() {
     const handleApproveOt = (ot) => {
         setOvertimes((prev) => prev.map((o) => (o.id === ot.id ? { ...o, status: 'approved' } : o)));
         toast.success(`Overtime Approved for ${ot.employeeName}`, {
-            description: `${ot.hours} hrs ($${ot.estimatedAmount}) credited.`,
+            description: `${ot.hours} hrs (${formatCurrency(ot.estimatedAmount)}) credited.`,
         });
     };
     const handleRejectOt = (ot) => {
@@ -33,7 +35,7 @@ export function RecentActivity() {
     const handleApproveExp = (exp) => {
         setExpenses((prev) => prev.map((e) => (e.id === exp.id ? { ...e, status: 'approved' } : e)));
         toast.success(`Claim Approved for ${exp.employeeName}`, {
-            description: `$${exp.amount.toFixed(2)} approved for reimbursement.`,
+            description: `${formatCurrency(exp.amount)} approved for reimbursement.`,
         });
     };
     const handleRejectExp = (exp) => {
@@ -61,7 +63,7 @@ export function RecentActivity() {
               Overtime Requests
             </TabsTrigger>
             <TabsTrigger value="expenses" className="text-xs data-[state=active]:bg-white data-[state=active]:text-brand-dark data-[state=active]:shadow-xs font-semibold">
-              <FontAwesomeIcon icon={faDollarSign} className="size-3.5 mr-1.5"/>
+              <FontAwesomeIcon icon={faIndianRupeeSign} className="size-3.5 mr-1.5"/>
               Expense Claims
             </TabsTrigger>
             <TabsTrigger value="announcements" className="text-xs data-[state=active]:bg-white data-[state=active]:text-brand-dark data-[state=active]:shadow-xs font-semibold">
@@ -94,7 +96,7 @@ export function RecentActivity() {
                       <span>{ot.department}</span>
                       <span>•</span>
                       <span className="font-semibold text-slate-600">
-                        {ot.hours}h (${ot.estimatedAmount})
+                        {ot.hours}h ({formatCurrency(ot.estimatedAmount)})
                       </span>
                       <span>•</span>
                       <span>Date: {ot.date}</span>
@@ -159,7 +161,7 @@ export function RecentActivity() {
                       </span>
                       <span>•</span>
                       <span className="font-bold text-slate-900">
-                        ${exp.amount.toFixed(2)}
+                        {formatCurrency(exp.amount)}
                       </span>
                       <span>•</span>
                       <span>{exp.date}</span>
@@ -242,7 +244,7 @@ export function RecentActivity() {
             : dialogState.type === 'reject-ot'
                 ? `Are you sure you want to reject this overtime request for ${dialogState.item?.employeeName}?`
                 : dialogState.type === 'approve-exp'
-                    ? `Are you sure you want to approve this expense claim of $${dialogState.item?.amount}?`
+                    ? `Are you sure you want to approve this expense claim of ${formatCurrency(dialogState.item?.amount)}?`
                     : `Are you sure you want to reject this expense claim?`} variant={dialogState.type?.includes('approve') ? 'success' : 'destructive'} confirmLabel={dialogState.type?.includes('approve') ? 'Yes, Approve' : 'Yes, Reject'} onConfirm={() => {
             if (dialogState.type === 'approve-ot' && dialogState.item) {
                 handleApproveOt(dialogState.item);

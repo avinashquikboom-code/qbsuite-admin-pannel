@@ -1,4 +1,6 @@
 'use client';
+import { currencyFormatter } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import { DataTable } from '@/components/common/DataTable';
 import * as React from 'react';
@@ -25,11 +27,7 @@ export default function CustomersPage() {
     const [newEmail, setNewEmail] = React.useState('');
     const [newPhone, setNewPhone] = React.useState('');
     const [newLocation, setNewLocation] = React.useState('');
-    const currency = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        maximumFractionDigits: 0,
-    });
+    const currency = currencyFormatter;
     const filtered = contacts.filter((c) => c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         c.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
         c.email.toLowerCase().includes(searchQuery.toLowerCase()));

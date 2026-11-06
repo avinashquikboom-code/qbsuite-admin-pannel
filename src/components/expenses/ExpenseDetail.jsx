@@ -1,4 +1,6 @@
 'use client';
+import { CURRENCY_LABEL, formatCurrency } from "@/lib/currency";
+
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, } from '@/components/common/Drawer';
@@ -18,7 +20,7 @@ export function ExpenseDetail({ claim, open, onOpenChange, onApprove, onReject, 
             <StatusBadge status={claim.status}/>
           </div>
           <SheetTitle className="text-xl font-bold text-slate-900 mt-1">
-            ${claim.amount.toFixed(2)}
+            {formatCurrency(claim.amount)}
           </SheetTitle>
           <SheetDescription className="text-xs text-slate-500">
             Submitted by {claim.employeeName} ({claim.department}) on {claim.submittedDate}
@@ -39,7 +41,7 @@ export function ExpenseDetail({ claim, open, onOpenChange, onApprove, onReject, 
           </div>
           <div className="flex justify-between items-center">
             <span className="text-slate-500">Reimbursement Currency</span>
-            <span className="font-mono text-slate-800">USD ($)</span>
+            <span className="font-mono text-slate-800">{CURRENCY_LABEL}</span>
           </div>
           <div className="pt-2 border-t border-slate-200/60">
             <span className="text-slate-500 block mb-1">Expense Description</span>

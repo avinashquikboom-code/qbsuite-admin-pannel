@@ -1,10 +1,12 @@
 'use client';
+import { formatCurrency } from "@/lib/currency";
+
 
 import * as React from 'react';
 import {
     faBullseye,
     faBuilding,
-    faSackDollar,
+    faIndianRupeeSign,
     faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { StatCard } from '@/components/common/StatCard';
@@ -59,10 +61,10 @@ export default function AdminDashboardPage() {
                 />
                 <StatCard
                     title="This Month Sales"
-                    value={`$${mockDashboardKpi.monthSales.toLocaleString()}`}
+                    value={`${formatCurrency(mockDashboardKpi.monthSales)}`}
                     change={mockDashboardKpi.monthSalesChange}
                     changeType="positive"
-                    icon={faSackDollar}
+                    icon={faIndianRupeeSign}
                     iconColor="text-brand"
                     iconBg="bg-brand-light"
                     description="vs last month"
