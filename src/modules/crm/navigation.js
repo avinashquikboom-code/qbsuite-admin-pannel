@@ -1,12 +1,6 @@
-import { faAddressBook, faBuilding, faChartLine, faGauge, faHandshake, faListCheck, faShieldHalved, faUserCheck, faUserGroup, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faBuilding, faChartLine, faHandshake, faListCheck, faShieldHalved, faUserCheck, faUserGroup, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { mockCrmKpiData } from '@/modules/crm/services/mock-data';
 export const navigation = [
-        {
-            name: 'CRM Dashboard',
-            href: '/admin/crm/dashboard',
-            icon: faGauge,
-            matchExact: true,
-        },
         {
             name: 'Leads',
             href: '/admin/crm/leads',
@@ -17,11 +11,6 @@ export const navigation = [
             name: 'Customers',
             href: '/admin/crm/customers',
             icon: faUserGroup,
-        },
-        {
-            name: 'CRM Reports',
-            href: '/admin/crm/reports',
-            icon: faChartLine,
         },
         {
             name: 'Lead Limits',

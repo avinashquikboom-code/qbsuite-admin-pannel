@@ -4,7 +4,7 @@ import { formatCurrency } from "@/lib/currency";
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { faBars, faBell, faBuilding, faCheckDouble, faGear, faMagnifyingGlass, faRightFromBracket, faTableCellsLarge, faUserTie, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { Sidebar } from '@/components/layout/Sidebar';
@@ -17,27 +17,10 @@ import { Badge } from '@/components/common/Badge';
 import { toast } from '@/hooks/use-toast';
 import { useSidebarStore } from '@/hooks/use-sidebar-store';
 export function Header() {
-    const pathname = usePathname();
     const router = useRouter();
     const toggleCollapsed = useSidebarStore((s) => s.toggleCollapsed);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
-    const currentModule = React.useMemo(() => {
-        if (pathname.startsWith('/admin/crm'))
-            return 'CRM';
-        if (pathname.startsWith('/admin/hrm') ||
-            pathname.startsWith('/employees') ||
-            pathname.startsWith('/attendance') ||
-            pathname.startsWith('/overtime') ||
-            pathname.startsWith('/expenses') ||
-            pathname.startsWith('/payroll') ||
-            pathname.startsWith('/announcements')) {
-            return 'HRM';
-        }
-        if (pathname.startsWith('/admin/production')) return 'Production';
-        if (pathname.startsWith('/admin/customer')) return 'Customer';
-        return 'Suite';
-    }, [pathname]);
     const notifications = [
         {
             id: 1,
@@ -118,7 +101,6 @@ export function Header() {
         </div>
       </div>
 
-      <nav aria-label="Modules" className="hidden md:flex items-center gap-1 rounded-lg bg-muted p-1">{['CRM', 'Production', 'Customer'].map(name => <Link key={name} href={'/admin/'+name.toLowerCase()+'/dashboard'} aria-current={currentModule === name ? 'page' : undefined} className={'rounded-md px-3 py-1 text-xs font-semibold '+(currentModule === name ? 'bg-card text-primary shadow-sm' : 'text-muted-foreground')}>{name}</Link>)}</nav>
       {/* Right: Search, Notifications & User Avatar */}
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Quick Search */}

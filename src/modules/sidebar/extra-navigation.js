@@ -19,8 +19,6 @@ import {
     faShareNodes,
     faStar,
     faTags,
-    faTrash,
-    faUserSlash,
     faUsers,
     faVideo,
 } from '@fortawesome/free-solid-svg-icons';
@@ -68,14 +66,6 @@ export const contentNavigation = [
     { name: 'Marketing Videos', href: '/admin/sections/marketing-videos', icon: faVideo },
 ];
 
-export const dataManagementNavigation = [
-    { name: 'Data Management', href: '/admin/sections/data-management', icon: faTrash },
-];
-
-export const reportsNavigation = [
-    { name: 'Reports', href: '/admin/sections/reports', icon: faChartBar },
-];
-
 export const settingsNavigation = [
     { name: 'Settings', href: '/admin/settings', icon: faGear, matchExact: true },
     { name: 'Notification Center', href: '/admin/sections/notification-center', icon: faBell },
@@ -96,6 +86,5 @@ export const settingsNavigation = [
             { name: 'Meta Integration', href: '/admin/crm/meta-integration', icon: faMeta },
         ],
     },
-    { name: 'Account Deletion', href: '/admin/sections/account-deletion', icon: faUserSlash },
     { name: 'Activity Logs', href: '/admin/sections/activity-logs', icon: faChartBar },
 ];
