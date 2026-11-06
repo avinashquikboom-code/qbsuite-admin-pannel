@@ -8,6 +8,10 @@ export const colors = {
   "textPrimary": "#1E293B",
   "textSecondary": "#64748B",
   "border": "#E2E8F0",
+  "sidebarDark": "#073B32",
+  "sidebarSecondary": "#0B4A3C",
+  "sidebarText": "#D1E7DA",
+  "sidebarMuted": "#8FB8A6",
   "danger": "#E11D48",
   "warning": "#D97706",
   "success": "#5EC269"

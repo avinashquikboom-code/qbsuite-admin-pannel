@@ -13,9 +13,11 @@ import { Popover, PopoverContent, PopoverTrigger, } from '@/components/common/Po
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
 import { Badge } from '@/components/common/Badge';
 import { toast } from '@/hooks/use-toast';
+import { useSidebarStore } from '@/hooks/use-sidebar-store';
 export function Header() {
     const pathname = usePathname();
     const router = useRouter();
+    const toggleCollapsed = useSidebarStore((s) => s.toggleCollapsed);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [searchQuery, setSearchQuery] = React.useState('');
     const currentModule = React.useMemo(() => {
@@ -98,6 +100,16 @@ export function Header() {
             <Sidebar onNavigate={() => setMobileOpen(false)} className="w-full border-none"/>
           </SheetContent>
         </Sheet>
+
+        {/* Desktop Sidebar Collapse Toggle */}
+        <button
+          type="button"
+          onClick={toggleCollapsed}
+          aria-label="Toggle sidebar"
+          className="hidden lg:inline-flex size-9 items-center justify-center rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors"
+        >
+          <FontAwesomeIcon icon={faBars} className="size-4.5" />
+        </button>
 
         <div className="hidden sm:block">
           <Breadcrumb />
