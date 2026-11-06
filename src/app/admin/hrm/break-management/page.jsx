@@ -5,10 +5,10 @@ import { PageHeader } from '@/components/common/PageHeader';
 import { DataTable } from '@/components/common/DataTable';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
 import { Button } from '@/components/common/Button';
+import { FormDrawer, DrawerFormField } from '@/components/common/drawers/FormDrawer';
 import { Badge } from '@/components/common/Badge';
 import { Input } from '@/components/common/Input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, } from '@/components/common/Modal';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/common/Select';
 import { Label } from '@/components/common/Label';
 import { toast } from '@/hooks/use-toast';
 import { faCheckCircle, faClock, faMagnifyingGlass, faMugHot, faPlus, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
@@ -262,67 +262,47 @@ export default function BreakManagementPage() {
       {/* Table */}
       <DataTable columns={columns} data={filtered} pageSize={8} emptyState={<div className="py-8 text-center text-slate-500">No break logs recorded.</div>}/>
 
-      {/* Manual Break Dialog */}
-      <Dialog open={logDialogOpen} onOpenChange={setLogDialogOpen}>
-        <DialogContent className="sm:max-w-md bg-white border border-slate-200 shadow-xl rounded-xl">
-          <form onSubmit={handleAddBreak}>
-            <DialogHeader>
-              <DialogTitle className="text-base font-bold text-slate-900">
-                Record Manual Break Log
-              </DialogTitle>
-              <DialogDescription className="text-xs text-slate-500">
-                Log a break duration for offline or off-site personnel.
-              </DialogDescription>
-            </DialogHeader>
+      {/* Manual Break FormDrawer */}
+      <FormDrawer
+        open={logDialogOpen}
+        onOpenChange={setLogDialogOpen}
+        title="Record Manual Break Log"
+        description="Log a break duration for offline or off-site personnel."
+        onSubmit={handleAddBreak}
+        submitLabel="Save Record"
+        size="standard"
+      >
+        <DrawerFormField label="Employee Name" required>
+          <Input value={formData.employeeName} onChange={(e) => setFormData((prev) => ({ ...prev, employeeName: e.target.value }))} className="h-9 text-xs"/>
+        </DrawerFormField>
 
-            <div className="space-y-3 py-4 text-xs">
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Employee Name</Label>
-                <Input value={formData.employeeName} onChange={(e) => setFormData((prev) => ({ ...prev, employeeName: e.target.value }))} className="h-8 text-xs"/>
-              </div>
+        <DrawerFormField label="Break Type" required>
+          <Select value={formData.breakType} onValueChange={(val) => setFormData((prev) => ({ ...prev, breakType: val }))}>
+            <SelectTrigger className="h-9 text-xs w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Lunch Break" className="text-xs">
+                Lunch Break
+              </SelectItem>
+              <SelectItem value="Coffee Break" className="text-xs">
+                Coffee Break
+              </SelectItem>
+              <SelectItem value="Personal Break" className="text-xs">
+                Personal Break
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </DrawerFormField>
 
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Break Type</Label>
-                <Select value={formData.breakType} onValueChange={(val) => setFormData((prev) => ({ ...prev, breakType: val }))}>
-                  <SelectTrigger className="h-8 text-xs w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Lunch Break" className="text-xs">
-                      Lunch Break
-                    </SelectItem>
-                    <SelectItem value="Coffee Break" className="text-xs">
-                      Coffee Break
-                    </SelectItem>
-                    <SelectItem value="Personal Break" className="text-xs">
-                      Personal Break
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label className="text-xs font-medium">Start Time</Label>
-                  <Input value={formData.startTime} onChange={(e) => setFormData((prev) => ({ ...prev, startTime: e.target.value }))} className="h-8 text-xs font-mono"/>
-                </div>
-                <div className="space-y-1">
-                  <Label className="text-xs font-medium">End Time</Label>
-                  <Input value={formData.endTime} onChange={(e) => setFormData((prev) => ({ ...prev, endTime: e.target.value }))} className="h-8 text-xs font-mono"/>
-                </div>
-              </div>
-            </div>
-
-            <DialogFooter className="border-t border-slate-100 pt-3">
-              <Button type="button" variant="outline" onClick={() => setLogDialogOpen(false)} className="h-8 text-xs">
-                Cancel
-              </Button>
-              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
-                Save Record
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="Start Time" required>
+            <Input value={formData.startTime} onChange={(e) => setFormData((prev) => ({ ...prev, startTime: e.target.value }))} className="h-9 text-xs font-mono"/>
+          </DrawerFormField>
+          <DrawerFormField label="End Time" required>
+            <Input value={formData.endTime} onChange={(e) => setFormData((prev) => ({ ...prev, endTime: e.target.value }))} className="h-9 text-xs font-mono"/>
+          </DrawerFormField>
+        </div>
+      </FormDrawer>
     </div>);
 }

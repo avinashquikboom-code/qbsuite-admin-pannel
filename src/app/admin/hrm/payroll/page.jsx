@@ -7,7 +7,7 @@ import { PageHeader } from '@/components/common/PageHeader';
 import { PayrollSummary } from '@/modules/hrm/components/payroll/PayrollSummary';
 import { PayrollTable } from '@/modules/hrm/components/payroll/PayrollTable';
 import { ConfirmDialog } from '@/components/common/ConfirmDialog';
-import { Dialog, DialogContent, } from '@/components/common/Modal';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/common/Drawer';
 import { Button } from '@/components/common/Button';
 import { Badge } from '@/components/common/Badge';
 import { mockPayrollRecords } from '@/lib/mock-data';
@@ -79,35 +79,37 @@ export default function PayrollPage() {
         <PayrollTable records={records} onViewPayslip={handleViewPayslip} onMarkPaid={handleMarkPaid}/>
       </div>
 
-      {/* Payslip Modal Dialog */}
-      <Dialog open={payslipOpen} onOpenChange={setPayslipOpen}>
-        <DialogContent className="sm:max-w-xl bg-white border border-slate-200 shadow-2xl rounded-2xl p-6">
-          {selectedRecord && (<div className="space-y-5 text-xs">
-              {/* Slip Header */}
-              <div className="flex items-start justify-between border-b pb-4">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-lg text-brand-dark tracking-tight">
-                      QB Suite Inc.
-                    </span>
-                    <span className="text-[10px] uppercase font-bold text-slate-500 bg-slate-100 px-1 rounded">
-                      Official Payslip
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-slate-400 mt-0.5">
-                    100 Montgomery St, Suite 1400, San Francisco, CA
-                  </p>
-                </div>
-                <div className="text-right">
-                  <span className="font-mono text-xs font-semibold text-slate-900">
-                    {selectedRecord.id}
+      {/* Payslip Drawer */}
+      <Sheet open={payslipOpen} onOpenChange={setPayslipOpen}>
+        <SheetContent side="right" className="sm:max-w-[600px] w-full p-0 flex flex-col gap-0 bg-white border-l border-slate-200/90 shadow-2xl rounded-l-2xl overflow-hidden">
+          <SheetHeader className="border-b border-slate-200/80 px-6 py-4.5 text-left">
+            <div className="flex items-start justify-between pr-6">
+              <div>
+                <div className="flex items-center gap-2">
+                  <SheetTitle className="font-bold text-lg text-brand-dark tracking-tight">
+                    QB Suite Inc.
+                  </SheetTitle>
+                  <span className="text-[10px] uppercase font-bold text-slate-500 bg-slate-100 px-1 rounded">
+                    Official Payslip
                   </span>
-                  <p className="text-[11px] text-slate-500">
-                    Pay Period: {selectedRecord.month}
-                  </p>
                 </div>
+                <SheetDescription className="text-[11px] text-slate-400 mt-0.5">
+                  100 Montgomery St, Suite 1400, San Francisco, CA
+                </SheetDescription>
               </div>
+              <div className="text-right">
+                <span className="font-mono text-xs font-semibold text-slate-900">
+                  {selectedRecord?.id}
+                </span>
+                <p className="text-[11px] text-slate-500 mt-0.5">
+                  Pay Period: {selectedRecord?.month}
+                </p>
+              </div>
+            </div>
+          </SheetHeader>
 
+          {selectedRecord && (
+            <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4 text-xs">
               {/* Employee Summary */}
               <div className="grid grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
                 <div>
@@ -221,30 +223,32 @@ export default function PayrollPage() {
                   {formatCurrency(selectedRecord.netPay)}
                 </span>
               </div>
+            </div>
+          )}
 
-              {/* Modal Footer Actions */}
-              <div className="flex items-center justify-between pt-2">
-                <Button variant="outline" size="sm" onClick={() => toast.success(`Payslip sent to ${selectedRecord.employeeName}'s email`)} className="h-8 text-xs border-slate-200">
-                  <FontAwesomeIcon icon={faEnvelope} className="size-3.5 mr-1"/>
-                  Email Payslip
+          {selectedRecord && (
+            <div className="shrink-0 flex items-center justify-between border-t border-slate-200/80 bg-slate-50/80 px-6 py-4">
+              <Button variant="outline" size="sm" onClick={() => toast.success(`Payslip sent to ${selectedRecord.employeeName}'s email`)} className="h-9 px-4 text-xs border-slate-200">
+                <FontAwesomeIcon icon={faEnvelope} className="size-3.5 mr-1.5"/>
+                Email Payslip
+              </Button>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={() => toast.success('Sending to connected office printer...')} className="h-9 px-4 text-xs border-slate-200">
+                  <FontAwesomeIcon icon={faPrint} className="size-3.5 mr-1.5"/>
+                  Print
                 </Button>
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" onClick={() => toast.success('Sending to connected office printer...')} className="h-8 text-xs border-slate-200">
-                    <FontAwesomeIcon icon={faPrint} className="size-3.5 mr-1"/>
-                    Print
-                  </Button>
-                  <Button size="sm" onClick={() => {
-                toast.success(`Downloaded ${selectedRecord.id}.pdf`);
-                setPayslipOpen(false);
-            }} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs">
-                    <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1"/>
-                    Download PDF
-                  </Button>
-                </div>
+                <Button size="sm" onClick={() => {
+                  toast.success(`Downloaded ${selectedRecord.id}.pdf`);
+                  setPayslipOpen(false);
+                }} className="h-9 px-4 bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs">
+                  <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1.5"/>
+                  Download PDF
+                </Button>
               </div>
-            </div>)}
-        </DialogContent>
-      </Dialog>
+            </div>
+          )}
+        </SheetContent>
+      </Sheet>
 
       {/* Run Batch Confirmation Dialog */}
       <ConfirmDialog open={runBatchOpen} onOpenChange={setRunBatchOpen} title="Execute Monthly Payroll Batch" description={`This will trigger automated disbursement for all ${records.length} employees in ${selectedMonth} totaling ${formatCurrency(records.reduce((acc, r) => acc + r.netPay, 0))}.`} variant="success" confirmLabel="Confirm & Disburse Funds" onConfirm={handleRunPayrollBatch}/>

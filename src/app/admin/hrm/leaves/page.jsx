@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import { Button } from '@/components/common/Button';
 import { Badge } from '@/components/common/Badge';
 import { Input } from '@/components/common/Input';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, } from '@/components/common/Modal';
+import { FormDrawer, DrawerFormField } from '@/components/common/drawers/FormDrawer';
 import { Label } from '@/components/common/Label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
 import { toast } from '@/hooks/use-toast';
@@ -334,80 +334,58 @@ export default function LeaveManagementPage() {
             ? `Grant ${confirmDialog.item?.totalDays} day(s) ${confirmDialog.item?.leaveType} to ${confirmDialog.item?.employeeName} from ${confirmDialog.item?.startDate} to ${confirmDialog.item?.endDate}.`
             : `Decline leave application for ${confirmDialog.item?.employeeName}.`} variant={confirmDialog.type === 'approve' ? 'success' : 'destructive'} confirmLabel={confirmDialog.type === 'approve' ? 'Approve Leave' : 'Reject Leave'} onConfirm={handleConfirmAction}/>
 
-      {/* Apply Leave Dialog */}
-      <Dialog open={applyDialogOpen} onOpenChange={setApplyDialogOpen}>
-        <DialogContent className="sm:max-w-md bg-white border border-slate-200 shadow-xl rounded-xl">
-          <form onSubmit={handleApplyLeave}>
-            <DialogHeader>
-              <DialogTitle className="text-base font-bold text-slate-900">
-                Submit Leave Application
-              </DialogTitle>
-              <DialogDescription className="text-xs text-slate-500">
-                Record absence on behalf of an employee.
-              </DialogDescription>
-            </DialogHeader>
+      {/* Apply Leave FormDrawer */}
+      <FormDrawer
+        open={applyDialogOpen}
+        onOpenChange={setApplyDialogOpen}
+        title="Submit Leave Application"
+        description="Record absence on behalf of an employee."
+        onSubmit={handleApplyLeave}
+        submitLabel="Submit Application"
+        size="standard"
+      >
+        <DrawerFormField label="Employee Name" required>
+          <Input required value={formData.employeeName} onChange={(e) => setFormData((prev) => ({ ...prev, employeeName: e.target.value }))} className="h-9 text-xs"/>
+        </DrawerFormField>
 
-            <div className="space-y-3 py-4 text-xs">
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Employee Name</Label>
-                <Input value={formData.employeeName} onChange={(e) => setFormData((prev) => ({ ...prev, employeeName: e.target.value }))} className="h-8 text-xs"/>
-              </div>
+        <DrawerFormField label="Leave Type" required>
+          <Select value={formData.leaveType} onValueChange={(val) => setFormData((prev) => ({ ...prev, leaveType: val }))}>
+            <SelectTrigger className="h-9 text-xs w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Annual Leave" className="text-xs">
+                Annual Leave
+              </SelectItem>
+              <SelectItem value="Sick Leave" className="text-xs">
+                Sick Leave
+              </SelectItem>
+              <SelectItem value="Casual Leave" className="text-xs">
+                Casual Leave
+              </SelectItem>
+              <SelectItem value="Maternity / Parental" className="text-xs">
+                Maternity / Parental
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </DrawerFormField>
 
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Leave Type</Label>
-                <Select value={formData.leaveType} onValueChange={(val) => setFormData((prev) => ({ ...prev, leaveType: val }))}>
-                  <SelectTrigger className="h-8 text-xs w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Annual Leave" className="text-xs">
-                      Annual Leave
-                    </SelectItem>
-                    <SelectItem value="Sick Leave" className="text-xs">
-                      Sick Leave
-                    </SelectItem>
-                    <SelectItem value="Casual Leave" className="text-xs">
-                      Casual Leave
-                    </SelectItem>
-                    <SelectItem value="Maternity / Parental" className="text-xs">
-                      Maternity / Parental
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="Start Date" required>
+            <Input required type="date" value={formData.startDate} onChange={(e) => setFormData((prev) => ({ ...prev, startDate: e.target.value }))} className="h-9 text-xs"/>
+          </DrawerFormField>
+          <DrawerFormField label="End Date" required>
+            <Input required type="date" value={formData.endDate} onChange={(e) => setFormData((prev) => ({ ...prev, endDate: e.target.value }))} className="h-9 text-xs"/>
+          </DrawerFormField>
+        </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label className="text-xs font-medium">Start Date</Label>
-                  <Input type="date" value={formData.startDate} onChange={(e) => setFormData((prev) => ({ ...prev, startDate: e.target.value }))} className="h-8 text-xs"/>
-                </div>
-                <div className="space-y-1">
-                  <Label className="text-xs font-medium">End Date</Label>
-                  <Input type="date" value={formData.endDate} onChange={(e) => setFormData((prev) => ({ ...prev, endDate: e.target.value }))} className="h-8 text-xs"/>
-                </div>
-              </div>
+        <DrawerFormField label="Total Days" required>
+          <Input required type="number" value={formData.totalDays} onChange={(e) => setFormData((prev) => ({ ...prev, totalDays: Number(e.target.value) }))} className="h-9 text-xs"/>
+        </DrawerFormField>
 
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Total Days</Label>
-                <Input type="number" value={formData.totalDays} onChange={(e) => setFormData((prev) => ({ ...prev, totalDays: Number(e.target.value) }))} className="h-8 text-xs"/>
-              </div>
-
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Reason for Absence</Label>
-                <Input value={formData.reason} onChange={(e) => setFormData((prev) => ({ ...prev, reason: e.target.value }))} className="h-8 text-xs"/>
-              </div>
-            </div>
-
-            <DialogFooter className="border-t border-slate-100 pt-3">
-              <Button type="button" variant="outline" onClick={() => setApplyDialogOpen(false)} className="h-8 text-xs">
-                Cancel
-              </Button>
-              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
-                Submit Application
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+        <DrawerFormField label="Reason for Absence">
+          <Input value={formData.reason} onChange={(e) => setFormData((prev) => ({ ...prev, reason: e.target.value }))} className="h-9 text-xs"/>
+        </DrawerFormField>
+      </FormDrawer>
     </div>);
 }

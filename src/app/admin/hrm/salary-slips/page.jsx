@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import { Button } from '@/components/common/Button';
 import { Input } from '@/components/common/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
-import { Dialog, DialogContent, } from '@/components/common/Modal';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/common/Drawer';
 import { mockPayrollRecords } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
 import { faDownload, faMagnifyingGlass, faPrint } from '@fortawesome/free-solid-svg-icons';
@@ -126,30 +126,33 @@ export default function SalarySlipsPage() {
       {/* Table */}
       <DataTable columns={columns} data={filtered} pageSize={8} emptyState={<div className="py-8 text-center text-slate-500">No salary slips found.</div>}/>
 
-      {/* Slip Modal */}
-      <Dialog open={!!activeSlip} onOpenChange={() => setActiveSlip(null)}>
-        <DialogContent className="sm:max-w-xl bg-white border border-slate-200 shadow-2xl rounded-2xl p-6">
-          {activeSlip && (<div className="space-y-4 text-xs">
-              <div className="flex items-start justify-between border-b pb-4">
-                <div>
-                  <span className="font-bold text-lg text-brand-dark tracking-tight">
-                    QB Suite Payslip
-                  </span>
-                  <p className="text-[11px] text-slate-400">
-                    Pay Period: {activeSlip.month}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <span className="font-mono font-bold text-slate-800">
-                    {activeSlip.id}
-                  </span>
-                  <p className="text-[11px] text-brand-dark font-semibold uppercase">
-                    Status: {activeSlip.status}
-                  </p>
-                </div>
+      {/* Salary Slip Drawer */}
+      <Sheet open={!!activeSlip} onOpenChange={() => setActiveSlip(null)}>
+        <SheetContent side="right" className="sm:max-w-[600px] w-full p-0 flex flex-col gap-0 bg-white border-l border-slate-200/90 shadow-2xl rounded-l-2xl overflow-hidden">
+          <SheetHeader className="border-b border-slate-200/80 px-6 py-4.5 text-left">
+            <div className="flex items-start justify-between pr-6">
+              <div>
+                <SheetTitle className="text-lg font-bold text-brand-dark tracking-tight">
+                  QB Suite Payslip
+                </SheetTitle>
+                <SheetDescription className="text-xs text-slate-400 mt-0.5">
+                  Pay Period: {activeSlip?.month}
+                </SheetDescription>
               </div>
+              <div className="text-right">
+                <span className="font-mono font-bold text-slate-800 text-xs">
+                  {activeSlip?.id}
+                </span>
+                <p className="text-[11px] text-brand-dark font-semibold uppercase mt-0.5">
+                  Status: {activeSlip?.status}
+                </p>
+              </div>
+            </div>
+          </SheetHeader>
 
-              <div className="p-3 bg-slate-50 rounded-lg flex justify-between">
+          {activeSlip && (
+            <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4 text-xs">
+              <div className="p-3 bg-slate-50 rounded-lg flex justify-between border border-slate-200/80">
                 <div>
                   <span className="font-bold text-slate-900 block text-sm">
                     {activeSlip.employeeName}
@@ -165,9 +168,9 @@ export default function SalarySlipsPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 border p-3 rounded-lg">
-                <div className="space-y-1">
-                  <span className="font-bold uppercase text-[10px] text-slate-400">
+              <div className="grid grid-cols-2 gap-4 border border-slate-200/80 p-3.5 rounded-lg bg-white">
+                <div className="space-y-1.5">
+                  <span className="font-bold uppercase text-[10px] text-slate-400 block pb-1 border-b">
                     Gross Earnings
                   </span>
                   <div className="flex justify-between">
@@ -184,8 +187,8 @@ export default function SalarySlipsPage() {
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <span className="font-bold uppercase text-[10px] text-slate-400">
+                <div className="space-y-1.5">
+                  <span className="font-bold uppercase text-[10px] text-slate-400 block pb-1 border-b">
                     Deductions
                   </span>
                   <div className="flex justify-between">
@@ -203,7 +206,7 @@ export default function SalarySlipsPage() {
                 </div>
               </div>
 
-              <div className="flex justify-between items-center p-3 bg-brand-light rounded-xl border border-brand-light">
+              <div className="flex justify-between items-center p-3.5 bg-brand-light rounded-xl border border-brand-light">
                 <span className="font-bold text-brand-dark text-sm">
                   Net Salary Disbursed
                 </span>
@@ -211,22 +214,23 @@ export default function SalarySlipsPage() {
                   {formatCurrency(activeSlip.netPay)}
                 </span>
               </div>
+            </div>
+          )}
 
-              <div className="flex justify-end gap-2 pt-2">
-                <Button variant="outline" size="sm" onClick={() => toast.success('Printed slip')} className="h-8 text-xs border-slate-200">
-                  <FontAwesomeIcon icon={faPrint} className="size-3.5 mr-1"/>
-                  Print
-                </Button>
-                <Button size="sm" onClick={() => {
-                toast.success('Downloaded PDF slip');
-                setActiveSlip(null);
-            }} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
-                  <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1"/>
-                  Download
-                </Button>
-              </div>
-            </div>)}
-        </DialogContent>
-      </Dialog>
+          <div className="shrink-0 flex items-center justify-end gap-2 border-t border-slate-200/80 bg-slate-50/80 px-6 py-4">
+            <Button variant="outline" size="sm" onClick={() => toast.success('Printed slip')} className="h-9 px-4 text-xs border-slate-200">
+              <FontAwesomeIcon icon={faPrint} className="size-3.5 mr-1.5"/>
+              Print
+            </Button>
+            <Button size="sm" onClick={() => {
+              toast.success('Downloaded PDF slip');
+              setActiveSlip(null);
+            }} className="h-9 px-4 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
+              <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1.5"/>
+              Download
+            </Button>
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>);
 }

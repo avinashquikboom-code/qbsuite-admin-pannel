@@ -20,9 +20,9 @@ for (const file of files.filter(file => /\.jsx?$/.test(file))) {
     for (const name of match[1].split(',').map(value => value.trim()).filter(Boolean)) assert(icons[name]?.icon, `${file}: unknown ${name}`);
   }
 }
-for (const module of ['crm','hrm','production','customer']) {
-  assert(fs.existsSync(`src/modules/${module}/components`), module);
-  assert(!fs.existsSync(`src/modules/${module}/components/ui`), `Duplicated library in ${module}`);
+for (const moduleName of ['crm','hrm','production','customer']) {
+  assert(fs.existsSync(`src/modules/${moduleName}/components`), moduleName);
+  assert(!fs.existsSync(`src/modules/${moduleName}/components/ui`), `Duplicated library in ${moduleName}`);
 }
 assert(fs.readFileSync('src/components/common/DataTable.jsx','utf8').includes('@tanstack/react-table'));
 for (const dependency of Object.keys(JSON.parse(fs.readFileSync('package.json')).dependencies)) assert(!/^(lucide|react-icons|@remixicon\/|@mui\/)/.test(dependency), dependency);

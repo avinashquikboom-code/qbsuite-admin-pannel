@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/common/PageHeader';
 import { AttendanceFilters } from '@/modules/hrm/components/attendance/AttendanceFilters';
 import { AttendanceTable } from '@/modules/hrm/components/attendance/AttendanceTable';
 import { Button } from '@/components/common/Button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, } from '@/components/common/Modal';
+import { FormDrawer, DrawerFormField } from '@/components/common/drawers/FormDrawer';
 import { Input } from '@/components/common/Input';
 import { Label } from '@/components/common/Label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
@@ -129,68 +129,49 @@ export default function AttendancePage() {
       {/* Attendance Table */}
       <AttendanceTable records={filtered} onAdjustPunch={handleOpenEdit}/>
 
-      {/* Manual Adjustment Dialog */}
-      <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-        <DialogContent className="sm:max-w-md bg-white border border-slate-200 shadow-xl rounded-xl">
-          <form onSubmit={handleSaveAdjustment}>
-            <DialogHeader>
-              <DialogTitle className="text-base font-bold text-slate-900">
-                Adjust Attendance Log
-              </DialogTitle>
-              <DialogDescription className="text-xs text-slate-500">
-                Modify recorded punch times for {currentRecord?.employeeName} ({currentRecord?.employeeId}).
-              </DialogDescription>
-            </DialogHeader>
+      {/* Manual Adjustment FormDrawer */}
+      <FormDrawer
+        open={editDialogOpen}
+        onOpenChange={setEditDialogOpen}
+        title="Adjust Attendance Log"
+        description={`Modify recorded punch times for ${currentRecord?.employeeName} (${currentRecord?.employeeId}).`}
+        onSubmit={handleSaveAdjustment}
+        submitLabel="Save Changes"
+        size="standard"
+      >
+        <div className="grid grid-cols-2 gap-3">
+          <DrawerFormField label="Punch In Time" required>
+            <Input value={punchInVal} onChange={(e) => setPunchInVal(e.target.value)} placeholder="e.g. 08:50 AM" className="h-9 text-xs font-mono"/>
+          </DrawerFormField>
+          <DrawerFormField label="Punch Out Time" required>
+            <Input value={punchOutVal} onChange={(e) => setPunchOutVal(e.target.value)} placeholder="e.g. 05:30 PM" className="h-9 text-xs font-mono"/>
+          </DrawerFormField>
+        </div>
 
-            <div className="space-y-3 py-4 text-xs">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label className="text-xs font-medium">Punch In Time</Label>
-                  <Input value={punchInVal} onChange={(e) => setPunchInVal(e.target.value)} placeholder="e.g. 08:50 AM" className="h-8 text-xs font-mono"/>
-                </div>
-                <div className="space-y-1">
-                  <Label className="text-xs font-medium">Punch Out Time</Label>
-                  <Input value={punchOutVal} onChange={(e) => setPunchOutVal(e.target.value)} placeholder="e.g. 05:30 PM" className="h-8 text-xs font-mono"/>
-                </div>
-              </div>
-
-              <div className="space-y-1">
-                <Label className="text-xs font-medium">Attendance Status</Label>
-                <Select value={statusVal} onValueChange={(val) => setStatusVal(val)}>
-                  <SelectTrigger className="h-8 text-xs w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="present" className="text-xs">
-                      Present
-                    </SelectItem>
-                    <SelectItem value="late" className="text-xs">
-                      Late
-                    </SelectItem>
-                    <SelectItem value="half_day" className="text-xs">
-                      Half Day
-                    </SelectItem>
-                    <SelectItem value="on_leave" className="text-xs">
-                      On Leave
-                    </SelectItem>
-                    <SelectItem value="absent" className="text-xs">
-                      Absent
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <DialogFooter className="border-t border-slate-100 pt-3">
-              <Button type="button" variant="outline" onClick={() => setEditDialogOpen(false)} className="h-8 text-xs">
-                Cancel
-              </Button>
-              <Button type="submit" className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
-                Save Changes
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+        <DrawerFormField label="Attendance Status" required>
+          <Select value={statusVal} onValueChange={(val) => setStatusVal(val)}>
+            <SelectTrigger className="h-9 text-xs w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="present" className="text-xs">
+                Present
+              </SelectItem>
+              <SelectItem value="late" className="text-xs">
+                Late
+              </SelectItem>
+              <SelectItem value="half_day" className="text-xs">
+                Half Day
+              </SelectItem>
+              <SelectItem value="on_leave" className="text-xs">
+                On Leave
+              </SelectItem>
+              <SelectItem value="absent" className="text-xs">
+                Absent
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </DrawerFormField>
+      </FormDrawer>
     </div>);
 }

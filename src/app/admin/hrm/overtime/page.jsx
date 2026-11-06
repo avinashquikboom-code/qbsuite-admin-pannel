@@ -7,7 +7,8 @@ import { PageHeader } from '@/components/common/PageHeader';
 import { OvertimeTable } from '@/modules/hrm/components/overtime/OvertimeTable';
 import { OvertimeActions } from '@/modules/hrm/components/overtime/OvertimeActions';
 import { ConfirmDialog } from '@/components/common/ConfirmDialog';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, } from '@/components/common/Modal';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/common/Drawer';
+import { Button } from '@/components/common/Button';
 import { mockOvertimeRequests } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
 import { faCheckCircle, faClock, faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
@@ -149,43 +150,56 @@ export default function OvertimePage() {
             required: confirmDialog.type === 'reject',
         }} onConfirm={handleConfirmAction}/>
 
-      {/* Item Details Dialog */}
-      <Dialog open={!!detailsItem} onOpenChange={() => setDetailsItem(null)}>
-        <DialogContent className="sm:max-w-md bg-white border border-slate-200 shadow-xl rounded-xl">
-          <DialogHeader>
-            <DialogTitle className="text-base font-bold text-slate-900">
+      {/* Item Details Drawer */}
+      <Sheet open={!!detailsItem} onOpenChange={() => setDetailsItem(null)}>
+        <SheetContent side="right" className="sm:max-w-[480px] w-full p-0 flex flex-col gap-0 bg-white border-l border-slate-200/90 shadow-2xl rounded-l-2xl overflow-hidden">
+          <SheetHeader className="border-b border-slate-200/80 px-6 py-4.5 text-left">
+            <SheetTitle className="text-base font-bold text-slate-900">
               Overtime Request Details ({detailsItem?.id})
-            </DialogTitle>
-            <DialogDescription className="text-xs text-slate-500">
+            </SheetTitle>
+            <SheetDescription className="text-xs text-slate-500 mt-0.5">
               Review verification log and history.
-            </DialogDescription>
-          </DialogHeader>
+            </SheetDescription>
+          </SheetHeader>
 
-          {detailsItem && (<div className="space-y-3 py-3 text-xs">
-              <div className="flex justify-between border-b pb-2">
-                <span className="text-slate-500">Employee</span>
-                <span className="font-semibold text-slate-900">{detailsItem.employeeName}</span>
+          {detailsItem && (
+            <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4 text-xs">
+              <div className="p-3 bg-slate-50 rounded-lg space-y-2.5 border border-slate-200/80">
+                <div className="flex justify-between border-b border-slate-200/60 pb-2">
+                  <span className="text-slate-500">Employee</span>
+                  <span className="font-semibold text-slate-900">{detailsItem.employeeName}</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-200/60 pb-2">
+                  <span className="text-slate-500">Project</span>
+                  <span className="font-semibold text-slate-900">{detailsItem.project}</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-200/60 pb-2">
+                  <span className="text-slate-500">Calculation</span>
+                  <span className="font-semibold text-slate-900">
+                    {detailsItem.hours} hrs @ {formatCurrency(detailsItem.hourlyRate)}/hr x {detailsItem.rateMultiplier} = {formatCurrency(detailsItem.estimatedAmount)}
+                  </span>
+                </div>
+                <div className="space-y-1 pt-1">
+                  <span className="text-slate-500">Reason</span>
+                  <p className="text-slate-800 bg-white p-2.5 rounded border border-slate-200/80">{detailsItem.reason}</p>
+                </div>
               </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="text-slate-500">Project</span>
-                <span className="font-semibold text-slate-900">{detailsItem.project}</span>
-              </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="text-slate-500">Calculation</span>
-                <span className="font-semibold text-slate-900">
-                  {detailsItem.hours} hrs @ {formatCurrency(detailsItem.hourlyRate)}/hr x {detailsItem.rateMultiplier} = {formatCurrency(detailsItem.estimatedAmount)}
-                </span>
-              </div>
-              <div className="border-b pb-2 space-y-1">
-                <span className="text-slate-500">Reason</span>
-                <p className="text-slate-800 bg-slate-50 p-2 rounded">{detailsItem.reason}</p>
-              </div>
-              {detailsItem.reviewedBy && (<div className="bg-slate-50 p-2.5 rounded-lg border space-y-1">
+
+              {detailsItem.reviewedBy && (
+                <div className="bg-slate-50 p-3 rounded-lg border border-slate-200/80 space-y-1">
                   <span className="font-semibold text-slate-700">Review Note ({detailsItem.reviewedBy})</span>
                   <p className="text-slate-600 italic">{detailsItem.reviewNote}</p>
-                </div>)}
-            </div>)}
-        </DialogContent>
-      </Dialog>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="shrink-0 flex items-center justify-end border-t border-slate-200/80 bg-slate-50/80 px-6 py-4">
+            <Button variant="outline" size="sm" onClick={() => setDetailsItem(null)} className="h-9 px-4 text-xs font-medium text-slate-700">
+              Close
+            </Button>
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>);
 }
