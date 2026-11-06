@@ -71,11 +71,10 @@ function NavLink({ item, pathname, collapsed, onNavigate }) {
 
 function NavGroup({ group, pathname, collapsed, onNavigate }) {
     const containsActive = group.items.some((item) => isActive(item, pathname));
-    const [open, setOpen] = React.useState(true);
-
-    React.useEffect(() => {
-        if (containsActive) setOpen(true);
-    }, [containsActive]);
+    // The group containing the active route always stays open; otherwise the
+    // user's last toggle wins.
+    const [closedByUser, setClosedByUser] = React.useState(false);
+    const open = containsActive || !closedByUser;
 
     if (collapsed) {
         return (
@@ -91,7 +90,7 @@ function NavGroup({ group, pathname, collapsed, onNavigate }) {
         <div>
             <button
                 type="button"
-                onClick={() => setOpen((v) => !v)}
+                onClick={() => setClosedByUser(open)}
                 aria-expanded={open}
                 className="flex w-full items-center justify-between px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-sidebar-muted hover:text-white transition-colors"
             >
