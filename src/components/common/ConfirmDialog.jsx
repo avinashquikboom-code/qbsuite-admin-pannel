@@ -1,7 +1,7 @@
 'use client';
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import * as React from 'react';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, } from '@/components/common/Modal';
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/common/Button';
 import { Textarea } from '@/components/common/Textarea';
 import { Label } from '@/components/common/Label';
@@ -33,19 +33,19 @@ export function ConfirmDialog({ open, onOpenChange, title, description, confirmL
                 return 'bg-brand hover:bg-brand-dark text-primary-foreground';
         }
     };
-    return (<Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-white border border-slate-200 shadow-xl rounded-xl">
+    return (<AlertDialog open={open} onOpenChange={onOpenChange}>
+      <AlertDialogContent className="sm:max-w-md bg-white border border-slate-200 shadow-xl rounded-xl">
         <div className="flex items-start gap-4">
           {getIcon()}
           <div className="flex-1 space-y-1">
-            <DialogHeader className="p-0 text-left">
-              <DialogTitle className="text-base font-semibold text-slate-900">
+            <AlertDialogHeader className="p-0 text-left">
+              <AlertDialogTitle className="text-base font-semibold text-slate-900">
                 {title}
-              </DialogTitle>
-              <DialogDescription className="text-sm text-slate-500 pt-1">
+              </AlertDialogTitle>
+              <AlertDialogDescription className="text-sm text-slate-500 pt-1">
                 {description}
-              </DialogDescription>
-            </DialogHeader>
+              </AlertDialogDescription>
+            </AlertDialogHeader>
 
             {note && (<div className="mt-4 space-y-1.5 pt-2">
                 <Label className="text-xs font-medium text-slate-700">
@@ -56,7 +56,7 @@ export function ConfirmDialog({ open, onOpenChange, title, description, confirmL
           </div>
         </div>
 
-        <DialogFooter className="mt-4 flex flex-row items-center justify-end gap-2 border-t border-slate-100 pt-3">
+        <AlertDialogFooter className="mt-4 flex flex-row items-center justify-end gap-2 border-t border-slate-100 pt-3">
           <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="border-slate-200 text-slate-700 hover:bg-slate-100 text-xs sm:text-sm">
             {cancelLabel}
           </Button>
@@ -66,7 +66,7 @@ export function ConfirmDialog({ open, onOpenChange, title, description, confirmL
         }} disabled={note?.required && !note.value.trim()} className={`${getButtonClass()} text-xs sm:text-sm font-medium`}>
             {confirmLabel}
           </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>);
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>);
 }

@@ -1,4 +1,6 @@
 'use client';
+import { MonthlyRevenueChart } from '@/modules/crm/components/MonthlyRevenueChart';
+import { SalesAnalyticsChart } from '@/modules/crm/components/SalesAnalyticsChart';
 import { currencyFormatter } from "@/lib/currency";
 
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
@@ -138,5 +140,5 @@ export default function CrmDashboardPage() {
           </Card>
         </div>
       </div>
-    </div>);
+<div className="grid min-w-0 grid-cols-1 gap-6 xl:grid-cols-2"><MonthlyRevenueChart /><SalesAnalyticsChart /></div>    </div>);
 }

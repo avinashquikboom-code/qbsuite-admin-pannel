@@ -2,6 +2,7 @@
 import { formatCurrency } from "@/lib/currency";
 
 
+import { BusinessAnalyticsGrid } from '@/components/dashboard/BusinessAnalyticsGrid';
 import * as React from 'react';
 import {
     faBullseye,
@@ -83,6 +84,7 @@ export default function AdminDashboardPage() {
                 <TaskSummaryCards />
             </div>
 
+            <BusinessAnalyticsGrid />
             <RecentLeadsTable />
 
             {/* Performance + Activity */}

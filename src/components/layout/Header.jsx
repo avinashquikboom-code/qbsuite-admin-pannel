@@ -9,7 +9,7 @@ import { faBars, faBell, faBuilding, faCheckDouble, faGear, faMagnifyingGlass, f
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Input } from '@/components/common/Input';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/common/Drawer';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/common/Drawer';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from '@/components/common/Dropdown';
 import { Popover, PopoverContent, PopoverTrigger, } from '@/components/common/Popover';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
@@ -98,7 +98,7 @@ export function Header() {
           <SheetTrigger className="inline-flex size-9 items-center justify-center rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 lg:hidden" aria-label="Open Navigation">
             <FontAwesomeIcon icon={faBars} className="size-5"/>
           </SheetTrigger>
-          <SheetContent aria-label="Navigation" side="left" className="p-0 w-72 max-w-[80vw]">
+          <SheetContent aria-label="Navigation" side="left" className="p-0 w-72 max-w-[80vw]"><SheetTitle className="sr-only">Main navigation</SheetTitle><SheetDescription className="sr-only">Choose a QB Suite module or page.</SheetDescription>
             <Sidebar onNavigate={() => setMobileOpen(false)} className="w-full border-none"/>
           </SheetContent>
         </Sheet>

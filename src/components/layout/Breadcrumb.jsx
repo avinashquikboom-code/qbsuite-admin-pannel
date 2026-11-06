@@ -1,81 +1,16 @@
-'use client';
-import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
-import * as React from 'react';
+"use client";
+import { Fragment } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { faChevronRight, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { Breadcrumb as Root, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+const names = { hrm: 'HRM', crm: 'CRM', 'salary-slips': 'Salary Slips', 'meta-integration': 'Meta Integration' };
 export function Breadcrumb() {
-    const pathname = usePathname();
-    const pathSegments = pathname.split('/').filter(Boolean);
-    const getSegmentName = (segment) => {
-        switch (segment) {
-            case 'admin':
-                return 'Admin';
-            case 'dashboard':
-                return 'Dashboard';
-            case 'hrm':
-                return 'HRM';
-            case 'crm':
-                return 'CRM';
-            case 'suite':
-                return 'Suite Overview';
-            case 'employees':
-                return 'Employees';
-            case 'attendance':
-                return 'Attendance';
-            case 'break-management':
-                return 'Break Management';
-            case 'overtime':
-                return 'Overtime Approvals';
-            case 'expense-claims':
-            case 'expenses':
-                return 'Expense Claims';
-            case 'leaves':
-                return 'Leave Management';
-            case 'payroll':
-                return 'Payroll';
-            case 'salary-slips':
-                return 'Salary Slips';
-            case 'announcements':
-                return 'Announcements';
-            case 'leads':
-                return 'Leads';
-            case 'customers':
-            case 'contacts':
-                return 'Customers';
-            case 'campaigns':
-                return 'Campaigns';
-            case 'whatsapp':
-                return 'WhatsApp Marketing';
-            case 'meta-integration':
-                return 'Meta Integration';
-            case 'reports':
-                return 'Reports & Analytics';
-            case 'settings':
-                return 'Settings';
-            default:
-                return segment.charAt(0).toUpperCase() + segment.slice(1);
-        }
-    };
-    return (<nav className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-      <Link href="/" className="flex items-center gap-1 text-slate-500 hover:text-brand-dark transition-colors">
-        <FontAwesomeIcon icon={faHouse} className="size-3.5 text-slate-400"/>
-        <span className="hidden sm:inline">QB Suite</span>
-      </Link>
-
-      {pathSegments.length > 0 && (<FontAwesomeIcon icon={faChevronRight} className="size-3.5 text-slate-400 shrink-0"/>)}
-
-      {pathSegments.map((segment, index) => {
-            const url = `/${pathSegments.slice(0, index + 1).join('/')}`;
-            const isLast = index === pathSegments.length - 1;
-            return (<React.Fragment key={url}>
-            {isLast ? (<span className="font-semibold text-slate-800">
-                {getSegmentName(segment)}
-              </span>) : (<Link href={url} className="text-slate-500 hover:text-brand-dark transition-colors">
-                {getSegmentName(segment)}
-              </Link>)}
-            {!isLast && (<FontAwesomeIcon icon={faChevronRight} className="size-3.5 text-slate-400 shrink-0"/>)}
-          </React.Fragment>);
-        })}
-    </nav>);
+  const segments = usePathname().split('/').filter(Boolean);
+  return <Root className="min-w-0"><BreadcrumbList className="flex-wrap text-xs">
+    <BreadcrumbItem><BreadcrumbLink render={<Link href="/admin/dashboard" />}>QB Suite</BreadcrumbLink></BreadcrumbItem>
+    {segments.map((segment, index) => <Fragment key={index}><BreadcrumbSeparator /><BreadcrumbItem>
+      {index === segments.length - 1 ? <BreadcrumbPage>{names[segment] || segment.replaceAll('-', ' ')}</BreadcrumbPage> :
+        <BreadcrumbLink render={<Link href={'/' + segments.slice(0, index + 1).join('/')} />}>{names[segment] || segment}</BreadcrumbLink>}
+    </BreadcrumbItem></Fragment>)}
+  </BreadcrumbList></Root>;
 }

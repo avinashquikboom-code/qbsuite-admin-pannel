@@ -1,4 +1,6 @@
 'use client';
+import { EmployeePerformanceChart } from '@/modules/hrm/components/EmployeePerformanceChart';
+import { PayrollAnalyticsChart } from '@/modules/hrm/components/PayrollAnalyticsChart';
 import { formatCurrency } from "@/lib/currency";
 
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
@@ -49,5 +51,5 @@ export default function HrmDashboardPage() {
         <AttendanceChart />
         <RecentActivity />
       </div>
-    </div>);
+<div className="grid min-w-0 grid-cols-1 gap-6 xl:grid-cols-2"><EmployeePerformanceChart /><PayrollAnalyticsChart /></div>    </div>);
 }
