@@ -987,6 +987,141 @@ export const mockDepartments = [
     'Operations',
 ];
 // ----------------------------------------------------
+// ADMIN DASHBOARD MOCK DATA
+// ----------------------------------------------------
+export const mockDashboardKpi = {
+    totalEmployees: 148,
+    totalEmployeesChange: '+12%',
+    activeLeads: 34,
+    activeLeadsChange: '+8.2%',
+    totalCustomers: 57,
+    totalCustomersChange: '+5.4%',
+    monthSales: 118500,
+    monthSalesChange: '+18.4%',
+};
+export const mockAttendanceOverview = {
+    present: 132,
+    onLeave: 4,
+    absent: 7,
+    notCheckedIn: 5,
+    attendancePercentage: 89.2,
+};
+export const mockLeadsTrend = [
+    { date: 'Mar 11', leads: 3 },
+    { date: 'Mar 12', leads: 5 },
+    { date: 'Mar 13', leads: 2 },
+    { date: 'Mar 14', leads: 6 },
+    { date: 'Mar 15', leads: 4 },
+    { date: 'Mar 16', leads: 7 },
+    { date: 'Mar 17', leads: 3 },
+    { date: 'Mar 18', leads: 8 },
+    { date: 'Mar 19', leads: 5 },
+    { date: 'Mar 20', leads: 9 },
+    { date: 'Mar 21', leads: 6 },
+    { date: 'Mar 22', leads: 4 },
+    { date: 'Mar 23', leads: 10 },
+    { date: 'Mar 24', leads: 7 },
+];
+export const mockLeadPipelineStages = [
+    { stage: 'New', count: 12 },
+    { stage: 'Contacted', count: 9 },
+    { stage: 'Interested', count: 6 },
+    { stage: 'Proposal', count: 4 },
+    { stage: 'Converted', count: 3 },
+];
+export const mockTaskSummary = {
+    total: 128,
+    inProgress: 42,
+    completed: 74,
+    overdue: 12,
+};
+export const mockTopPerformers = [
+    {
+        id: 'EMP-1001',
+        name: 'Sarah Jenkins',
+        designation: 'Staff Software Architect',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
+        revenue: 84500,
+        conversions: 12,
+    },
+    {
+        id: 'EMP-1002',
+        name: 'Alexander Vance',
+        designation: 'Senior Frontend Engineer',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
+        revenue: 76200,
+        conversions: 10,
+    },
+    {
+        id: 'EMP-1003',
+        name: 'Priya Sharma',
+        designation: 'Sales Lead',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
+        revenue: 68900,
+        conversions: 9,
+    },
+    {
+        id: 'EMP-1004',
+        name: 'Marcus Reid',
+        designation: 'Account Executive',
+        avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150',
+        revenue: 54300,
+        conversions: 7,
+    },
+    {
+        id: 'EMP-1005',
+        name: 'Elena Rodriguez',
+        designation: 'Customer Success Manager',
+        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150',
+        revenue: 47800,
+        conversions: 6,
+    },
+];
+export const mockActivityTimeline = [
+    {
+        id: 'ACT-1',
+        type: 'checkin',
+        description: 'Checked in at San Francisco HQ',
+        employeeName: 'Sarah Jenkins',
+        timestamp: '09:02 AM',
+    },
+    {
+        id: 'ACT-2',
+        type: 'lead',
+        description: 'New lead added: Catherine Morales (Apex Cloud Solutions)',
+        employeeName: 'Liam Chen',
+        timestamp: '10:15 AM',
+    },
+    {
+        id: 'ACT-3',
+        type: 'leave',
+        description: 'Leave request submitted for Apr 3 – Apr 5',
+        employeeName: 'Priya Sharma',
+        timestamp: '11:40 AM',
+    },
+    {
+        id: 'ACT-4',
+        type: 'payroll',
+        description: 'Salary slip generated for March 2026',
+        employeeName: 'System',
+        timestamp: '12:00 PM',
+    },
+    {
+        id: 'ACT-5',
+        type: 'lead',
+        description: 'Lead Zoe Katsaros converted to Deal DEAL-804',
+        employeeName: 'Liam Chen',
+        timestamp: '01:25 PM',
+    },
+    {
+        id: 'ACT-6',
+        type: 'checkin',
+        description: 'Checked in remotely (Austin, TX)',
+        employeeName: 'Alexander Vance',
+        timestamp: '02:10 PM',
+    },
+];
+// ----------------------------------------------------
 // CRM MODULE MOCK DATA
 // ----------------------------------------------------
 export * from '@/modules/crm/services/mock-data';
