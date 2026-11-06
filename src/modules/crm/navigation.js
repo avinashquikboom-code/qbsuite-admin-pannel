@@ -1,5 +1,4 @@
-import { faBullhorn, faChartLine, faGauge, faUserGroup, faUsers } from '@fortawesome/free-solid-svg-icons';
-import { faMeta, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faAddressBook, faBuilding, faChartLine, faGauge, faHandshake, faListCheck, faShieldHalved, faUserCheck, faUserGroup, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { mockCrmKpiData } from '@/modules/crm/services/mock-data';
 export const navigation = [
         {
@@ -20,25 +19,43 @@ export const navigation = [
             icon: faUserGroup,
         },
         {
-            name: 'Campaigns',
-            href: '/admin/crm/campaigns',
-            icon: faBullhorn,
-        },
-        {
-            name: 'WhatsApp',
-            href: '/admin/crm/whatsapp',
-            icon: faWhatsapp,
-            badge: 'Live',
-            badgeVariant: 'green',
-        },
-        {
-            name: 'Meta Integration',
-            href: '/admin/crm/meta-integration',
-            icon: faMeta,
-        },
-        {
             name: 'CRM Reports',
             href: '/admin/crm/reports',
+            icon: faChartLine,
+        },
+        {
+            name: 'Lead Limits',
+            href: '/admin/sections/lead-limits',
+            icon: faShieldHalved,
+        },
+        {
+            name: 'Contacts',
+            href: '/admin/sections/contacts',
+            icon: faAddressBook,
+        },
+        {
+            name: 'Companies',
+            href: '/admin/sections/companies',
+            icon: faBuilding,
+        },
+        {
+            name: 'Deals',
+            href: '/admin/sections/deals',
+            icon: faHandshake,
+        },
+        {
+            name: 'Visits',
+            href: '/admin/sections/visits',
+            icon: faUserCheck,
+        },
+        {
+            name: 'Tasks',
+            href: '/admin/sections/tasks',
+            icon: faListCheck,
+        },
+        {
+            name: 'Activities',
+            href: '/admin/sections/activities',
             icon: faChartLine,
         },
     ];
