@@ -98,23 +98,13 @@ export const contentNavigation = [
 ];
 
 export const settingsNavigation = [
-    { name: 'Settings Overview', href: '/admin/settings', icon: faGear, matchExact: true },
+    { name: 'General Settings', href: '/admin/settings', icon: faGear, matchExact: true },
+    { name: 'Company Settings', href: '/admin/sections/company-settings', icon: faBuilding },
+    { name: 'User Management', href: '/admin/sections/user-management', icon: faUsers },
+    { name: 'Roles & Permissions', href: '/admin/sections/permissions', icon: faShieldHalved },
+    { name: 'Integrations', href: '/admin/settings/integrations', icon: faBolt },
+    { name: 'Notifications', href: '/admin/sections/notification-center', icon: faBell },
     { name: 'Data Management', href: '/admin/settings/data-management', icon: faTrash },
-    { name: 'Notification Center', href: '/admin/sections/notification-center', icon: faBell },
     { name: 'Commission Settings', href: '/admin/sections/commission-settings', icon: faCreditCard },
-    {
-        name: 'Integrations',
-        icon: faBolt,
-        children: [
-            { name: 'Campaigns', href: '/admin/crm/campaigns', icon: faBullhorn },
-            {
-                name: 'WhatsApp',
-                href: '/admin/crm/whatsapp',
-                icon: faWhatsapp,
-                badge: 'Live',
-                badgeVariant: 'green',
-            },
-        ],
-    },
     { name: 'Activity Logs', href: '/admin/sections/activity-logs', icon: faChartBar },
 ];

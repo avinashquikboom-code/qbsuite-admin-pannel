@@ -4,6 +4,20 @@ import * as React from 'react';
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import { cn } from '@/lib/utils';
 
+function isFontAwesomeIconDefinition(icon) {
+    return Boolean(icon && typeof icon === 'object' && 'iconName' in icon);
+}
+
+function KpiCardIcon({ icon, className }) {
+    if (!icon) {
+        return null;
+    }
+    if (isFontAwesomeIconDefinition(icon)) {
+        return <FontAwesomeIcon icon={icon} className={className} />;
+    }
+    return React.createElement(icon, { className, strokeWidth: 2, 'aria-hidden': true });
+}
+
 export function KpiCard({
     title,
     value,
@@ -64,7 +78,7 @@ export function KpiCard({
                             iconColor
                         )}
                     >
-                        <FontAwesomeIcon icon={icon} className="size-5" />
+                        <KpiCardIcon icon={icon} className="size-5" />
                     </div>
                 )}
             </div>

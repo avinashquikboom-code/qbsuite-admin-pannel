@@ -14,12 +14,13 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { SegmentedTabs } from '@/components/ui/segmented-tabs';
 import { PermanentDeleteDialog } from '@/components/data-management/PermanentDeleteDialog';
 import {
-  fetchDataManagementOverview,
-  fetchDataManagementModules,
-  fetchDataManagementHistory,
-  postDeletionPreview,
-  postDeletionExecute,
-} from '@/lib/api/data-management-client';
+  UI_ONLY_NOTICE,
+  buildLocalDeletionPreview,
+  buildLocalExecuteResult,
+  createLocalHistoryEntry,
+  getLocalModules,
+  getLocalOverview,
+} from '@/lib/data-management/local-data-management';
 
 const MODES = [
   { value: 'modules', label: 'Selected modules' },
@@ -46,26 +47,16 @@ export default function DataManagementPage() {
 
   const resolvedCustomer = customerId.trim() || undefined;
 
-  const load = React.useCallback(async () => {
+  const load = React.useCallback(() => {
     setLoading(true);
-    try {
-      const [ov, mods, hist] = await Promise.all([
-        fetchDataManagementOverview(resolvedCustomer),
-        fetchDataManagementModules(resolvedCustomer),
-        fetchDataManagementHistory(resolvedCustomer),
-      ]);
-      setOverview(ov);
-      setModules(mods.modules || []);
-      setHistory(hist || []);
-      if (!customerId && ov?.customerId) {
-        setCustomerId(String(ov.customerId));
-      }
-    } catch (err) {
-      toast.error(err.message || 'Failed to load data management.');
-      setOverview(null);
-    } finally {
-      setLoading(false);
+    const ov = getLocalOverview(resolvedCustomer);
+    const mods = getLocalModules();
+    setOverview(ov);
+    setModules(mods.modules || []);
+    if (!customerId && ov?.customerId) {
+      setCustomerId(String(ov.customerId));
     }
+    setLoading(false);
   }, [resolvedCustomer, customerId]);
 
   React.useEffect(() => {
@@ -102,7 +93,7 @@ export default function DataManagementPage() {
     setPreview(null);
   };
 
-  const runPreview = async () => {
+  const runPreview = () => {
     const payload = {
       mode,
       modules: mode === 'all' ? undefined : [...selected],
@@ -119,45 +110,35 @@ export default function DataManagementPage() {
     setPreviewLoading(true);
     setPreview(null);
     try {
-      const result = await postDeletionPreview(resolvedCustomer, payload);
+      const result = buildLocalDeletionPreview(payload);
       setPreview(result);
-      if (!result.canConfirm) {
-        toast.warning('Preview loaded with restrictions. Confirm may stay disabled.');
-      } else {
-        toast.success('Deletion preview ready.');
-      }
+      toast.info(UI_ONLY_NOTICE);
+      toast.success('Deletion preview ready (UI only).');
     } catch (err) {
-      toast.error(err.message || 'Preview failed.');
+      toast.error(err instanceof Error ? err.message : 'Preview failed.');
     } finally {
       setPreviewLoading(false);
     }
   };
 
-  const executeDelete = async ({ acknowledgePermanent, confirmation }) => {
+  const executeDelete = ({ acknowledgePermanent, confirmation }) => {
     if (!preview?.previewId) {
       toast.error('Valid preview required.');
       return;
     }
+    if (!acknowledgePermanent || !confirmation) {
+      return;
+    }
     setExecuting(true);
     try {
-      const result = await postDeletionExecute(resolvedCustomer, {
-        previewId: preview.previewId,
-        acknowledgePermanent,
-        confirmation,
-        requireBackup: false,
-        reason: 'QB Suite Super Admin permanent deletion',
-      });
-      toast.success(
-        result.status === 'PARTIAL'
-          ? `Deletion completed with ${result.failedModules} module failure(s).`
-          : `Deleted ${result.recordsDeleted?.toLocaleString() ?? 0} records.`,
-      );
+      const result = buildLocalExecuteResult(preview);
+      setHistory((prev) => [createLocalHistoryEntry(preview), ...prev]);
+      toast.info(result.message);
+      toast.success('Flow completed in UI only — no data was deleted.');
       setDeleteOpen(false);
       setPreview(null);
       setSelected(new Set());
-      await load();
-    } catch (err) {
-      toast.error(err.message || 'Deletion failed.');
+      load();
     } finally {
       setExecuting(false);
     }
@@ -243,7 +224,7 @@ export default function DataManagementPage() {
     <div className="flex flex-col gap-6 p-4 md:p-6">
       <PageHeader
         title="Data Management"
-        description="Preview and permanently delete tenant business data from PostgreSQL. Super Admin only — backend authorization required on every action."
+        description="Preview deletion scope and workflows (UI only). Backend connection for live counts and permanent delete is not enabled in this phase."
         category="DATA GOVERNANCE"
         badge="Destructive"
         badgeVariant="default"
@@ -279,6 +260,10 @@ export default function DataManagementPage() {
       </div>
 
       <KpiGrid cards={kpis} />
+
+      <p className="rounded-xl border border-amber-200/80 bg-amber-50/90 px-4 py-3 text-xs text-amber-950">
+        {UI_ONLY_NOTICE}
+      </p>
 
       {overview?.lastDeletionOperation ? (
         <Card className="border-slate-200 p-4 text-sm text-slate-600">
