@@ -6,11 +6,10 @@ import * as React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { faBars, faBell, faBuilding, faCheckDouble, faGear, faMagnifyingGlass, faRightFromBracket, faTableCellsLarge, faUserTie, faUsers } from '@fortawesome/free-solid-svg-icons';
-import { Breadcrumb } from '@/components/layout/Breadcrumb';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Input } from '@/components/common/Input';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/common/Drawer';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from '@/components/common/Dropdown';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from '@/components/common/Dropdown';
 import { Popover, PopoverContent, PopoverTrigger, } from '@/components/common/Popover';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
 import { Badge } from '@/components/common/Badge';
@@ -74,7 +73,7 @@ export function Header() {
         }
     };
     return (<header className="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-slate-200/80 bg-white/95 px-4 backdrop-blur-sm sm:px-6">
-      {/* Left: Mobile hamburger + Breadcrumb */}
+      {/* Left: Mobile hamburger & Sidebar toggle */}
       <div className="flex items-center gap-3">
         {/* Mobile Sidebar Trigger */}
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -82,7 +81,9 @@ export function Header() {
             <FontAwesomeIcon icon={faBars} className="size-5"/>
           </SheetTrigger>
           <SheetContent aria-label="Navigation" side="left" className="p-0 w-72 max-w-[80vw]"><SheetTitle className="sr-only">Main navigation</SheetTitle><SheetDescription className="sr-only">Choose a QB Suite module or page.</SheetDescription>
-            <Sidebar onNavigate={() => setMobileOpen(false)} className="w-full border-none"/>
+            <React.Suspense fallback={null}>
+              <Sidebar onNavigate={() => setMobileOpen(false)} className="w-full border-none"/>
+            </React.Suspense>
           </SheetContent>
         </Sheet>
 
@@ -95,10 +96,6 @@ export function Header() {
         >
           <FontAwesomeIcon icon={faBars} className="size-4.5" />
         </button>
-
-        <div className="hidden sm:block">
-          <Breadcrumb />
-        </div>
       </div>
 
       {/* Right: Search, Notifications & User Avatar */}
@@ -172,30 +169,33 @@ export function Header() {
           </DropdownMenuTrigger>
 
           <DropdownMenuContent align="end" className="w-56 bg-white border border-slate-200 shadow-xl rounded-xl p-1.5">
-            <DropdownMenuLabel className="px-2 py-1.5">
-              <div className="flex flex-col">
-                <span className="text-xs font-semibold text-slate-900">
-                  Alexander Vance
-                </span>
-                <span className="text-[11px] text-slate-500">
-                  alexander.vance@qbsuite.com
-                </span>
-              </div>
-            </DropdownMenuLabel>
+            <DropdownMenuGroup>
+              <DropdownMenuLabel className="px-2 py-1.5">
+                <div className="flex flex-col">
+                  <span className="text-xs font-semibold text-slate-900">
+                    Alexander Vance
+                  </span>
+                  <span className="text-[11px] text-slate-500">
+                    alexander.vance@qbsuite.com
+                  </span>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuItem onClick={() => router.push('/admin/hrm/employees')} className="text-xs p-2 rounded-lg cursor-pointer text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+                <FontAwesomeIcon icon={faUserTie} className="size-4 text-slate-500"/>
+                <span>Admin Profile</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push('/admin/settings')} className="text-xs p-2 rounded-lg cursor-pointer text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+                <FontAwesomeIcon icon={faGear} className="size-4 text-slate-500"/>
+                <span>System Settings</span>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
             <DropdownMenuSeparator className="bg-slate-100 my-1"/>
-            <DropdownMenuItem onClick={() => router.push('/admin/hrm/employees')} className="text-xs p-2 rounded-lg cursor-pointer text-slate-700 hover:bg-slate-50 flex items-center gap-2">
-              <FontAwesomeIcon icon={faUserTie} className="size-4 text-slate-500"/>
-              <span>Admin Profile</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => router.push('/admin/settings')} className="text-xs p-2 rounded-lg cursor-pointer text-slate-700 hover:bg-slate-50 flex items-center gap-2">
-              <FontAwesomeIcon icon={faGear} className="size-4 text-slate-500"/>
-              <span>System Settings</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator className="bg-slate-100 my-1"/>
-            <DropdownMenuItem onClick={() => toast.success('Signed out successfully')} className="text-xs p-2 rounded-lg cursor-pointer text-rose-600 hover:bg-rose-50 flex items-center gap-2">
-              <FontAwesomeIcon icon={faRightFromBracket} className="size-4 text-rose-500"/>
-              <span>Sign out</span>
-            </DropdownMenuItem>
+            <DropdownMenuGroup>
+              <DropdownMenuItem onClick={() => toast.success('Signed out successfully')} className="text-xs p-2 rounded-lg cursor-pointer text-rose-600 hover:bg-rose-50 flex items-center gap-2">
+                <FontAwesomeIcon icon={faRightFromBracket} className="size-4 text-rose-500"/>
+                <span>Sign out</span>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
