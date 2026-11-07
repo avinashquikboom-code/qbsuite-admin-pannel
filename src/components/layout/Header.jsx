@@ -14,6 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger, } from '@/components/common/Po
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
 import { Badge } from '@/components/common/Badge';
 import { toast } from '@/hooks/use-toast';
+import { logoutAdmin } from '@/lib/auth/admin-login';
 import { useSidebarStore } from '@/hooks/use-sidebar-store';
 export function Header() {
     const router = useRouter();
@@ -191,7 +192,11 @@ export function Header() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator className="bg-slate-100 my-1"/>
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => toast.success('Signed out successfully')} className="text-xs p-2 rounded-lg cursor-pointer text-rose-600 hover:bg-rose-50 flex items-center gap-2">
+              <DropdownMenuItem onClick={async () => {
+                await logoutAdmin();
+                toast.success('Signed out successfully');
+                router.push('/login');
+              }} className="text-xs p-2 rounded-lg cursor-pointer text-rose-600 hover:bg-rose-50 flex items-center gap-2">
                 <FontAwesomeIcon icon={faRightFromBracket} className="size-4 text-rose-500"/>
                 <span>Sign out</span>
               </DropdownMenuItem>

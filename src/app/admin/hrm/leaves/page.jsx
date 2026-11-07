@@ -4,7 +4,7 @@ import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { DataTable } from '@/components/common/DataTable';
 import { StatusBadge } from '@/components/common/StatusBadge';
-import { ConfirmDialog } from '@/components/common/ConfirmDialog';
+import { RequestDecisionDialogSwitch } from '@/components/approval';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
 import { Button } from '@/components/common/Button';
 import { Badge } from '@/components/common/Badge';
@@ -83,6 +83,8 @@ export default function LeaveManagementPage() {
         type: null,
         item: null,
     });
+    const [reviewNote, setReviewNote] = React.useState('');
+    const [submitting, setSubmitting] = React.useState(false);
     const [applyDialogOpen, setApplyDialogOpen] = React.useState(false);
     const [formData, setFormData] = React.useState({
         employeeName: 'Marcus Sterling',
@@ -103,6 +105,7 @@ export default function LeaveManagementPage() {
         });
     }, [leaves, search, selectedType, selectedStatus]);
     const handleApprove = (item) => {
+        setReviewNote('');
         setConfirmDialog({
             open: true,
             type: 'approve',
@@ -110,26 +113,54 @@ export default function LeaveManagementPage() {
         });
     };
     const handleReject = (item) => {
+        setReviewNote('');
         setConfirmDialog({
             open: true,
             type: 'reject',
             item,
         });
     };
-    const handleConfirmAction = () => {
-        if (!confirmDialog.item || !confirmDialog.type)
+    const handleSubmitDecision = async (note) => {
+        if (!confirmDialog.item || !confirmDialog.type) {
             return;
-        const isApprove = confirmDialog.type === 'approve';
-        setLeaves((prev) => prev.map((l) => l.id === confirmDialog.item.id
-            ? { ...l, status: isApprove ? 'approved' : 'rejected' }
-            : l));
-        if (isApprove) {
-            toast.success(`Leave Approved for ${confirmDialog.item.employeeName}`, {
-                description: `${confirmDialog.item.totalDays} day(s) deducted from balance.`,
-            });
         }
-        else {
-            toast.error(`Leave Request Rejected for ${confirmDialog.item.employeeName}`);
+        if (confirmDialog.item.status !== 'pending') {
+            toast.error('This leave request was already processed.');
+            throw new Error('already-processed');
+        }
+        const item = confirmDialog.item;
+        const isApprove = confirmDialog.type === 'approve';
+        setSubmitting(true);
+        try {
+            await new Promise((resolve) => {
+                setTimeout(resolve, 320);
+            });
+            setLeaves((prev) => prev.map((l) => l.id === item.id
+                ? {
+                    ...l,
+                    status: isApprove ? 'approved' : 'rejected',
+                    reviewNote: note || undefined,
+                }
+                : l));
+            if (isApprove) {
+                toast.success(`Leave Approved for ${item.employeeName}`, {
+                    description: `${item.totalDays} day(s) deducted from balance.`,
+                });
+            }
+            else {
+                toast.error(`Leave Request Rejected for ${item.employeeName}`);
+            }
+            setConfirmDialog({ open: false, type: null, item: null });
+            setReviewNote('');
+        }
+        catch (error) {
+            if (error?.message !== 'already-processed') {
+                toast.error('Unable to update leave request. Please try again.');
+                throw error;
+            }
+        }
+        finally {
+            setSubmitting(false);
         }
     };
     const handleApplyLeave = (e) => {
@@ -327,12 +358,21 @@ export default function LeaveManagementPage() {
       {/* Table */}
       <DataTable columns={columns} data={filtered} pageSize={8} emptyState={<div className="py-8 text-center text-slate-500">No leave applications found.</div>}/>
 
-      {/* Approve / Reject Dialog */}
-      <ConfirmDialog open={confirmDialog.open} onOpenChange={(open) => setConfirmDialog((prev) => ({ ...prev, open }))} title={confirmDialog.type === 'approve'
-            ? `Approve Leave Application (${confirmDialog.item?.totalDays} Days)`
-            : `Reject Leave Application`} description={confirmDialog.type === 'approve'
-            ? `Grant ${confirmDialog.item?.totalDays} day(s) ${confirmDialog.item?.leaveType} to ${confirmDialog.item?.employeeName} from ${confirmDialog.item?.startDate} to ${confirmDialog.item?.endDate}.`
-            : `Decline leave application for ${confirmDialog.item?.employeeName}.`} variant={confirmDialog.type === 'approve' ? 'success' : 'destructive'} confirmLabel={confirmDialog.type === 'approve' ? 'Approve Leave' : 'Reject Leave'} onConfirm={handleConfirmAction}/>
+      <RequestDecisionDialogSwitch
+        open={confirmDialog.open}
+        onOpenChange={(open) => {
+          if (!submitting) {
+            setConfirmDialog((prev) => ({ ...prev, open }));
+          }
+        }}
+        mode={confirmDialog.type}
+        requestType="leave"
+        item={confirmDialog.item}
+        note={reviewNote}
+        onNoteChange={setReviewNote}
+        loading={submitting}
+        onSubmit={handleSubmitDecision}
+      />
 
       {/* Apply Leave FormDrawer */}
       <FormDrawer

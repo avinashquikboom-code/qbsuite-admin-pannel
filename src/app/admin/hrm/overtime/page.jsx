@@ -6,7 +6,7 @@ import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { OvertimeTable } from '@/modules/hrm/components/overtime/OvertimeTable';
 import { OvertimeActions } from '@/modules/hrm/components/overtime/OvertimeActions';
-import { ConfirmDialog } from '@/components/common/ConfirmDialog';
+import { RequestDecisionDialogSwitch } from '@/components/approval';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/common/Drawer';
 import { Button } from '@/components/common/Button';
 import { mockOvertimeRequests } from '@/lib/mock-data';
@@ -24,6 +24,7 @@ export default function OvertimePage() {
     });
     // Review note for approval/rejection
     const [reviewNote, setReviewNote] = React.useState('');
+    const [submitting, setSubmitting] = React.useState(false);
     // Details dialog
     const [detailsItem, setDetailsItem] = React.useState(null);
     const counts = {
@@ -57,27 +58,50 @@ export default function OvertimePage() {
             item: req,
         });
     };
-    const handleConfirmAction = () => {
-        if (!confirmDialog.item || !confirmDialog.type)
+    const handleSubmitDecision = async (note) => {
+        if (!confirmDialog.item || !confirmDialog.type) {
             return;
-        const isApprove = confirmDialog.type === 'approve';
-        const updatedStatus = isApprove ? 'approved' : 'rejected';
-        setRequests((prev) => prev.map((r) => r.id === confirmDialog.item.id
-            ? {
-                ...r,
-                status: updatedStatus,
-                reviewedBy: 'Alexander Vance',
-                reviewDate: new Date().toISOString().split('T')[0],
-                reviewNote: reviewNote || (isApprove ? 'Approved by Admin' : 'Rejected by Admin'),
-            }
-            : r));
-        if (isApprove) {
-            toast.success(`Overtime Approved for ${confirmDialog.item.employeeName}`, {
-                description: `${confirmDialog.item.hours}h credited (${formatCurrency(confirmDialog.item.estimatedAmount)}).`,
-            });
         }
-        else {
-            toast.error(`Overtime Rejected for ${confirmDialog.item.employeeName}`);
+        if (confirmDialog.item.status !== 'pending') {
+            toast.error('This overtime request was already processed.');
+            throw new Error('already-processed');
+        }
+        const item = confirmDialog.item;
+        const isApprove = confirmDialog.type === 'approve';
+        setSubmitting(true);
+        try {
+            await new Promise((resolve) => {
+                setTimeout(resolve, 320);
+            });
+            const updatedStatus = isApprove ? 'approved' : 'rejected';
+            setRequests((prev) => prev.map((r) => r.id === item.id
+                ? {
+                    ...r,
+                    status: updatedStatus,
+                    reviewedBy: 'Alexander Vance',
+                    reviewDate: new Date().toISOString().split('T')[0],
+                    reviewNote: note || (isApprove ? 'Approved by Admin' : 'Rejected by Admin'),
+                }
+                : r));
+            if (isApprove) {
+                toast.success(`Overtime Approved for ${item.employeeName}`, {
+                    description: `${item.hours}h credited (${formatCurrency(item.estimatedAmount)}).`,
+                });
+            }
+            else {
+                toast.error(`Overtime Rejected for ${item.employeeName}`);
+            }
+            setConfirmDialog({ open: false, type: null, item: null });
+            setReviewNote('');
+        }
+        catch (error) {
+            if (error?.message !== 'already-processed') {
+                toast.error('Unable to update overtime request. Please try again.');
+                throw error;
+            }
+        }
+        finally {
+            setSubmitting(false);
         }
     };
     const totalHours = requests
@@ -137,18 +161,21 @@ export default function OvertimePage() {
       {/* Overtime Table */}
       <OvertimeTable records={filtered} onApprove={handleApprove} onReject={handleReject} onViewDetails={(req) => setDetailsItem(req)}/>
 
-      {/* Confirmation Dialog */}
-      <ConfirmDialog open={confirmDialog.open} onOpenChange={(open) => setConfirmDialog((prev) => ({ ...prev, open }))} title={confirmDialog.type === 'approve'
-            ? `Approve Overtime (${confirmDialog.item?.hours}h)`
-            : `Reject Overtime Request`} description={confirmDialog.type === 'approve'
-            ? `Authorize payment of ${formatCurrency(confirmDialog.item?.estimatedAmount)} for ${confirmDialog.item?.employeeName} under project "${confirmDialog.item?.project}".`
-            : `Decline overtime request for ${confirmDialog.item?.employeeName}. Please provide a rejection reason.`} variant={confirmDialog.type === 'approve' ? 'success' : 'destructive'} confirmLabel={confirmDialog.type === 'approve' ? 'Approve & Credit' : 'Reject Request'} note={{
-            label: confirmDialog.type === 'approve' ? 'Optional Manager Note' : 'Reason for Rejection',
-            placeholder: confirmDialog.type === 'approve' ? 'e.g. Critical release crunch approved.' : 'e.g. Prior authorization required.',
-            value: reviewNote,
-            onChange: setReviewNote,
-            required: confirmDialog.type === 'reject',
-        }} onConfirm={handleConfirmAction}/>
+      <RequestDecisionDialogSwitch
+        open={confirmDialog.open}
+        onOpenChange={(open) => {
+          if (!submitting) {
+            setConfirmDialog((prev) => ({ ...prev, open }));
+          }
+        }}
+        mode={confirmDialog.type}
+        requestType="overtime"
+        item={confirmDialog.item}
+        note={reviewNote}
+        onNoteChange={setReviewNote}
+        loading={submitting}
+        onSubmit={handleSubmitDecision}
+      />
 
       {/* Item Details Drawer */}
       <Sheet open={!!detailsItem} onOpenChange={() => setDetailsItem(null)}>

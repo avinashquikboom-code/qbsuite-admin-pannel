@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/common/Ta
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar';
 import { Button } from '@/components/common/Button';
 import { StatusBadge } from '@/components/common/StatusBadge';
-import { ConfirmDialog } from '@/components/common/ConfirmDialog';
+import { RequestDecisionDialogSwitch } from '@/components/approval';
 import { mockOvertimeRequests, mockExpenseClaims, mockAnnouncements, } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
 import { faArrowRight, faBullhorn, faCheck, faClock, faIndianRupeeSign, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -19,28 +19,84 @@ export function RecentActivity() {
     // Dialog state
     const [dialogState, setDialogState] = React.useState({
         open: false,
-        type: null,
+        mode: null,
+        requestType: null,
         item: null,
     });
-    const handleApproveOt = (ot) => {
-        setOvertimes((prev) => prev.map((o) => (o.id === ot.id ? { ...o, status: 'approved' } : o)));
-        toast.success(`Overtime Approved for ${ot.employeeName}`, {
-            description: `${ot.hours} hrs (${formatCurrency(ot.estimatedAmount)}) credited.`,
+    const [reviewNote, setReviewNote] = React.useState('');
+    const [submitting, setSubmitting] = React.useState(false);
+
+    const openDecision = (mode, requestType, item) => {
+        setReviewNote('');
+        setDialogState({
+            open: true,
+            mode,
+            requestType,
+            item,
         });
     };
-    const handleRejectOt = (ot) => {
-        setOvertimes((prev) => prev.map((o) => (o.id === ot.id ? { ...o, status: 'rejected' } : o)));
-        toast.error(`Overtime Rejected for ${ot.employeeName}`);
-    };
-    const handleApproveExp = (exp) => {
-        setExpenses((prev) => prev.map((e) => (e.id === exp.id ? { ...e, status: 'approved' } : e)));
-        toast.success(`Claim Approved for ${exp.employeeName}`, {
-            description: `${formatCurrency(exp.amount)} approved for reimbursement.`,
-        });
-    };
-    const handleRejectExp = (exp) => {
-        setExpenses((prev) => prev.map((e) => (e.id === exp.id ? { ...e, status: 'rejected' } : e)));
-        toast.error(`Claim Rejected for ${exp.employeeName}`);
+
+    const handleSubmitDecision = async (note) => {
+        const { mode, requestType, item } = dialogState;
+        if (!item || !mode || !requestType) {
+            return;
+        }
+        if (item.status !== 'pending') {
+            toast.error('This request was already processed.');
+            throw new Error('already-processed');
+        }
+        setSubmitting(true);
+        try {
+            await new Promise((resolve) => {
+                setTimeout(resolve, 320);
+            });
+            const isApprove = mode === 'approve';
+            if (requestType === 'overtime') {
+                setOvertimes((prev) => prev.map((o) => (o.id === item.id
+                    ? {
+                        ...o,
+                        status: isApprove ? 'approved' : 'rejected',
+                        reviewNote: note || undefined,
+                    }
+                    : o)));
+                if (isApprove) {
+                    toast.success(`Overtime Approved for ${item.employeeName}`, {
+                        description: `${item.hours} hrs (${formatCurrency(item.estimatedAmount)}) credited.`,
+                    });
+                }
+                else {
+                    toast.error(`Overtime Rejected for ${item.employeeName}`);
+                }
+            }
+            else if (requestType === 'expense') {
+                setExpenses((prev) => prev.map((e) => (e.id === item.id
+                    ? {
+                        ...e,
+                        status: isApprove ? 'approved' : 'rejected',
+                        reviewNote: note || undefined,
+                    }
+                    : e)));
+                if (isApprove) {
+                    toast.success(`Claim Approved for ${item.employeeName}`, {
+                        description: `${formatCurrency(item.amount)} approved for reimbursement.`,
+                    });
+                }
+                else {
+                    toast.error(`Claim Rejected for ${item.employeeName}`);
+                }
+            }
+            setDialogState({ open: false, mode: null, requestType: null, item: null });
+            setReviewNote('');
+        }
+        catch (error) {
+            if (error?.message !== 'already-processed') {
+                toast.error('Unable to update this request. Please try again.');
+                throw error;
+            }
+        }
+        finally {
+            setSubmitting(false);
+        }
     };
     return (<Card className="border border-slate-200/90 bg-white shadow-xs">
       <CardHeader className="p-5 pb-3">
@@ -106,19 +162,11 @@ export function RecentActivity() {
 
                 <div className="flex items-center gap-1.5 self-end sm:self-center shrink-0">
                   {ot.status === 'pending' ? (<>
-                      <Button size="sm" onClick={() => setDialogState({
-                    open: true,
-                    type: 'approve-ot',
-                    item: ot,
-                })} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs px-2.5 font-medium">
+                      <Button size="sm" onClick={() => openDecision('approve', 'overtime', ot)} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs px-2.5 font-medium">
                         <FontAwesomeIcon icon={faCheck} className="size-3.5 mr-1"/>
                         Approve
                       </Button>
-                      <Button size="sm" variant="outline" onClick={() => setDialogState({
-                    open: true,
-                    type: 'reject-ot',
-                    item: ot,
-                })} className="h-8 border-slate-200 text-slate-600 hover:text-rose-600 text-xs px-2.5">
+                      <Button size="sm" variant="outline" onClick={() => openDecision('reject', 'overtime', ot)} className="h-8 border-slate-200 text-slate-600 hover:text-rose-600 text-xs px-2.5">
                         <FontAwesomeIcon icon={faXmark} className="size-3.5 mr-1"/>
                         Reject
                       </Button>
@@ -171,19 +219,11 @@ export function RecentActivity() {
 
                 <div className="flex items-center gap-1.5 self-end sm:self-center shrink-0">
                   {exp.status === 'pending' ? (<>
-                      <Button size="sm" onClick={() => setDialogState({
-                    open: true,
-                    type: 'approve-exp',
-                    item: exp,
-                })} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs px-2.5 font-medium">
+                      <Button size="sm" onClick={() => openDecision('approve', 'expense', exp)} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs px-2.5 font-medium">
                         <FontAwesomeIcon icon={faCheck} className="size-3.5 mr-1"/>
                         Approve
                       </Button>
-                      <Button size="sm" variant="outline" onClick={() => setDialogState({
-                    open: true,
-                    type: 'reject-exp',
-                    item: exp,
-                })} className="h-8 border-slate-200 text-slate-600 hover:text-rose-600 text-xs px-2.5">
+                      <Button size="sm" variant="outline" onClick={() => openDecision('reject', 'expense', exp)} className="h-8 border-slate-200 text-slate-600 hover:text-rose-600 text-xs px-2.5">
                         <FontAwesomeIcon icon={faXmark} className="size-3.5 mr-1"/>
                         Reject
                       </Button>
@@ -236,28 +276,20 @@ export function RecentActivity() {
         </Tabs>
       </CardContent>
 
-      {/* Confirmation Dialog */}
-      <ConfirmDialog open={dialogState.open} onOpenChange={(open) => setDialogState((prev) => ({ ...prev, open }))} title={dialogState.type?.includes('approve')
-            ? 'Confirm Approval'
-            : 'Confirm Rejection'} description={dialogState.type === 'approve-ot'
-            ? `Are you sure you want to approve this overtime request for ${dialogState.item?.employeeName}?`
-            : dialogState.type === 'reject-ot'
-                ? `Are you sure you want to reject this overtime request for ${dialogState.item?.employeeName}?`
-                : dialogState.type === 'approve-exp'
-                    ? `Are you sure you want to approve this expense claim of ${formatCurrency(dialogState.item?.amount)}?`
-                    : `Are you sure you want to reject this expense claim?`} variant={dialogState.type?.includes('approve') ? 'success' : 'destructive'} confirmLabel={dialogState.type?.includes('approve') ? 'Yes, Approve' : 'Yes, Reject'} onConfirm={() => {
-            if (dialogState.type === 'approve-ot' && dialogState.item) {
-                handleApproveOt(dialogState.item);
-            }
-            else if (dialogState.type === 'reject-ot' && dialogState.item) {
-                handleRejectOt(dialogState.item);
-            }
-            else if (dialogState.type === 'approve-exp' && dialogState.item) {
-                handleApproveExp(dialogState.item);
-            }
-            else if (dialogState.type === 'reject-exp' && dialogState.item) {
-                handleRejectExp(dialogState.item);
-            }
-        }}/>
+      <RequestDecisionDialogSwitch
+        open={dialogState.open}
+        onOpenChange={(open) => {
+          if (!submitting) {
+            setDialogState((prev) => ({ ...prev, open }));
+          }
+        }}
+        mode={dialogState.mode}
+        requestType={dialogState.requestType}
+        item={dialogState.item}
+        note={reviewNote}
+        onNoteChange={setReviewNote}
+        loading={submitting}
+        onSubmit={handleSubmitDecision}
+      />
     </Card>);
 }

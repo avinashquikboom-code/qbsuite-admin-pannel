@@ -6,7 +6,7 @@ import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { ExpenseTable } from '@/modules/hrm/components/expenses/ExpenseTable';
 import { ExpenseDetail } from '@/modules/hrm/components/expenses/ExpenseDetail';
-import { ConfirmDialog } from '@/components/common/ConfirmDialog';
+import { RequestDecisionDialogSwitch } from '@/components/approval';
 import { Input } from '@/components/common/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
 import { mockExpenseClaims } from '@/lib/mock-data';
@@ -26,6 +26,7 @@ export default function ExpenseClaimsPage() {
         item: null,
     });
     const [reviewNote, setReviewNote] = React.useState('');
+    const [submitting, setSubmitting] = React.useState(false);
     const filtered = React.useMemo(() => {
         return claims.filter((claim) => {
             const matchSearch = claim.employeeName.toLowerCase().includes(search.toLowerCase()) ||
@@ -52,30 +53,53 @@ export default function ExpenseClaimsPage() {
             item: claim,
         });
     };
-    const handleConfirmAction = () => {
-        if (!confirmDialog.item || !confirmDialog.type)
+    const handleSubmitDecision = async (note) => {
+        if (!confirmDialog.item || !confirmDialog.type) {
             return;
-        const isApprove = confirmDialog.type === 'approve';
-        const updatedStatus = isApprove ? 'approved' : 'rejected';
-        setClaims((prev) => prev.map((c) => c.id === confirmDialog.item.id
-            ? {
-                ...c,
-                status: updatedStatus,
-                reviewedBy: 'Alexander Vance',
-                reviewDate: new Date().toISOString().split('T')[0],
-                reviewNote: reviewNote ||
-                    (isApprove
-                        ? 'Reimbursement verified and approved'
-                        : 'Claim declined by policy compliance officer'),
-            }
-            : c));
-        if (isApprove) {
-            toast.success(`Expense Approved for ${confirmDialog.item.employeeName}`, {
-                description: `${formatCurrency(confirmDialog.item.amount)} scheduled for next payroll cycle.`,
-            });
         }
-        else {
-            toast.error(`Expense Claim Rejected for ${confirmDialog.item.employeeName}`);
+        if (confirmDialog.item.status !== 'pending') {
+            toast.error('This expense claim was already processed.');
+            throw new Error('already-processed');
+        }
+        const item = confirmDialog.item;
+        const isApprove = confirmDialog.type === 'approve';
+        setSubmitting(true);
+        try {
+            await new Promise((resolve) => {
+                setTimeout(resolve, 320);
+            });
+            const updatedStatus = isApprove ? 'approved' : 'rejected';
+            setClaims((prev) => prev.map((c) => c.id === item.id
+                ? {
+                    ...c,
+                    status: updatedStatus,
+                    reviewedBy: 'Alexander Vance',
+                    reviewDate: new Date().toISOString().split('T')[0],
+                    reviewNote: note ||
+                        (isApprove
+                            ? 'Reimbursement verified and approved'
+                            : 'Claim declined by policy compliance officer'),
+                }
+                : c));
+            if (isApprove) {
+                toast.success(`Expense Approved for ${item.employeeName}`, {
+                    description: `${formatCurrency(item.amount)} scheduled for next payroll cycle.`,
+                });
+            }
+            else {
+                toast.error(`Expense Claim Rejected for ${item.employeeName}`);
+            }
+            setConfirmDialog({ open: false, type: null, item: null });
+            setReviewNote('');
+        }
+        catch (error) {
+            if (error?.message !== 'already-processed') {
+                toast.error('Unable to update expense claim. Please try again.');
+                throw error;
+            }
+        }
+        finally {
+            setSubmitting(false);
         }
     };
     const pendingAmount = claims
@@ -201,19 +225,20 @@ export default function ExpenseClaimsPage() {
       {/* Expense Detail Sheet */}
       <ExpenseDetail claim={selectedClaim} open={detailOpen} onOpenChange={setDetailOpen} onApprove={handleOpenApprove} onReject={handleOpenReject}/>
 
-      {/* Confirmation Dialog */}
-      <ConfirmDialog open={confirmDialog.open} onOpenChange={(open) => setConfirmDialog((prev) => ({ ...prev, open }))} title={confirmDialog.type === 'approve'
-            ? `Approve Expense Claim (${formatCurrency(confirmDialog.item?.amount)})`
-            : `Reject Expense Claim`} description={confirmDialog.type === 'approve'
-            ? `Approve reimbursement for ${confirmDialog.item?.employeeName} under "${confirmDialog.item?.category}".`
-            : `Decline expense claim for ${confirmDialog.item?.employeeName}. Please specify the reason.`} variant={confirmDialog.type === 'approve' ? 'success' : 'destructive'} confirmLabel={confirmDialog.type === 'approve' ? 'Approve & Reimburse' : 'Reject Claim'} note={{
-            label: confirmDialog.type === 'approve' ? 'Audit Note' : 'Rejection Reason',
-            placeholder: confirmDialog.type === 'approve'
-                ? 'e.g. Verified receipt and manager clearance.'
-                : 'e.g. Missing official tax invoice.',
-            value: reviewNote,
-            onChange: setReviewNote,
-            required: confirmDialog.type === 'reject',
-        }} onConfirm={handleConfirmAction}/>
+      <RequestDecisionDialogSwitch
+        open={confirmDialog.open}
+        onOpenChange={(open) => {
+          if (!submitting) {
+            setConfirmDialog((prev) => ({ ...prev, open }));
+          }
+        }}
+        mode={confirmDialog.type}
+        requestType="expense"
+        item={confirmDialog.item}
+        note={reviewNote}
+        onNoteChange={setReviewNote}
+        loading={submitting}
+        onSubmit={handleSubmitDecision}
+      />
     </div>);
 }

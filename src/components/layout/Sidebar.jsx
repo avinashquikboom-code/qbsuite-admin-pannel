@@ -3,7 +3,7 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import * as React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
     faBriefcase,
     faBullhorn,
@@ -37,6 +37,7 @@ import {
 import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
 import { useSidebarStore } from '@/hooks/use-sidebar-store';
 import { toast } from '@/hooks/use-toast';
+import { logoutAdmin } from '@/lib/auth/admin-login';
 import { cn } from '@/lib/utils';
 
 const groups = [
@@ -191,8 +192,17 @@ function NavGroup({ group, pathname, collapsed, onNavigate }) {
     );
 }
 
-export function Sidebar({ className = '', onNavigate }) {
+export function Sidebar(props) {
+    return (
+        <React.Suspense fallback={<aside className={cn('flex h-full shrink-0 flex-col bg-[#F7F9FC] text-slate-800 transition-[width] duration-300 w-72', props.className)} />}>
+            <SidebarContent {...props} />
+        </React.Suspense>
+    );
+}
+
+function SidebarContent({ className = '', onNavigate }) {
     const pathname = usePathname();
+    const router = useRouter();
     const { collapsed } = useSidebarStore();
     const isCollapsed = collapsed && !onNavigate;
 
@@ -244,9 +254,11 @@ export function Sidebar({ className = '', onNavigate }) {
                     <button
                         type="button"
                         title={isCollapsed ? 'Logout' : undefined}
-                        onClick={() => {
+                        onClick={async () => {
+                            await logoutAdmin();
                             toast.success('Signed out successfully');
                             onNavigate?.();
+                            router.push('/login');
                         }}
                         className={cn(
                             'flex w-full items-center gap-2.5 rounded-2xl border border-slate-200 bg-white p-2 text-left shadow-sm',

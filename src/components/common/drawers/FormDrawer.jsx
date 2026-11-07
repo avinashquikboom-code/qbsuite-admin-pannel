@@ -7,13 +7,15 @@ import { cn } from "@/lib/utils";
 
 const SIZE_CLASSES = {
   sm: "sm:max-w-[400px]",
-  default: "sm:max-w-[480px]",
-  standard: "sm:max-w-[480px]",
-  md: "sm:max-w-[480px]",
-  complex: "sm:max-w-[600px]",
-  lg: "sm:max-w-[600px]",
-  large: "sm:max-w-[720px]",
-  xl: "sm:max-w-[720px]",
+  simple: "sm:max-w-[560px]",
+  default: "sm:max-w-[560px]",
+  standard: "sm:max-w-[560px]",
+  md: "sm:max-w-[640px]",
+  medium: "sm:max-w-[640px]",
+  complex: "sm:max-w-[800px]",
+  lg: "sm:max-w-[800px]",
+  large: "sm:max-w-[840px]",
+  xl: "sm:max-w-[900px]",
   full: "sm:max-w-full",
 };
 

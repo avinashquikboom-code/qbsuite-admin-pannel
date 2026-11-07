@@ -4,8 +4,10 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { Toaster } from '@/components/common/Toast';
 import { TooltipProvider } from '@/components/common/Tooltip';
+import { ApprovalDialogProvider } from '@/components/approval';
 export function MainLayout({ children }) {
  return (
+   <ApprovalDialogProvider>
    <TooltipProvider>
      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded focus:bg-background focus:p-3">
        Skip to content
@@ -25,5 +27,6 @@ export function MainLayout({ children }) {
      </div>
      <Toaster position="top-right" />
    </TooltipProvider>
+   </ApprovalDialogProvider>
  );
 }
