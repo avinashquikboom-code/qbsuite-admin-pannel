@@ -6,7 +6,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff, Loader2, Lock, LogIn, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
-import { loginAdmin, validateLoginForm } from '@/lib/auth/admin-login';
+import { persistSession } from '@/lib/auth/admin-session';
+import { validateLoginForm } from '@/lib/auth/admin-login';
 import { LOGIN_BRAND, QbSuiteLogoMark } from './login-branding-panel';
 
 export function LoginFormCard({ className }) {
@@ -18,14 +19,12 @@ export function LoginFormCard({ className }) {
   const [showPassword, setShowPassword] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [fieldErrors, setFieldErrors] = React.useState({});
-  const [apiError, setApiError] = React.useState('');
 
-  const onSubmit = async (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
     if (loading) {
       return;
     }
-    setApiError('');
     const errors = validateLoginForm({ email, password });
     setFieldErrors(errors);
     if (Object.keys(errors).length > 0) {
@@ -33,19 +32,17 @@ export function LoginFormCard({ className }) {
     }
 
     setLoading(true);
-    try {
-      const result = await loginAdmin({ email, password, remember });
-      toast.success('Signed in successfully');
-      const next = searchParams.get('next');
-      router.push(result?.redirectTo || next || '/admin/dashboard');
-      router.refresh();
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Sign in failed.';
-      setApiError(message);
-      toast.error(message);
-    } finally {
-      setLoading(false);
-    }
+    const trimmedEmail = email.trim();
+    persistSession({
+      token: 'local-screen-session',
+      user: { email: trimmedEmail },
+      remember,
+    });
+    toast.success('Signed in successfully');
+    const next = searchParams.get('next');
+    router.push(next || '/admin/dashboard');
+    router.refresh();
+    setLoading(false);
   };
 
   return (
@@ -76,15 +73,6 @@ export function LoginFormCard({ className }) {
       </div>
 
       <form onSubmit={onSubmit} className="mt-8 space-y-5" noValidate>
-        {apiError ? (
-          <p
-            className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700"
-            role="alert"
-          >
-            {apiError}
-          </p>
-        ) : null}
-
         <div className="space-y-2">
           <label htmlFor="admin-login-email" className="text-sm font-medium" style={{ color: LOGIN_BRAND.navy }}>
             Email Address
