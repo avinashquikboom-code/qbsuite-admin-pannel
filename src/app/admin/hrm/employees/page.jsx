@@ -6,11 +6,8 @@ import * as React from 'react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { EmployeeTable } from '@/modules/hrm/components/employees/EmployeeTable';
 import { EmployeeDetail } from '@/modules/hrm/components/employees/EmployeeDetail';
+import { EmployeeRegistrationWizard } from '@/modules/hrm/components/employees/wizard';
 import { Button } from '@/components/common/Button';
-import { FormDrawer, DrawerFormField } from '@/components/common/drawers/FormDrawer';
-import { Input } from '@/components/common/Input';
-import { Label } from '@/components/common/Label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/common/Select';
 import { mockEmployees } from '@/lib/mock-data';
 import { toast } from '@/hooks/use-toast';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
@@ -18,83 +15,56 @@ export default function EmployeesPage() {
     const [employees, setEmployees] = React.useState(mockEmployees);
     const [selectedEmployee, setSelectedEmployee] = React.useState(null);
     const [detailOpen, setDetailOpen] = React.useState(false);
-    const [addDialogOpen, setAddDialogOpen] = React.useState(false);
-    // Add Employee Form State
-    const [formData, setFormData] = React.useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        department: 'Engineering',
-        designation: '',
-        basicSalary: '',
-        location: 'San Francisco, CA (HQ)',
-        employmentType: 'Full-Time',
-    });
+    const [wizardOpen, setWizardOpen] = React.useState(false);
+
     const handleSelectEmployee = (emp) => {
         setSelectedEmployee(emp);
         setDetailOpen(true);
     };
-    const handleAddEmployee = (e) => {
-        e.preventDefault();
-        if (!formData.firstName || !formData.lastName || !formData.email) {
-            toast.error('Please fill in required fields');
-            return;
-        }
+
+    const handleWizardSuccess = (wizardData) => {
         const newEmp = {
             id: `EMP-${1000 + employees.length + 1}`,
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            name: `${formData.firstName} ${formData.lastName}`,
-            avatar: `https://images.unsplash.com/photo-${1534528741775 + employees.length}?w=150`,
-            email: formData.email,
-            phone: formData.phone || '+1 (555) 000-0000',
-            department: formData.department,
-            designation: formData.designation || 'Specialist',
+            firstName: wizardData.personal.firstName,
+            lastName: wizardData.personal.lastName,
+            name: `${wizardData.personal.firstName} ${wizardData.personal.lastName}`,
+            avatar: wizardData.personal.profilePhoto ? undefined : `https://images.unsplash.com/photo-${1534528741775 + employees.length}?w=150`,
+            email: wizardData.personal.corporateEmail,
+            phone: wizardData.personal.phone,
+            department: wizardData.employment.department,
+            designation: wizardData.employment.jobTitle,
             status: 'active',
-            joinDate: new Date().toISOString().split('T')[0],
-            employmentType: formData.employmentType,
-            location: formData.location,
+            joinDate: wizardData.employment.dateOfJoining,
+            employmentType: wizardData.employment.employmentType,
+            location: wizardData.employment.workLocation,
             salary: {
-                basic: Number(formData.basicSalary) || 8000,
-                allowances: 800,
-                hourlyRate: 50,
+                basic: Number(wizardData.organization.salary.basic) || 0,
+                allowances: Number(wizardData.organization.salary.allowances) || 0,
+                hourlyRate: (Number(wizardData.organization.salary.basic) || 0) / 160,
                 currency: CURRENCY_CODE,
             },
             bankDetails: {
-                accountName: `${formData.firstName} ${formData.lastName}`,
-                accountNumber: '•••• •••• ' + Math.floor(1000 + Math.random() * 9000),
-                bankName: 'Chase Bank',
-                routingNumber: '111000614',
+                accountName: wizardData.organization.bankDetails.accountHolderName,
+                accountNumber: '•••• •••• ' + (wizardData.organization.bankDetails.accountNumber?.slice(-4) || '0000'),
+                bankName: wizardData.organization.bankDetails.bankName,
+                routingNumber: wizardData.organization.bankDetails.ifscCode,
             },
-            emergencyContact: {
-                name: 'Primary Contact',
-                relationship: 'Family',
-                phone: '+1 (555) 999-9999',
+            emergencyContact: wizardData.emergency.contacts[0] || {
+                name: 'Contact',
+                relationship: 'Emergency',
+                phone: '+1 (555) 000-0000',
             },
         };
         setEmployees((prev) => [newEmp, ...prev]);
-        setAddDialogOpen(false);
-        setFormData({
-            firstName: '',
-            lastName: '',
-            email: '',
-            phone: '',
-            department: 'Engineering',
-            designation: '',
-            basicSalary: '',
-            location: 'San Francisco, CA (HQ)',
-            employmentType: 'Full-Time',
-        });
-        toast.success('Employee Added Successfully', {
-            description: `${newEmp.name} (${newEmp.id}) onboarded to ${newEmp.department}.`,
+        toast.success('Employee Registered Successfully', {
+            description: `${newEmp.name} (${newEmp.id}) has been added to the system.`,
         });
     };
     const activeCount = employees.filter((e) => e.status === 'active').length;
     const onLeaveCount = employees.filter((e) => e.status === 'on_leave').length;
     const inactiveCount = employees.filter((e) => e.status === 'inactive').length;
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Employee Directory" description="Manage company personnel, designations, salary packages, and employment status." actions={<Button onClick={() => setAddDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
+      <PageHeader title="Employee Directory" description="Manage company personnel, designations, salary packages, and employment status." actions={<Button onClick={() => setWizardOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
             <FontAwesomeIcon icon={faUserPlus} className="size-4 mr-1.5"/>
             Add New Employee
           </Button>}/>
@@ -141,82 +111,11 @@ export default function EmployeesPage() {
       {/* Employee Detail Slide-Out */}
       <EmployeeDetail employee={selectedEmployee} open={detailOpen} onOpenChange={setDetailOpen}/>
 
-      {/* Add Employee FormDrawer */}
-      <FormDrawer
-        open={addDialogOpen}
-        onOpenChange={setAddDialogOpen}
-        title="Onboard New Employee"
-        description="Enter professional and compensation details to add a team member."
-        onSubmit={handleAddEmployee}
-        submitLabel="Save & Onboard"
-        size="complex"
-      >
-        <div className="grid grid-cols-2 gap-3">
-          <DrawerFormField label="First Name" required>
-            <Input required placeholder="e.g. John" value={formData.firstName} onChange={(e) => setFormData((prev) => ({ ...prev, firstName: e.target.value }))} className="h-9 text-xs"/>
-          </DrawerFormField>
-
-          <DrawerFormField label="Last Name" required>
-            <Input required placeholder="e.g. Doe" value={formData.lastName} onChange={(e) => setFormData((prev) => ({ ...prev, lastName: e.target.value }))} className="h-9 text-xs"/>
-          </DrawerFormField>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3">
-          <DrawerFormField label="Work Email" required>
-            <Input required type="email" placeholder="john.doe@qbsuite.com" value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} className="h-9 text-xs"/>
-          </DrawerFormField>
-
-          <DrawerFormField label="Phone">
-            <Input placeholder="+1 (555) 000-0000" value={formData.phone} onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))} className="h-9 text-xs"/>
-          </DrawerFormField>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3">
-          <DrawerFormField label="Department">
-            <Select value={formData.department} onValueChange={(val) => setFormData((prev) => ({ ...prev, department: val }))}>
-              <SelectTrigger className="h-9 text-xs w-full">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Engineering" className="text-xs">
-                  Engineering
-                </SelectItem>
-                <SelectItem value="Product & Design" className="text-xs">
-                  Product & Design
-                </SelectItem>
-                <SelectItem value="Human Resources" className="text-xs">
-                  Human Resources
-                </SelectItem>
-                <SelectItem value="Finance" className="text-xs">
-                  Finance
-                </SelectItem>
-                <SelectItem value="Sales" className="text-xs">
-                  Sales
-                </SelectItem>
-                <SelectItem value="Marketing" className="text-xs">
-                  Marketing
-                </SelectItem>
-                <SelectItem value="Operations" className="text-xs">
-                  Operations
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </DrawerFormField>
-
-          <DrawerFormField label="Designation">
-            <Input placeholder="e.g. Lead Engineer" value={formData.designation} onChange={(e) => setFormData((prev) => ({ ...prev, designation: e.target.value }))} className="h-9 text-xs"/>
-          </DrawerFormField>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3">
-          <DrawerFormField label={`Monthly Basic (${CURRENCY_SYMBOL})`}>
-            <Input type="number" placeholder="e.g. 9500" value={formData.basicSalary} onChange={(e) => setFormData((prev) => ({ ...prev, basicSalary: e.target.value }))} className="h-9 text-xs"/>
-          </DrawerFormField>
-
-          <DrawerFormField label="Location">
-            <Input placeholder="San Francisco, CA" value={formData.location} onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))} className="h-9 text-xs"/>
-          </DrawerFormField>
-        </div>
-      </FormDrawer>
+      {/* Employee Registration Wizard Modal */}
+      <EmployeeRegistrationWizard
+        open={wizardOpen}
+        onOpenChange={setWizardOpen}
+        onSuccess={handleWizardSuccess}
+      />
     </div>);
 }
