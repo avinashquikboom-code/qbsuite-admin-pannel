@@ -68,7 +68,7 @@ export function OvertimeTable({ records, onApprove, onReject, onViewDetails, }) 
             className: 'text-right',
             cell: (ot) => (<div className="flex items-center justify-end gap-1.5">
           {ot.status === 'pending' ? (<>
-              <Button size="sm" onClick={() => onApprove(ot)} className="h-7.5 px-2.5 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
+              <Button size="sm" onClick={() => onApprove(ot)} className="h-7.5 px-2.5 bg-brand hover:bg-primary-hover text-primary-foreground text-xs font-semibold">
                 <FontAwesomeIcon icon={faCheck} className="size-3.5 mr-1"/>
                 Approve
               </Button>

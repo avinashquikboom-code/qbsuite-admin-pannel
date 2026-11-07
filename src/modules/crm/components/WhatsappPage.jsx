@@ -115,7 +115,7 @@ export default function WhatsAppPage() {
                 <Textarea rows={4} value={customMsg} onChange={(e) => setCustomMsg(e.target.value)} className="text-xs resize-none"/>
               </div>
 
-              <Button type="submit" size="sm" className="w-full bg-brand hover:bg-brand-dark text-primary-foreground gap-2">
+              <Button type="submit" size="sm" className="w-full bg-brand hover:bg-primary-hover text-primary-foreground gap-2">
                 <FontAwesomeIcon icon={faPaperPlane} className="size-4"/>
                 <span>Send via WhatsApp API</span>
               </Button>

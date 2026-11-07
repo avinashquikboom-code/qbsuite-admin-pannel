@@ -44,7 +44,7 @@ export function DrawerFooter({
             size="sm"
             onClick={onSubmit}
             disabled={loading || disabled}
-            className="h-9 px-4 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold shadow-xs transition-colors"
+            className="h-9 px-4 bg-brand hover:bg-primary-hover text-primary-foreground text-xs font-semibold shadow-xs transition-colors"
           >
             {loading ? <Loading label="Saving…" className="p-0 text-white" /> : submitLabel}
           </Button>

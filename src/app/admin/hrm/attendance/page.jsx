@@ -67,7 +67,7 @@ export default function AttendancePage() {
     const onLeaveCount = records.filter((r) => r.status === 'on_leave').length;
     const absentCount = records.filter((r) => r.status === 'absent').length;
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Attendance & Time Clock" description="Daily punch in/out timestamps, break tracking, working duration, and automated late arrival detection." actions={<Button size="sm" onClick={handleExport} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
+      <PageHeader title="Attendance & Time Clock" description="Daily punch in/out timestamps, break tracking, working duration, and automated late arrival detection." actions={<Button size="sm" onClick={handleExport} className="bg-brand hover:bg-primary-hover text-primary-foreground font-medium text-xs h-9">
             <FontAwesomeIcon icon={faCalendarCheck} className="size-4 mr-1.5"/>
             Generate Timesheet
           </Button>}/>

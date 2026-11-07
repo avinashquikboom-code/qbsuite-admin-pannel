@@ -90,7 +90,7 @@ export default function LeadsPage() {
               <FontAwesomeIcon icon={faDownload} className="size-4"/>
               <span>Export</span>
             </Button>
-            <Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
+            <Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-primary-hover text-primary-foreground gap-1.5 shadow-sm text-xs">
               <FontAwesomeIcon icon={faPlus} className="size-4"/>
               <span>New Lead</span>
             </Button>

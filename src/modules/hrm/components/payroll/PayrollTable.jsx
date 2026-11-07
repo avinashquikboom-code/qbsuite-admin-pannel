@@ -88,7 +88,7 @@ export function PayrollTable({ records, onViewPayslip, onMarkPaid, }) {
             <FontAwesomeIcon icon={faFileLines} className="size-3.5 mr-1 text-slate-400"/>
             Payslip
           </Button>
-          {rec.status === 'pending' && onMarkPaid && (<Button size="sm" onClick={() => onMarkPaid(rec)} className="h-7.5 px-2 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
+          {rec.status === 'pending' && onMarkPaid && (<Button size="sm" onClick={() => onMarkPaid(rec)} className="h-7.5 px-2 bg-brand hover:bg-primary-hover text-primary-foreground text-xs font-semibold">
               <FontAwesomeIcon icon={faCheckDouble} className="size-3.5 mr-1"/>
               Pay
             </Button>)}

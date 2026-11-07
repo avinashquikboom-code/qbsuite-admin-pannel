@@ -26,7 +26,7 @@ export function AdminLoginScreen() {
       <section className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden bg-[#F7FAFC] lg:w-[54%]">
         <svg
           aria-hidden
-          className="pointer-events-none absolute top-0 right-0 h-48 w-72 text-[#E9F9EF]"
+          className="pointer-events-none absolute top-0 right-0 h-48 w-72 text-brand-light"
           viewBox="0 0 300 200"
         >
           <path
@@ -41,7 +41,7 @@ export function AdminLoginScreen() {
         </svg>
         <svg
           aria-hidden
-          className="pointer-events-none absolute right-0 bottom-0 h-44 w-64 text-[#D9F8E6]"
+          className="pointer-events-none absolute right-0 bottom-0 h-44 w-64 text-primary-muted"
           viewBox="0 0 280 180"
         >
           <path

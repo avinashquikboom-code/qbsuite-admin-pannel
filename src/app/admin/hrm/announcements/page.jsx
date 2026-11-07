@@ -73,7 +73,7 @@ export default function AnnouncementsPage() {
       <PageHeader title="Company Announcements & Communications" description="Broadcast enterprise updates, holiday notifications, benefits policy changes, and urgent alerts." actions={<Button size="sm" onClick={() => {
                 setEditingItem(null);
                 setFormOpen(true);
-            }} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
+            }} className="bg-brand hover:bg-primary-hover text-primary-foreground font-medium text-xs h-9">
             <FontAwesomeIcon icon={faPlus} className="size-4 mr-1.5"/>
             New Announcement
           </Button>}/>

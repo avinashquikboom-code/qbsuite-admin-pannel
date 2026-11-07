@@ -51,7 +51,7 @@ export default function PayrollPage() {
               <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1 text-slate-400"/>
               Export Bank File
             </Button>
-            <Button size="sm" onClick={() => setRunBatchOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
+            <Button size="sm" onClick={() => setRunBatchOpen(true)} className="bg-brand hover:bg-primary-hover text-primary-foreground font-medium text-xs h-9">
               <FontAwesomeIcon icon={faWallet} className="size-4 mr-1.5"/>
               Run Payroll Batch
             </Button>
@@ -240,7 +240,7 @@ export default function PayrollPage() {
                 <Button size="sm" onClick={() => {
                   toast.success(`Downloaded ${selectedRecord.id}.pdf`);
                   setPayslipOpen(false);
-                }} className="h-9 px-4 bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs">
+                }} className="h-9 px-4 bg-brand hover:bg-primary-hover text-primary-foreground font-medium text-xs">
                   <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1.5"/>
                   Download PDF
                 </Button>

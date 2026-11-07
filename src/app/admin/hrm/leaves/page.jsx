@@ -237,7 +237,7 @@ export default function LeaveManagementPage() {
             className: 'text-right',
             cell: (l) => (<div className="flex items-center justify-end gap-1.5">
           {l.status === 'pending' ? (<>
-              <Button size="sm" onClick={() => handleApprove(l)} className="h-7.5 px-2.5 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
+              <Button size="sm" onClick={() => handleApprove(l)} className="h-7.5 px-2.5 bg-brand hover:bg-primary-hover text-primary-foreground text-xs font-semibold">
                 <FontAwesomeIcon icon={faCheck} className="size-3.5 mr-1"/>
                 Approve
               </Button>
@@ -249,7 +249,7 @@ export default function LeaveManagementPage() {
         },
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Leave Management & Absence Tracking" description="Review vacation requests, sick leaves, parental allowances, and team holiday calendars." actions={<Button size="sm" onClick={() => setApplyDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
+      <PageHeader title="Leave Management & Absence Tracking" description="Review vacation requests, sick leaves, parental allowances, and team holiday calendars." actions={<Button size="sm" onClick={() => setApplyDialogOpen(true)} className="bg-brand hover:bg-primary-hover text-primary-foreground font-medium text-xs h-9">
             <FontAwesomeIcon icon={faPlus} className="size-4 mr-1.5"/>
             Apply Leave On Behalf
           </Button>}/>

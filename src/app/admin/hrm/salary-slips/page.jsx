@@ -90,7 +90,7 @@ export default function SalarySlipsPage() {
         },
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Salary Slips Repository" description="Search, view, download and distribute official monthly compensation slips to personnel." actions={<Button size="sm" onClick={() => toast.success('Sent payslips to all employees via email')} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
+      <PageHeader title="Salary Slips Repository" description="Search, view, download and distribute official monthly compensation slips to personnel." actions={<Button size="sm" onClick={() => toast.success('Sent payslips to all employees via email')} className="bg-brand hover:bg-primary-hover text-primary-foreground font-medium text-xs h-9">
             <FontAwesomeIcon icon={faEnvelope} className="size-4 mr-1.5"/>
             Email All Slips
           </Button>}/>
@@ -225,7 +225,7 @@ export default function SalarySlipsPage() {
             <Button size="sm" onClick={() => {
               toast.success('Downloaded PDF slip');
               setActiveSlip(null);
-            }} className="h-9 px-4 bg-brand hover:bg-brand-dark text-primary-foreground text-xs font-semibold">
+            }} className="h-9 px-4 bg-brand hover:bg-primary-hover text-primary-foreground text-xs font-semibold">
               <FontAwesomeIcon icon={faDownload} className="size-3.5 mr-1.5"/>
               Download
             </Button>

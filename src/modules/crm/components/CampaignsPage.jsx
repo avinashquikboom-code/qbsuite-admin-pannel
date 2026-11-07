@@ -90,7 +90,7 @@ export default function CampaignsPage() {
         toast.success('Campaign scheduled and broadcast ready!');
     };
     return (<div className="space-y-6">
-      <PageHeader title="Marketing & Ad Campaigns" description="Multi-channel acquisition pipelines across LinkedIn, Email and Meta networks." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
+      <PageHeader title="Marketing & Ad Campaigns" description="Multi-channel acquisition pipelines across LinkedIn, Email and Meta networks." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-primary-hover text-primary-foreground gap-1.5 shadow-sm text-xs">
             <FontAwesomeIcon icon={faPlus} className="size-4"/>
             <span>Launch Campaign</span>
           </Button>}/>

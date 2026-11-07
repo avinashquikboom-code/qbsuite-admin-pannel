@@ -25,7 +25,7 @@ export default function SettingsPage() {
         toast.success('Configuration policies saved and deployed across QB Suite!');
     };
     return (<div className="space-y-6">
-      <PageHeader title="Suite Administration & Policies" description="Global system parameters, attendance deduction rules, overtime rates, and company profile." badge="System" badgeVariant="green" actions={<Button size="sm" onClick={handleSave} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
+      <PageHeader title="Suite Administration & Policies" description="Global system parameters, attendance deduction rules, overtime rates, and company profile." badge="System" badgeVariant="green" actions={<Button size="sm" onClick={handleSave} className="bg-brand hover:bg-primary-hover text-primary-foreground gap-1.5 shadow-sm text-xs">
             <FontAwesomeIcon icon={faFloppyDisk} className="size-4"/>
             <span>Save Changes</span>
           </Button>}/>

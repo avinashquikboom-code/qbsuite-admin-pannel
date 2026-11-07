@@ -1,13 +1,14 @@
 'use client';
 
-import { BarChart3, Coins, Layers, Users } from 'lucide-react';
+import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
+import { faChartColumn, faCoins, faLayerGroup, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { LoginDashboardPreview } from './login-dashboard-preview';
 
 const FEATURES = [
-  { label: 'HRM & Team Management', icon: Users },
-  { label: 'Sales & CRM', icon: BarChart3 },
-  { label: 'Operations & Projects', icon: Layers },
-  { label: 'Finance & Reports', icon: Coins },
+  { label: 'HRM & Team Management', icon: faUsers },
+  { label: 'Sales & CRM', icon: faChartColumn },
+  { label: 'Operations & Projects', icon: faLayerGroup },
+  { label: 'Finance & Reports', icon: faCoins },
 ];
 
 export function QbSuiteLogoMark({ size = 'md' }) {
@@ -18,9 +19,9 @@ export function QbSuiteLogoMark({ size = 'md' }) {
   const icon = size === 'sm' ? 'size-5' : 'size-5';
   return (
     <div
-      className={`flex shrink-0 items-center justify-center ${box} bg-brand text-primary-foreground shadow-[0_8px_24px_rgba(61,136,75,0.35)]`}
+      className={`flex shrink-0 items-center justify-center ${box} bg-brand text-primary-foreground shadow-[0_8px_24px_rgba(94,193,105,0.35)]`}
     >
-      <Layers className={icon} strokeWidth={2.2} aria-hidden />
+      <FontAwesomeIcon icon={faLayerGroup} className={icon} aria-hidden />
     </div>
   );
 }
@@ -32,7 +33,7 @@ export function LoginBrandingPanel() {
       style={{ backgroundColor: 'var(--sidebar)' }}
       aria-label="QB Suite overview"
     >
-      <div className="absolute inset-0 bg-linear-to-br from-[color:var(--sidebar)] via-[color:var(--sidebar-secondary)] to-[#2A5435]" />
+      <div className="absolute inset-0 bg-linear-to-br from-[color:var(--sidebar)] via-[color:var(--sidebar-secondary)] to-[color:var(--primary-dark)]" />
       <div
         aria-hidden
         className="pointer-events-none absolute -bottom-20 left-0 h-56 w-[120%] rounded-[100%] bg-brand/20 blur-2xl"
@@ -99,10 +100,10 @@ export function LoginBrandingPanel() {
         </div>
 
         <div className="mt-8 grid max-w-lg grid-cols-1 gap-3 sm:grid-cols-2 xl:mt-10">
-          {FEATURES.map(({ label, icon: Icon }) => (
+          {FEATURES.map(({ label, icon }) => (
             <div key={label} className="flex items-center gap-3">
               <div className="flex size-10 items-center justify-center rounded-xl bg-brand/25 ring-1 ring-white/10">
-                <Icon className="size-[18px] text-white" strokeWidth={2} aria-hidden />
+                <FontAwesomeIcon icon={icon} className="size-4 text-white" aria-hidden />
               </div>
               <span className="text-sm font-medium text-white/95">{label}</span>
             </div>

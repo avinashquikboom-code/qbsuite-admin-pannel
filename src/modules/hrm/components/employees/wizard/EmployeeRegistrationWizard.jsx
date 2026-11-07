@@ -222,7 +222,7 @@ export function EmployeeRegistrationWizard({ open, onOpenChange, onSuccess }) {
                 onClick={handleNext}
                 disabled={loading || (!stepValid && store.currentStep < 6)}
                 className={cn(
-                  'h-9 px-6 text-xs bg-brand hover:bg-brand-dark text-white font-medium',
+                  'h-9 px-6 text-xs bg-brand hover:bg-primary-hover text-white font-medium',
                   (!stepValid && store.currentStep < 6) && 'opacity-50 cursor-not-allowed'
                 )}
               >
@@ -234,7 +234,7 @@ export function EmployeeRegistrationWizard({ open, onOpenChange, onSuccess }) {
                 onClick={handleSubmit}
                 disabled={loading || !stepValid}
                 className={cn(
-                  'h-9 px-6 text-xs bg-brand hover:bg-brand-dark text-white font-medium',
+                  'h-9 px-6 text-xs bg-brand hover:bg-primary-hover text-white font-medium',
                   (!stepValid || loading) && 'opacity-50 cursor-not-allowed'
                 )}
               >

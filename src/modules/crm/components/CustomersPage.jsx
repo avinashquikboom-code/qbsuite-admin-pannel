@@ -64,7 +64,7 @@ export default function CustomersPage() {
         setNewLocation('');
     };
     return (<div className="space-y-6">
-      <PageHeader title="Enterprise Customers & Accounts" description="Maintain client relationships, contract histories, and account portfolio values." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground gap-1.5 shadow-sm text-xs">
+      <PageHeader title="Enterprise Customers & Accounts" description="Maintain client relationships, contract histories, and account portfolio values." badge="CRM" badgeVariant="green" actions={<Button size="sm" onClick={() => setIsAddOpen(true)} className="bg-brand hover:bg-primary-hover text-primary-foreground gap-1.5 shadow-sm text-xs">
             <FontAwesomeIcon icon={faPlus} className="size-4"/>
             <span>Add Customer</span>
           </Button>}/>

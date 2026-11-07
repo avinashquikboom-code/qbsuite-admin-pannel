@@ -162,7 +162,7 @@ export function RecentActivity() {
 
                 <div className="flex items-center gap-1.5 self-end sm:self-center shrink-0">
                   {ot.status === 'pending' ? (<>
-                      <Button size="sm" onClick={() => openDecision('approve', 'overtime', ot)} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs px-2.5 font-medium">
+                      <Button size="sm" onClick={() => openDecision('approve', 'overtime', ot)} className="h-8 bg-brand hover:bg-primary-hover text-primary-foreground text-xs px-2.5 font-medium">
                         <FontAwesomeIcon icon={faCheck} className="size-3.5 mr-1"/>
                         Approve
                       </Button>
@@ -219,7 +219,7 @@ export function RecentActivity() {
 
                 <div className="flex items-center gap-1.5 self-end sm:self-center shrink-0">
                   {exp.status === 'pending' ? (<>
-                      <Button size="sm" onClick={() => openDecision('approve', 'expense', exp)} className="h-8 bg-brand hover:bg-brand-dark text-primary-foreground text-xs px-2.5 font-medium">
+                      <Button size="sm" onClick={() => openDecision('approve', 'expense', exp)} className="h-8 bg-brand hover:bg-primary-hover text-primary-foreground text-xs px-2.5 font-medium">
                         <FontAwesomeIcon icon={faCheck} className="size-3.5 mr-1"/>
                         Approve
                       </Button>

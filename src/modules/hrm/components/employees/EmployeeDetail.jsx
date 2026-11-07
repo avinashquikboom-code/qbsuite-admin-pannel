@@ -187,7 +187,7 @@ export function EmployeeDetail({ employee, open, onOpenChange, }) {
 
           {/* Quick Actions */}
           <div className="pt-2 flex items-center gap-2">
-            <Button className="flex-1 bg-brand hover:bg-brand-dark text-primary-foreground font-semibold text-xs h-9" onClick={() => {
+            <Button className="flex-1 bg-brand hover:bg-primary-hover text-primary-foreground font-semibold text-xs h-9" onClick={() => {
             toast.success(`Generated Profile Summary for ${employee.name}`);
             onOpenChange(false);
         }}>

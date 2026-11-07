@@ -63,8 +63,8 @@
   --muted: #f1f5f9;
   --chart-1: var(--primary);
   --chart-2: var(--primary-dark);
-  --chart-3: #327A40;
-  --chart-4: #9FC4A7;
+  --chart-3: var(--primary-hover);
+  --chart-4: #9FD9A8;
   --chart-5: var(--sidebar);
 }
 

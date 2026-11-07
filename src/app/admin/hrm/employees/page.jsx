@@ -64,7 +64,7 @@ export default function EmployeesPage() {
     const onLeaveCount = employees.filter((e) => e.status === 'on_leave').length;
     const inactiveCount = employees.filter((e) => e.status === 'inactive').length;
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Employee Directory" description="Manage company personnel, designations, salary packages, and employment status." actions={<Button onClick={() => setWizardOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
+      <PageHeader title="Employee Directory" description="Manage company personnel, designations, salary packages, and employment status." actions={<Button onClick={() => setWizardOpen(true)} className="bg-brand hover:bg-primary-hover text-primary-foreground font-medium text-xs h-9">
             <FontAwesomeIcon icon={faUserPlus} className="size-4 mr-1.5"/>
             Add New Employee
           </Button>}/>

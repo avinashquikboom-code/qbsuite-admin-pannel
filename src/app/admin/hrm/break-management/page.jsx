@@ -184,7 +184,7 @@ export default function BreakManagementPage() {
         },
     ];
     return (<div className="space-y-6 max-w-7xl mx-auto">
-      <PageHeader title="Break & Interval Management" description="Monitor lunch and short break durations in compliance with workplace time policies." actions={<Button size="sm" onClick={() => setLogDialogOpen(true)} className="bg-brand hover:bg-brand-dark text-primary-foreground font-medium text-xs h-9">
+      <PageHeader title="Break & Interval Management" description="Monitor lunch and short break durations in compliance with workplace time policies." actions={<Button size="sm" onClick={() => setLogDialogOpen(true)} className="bg-brand hover:bg-primary-hover text-primary-foreground font-medium text-xs h-9">
             <FontAwesomeIcon icon={faPlus} className="size-4 mr-1.5"/>
             Log Manual Break
           </Button>}/>

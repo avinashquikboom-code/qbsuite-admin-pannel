@@ -191,7 +191,7 @@ export function LoginFormCard({ className }) {
         <button
           type="submit"
           disabled={loading}
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-brand to-primary-highlight text-sm font-bold text-primary-foreground shadow-[0_12px_28px_rgba(61,136,75,0.35)] transition hover:from-brand-dark hover:to-brand active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-brand to-brand-dark text-sm font-bold text-primary-foreground shadow-[0_12px_28px_rgba(94,193,105,0.35)] transition hover:from-primary-hover hover:to-brand active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {loading ? (
             <>
