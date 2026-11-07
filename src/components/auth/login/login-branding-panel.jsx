@@ -1,17 +1,16 @@
 'use client';
 
-import { FontAwesomeIcon } from '@/components/icons/FontAwesomeIcon';
-import { faChartColumn, faCoins, faLayerGroup, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { BarChart3, Coins, Layers, Users } from 'lucide-react';
 import { LoginDashboardPreview } from './login-dashboard-preview';
 
 const FEATURES = [
-  { label: 'HRM & Team Management', icon: faUsers },
-  { label: 'Sales & CRM', icon: faChartColumn },
-  { label: 'Operations & Projects', icon: faLayerGroup },
-  { label: 'Finance & Reports', icon: faCoins },
+  { label: 'HRM & Team Management', icon: Users },
+  { label: 'Sales & CRM', icon: BarChart3 },
+  { label: 'Operations & Projects', icon: Layers },
+  { label: 'Finance & Reports', icon: Coins },
 ];
 
-export function QbSuiteLogoMark({ size = 'md', onDark = true }) {
+export function QbSuiteLogoMark({ size = 'md' }) {
   const box =
     size === 'sm'
       ? 'size-10 rounded-xl'
@@ -19,9 +18,9 @@ export function QbSuiteLogoMark({ size = 'md', onDark = true }) {
   const icon = size === 'sm' ? 'size-5' : 'size-5';
   return (
     <div
-      className={`flex shrink-0 items-center justify-center ${box} bg-[#39E879] text-white shadow-[0_8px_24px_rgba(57,232,121,0.35)]`}
+      className={`flex shrink-0 items-center justify-center ${box} bg-brand text-primary-foreground shadow-[0_8px_24px_rgba(61,136,75,0.35)]`}
     >
-      <FontAwesomeIcon icon={faLayerGroup} className={icon} aria-hidden />
+      <Layers className={icon} strokeWidth={2.2} aria-hidden />
     </div>
   );
 }
@@ -29,17 +28,18 @@ export function QbSuiteLogoMark({ size = 'md', onDark = true }) {
 export function LoginBrandingPanel() {
   return (
     <section
-      className="relative hidden min-h-0 flex-col overflow-hidden bg-[#004D36] text-white lg:flex lg:w-[46%]"
+      className="relative hidden min-h-0 flex-col overflow-hidden text-white lg:flex lg:w-[46%]"
+      style={{ backgroundColor: 'var(--sidebar)' }}
       aria-label="QB Suite overview"
     >
-      <div className="absolute inset-0 bg-linear-to-br from-[#004D36] via-[#006B45] to-[#005338]" />
+      <div className="absolute inset-0 bg-linear-to-br from-[color:var(--sidebar)] via-[color:var(--sidebar-secondary)] to-[#2A5435]" />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-20 left-0 h-56 w-[120%] rounded-[100%] bg-[#00B94F]/20 blur-2xl"
+        className="pointer-events-none absolute -bottom-20 left-0 h-56 w-[120%] rounded-[100%] bg-brand/20 blur-2xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-10 right-[12%] size-32 rounded-full bg-[#39E879]/20 blur-3xl"
+        className="pointer-events-none absolute bottom-10 right-[12%] size-32 rounded-full bg-primary-highlight/20 blur-3xl"
       />
 
       <svg
@@ -56,7 +56,7 @@ export function LoginBrandingPanel() {
 
       <svg
         aria-hidden
-        className="pointer-events-none absolute bottom-0 left-0 w-full text-[#006B45]"
+        className="pointer-events-none absolute bottom-0 left-0 w-full text-[color:var(--sidebar-secondary)]"
         viewBox="0 0 1440 220"
         preserveAspectRatio="none"
       >
@@ -88,9 +88,9 @@ export function LoginBrandingPanel() {
             One Platform to
             <br />
             Run{' '}
-            <span className="text-[#39E879]">
+            <span className="text-primary-highlight">
               Your Business
-              <span className="mt-2 block h-0.5 w-[85%] max-w-[220px] rounded-full bg-[#39E879]/70" />
+              <span className="mt-2 block h-0.5 w-[85%] max-w-[220px] rounded-full bg-primary-highlight/70" />
             </span>
           </h1>
           <p className="mt-5 text-sm leading-relaxed text-white/78 xl:text-[15px]">
@@ -99,10 +99,10 @@ export function LoginBrandingPanel() {
         </div>
 
         <div className="mt-8 grid max-w-lg grid-cols-1 gap-3 sm:grid-cols-2 xl:mt-10">
-          {FEATURES.map(({ label, icon }) => (
+          {FEATURES.map(({ label, icon: Icon }) => (
             <div key={label} className="flex items-center gap-3">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-[#00B94F]/25 ring-1 ring-white/10">
-                <FontAwesomeIcon icon={icon} className="size-4 text-white" aria-hidden />
+              <div className="flex size-10 items-center justify-center rounded-xl bg-brand/25 ring-1 ring-white/10">
+                <Icon className="size-[18px] text-white" strokeWidth={2} aria-hidden />
               </div>
               <span className="text-sm font-medium text-white/95">{label}</span>
             </div>

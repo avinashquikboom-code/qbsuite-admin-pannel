@@ -17,12 +17,12 @@ export default function ForgotPasswordPage() {
             you need help restoring access.
           </p>
         </div>
-        <div className="mt-6 rounded-xl border border-[#E9F9EF] bg-[#E9F9EF]/40 px-4 py-3 text-sm text-[#006B45]">
+        <div className="mt-6 rounded-xl border border-brand-light bg-brand-light/60 px-4 py-3 text-sm text-brand-dark">
           Email-based reset is handled by the QB Suite identity service configured for this
           deployment.
         </div>
         <div className="mt-6 text-center">
-          <Link href="/login" className="text-sm font-semibold text-[#00B94F] hover:text-[#006B45]">
+          <Link href="/login" className="text-sm font-semibold text-brand hover:text-brand-dark">
             Back to Sign In
           </Link>
         </div>

@@ -106,7 +106,7 @@ export function LoginFormCard({ className }) {
               }}
               className={cn(
                 'h-12 w-full rounded-xl border bg-white pr-3 pl-11 text-sm text-[#101D35] outline-none transition-colors placeholder:text-[#94A3B8]',
-                fieldErrors.email ? 'border-rose-400 ring-2 ring-rose-100' : 'border-[#DCE4ED] focus:border-[#00B94F] focus:ring-2 focus:ring-[#E9F9EF]',
+                fieldErrors.email ? 'border-rose-400 ring-2 ring-rose-100' : 'border-[#DCE4ED] focus:border-brand focus:ring-2 focus:ring-brand-light',
               )}
               aria-invalid={!!fieldErrors.email}
               aria-describedby={fieldErrors.email ? 'admin-login-email-error' : undefined}
@@ -144,7 +144,7 @@ export function LoginFormCard({ className }) {
               }}
               className={cn(
                 'h-12 w-full rounded-xl border bg-white pr-12 pl-11 text-sm text-[#101D35] outline-none transition-colors placeholder:text-[#94A3B8]',
-                fieldErrors.password ? 'border-rose-400 ring-2 ring-rose-100' : 'border-[#DCE4ED] focus:border-[#00B94F] focus:ring-2 focus:ring-[#E9F9EF]',
+                fieldErrors.password ? 'border-rose-400 ring-2 ring-rose-100' : 'border-[#DCE4ED] focus:border-brand focus:ring-2 focus:ring-brand-light',
               )}
               aria-invalid={!!fieldErrors.password}
               aria-describedby={fieldErrors.password ? 'admin-login-password-error' : undefined}
@@ -176,13 +176,13 @@ export function LoginFormCard({ className }) {
               type="checkbox"
               checked={remember}
               onChange={(e) => setRemember(e.target.checked)}
-              className="size-4 rounded border-[#DCE4ED] text-[#00B94F] focus:ring-[#00B94F]/30"
+              className="size-4 rounded border-[#DCE4ED] text-brand focus:ring-brand/30"
             />
             Remember me
           </label>
           <Link
             href="/forgot-password"
-            className="text-sm font-semibold text-[#00B94F] hover:text-[#006B45]"
+            className="text-sm font-semibold text-brand hover:text-brand-dark"
           >
             Forgot Password?
           </Link>
@@ -191,7 +191,7 @@ export function LoginFormCard({ className }) {
         <button
           type="submit"
           disabled={loading}
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-[#00B94F] to-[#39E879] text-sm font-bold text-white shadow-[0_12px_28px_rgba(0,185,79,0.35)] transition hover:brightness-[1.03] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-brand to-primary-highlight text-sm font-bold text-primary-foreground shadow-[0_12px_28px_rgba(61,136,75,0.35)] transition hover:from-brand-dark hover:to-brand active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {loading ? (
             <>

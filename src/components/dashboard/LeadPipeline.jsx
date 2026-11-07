@@ -11,10 +11,10 @@ import { cn } from '@/lib/utils';
 // Progressive green shades from light to primary across the pipeline.
 const STAGE_STYLES = [
     'bg-brand-light text-brand-dark',
-    'bg-[#CDEED2] text-brand-dark',
-    'bg-[#A9E0B2] text-sidebar',
-    'bg-[#7ED08D] text-sidebar',
-    'bg-brand text-white',
+    'bg-primary-muted text-brand-dark',
+    'bg-primary-border/70 text-brand-dark',
+    'bg-primary-highlight/35 text-sidebar',
+    'bg-brand text-primary-foreground',
 ];
 
 export function LeadPipeline() {

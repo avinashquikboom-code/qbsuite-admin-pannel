@@ -8,6 +8,10 @@
   --color-brand: var(--primary);
   --color-brand-dark: var(--primary-dark);
   --color-brand-light: var(--primary-light);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-muted: var(--primary-muted);
+  --color-primary-border: var(--primary-border);
+  --color-primary-highlight: var(--primary-highlight);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), Inter, sans-serif;
@@ -59,9 +63,9 @@
   --muted: #f1f5f9;
   --chart-1: var(--primary);
   --chart-2: var(--primary-dark);
-  --chart-3: #247A48;
-  --chart-4: #9CD5A2;
-  --chart-5: #073B32;
+  --chart-3: #327A40;
+  --chart-4: #9FC4A7;
+  --chart-5: var(--sidebar);
 }
 
 

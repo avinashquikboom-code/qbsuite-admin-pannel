@@ -6,9 +6,9 @@ export function LoginDashboardPreview() {
       <div className="relative rounded-[18px] border border-white/20 bg-linear-to-b from-slate-700 to-slate-900 p-2 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
         <div className="overflow-hidden rounded-[12px] bg-[#F4F7FA]">
           <div className="flex h-[220px] text-[6px] leading-tight text-slate-600">
-            <aside className="flex w-[72px] shrink-0 flex-col gap-1 bg-[#004D36] p-1.5 text-white">
+            <aside className="flex w-[72px] shrink-0 flex-col gap-1 bg-[color:var(--sidebar)] p-1.5 text-white">
               <div className="mb-1 flex items-center gap-1">
-                <div className="size-3 rounded bg-[#39E879]" />
+                <div className="size-3 rounded bg-brand" />
                 <span className="text-[5px] font-bold">QB Suite</span>
               </div>
               {['Dashboard', 'HRM', 'CRM', 'Finance', 'Reports'].map((item) => (
@@ -41,7 +41,7 @@ export function LoginDashboardPreview() {
                     {[40, 55, 35, 70, 50, 62].map((h, i) => (
                       <div
                         key={i}
-                        className="flex-1 rounded-sm bg-[#00B94F]/80"
+                        className="flex-1 rounded-sm bg-brand/80"
                         style={{ height: `${h}%` }}
                       />
                     ))}
@@ -49,11 +49,11 @@ export function LoginDashboardPreview() {
                 </div>
                 <div className="rounded border border-[#DCE4ED] bg-white p-1">
                   <div className="text-[5px] font-semibold text-[#101D35]">Sales trend</div>
-                  <div className="mt-1 h-8 rounded bg-linear-to-t from-[#E9F9EF] to-transparent">
+                  <div className="mt-1 h-8 rounded bg-linear-to-t from-brand-light to-transparent">
                     <svg viewBox="0 0 80 24" className="h-full w-full" preserveAspectRatio="none">
                       <polyline
                         fill="none"
-                        stroke="#00B94F"
+                        stroke="var(--primary)"
                         strokeWidth="2"
                         points="0,18 12,14 24,16 36,8 48,10 60,6 72,4 80,2"
                       />

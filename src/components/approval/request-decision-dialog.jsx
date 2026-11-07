@@ -250,7 +250,7 @@ export function RequestDecisionDialog({
               className={cn(
                 'h-10 w-full font-semibold sm:w-auto',
                 isApprove
-                  ? 'bg-brand hover:bg-brand-dark text-primary-foreground'
+                  ? 'bg-brand hover:bg-primary-hover text-primary-foreground'
                   : 'bg-rose-600 hover:bg-rose-700 text-white',
               )}
             >

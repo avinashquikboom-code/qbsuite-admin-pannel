@@ -53,14 +53,14 @@ import { filterChartRows, pieTotals } from '@/lib/chart-data';
 
 const numbers = new Intl.NumberFormat('en-IN');
 
-// QB Suite Primary Green Palette
+// QB Suite brand greens (#3D884B family)
 const QB_GREEN_PALETTE = [
-    '#5EC269', // Primary Green
-    '#078A43', // Dark Green
-    '#10C95A', // Bright Green
-    '#22C55E', // Accent Green
-    '#86EFAC', // Soft Green
-    '#14532D', // Deep Forest
+    '#3D884B',
+    '#2F6D3C',
+    '#5BA06A',
+    '#9FC4A7',
+    '#B5D4BC',
+    '#1E3F2A',
 ];
 
 function AnalyticsChartContent({
