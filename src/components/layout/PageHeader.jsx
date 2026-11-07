@@ -42,7 +42,7 @@ import {
     faGauge,
     faBullhorn,
 } from '@fortawesome/free-solid-svg-icons';
-import { faWhatsapp, faMeta } from '@fortawesome/free-brands-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { Badge } from '@/components/common/Badge';
 import { cn } from '@/lib/utils';
 
@@ -150,7 +150,6 @@ function getRouteMetadata(pathname) {
             'customers': { title: 'Customers', icon: faBuilding },
             'campaigns': { title: 'Campaigns', icon: faBullhorn },
             'whatsapp': { title: 'WhatsApp Gateway', icon: faWhatsapp },
-            'meta-integration': { title: 'Meta Integration', icon: faMeta },
         };
         const meta = crmNames[lastSegment] || { title: lastSegment, icon: faUsers };
         return {

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 const SESSION_COOKIE = 'qb_admin_session';
-const PUBLIC_PREFIXES = ['/login', '/forgot-password', '/api/auth'];
+const PUBLIC_PREFIXES = ['/login', '/forgot-password', '/api/auth', '/api/admin'];
 
 function isPublicPath(pathname) {
   if (pathname === '/') {

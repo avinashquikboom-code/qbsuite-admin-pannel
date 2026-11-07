@@ -54,7 +54,7 @@ const groups = [
     { name: 'Influencer Management', icon: faBullhorn, items: influencerNavigation },
     { name: 'AI & Social', icon: faStar, items: aiSocialNavigation },
     { name: 'Content Management', icon: faVideo, items: contentNavigation },
-    { name: 'Data Management', icon: faTrash, href: '/admin/sections/data-management' },
+    { name: 'Data Management', icon: faTrash, href: '/admin/settings/data-management' },
     { name: 'Reports', icon: faChartBar, href: '/admin/sections/reports' },
     { name: 'Settings', icon: faGear, items: settingsNavigation },
 ];

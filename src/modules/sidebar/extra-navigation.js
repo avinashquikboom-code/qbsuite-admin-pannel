@@ -1,4 +1,4 @@
-import { faMeta, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import {
     faArrowRightArrowLeft,
@@ -21,7 +21,6 @@ import {
     faIdBadge,
     faImage,
     faIndustry,
-    faKey,
     faLayerGroup,
     faListCheck,
     faMessage,
@@ -29,11 +28,10 @@ import {
     faReceipt,
     faShareNodes,
     faShieldHalved,
-    faSliders,
     faStar,
     faTags,
+    faTrash,
     faUsers,
-    faUsersGear,
     faVideo,
     faWallet,
 } from '@fortawesome/free-solid-svg-icons';
@@ -101,14 +99,9 @@ export const contentNavigation = [
 
 export const settingsNavigation = [
     { name: 'Settings Overview', href: '/admin/settings', icon: faGear, matchExact: true },
-    { name: 'Company Settings', href: '/admin/sections/company-settings', icon: faBuilding },
-    { name: 'User Management', href: '/admin/sections/user-management', icon: faUsersGear },
-    { name: 'Roles', href: '/admin/sections/roles', icon: faShieldHalved },
-    { name: 'Permissions', href: '/admin/sections/permissions', icon: faKey },
+    { name: 'Data Management', href: '/admin/settings/data-management', icon: faTrash },
     { name: 'Notification Center', href: '/admin/sections/notification-center', icon: faBell },
     { name: 'Commission Settings', href: '/admin/sections/commission-settings', icon: faCreditCard },
-    { name: 'Company Policies', href: '/admin/sections/company-policies', icon: faFileLines },
-    { name: 'General Settings', href: '/admin/sections/general-settings', icon: faSliders },
     {
         name: 'Integrations',
         icon: faBolt,
@@ -121,7 +114,6 @@ export const settingsNavigation = [
                 badge: 'Live',
                 badgeVariant: 'green',
             },
-            { name: 'Meta Integration', href: '/admin/crm/meta-integration', icon: faMeta },
         ],
     },
     { name: 'Activity Logs', href: '/admin/sections/activity-logs', icon: faChartBar },
